@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="true" default-lazy="false">
+
+  <class name="mindbadger.footballresultsanalyser.hibernate.SeasonDivision" table="season_division">
+
+    <composite-id>
+      <key-many-to-one name="season" class="mindbadger.footballresultsanalyser.hibernate.Season" column="ssn_num"/>
+      <key-many-to-one name="division" class="mindbadger.footballresultsanalyser.hibernate.Division" column="div_id"/>
+    </composite-id>  
+
+    <property name="divPos" type="java.lang.Integer" column="div_pos" not-null="true"/>
+    
+    <set name="teamsInDivisionInSeason" table="season_division_team">
+	    <key>
+	      <column name="ssn_num"/>
+    	  <column name="div_id"/>
+	    </key>  
+
+      <many-to-many column="team_id" class="mindbadger.footballresultsanalyser.hibernate.Team"/>
+    </set>
+  </class>
+  
+</hibernate-mapping>

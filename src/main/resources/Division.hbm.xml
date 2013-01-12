@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="true" default-lazy="false">
+
+  <class name="mindbadger.footballresultsanalyser.hibernate.Division" table="division">
+
+    <id name="divId" type="java.lang.Integer" column="div_id">
+      <generator class="increment" />
+    </id>
+
+    <property name="divName" type="java.lang.String" column="div_name" not-null="true" length="50" unique="true"/>
+  </class>
+  
+</hibernate-mapping>

@@ -12,10 +12,17 @@
     <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
 
+    <property name="hibernate.c3p0.min_size">5</property>
+    <property name="hibernate.c3p0.max_size">20</property>
+    <property name="hibernate.c3p0.timeout">300</property>
+    <property name="hibernate.c3p0.max_statements">50</property>
+    <property name="hibernate.c3p0.idle_test_period">3000</property>
+    
+    
     <!-- Mapping files -->
-    <mapping resource="Division.hbm.xml"/>
-    <mapping resource="Season.hbm.xml"/>
-    <mapping resource="SeasonDivision.hbm.xml"/>
-    <mapping resource="Team.hbm.xml"/>
+    <mapping resource="hibernatemapping/Division.hbm.xml"/>
+    <mapping resource="hibernatemapping/Season.hbm.xml"/>
+    <mapping resource="hibernatemapping/SeasonDivision.hbm.xml"/>
+    <mapping resource="hibernatemapping/Team.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

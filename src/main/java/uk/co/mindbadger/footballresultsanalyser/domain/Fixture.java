@@ -1,9 +1,8 @@
-package mindbadger.footballresultsanalyser.hibernate;
+package uk.co.mindbadger.footballresultsanalyser.domain;
 
-import java.io.Serializable;
 import java.util.Calendar;
 
-public class Fixture implements Serializable {
+public class Fixture {
 	private Season season;
 	private Team homeTeam;
 	private Team awayTeam;
@@ -11,6 +10,7 @@ public class Fixture implements Serializable {
 	private Division division;
 	private Integer homeGoals;
 	private Integer awayGoals;
+	
 	public Season getSeason() {
 		return season;
 	}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="true" default-lazy="false">
+
+	<class name="uk.co.mindbadger.footballresultsanalyser.domain.Team" table="team">
+
+		<id name="teamId" type="java.lang.Integer" column="team_id">
+		</id>
+
+		<property name="teamName" type="java.lang.String" column="team_name" not-null="true" length="50" unique="true"/>
+		<property name="teamShortName" type="java.lang.String" column="team_short_name" not-null="true" length="30" />
+
+		<set name="homeFixturesForTeam" table="fixture">
+			<key column="team_id"/>
+      		<one-to-many class="uk.co.mindbadger.footballresultsanalyser.domain.Fixture" column="home_team_id"/>
+	    </set>
+		<set name="awayFixturesForTeam" table="fixture">
+			<key column="team_id"/>
+      		<one-to-many class="uk.co.mindbadger.footballresultsanalyser.domain.Fixture" column="away_team_id"/>
+	    </set>
+
+	</class>
+
+</hibernate-mapping>

@@ -3,23 +3,21 @@
 
 <hibernate-mapping auto-import="true" default-lazy="false">
 
-  <class name="mindbadger.footballresultsanalyser.hibernate.Season" table="season">
+  <class name="uk.co.mindbadger.footballresultsanalyser.domain.Season" table="season">
 
     <id name="ssnNum" type="java.lang.Integer" column="ssn_num">
     </id>
-
-<!-- 
-    <set name="divisionsInSeason" table="season_division">
-      <key column="ssn_num"/>
-      <many-to-many column="div_id" class="mindbadger.footballresultsanalyser.hibernate.Division"/>
-    </set>
-  </class>
- -->
  
     <set name="divisionsInSeason" table="season_division" inverse="true">
       <key column="ssn_num"/>
-      <one-to-many class="mindbadger.footballresultsanalyser.hibernate.SeasonDivision" />
+      <one-to-many class="uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision" />
     </set>
+
+    <set name="fixturesInSeason" table="fixture" inverse="true">
+      <key column="ssn_num"/>
+      <one-to-many class="uk.co.mindbadger.footballresultsanalyser.domain.Fixture" />
+    </set>
+    
   </class>
   
 </hibernate-mapping>

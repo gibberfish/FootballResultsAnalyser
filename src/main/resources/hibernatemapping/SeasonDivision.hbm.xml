@@ -3,11 +3,11 @@
 
 <hibernate-mapping auto-import="true" default-lazy="false">
 
-  <class name="mindbadger.footballresultsanalyser.hibernate.SeasonDivision" table="season_division">
+  <class name="uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision" table="season_division">
 
     <composite-id>
-      <key-many-to-one name="season" class="mindbadger.footballresultsanalyser.hibernate.Season" column="ssn_num"/>
-      <key-many-to-one name="division" class="mindbadger.footballresultsanalyser.hibernate.Division" column="div_id"/>
+      <key-many-to-one name="season" class="uk.co.mindbadger.footballresultsanalyser.domain.Season" column="ssn_num"/>
+      <key-many-to-one name="division" class="uk.co.mindbadger.footballresultsanalyser.domain.Division" column="div_id"/>
     </composite-id>  
 
     <property name="divPos" type="java.lang.Integer" column="div_pos" not-null="true"/>
@@ -18,7 +18,7 @@
     	  <column name="div_id"/>
 	    </key>  
 
-      <many-to-many column="team_id" class="mindbadger.footballresultsanalyser.hibernate.Team"/>
+      <many-to-many column="team_id" class="uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam"/>
     </set>
   </class>
   

@@ -3,13 +3,19 @@
 
 <hibernate-mapping auto-import="true" default-lazy="false">
 
-  <class name="mindbadger.footballresultsanalyser.hibernate.Division" table="division">
+  <class name="uk.co.mindbadger.footballresultsanalyser.domain.Division" table="division">
 
     <id name="divId" type="java.lang.Integer" column="div_id">
       <generator class="increment" />
     </id>
 
     <property name="divName" type="java.lang.String" column="div_name" not-null="true" length="50" unique="true"/>
+    
+    <set name="seasonsForDivision" table="season_division" inverse="true">
+      <key column="divId"/>
+      <one-to-many class="uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision" />
+    </set>
+    
   </class>
   
 </hibernate-mapping>

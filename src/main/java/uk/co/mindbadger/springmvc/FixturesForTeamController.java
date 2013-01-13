@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import uk.co.mindbadger.footballresultsanalyser.hibernate.Tester;
+
 @Controller
 public class FixturesForTeamController {
 	Logger logger = Logger.getLogger(FixturesForTeamController.class);
@@ -13,6 +15,8 @@ public class FixturesForTeamController {
 	public ModelAndView fixturesForTeam() {
 		logger.debug("CONTROLLER: fixtures for team");
 
+		Tester.main(null);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("fixturesForTeamController");
 

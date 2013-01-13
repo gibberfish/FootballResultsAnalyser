@@ -35,5 +35,6 @@
      <mapping class="uk.co.mindbadger.footballresultsanalyser.domain.Team"/>
      <mapping class="uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision"/>
      <mapping class="uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam"/>
+     <mapping class="uk.co.mindbadger.footballresultsanalyser.domain.Fixture"/>
   </session-factory>
 </hibernate-configuration>

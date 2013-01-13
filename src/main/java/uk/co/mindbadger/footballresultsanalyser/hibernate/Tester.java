@@ -1,5 +1,6 @@
 package uk.co.mindbadger.footballresultsanalyser.hibernate;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import uk.co.mindbadger.footballresultsanalyser.domain.Division;
+import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Season;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
@@ -118,28 +120,25 @@ public class Tester {
 	addTeamToSeasonDivision(session, ssn2div2, team2);
 	addTeamToSeasonDivision(session, ssn2div2, team1);
 
-	// List divisions = session.createQuery("from Division").list();
-
-	// for (Division division : (List<Division>) divisions) {
-	// System.out.println("Division: " + division.getDivName());
-	// for (SeasonDivision ssnDiv : season.getDivisionsInSeason()) {
-	// Division div = ssnDiv.getDivision();
-	//
-	// System.out.println("Season num = " + season.getSsnNum() + ", div = "
-	// + div + ", pos = " + ssnDiv.getDivPos() + ", name = " +
-	// div.getDivName());
-	//
-	// for (Team team : ssnDiv.getTeamsInDivisionInSeason()) {
-	// System.out.println("..Team = " + team.getTeamName());
-	// }
-	// }
-	// }
+	addFixture (session, Calendar.getInstance(), season1, division1, team1, team2);
+	addFixture (session, Calendar.getInstance(), season1, division1, team2, team1);
+	
 	tx.commit();
 	
     }
 
+    private static void addFixture(Session session, Calendar fixtureDate, Season season, Division division, Team homeTeam, Team awayTeam) {
+	Fixture fixture = new Fixture ();
+	fixture.setFixtureDate(fixtureDate);
+	fixture.setSeason(season);
+	fixture.setDivision(division);
+	fixture.setHomeTeam(homeTeam);
+	fixture.setAwayTeam(awayTeam);
+	
+	session.save(fixture);
+    }
+
     private static void addTeamToSeasonDivision(Session session, SeasonDivision seasonDivision, Team team) {
-	System.out.println("Adding team " + team.getTeamId() + " to season " + seasonDivision.getSeason().getSsnNum() + " and division " + seasonDivision.getDivision().getDivId());
 	SeasonDivisionTeam seasonDivisionTeam = new SeasonDivisionTeam();
 	seasonDivisionTeam.setSeasonDivision(seasonDivision);
 	seasonDivisionTeam.setTeam(team);

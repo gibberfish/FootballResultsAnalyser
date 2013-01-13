@@ -13,41 +13,44 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="division", catalog="football")
+@Table(name = "division", catalog = "football")
 public class Division implements Serializable {
-	private static final long serialVersionUID = 693092329472146716L;
-	
-	private Integer divId;
+    private static final long serialVersionUID = 693092329472146716L;
+
+    private Integer divId;
     private String divName;
-    private Set<SeasonDivision> seasonsForDivision  = new HashSet<SeasonDivision> ();
-    
-    public Division (String divName) {
-    	this.divName = divName;
+    private Set<SeasonDivision> seasonsForDivision = new HashSet<SeasonDivision>();
+
+    public Division(String divName) {
+	this.divName = divName;
     }
-    
-	@Id
-	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	@Column(name = "DIV_ID", unique = true, nullable = false)
-	public Integer getDivId() {
-		return divId;
-	}
-	public void setDivId(Integer divId) {
-		this.divId = divId;
-	}
-	
-	@Column(name = "DIV_NAME", nullable = false)
-	public String getDivName() {
-		return divName;
-	}
-	public void setDivName(String divName) {
-		this.divName = divName;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "primaryKey.division")
-	public Set<SeasonDivision> getSeasonsForDivision() {
-		return seasonsForDivision;
-	}
-	public void setSeasonsForDivision(Set<SeasonDivision> seasonsForDivision) {
-		this.seasonsForDivision = seasonsForDivision;
-	}
+
+    @Id
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @Column(name = "DIV_ID", unique = true, nullable = false)
+    public Integer getDivId() {
+	return divId;
+    }
+
+    public void setDivId(Integer divId) {
+	this.divId = divId;
+    }
+
+    @Column(name = "DIV_NAME", nullable = false)
+    public String getDivName() {
+	return divName;
+    }
+
+    public void setDivName(String divName) {
+	this.divName = divName;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "primaryKey.division")
+    public Set<SeasonDivision> getSeasonsForDivision() {
+	return seasonsForDivision;
+    }
+
+    public void setSeasonsForDivision(Set<SeasonDivision> seasonsForDivision) {
+	this.seasonsForDivision = seasonsForDivision;
+    }
 }

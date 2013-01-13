@@ -1,13 +1,18 @@
 package uk.co.mindbadger.footballresultsanalyser.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -23,6 +28,7 @@ public class SeasonDivision implements Serializable {
 	
 	private SeasonDivisionId primaryKey = new SeasonDivisionId();
 	private int divPos;
+	private Set<SeasonDivisionTeam> teamsInSeasonDivision = new HashSet<SeasonDivisionTeam>(0);
 	
 	@EmbeddedId
 	public SeasonDivisionId getPrimaryKey() {
@@ -54,5 +60,13 @@ public class SeasonDivision implements Serializable {
 	}
 	public void setDivPos(int divPos) {
 		this.divPos = divPos;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "primaryKey.seasonDivision")
+	public Set<SeasonDivisionTeam> getTeamsInSeasonDivision() {
+		return teamsInSeasonDivision;
+	}
+	public void setTeamsInSeasonDivision(Set<SeasonDivisionTeam> teamsInSeasonDivision) {
+		this.teamsInSeasonDivision = teamsInSeasonDivision;
 	}
 }

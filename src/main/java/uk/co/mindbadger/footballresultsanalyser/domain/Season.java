@@ -18,7 +18,7 @@ public class Season implements Serializable {
 	private static final long serialVersionUID = -4032527106145900975L;
 
 	private Integer ssnNum;
-	public Set<SeasonDivision> divisionsInSeason = new HashSet<SeasonDivision>(0);
+	private Set<SeasonDivision> divisionsInSeason = new HashSet<SeasonDivision>(0);
 	//public Set<Fixture> fixturesInSeason;
 
 	public Season (Integer ssnNum) {

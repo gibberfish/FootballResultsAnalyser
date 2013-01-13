@@ -12,6 +12,7 @@
 
     <property name="divPos" type="java.lang.Integer" column="div_pos" not-null="true"/>
     
+    <!-- 
     <set name="teamsInDivisionInSeason" table="season_division_team">
 	    <key>
 	      <column name="ssn_num"/>
@@ -20,6 +21,7 @@
 
       <many-to-many column="team_id" class="uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam"/>
     </set>
+     -->
   </class>
   
 </hibernate-mapping>

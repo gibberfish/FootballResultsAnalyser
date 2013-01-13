@@ -13,11 +13,12 @@
       <one-to-many class="uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision" />
     </set>
 
+<!-- 
     <set name="fixturesInSeason" table="fixture" inverse="true">
       <key column="ssn_num"/>
       <one-to-many class="uk.co.mindbadger.footballresultsanalyser.domain.Fixture" />
     </set>
-    
+ -->    
   </class>
   
 </hibernate-mapping>

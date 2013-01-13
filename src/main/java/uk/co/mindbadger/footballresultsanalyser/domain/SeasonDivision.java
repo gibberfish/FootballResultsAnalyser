@@ -1,36 +1,58 @@
 package uk.co.mindbadger.footballresultsanalyser.domain;
 
-import java.util.Set;
+import java.io.Serializable;
 
-public class SeasonDivision{
+import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "season_division", catalog = "football")
+@AssociationOverrides({
+		@AssociationOverride(name = "primaryKey.season", 
+			joinColumns = @JoinColumn(name = "SSN_NUM")),
+		@AssociationOverride(name = "primaryKey.division", 
+			joinColumns = @JoinColumn(name = "DIV_ID")) })
+public class SeasonDivision implements Serializable {
+	private static final long serialVersionUID = -862413151112264079L;
 	
-	private Season season;
-	private Division division;
+	private SeasonDivisionId primaryKey = new SeasonDivisionId();
 	private int divPos;
-	private Set<SeasonDivisionTeam> teamsInSeasonDivision;
 	
+	@EmbeddedId
+	public SeasonDivisionId getPrimaryKey() {
+		return primaryKey;
+	}
+	public void setPrimaryKey(SeasonDivisionId primaryKey) {
+		this.primaryKey = primaryKey;
+	}
+
+	@Transient
 	public Season getSeason() {
-		return season;
+		return primaryKey.getSeason();
 	}
 	public void setSeason(Season season) {
-		this.season = season;
+		primaryKey.setSeason(season);
 	}
+	
+	@Transient
 	public Division getDivision() {
-		return division;
+		return primaryKey.getDivision();
 	}
 	public void setDivision(Division division) {
-		this.division = division;
+		primaryKey.setDivision(division);
 	}
+	
+	@Column(name = "DIV_POS", nullable=true)
 	public int getDivPos() {
 		return divPos;
 	}
 	public void setDivPos(int divPos) {
 		this.divPos = divPos;
-	}
-	public Set<SeasonDivisionTeam> getTeamsInDivisionInSeason() {
-		return teamsInSeasonDivision;
-	}
-	public void setTeamsInDivisionInSeason(Set<SeasonDivisionTeam> teamsInSeasonDivision) {
-		this.teamsInSeasonDivision = teamsInSeasonDivision;
 	}
 }

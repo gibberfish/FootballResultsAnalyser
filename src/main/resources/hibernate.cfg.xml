@@ -19,10 +19,20 @@
     <property name="hibernate.c3p0.idle_test_period">3000</property>
     
     
-    <!-- Mapping files -->
-    <mapping resource="hibernatemapping/Division.hbm.xml"/>
+    <!-- Mapping files XML -->
+    <!-- 
     <mapping resource="hibernatemapping/Season.hbm.xml"/>
     <mapping resource="hibernatemapping/SeasonDivision.hbm.xml"/>
+    <mapping resource="hibernatemapping/Division.hbm.xml"/>
     <mapping resource="hibernatemapping/Team.hbm.xml"/>
+    <mapping resource="hibernatemapping/SeasonDivisionTeam.hbm.xml"/>
+    <mapping resource="hibernatemapping/Fixture.hbm.xml"/>
+     -->
+     
+     <!-- Mapping classes using Annotations -->
+     <mapping class="uk.co.mindbadger.footballresultsanalyser.domain.Season"/>
+     <mapping class="uk.co.mindbadger.footballresultsanalyser.domain.Division"/>
+     <mapping class="uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionId"/>
+     <mapping class="uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision"/>
   </session-factory>
 </hibernate-configuration>

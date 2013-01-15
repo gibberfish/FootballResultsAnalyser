@@ -21,6 +21,8 @@ public class Season implements Serializable {
 	private Set<SeasonDivision> divisionsInSeason = new HashSet<SeasonDivision>(0);
 	//public Set<Fixture> fixturesInSeason;
 
+	public Season () {}
+	
 	public Season (Integer ssnNum) {
 		this.ssnNum = ssnNum;
 	}

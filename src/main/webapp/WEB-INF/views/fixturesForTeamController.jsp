@@ -3,34 +3,51 @@
 
 <html>
 <head>
-
-<script src="jquery-1.8.2.js"></script>
+<link rel="stylesheet" type="text/css" href="css\fra.css">
+<script src="js\jquery-1.8.2.js"></script>
+<script src="js\fra.js"></script>
 </head>
 
 <body>
 	LETS GET FIXTURES FOR A TEAM
 	<p>
-	Season: 
-	<select id="selectSeason">
-	  <option>2000</option>
-	  <option>2001</option>
-	  <option>2002</option>
-	</select>
+		Season: <select id="selectSeason">
+			<option>..select</option>
+			<c:forEach var="season" items="${seasons}">
+				<option>
+					<c:out value='${season.ssnNum}' />
+				</option>
+			</c:forEach>
+		</select>
 	<p>
-	Division: 
-	<select id="selectDivision">
-	  <option>Premier</option>
-	  <option>Championship</option>
-	  <option>League 1</option>
-	</select>
+		Division: <select id="selectDivision">
+			<option>..select</option>
+			<option>Premier</option>
+			<option>Championship</option>
+			<option>League 1</option>
+		</select>
 	<p>
-	Team: 
-	<select id="selectTeam">
-	  <option>Portsmouth</option>
-	  <option>Leeds</option>
-	  <option>Millwall</option>
-	</select>
-	<p>
-	
+		Team: <select id="selectTeam">
+			<option>..select</option>
+			<option>Portsmouth</option>
+			<option>Leeds</option>
+			<option>Millwall</option>
+		</select>
+	<p>Fixtures:
+	<div id="fixtures">
+		<table id="fixturesTable">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Division</th>
+					<th>Home Team</th>
+					<th>Score</th>
+					<th>Away Team</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

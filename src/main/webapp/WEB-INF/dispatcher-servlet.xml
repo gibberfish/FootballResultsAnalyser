@@ -37,6 +37,10 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     </list>
   </property>
 </bean>
+
+  
+  <bean id="dao" class="uk.co.mindbadger.footballresultsanalyser.hibernate.FootballResultsAnalyserHibernateDAO">
+  </bean>
   
 <!--   
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

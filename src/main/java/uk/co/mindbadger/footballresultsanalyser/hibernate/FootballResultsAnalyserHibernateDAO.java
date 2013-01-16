@@ -32,4 +32,25 @@ public class FootballResultsAnalyserHibernateDAO implements FootballResultsAnaly
 	return seasons;
     }
 
+    @Override
+    public Set<SeasonDivision> getDivisionsForSeason(int seasonNumber) {
+	Transaction tx = null;
+	
+	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
+	Session session = sessionFactory.openSession();
+
+	tx = session.beginTransaction();
+	
+	Season season = (Season)session.get(Season.class, seasonNumber);
+
+	// Get the Seasons
+	//List seasonDivisions = session.createQuery("from SeasonDivision SD where SD.season.ssnNum = " + seasonNumber + " order by SD.divPos").list();
+	//List seasonDivisions = session.createQuery("from SeasonDivision SD").list();
+	
+	tx.commit();
+
+	return season.getDivisionsInSeason();
+    }
+
 }

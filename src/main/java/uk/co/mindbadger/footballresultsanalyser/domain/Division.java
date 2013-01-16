@@ -21,6 +21,8 @@ public class Division implements Serializable {
     private String divName;
     private Set<SeasonDivision> seasonsForDivision = new HashSet<SeasonDivision>();
 
+    public Division() { }
+    
     public Division(String divName) {
 	this.divName = divName;
     }

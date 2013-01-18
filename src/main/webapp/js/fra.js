@@ -40,10 +40,14 @@ $(function(){
 	});
 	
 	function resetDivision () {
+		$("#selectDivision").empty();
+		$("#selectDivision").append("<option>..select</option>");
 		$("#selectDivision").attr("disabled", true).val("..select");
 	}
 	
 	function resetTeam () {
+		//$("#selectTeam").empty();
+		$("#selectTeam").html("<option>..select</option>");
 		$("#selectTeam").attr("disabled", true).val("..select");
 	}
 
@@ -78,7 +82,11 @@ $(function(){
 	}
 	
 	function populateDivisionDropdown(season) {
-		
+		$.getJSON ("getDivisionsForSeason.html", "ssn="+season, function(data) {
+			$.each(data, function (i,division) {
+				$("#selectDivision").append("<option>" + division + "</option>");
+			});
+		});
 	}
 	
 	function populateTeamDropdown(season, division) {

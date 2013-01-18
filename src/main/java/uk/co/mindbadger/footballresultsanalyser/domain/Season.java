@@ -45,14 +45,15 @@ public class Season implements Serializable {
 		this.divisionsInSeason = divisionsInSeason;
 	}
 	
-	public void addDivisionToSeason (Division division, int divisionPosition) {
-		SeasonDivision seasonDivision = new SeasonDivision ();
-		seasonDivision.setSeason(this);
-		seasonDivision.setDivision(division);
-		seasonDivision.setDivPos(divisionPosition);
-		this.divisionsInSeason.add(seasonDivision);
-		division.getSeasonsForDivision().add(seasonDivision);
-	}
+	//TODO Move to DAO
+//	public void addDivisionToSeason (Division division, int divisionPosition) {
+//		SeasonDivision seasonDivision = new SeasonDivision ();
+//		seasonDivision.setSeason(this);
+//		seasonDivision.setDivision(division);
+//		seasonDivision.setDivPos(divisionPosition);
+//		this.divisionsInSeason.add(seasonDivision);
+//		division.getSeasonsForDivision().add(seasonDivision);
+//	}
 	
 //	public Set<Fixture> getFixturesInSeason() {
 //		return fixturesInSeason;

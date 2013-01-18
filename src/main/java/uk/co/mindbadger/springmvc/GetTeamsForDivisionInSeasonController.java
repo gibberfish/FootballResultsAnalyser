@@ -30,14 +30,14 @@ public class GetTeamsForDivisionInSeasonController {
 		Set<SeasonDivisionTeam> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonNumber, divisionId);
 		
 		//TODO CLUNKY APPROACH - need to get Jackson working properly
-		String output = "[";
+		String output = "{\"teams\": [";
 		for (SeasonDivisionTeam seasonDivisionTeam : seasonDivisionTeams) {
-		    output+="\"" + seasonDivisionTeam.getTeam().getTeamName() + "\",";
+		    output+="{\"id\":"+ seasonDivisionTeam.getTeam().getTeamId()+",\"name\":\""+seasonDivisionTeam.getTeam().getTeamName()+"\"},";
 		}
 		if (output.length() > 1) {
 		    output = output.substring(0, output.length() - 1);
 		}
-		output+="]";
+		output+="]}";
 		
 		logger.debug("++++++ teams: " + output);
 		

@@ -83,13 +83,20 @@ $(function(){
 	
 	function populateDivisionDropdown(season) {
 		$.getJSON ("getDivisionsForSeason.html", "ssn="+season, function(data) {
-			$.each(data, function (i,division) {
-				$("#selectDivision").append("<option>" + division + "</option>");
+			$.each(data.divisions, function (index,division) {
+				$("#selectDivision").append("<option value=\""+ division.id +"\">" + division.name + "</option>");
 			});
 		});
 	}
 	
 	function populateTeamDropdown(season, division) {
-		
+		var data = {};
+		data.ssn = season;
+		data.div = division;
+		$.getJSON ("getTeamsForDivision.html", data, function(data) {
+			$.each(data.teams, function (index,team) {
+				$("#selectTeam").append("<option value=\""+ team.id +"\">" + team.name + "</option>");
+			});
+		});
 	}
 });

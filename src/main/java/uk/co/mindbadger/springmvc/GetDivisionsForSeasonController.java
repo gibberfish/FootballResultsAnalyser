@@ -37,14 +37,14 @@ public class GetDivisionsForSeasonController {
 		}
 
 		//TODO CLUNKY APPROACH - need to get Jackson working properly
-		String output = "[";
+		String output = "{\"divisions\": [";
 		for (Division division : divisions) {
-		    output+="\"" + division.getDivName() + "\",";
+		    output+="{\"id\":"+division.getDivId()+",\"name\":\""+division.getDivName()+"\"},";
 		}
 		if (output.length() > 1) {
 		    output = output.substring(0, output.length() - 1);
 		}
-		output+="]";
+		output+="]}";
 		
 		logger.debug("++++++ divisions: " + output);
 		

@@ -29,6 +29,8 @@ public class GetDivisionsForSeasonController {
 	//public @ResponseBody Division[] getDivisionsForSeason(@RequestParam("ssn") int seasonNumber) {
 		logger.debug("CONTROLLER: getDivisionsForSeason: " + seasonNumber);
 
+		dao.startSession();
+		
 		Set<SeasonDivision> seasonDivisions = dao.getDivisionsForSeason(seasonNumber);
 		
 		Division[] divisions = new Division[seasonDivisions.size()];
@@ -47,6 +49,8 @@ public class GetDivisionsForSeasonController {
 		output+="]}";
 		
 		logger.debug("++++++ divisions: " + output);
+		
+		dao.closeSession();
 		
 		return output;
 	}

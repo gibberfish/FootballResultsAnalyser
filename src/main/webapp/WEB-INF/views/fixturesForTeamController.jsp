@@ -21,17 +21,9 @@
 		</select>
 	<p>
 		Division: <select id="selectDivision">
-			<option>..select</option>
-			<option>Premier</option>
-			<option>Championship</option>
-			<option>League 1</option>
 		</select>
 	<p>
 		Team: <select id="selectTeam">
-			<option>..select</option>
-			<option>Portsmouth</option>
-			<option>Leeds</option>
-			<option>Millwall</option>
 		</select>
 	<p>Fixtures:
 	<div id="fixtures">

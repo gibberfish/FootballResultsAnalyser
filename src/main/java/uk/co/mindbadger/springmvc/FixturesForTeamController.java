@@ -23,6 +23,8 @@ public class FixturesForTeamController {
 	public ModelAndView fixturesForTeam() {
 		logger.debug("CONTROLLER: fixtures for team");
 
+		dao.startSession();
+		
 		//Tester.main(null);
 		List<Season> seasons = dao.getSeasons();
 		
@@ -31,6 +33,8 @@ public class FixturesForTeamController {
 		
 		mav.setViewName("fixturesForTeamController");
 
+		dao.closeSession();
+		
 		return mav;
 	}
 }

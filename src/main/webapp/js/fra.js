@@ -57,28 +57,15 @@ $(function(){
 	
 	function populateTableFor(season, division, team) {
 		resetTable();
-		if (team == 'Portsmouth') {
-			$("#fixturesTable tbody").append("<tr><td>21/08/2012</td><td>League 1</td><td>Portsmouth</td><td>1-0</td><td>Walsall</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>29/08/2012</td><td>League 1</td><td>Leeds</td><td>1-3</td><td>Portsmouth</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>07/09/2012</td><td>League 1</td><td>Portsmouth</td><td>0-0</td><td>Liverpool</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>15/09/2012</td><td>League 1</td><td>Portsmouth</td><td>2-1</td><td>Scunthorpe</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>21/09/2012</td><td>League 1</td><td>Wigan</td><td>1-0</td><td>Portsmouth</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>28/09/2012</td><td>League 1</td><td>Portsmouth</td><td>5-0</td><td>Southampton</td></tr>");
-		} else if (team == 'Leeds') {
-			$("#fixturesTable tbody").append("<tr><td>21/08/2012</td><td>League 1</td><td>Leeds</td><td>1-0</td><td>Walsall</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>29/08/2012</td><td>League 1</td><td>Leeds</td><td>1-3</td><td>Portsmouth</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>07/09/2012</td><td>League 1</td><td>Leeds</td><td>0-0</td><td>Liverpool</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>15/09/2012</td><td>League 1</td><td>Leeds</td><td>2-1</td><td>Scunthorpe</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>21/09/2012</td><td>League 1</td><td>Wigan</td><td>1-0</td><td>Leeds</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>28/09/2012</td><td>League 1</td><td>Leeds</td><td>5-0</td><td>Southampton</td></tr>");
-		} else if (team == 'Millwall') {
-			$("#fixturesTable tbody").append("<tr><td>21/08/2012</td><td>League 1</td><td>Millwall</td><td>1-0</td><td>Walsall</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>29/08/2012</td><td>League 1</td><td>Millwall</td><td>1-3</td><td>Portsmouth</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>07/09/2012</td><td>League 1</td><td>Millwall</td><td>0-0</td><td>Liverpool</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>15/09/2012</td><td>League 1</td><td>Millwall</td><td>2-1</td><td>Scunthorpe</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>21/09/2012</td><td>League 1</td><td>Wigan</td><td>1-0</td><td>Millwall</td></tr>");
-			$("#fixturesTable tbody").append("<tr><td>28/09/2012</td><td>League 1</td><td>Millwall</td><td>5-0</td><td>Southampton</td></tr>");
-		}
+		var data = {};
+		data.ssn = season;
+		data.div = division;
+		data.team = team;
+		$.getJSON ("getFixturesForTeamInSeason.html", data, function(data) {
+			$.each(data.fixtures, function (index,fixture) {
+				$("#fixturesTable tbody").append("<tr><td>"+fixture.date+"</td><td>"+fixture.div+"</td><td>"+fixture.homeTeam+"</td><td>"+fixture.score+"</td><td>"+fixture.awayTeam+"</td></tr>");
+			});
+		});
 	}
 	
 	function populateDivisionDropdown(season) {

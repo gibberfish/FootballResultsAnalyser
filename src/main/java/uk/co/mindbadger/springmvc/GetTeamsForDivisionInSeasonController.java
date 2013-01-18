@@ -1,6 +1,5 @@
 package uk.co.mindbadger.springmvc;
 
-import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
-import uk.co.mindbadger.footballresultsanalyser.domain.Division;
-import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
 
 @Controller
@@ -27,6 +24,8 @@ public class GetTeamsForDivisionInSeasonController {
 	public @ResponseBody String getTeamsForDivision(@RequestParam("ssn") int seasonNumber, @RequestParam("div") int divisionId) {
 		logger.debug("CONTROLLER: getTeamsForDivision: " + seasonNumber + ", " + divisionId);
 
+		dao.startSession();
+		
 		Set<SeasonDivisionTeam> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonNumber, divisionId);
 		
 		//TODO CLUNKY APPROACH - need to get Jackson working properly
@@ -40,6 +39,8 @@ public class GetTeamsForDivisionInSeasonController {
 		output+="]}";
 		
 		logger.debug("++++++ teams: " + output);
+		
+		dao.closeSession();
 		
 		return output;
 	}

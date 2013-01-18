@@ -15,38 +15,31 @@ import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
 import uk.co.mindbadger.footballresultsanalyser.domain.Division;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
-import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 @Controller
-public class GetDivisionsForSeasonController {
-	Logger logger = Logger.getLogger(GetDivisionsForSeasonController.class);
+public class GetTeamsForDivisionInSeasonController {
+	Logger logger = Logger.getLogger(GetTeamsForDivisionInSeasonController.class);
 
 	@Autowired
 	FootballResultsAnalyserDAO dao;
 	
-	@RequestMapping(value = "/getDivisionsForSeason.html", method = RequestMethod.GET)
-	public @ResponseBody String getDivisionsForSeason(@RequestParam("ssn") int seasonNumber) {
-	//public @ResponseBody Division[] getDivisionsForSeason(@RequestParam("ssn") int seasonNumber) {
-		logger.debug("CONTROLLER: getDivisionsForSeason: " + seasonNumber);
+	@RequestMapping(value = "/getTeamsForDivision.html", method = RequestMethod.GET)
+	public @ResponseBody String getTeamsForDivision(@RequestParam("ssn") int seasonNumber, @RequestParam("div") int divisionId) {
+		logger.debug("CONTROLLER: getTeamsForDivision: " + seasonNumber + ", " + divisionId);
 
-		Set<SeasonDivision> seasonDivisions = dao.getDivisionsForSeason(seasonNumber);
+		Set<SeasonDivisionTeam> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonNumber, divisionId);
 		
-		Division[] divisions = new Division[seasonDivisions.size()];
-		for (SeasonDivision seasonDivision : seasonDivisions) {
-		    divisions[seasonDivision.getDivPos()-1] = seasonDivision.getDivision();
-		}
-
 		//TODO CLUNKY APPROACH - need to get Jackson working properly
 		String output = "[";
-		for (Division division : divisions) {
-		    output+="\"" + division.getDivName() + "\",";
+		for (SeasonDivisionTeam seasonDivisionTeam : seasonDivisionTeams) {
+		    output+="\"" + seasonDivisionTeam.getTeam().getTeamName() + "\",";
 		}
 		if (output.length() > 1) {
 		    output = output.substring(0, output.length() - 1);
 		}
 		output+="]";
 		
-		logger.debug("++++++ divisions: " + output);
+		logger.debug("++++++ teams: " + output);
 		
 		return output;
 	}

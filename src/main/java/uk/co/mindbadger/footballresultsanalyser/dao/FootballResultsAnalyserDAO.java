@@ -5,9 +5,12 @@ import java.util.Set;
 
 import uk.co.mindbadger.footballresultsanalyser.domain.Season;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
+import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
 
 public interface FootballResultsAnalyserDAO {
     public List<Season> getSeasons ();
     
     public Set<SeasonDivision> getDivisionsForSeason (int seasonNumber);
+
+    public Set<SeasonDivisionTeam> getTeamsForDivisionInSeason(int seasonNumber, int divisionId);
 }

@@ -17,6 +17,8 @@ public class Team {
 	//private Set<Fixture> homeFixturesForTeam;
 	//private Set<Fixture> awayFixturesForTeam;
 	
+	public Team () {}
+	
 	public Team(String teamName) {
 		this.teamName = teamName;
 	}

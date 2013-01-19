@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
 import uk.co.mindbadger.footballresultsanalyser.domain.Season;
-import uk.co.mindbadger.footballresultsanalyser.hibernate.Tester;
 
 @Controller
 public class FixturesForTeamController {

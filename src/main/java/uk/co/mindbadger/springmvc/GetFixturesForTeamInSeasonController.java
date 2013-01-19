@@ -48,7 +48,7 @@ public class GetFixturesForTeamInSeasonController {
 		    
 		    output+="{\"id\":\""+ fixture.getFixtureId()+"\""+
 			    ",\"date\":\""+fixtureDate+"\""+
-			    ",\"div\":\""+fixture.getDivision().getDivName()+"\""+
+			    ",\"div\":\""+fixture.getDivision().getDivisionName()+"\""+
 			    ",\"homeTeam\":\""+fixture.getHomeTeam().getTeamName()+"\""+
 			    ",\"awayTeam\":\""+fixture.getAwayTeam().getTeamName()+"\""+
 			    ",\"score\":\""+score+"\""+

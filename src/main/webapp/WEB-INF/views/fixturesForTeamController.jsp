@@ -15,7 +15,7 @@
 			<option>..select</option>
 			<c:forEach var="season" items="${seasons}">
 				<option>
-					<c:out value='${season.ssnNum}' />
+					<c:out value='${season.seasonNumber}' />
 				</option>
 			</c:forEach>
 		</select>

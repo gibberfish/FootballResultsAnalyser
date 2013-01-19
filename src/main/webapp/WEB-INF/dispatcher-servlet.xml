@@ -44,7 +44,11 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	</bean>
 
   
-  <bean id="dao" class="uk.co.mindbadger.footballresultsanalyser.hibernate.FootballResultsAnalyserHibernateDAO">
+  <bean id="domainObjectFactory" class="uk.co.mindbadger.footballresultsanalyser.domain.DomainObjectFactoryImpl">
+  </bean>
+
+  <bean id="dao" class="uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserHibernateDAO">
+      <property name="domainObjectFactory" ref="domainObjectFactory"/>
   </bean>
   
 <!--   

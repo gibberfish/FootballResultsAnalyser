@@ -35,13 +35,13 @@ public class GetDivisionsForSeasonController {
 		
 		Division[] divisions = new Division[seasonDivisions.size()];
 		for (SeasonDivision seasonDivision : seasonDivisions) {
-		    divisions[seasonDivision.getDivPos()-1] = seasonDivision.getDivision();
+		    divisions[seasonDivision.getDivisionPosition()-1] = seasonDivision.getDivision();
 		}
 
 		//TODO CLUNKY APPROACH - need to get Jackson working properly
 		String output = "{\"divisions\": [";
 		for (Division division : divisions) {
-		    output+="{\"id\":"+division.getDivId()+",\"name\":\""+division.getDivName()+"\"},";
+		    output+="{\"id\":"+division.getDivisionId()+",\"name\":\""+division.getDivisionName()+"\"},";
 		}
 		if (output.length() > 1) {
 		    output = output.substring(0, output.length() - 1);

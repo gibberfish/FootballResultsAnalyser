@@ -73,3 +73,40 @@ insert into season_division_team
 select distinct ssn_num, div_id, home_team_id
 from fixture
 ;
+
+insert into fixture (ssn_num, div_id, home_team_id, away_team_id)
+select h.ssn_num, h.div_id, h.team_id, a.team_id
+from season_division_team h,
+     season_division_team a
+where h.ssn_num = a.ssn_num
+and h.div_id = a.div_id
+and h.team_id != a.team_id
+and not exists (select 'x' from fixture f where f.ssn_num = h.ssn_num and f.div_id = h.div_id and f.home_team_id = h.team_id and f.away_team_id = a.team_id)
+;
+
+select count(*) from fixture where fixture_date is null;
+
+
+select * from fixture f, team h, team a where f.ssn_num = 2012 and h.team_id = f.home_team_id and a.team_id = f.away_team_id and h.team_id = 561 and a.team_id = 585;
+
+select * from fixture f, team h, team a where f.fixture_date is null and h.team_id = f.home_team_id and a.team_id = f.away_team_id;
+
+select ssn_num, div_id, home_team_id, away_team_id, count(*)
+from fixture
+where ssn_num = 2012
+group by ssn_num, div_id, home_team_id, away_team_id
+having count(*) > 1;
+
+select * from fixture where ssn_num = 2000 and div_id = 31 and home_team_id = 578 and away_team_id = 597;
+
+
+
+
+select * from fixture
+where 
+((home_team_id = 560 and away_team_Id = 574))
+and ssn_num = 2012
+;
+
+delete from fixture where fixture_id = 21373;
+

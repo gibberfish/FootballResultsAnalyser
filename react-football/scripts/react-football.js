@@ -19,20 +19,39 @@ var Season = React.createClass({
     });
   },
   componentWillMount: function() {
+	console.log("componentWillMount");
     this.loadSeasonsFromServer();
+  },
+  componentDidMount: function (rootNode) {
+	if (this.state.data.length == 0) return;
+  
+    console.log("componentDidMount");
+  
+	var newSeason = rootNode.selector;
+	
+	for (var name in rootNode.selector) {
+		console.log("componentDidMount: " + name);
+	}
+	
+//	React.renderComponent(
+//		<Division season={newSeason} />, document.getElementById('division')
+//	);
   },
   changeSeason: function () {
 	var newSeason = this.refs.seasonSelection.getDOMNode().value.trim();
+	console.log("Changing Season: " + newSeason);
 	
 	React.renderComponent(
 		<Division season={newSeason} />, document.getElementById('division')
 	);
   },
   render: function() {
+    console.log("Render Season: " + this.state.data.length);
+  
 	var seasonRows = this.state.data.map(function (selectOption, index) {
 	  return <SelectOption selectOption={selectOption} />;
 	});
-	return (<div><span class="label">Season</span><span class="selector"><select onChange={this.changeSeason} ref="seasonSelection">{seasonRows}</select></span></div>);
+	return (<div><span className="label">Season</span><span className="selector"><select onChange={this.changeSeason} ref="seasonSelection">{seasonRows}</select></span></div>);
   }
 });
 
@@ -57,12 +76,12 @@ var Division = React.createClass({
   },
   render: function() {
 	
-	console.log("render: " + this.props.season);
+	console.log("Render Division: " + this.props.season + ", " + this.state.data);
 	
 	var divisionRows = this.state.data.map(function (selectOption, index) {
 	  return <SelectOption selectOption={selectOption} />;
 	});
-	return (<div><span class="label">Division</span><span class="selector"><select>{divisionRows}</select></span></div>);
+	return (<div><span className="label">Division</span><span className="selector"><select>{divisionRows}</select></span></div>);
   }
 });
 
@@ -72,7 +91,7 @@ React.renderComponent(
   document.getElementById('season')
 );
 
-React.renderComponent(
-  <Division season="2013" />,
-  document.getElementById('division')
-);
+//React.renderComponent(
+//  <Division season="2013" />,
+//  document.getElementById('division')
+//);

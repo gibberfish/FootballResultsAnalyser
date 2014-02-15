@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="footballApp">
+  <head>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <title>Football Fixtures</title>
+    <link rel="stylesheet" href="css/football.css" />
+	
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+	<script src="scripts/angular.min.js"></script>
+	<script src="scripts/angular-football.js"></script>
+
+  </head>
+  <body ng-controller="ShowFixturesCtrl">
+    <div id="choices" >
+		<div class="selectionDiv">
+			<span class="label">Season</span>
+			<span class="selector">
+				<select data-ng-model="selectedSeason">
+					<option ng-repeat="season in seasons" value="{{season.id}}">{{season.display}}</option>
+				</select>
+			</span>
+		</div>
+		
+		<div class="selectionDiv">
+			<span class="label">Division</span>
+			<span>
+				<select data-ng-model="selectedDivision">
+					<option ng-repeat="division in divisions" value="{{division.id}}">{{division.display}}</option>
+				</select>
+			</span>
+		</div>
+
+		<div class="selectionDiv">
+			<span class="label">Team</span>
+			<span>
+				<select data-ng-model="selectedTeam">
+					<option ng-repeat="team in teams" value="{{team.id}}">{{team.display}}</option>
+				</select>
+			</span>
+		</div>
+		
+	</div>
+    <div id="fixtures">
+		<table>
+			<tr>
+				<th class="date">Date</td>
+				<th class="home">Home</td>
+				<th class="score">&nbsp;</td>
+				<th class="versus">&nbsp;</td>
+				<th class="score">&nbsp;</td>
+				<th class="away">Away</td>
+			</tr>		
+			<tr ng-repeat="fixture in fixtures">
+				<td class="date">{{fixture.date}}</td>
+				<td class="home">{{fixture.home}}</td>
+				<td class="score">{{fixture.homeGoals}}</td>
+				<td class="versus">-</td>
+				<td class="score">{{fixture.awayGoals}}</td>
+				<td class="away">{{fixture.away}}</td>
+			</tr>
+		</table>
+    </div>
+  </body>
+</html>

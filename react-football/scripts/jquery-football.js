@@ -11,10 +11,11 @@ Football.Controller =  {
 	seasons: [],
 	populateValuesInSeasonDropdown: function () {
 		console.log("populateValuesInSeasonDropdown: " + this.seasons);
-		for(var season in this.seasons) {
-			console.log("Adding option for season " + season);
-			$('#seasonSelect').after('<option value="'+season.id+'">'+season.display+'</option>');
-		}
+		
+		this.seasons.map(function (season, index) {
+			console.log("Adding option for season " + season.display);
+			$('#seasonSelect').append('<option value="'+season.id+'">'+season.display+'</option>');
+		});		
 	},
 
 	loadSeasonsFromServer: function() {
@@ -22,12 +23,6 @@ Football.Controller =  {
 		 url: "/seasons.json",
 		 success: function(data) {
 			console.log("Season Ajax call returned success: " + data);
-		   
-			for (var key in data) {
-				//if (data.hasOwnProperty(key)) {
-					console.log("..key: " + key);
-				//}
-			}
 		   
 			Football.Controller.seasons = data;
 			Football.Controller.populateValuesInSeasonDropdown ();

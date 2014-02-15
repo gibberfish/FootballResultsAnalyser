@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <title>Football Fixtures</title>
+    <link rel="stylesheet" href="css/football.css" />
+	
+	<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+	<script src="scripts/jquery-football.js"></script>
+  </head>
+  <body>
+    <div id="choices">
+		<div class="selectionDiv">
+			<span class="label">Season</span>
+			<span class="selector">
+				<select id="seasonSelect">
+					<!-- <option value="2013">2013/2014</option> -->
+				</select>
+			</span>
+		</div>
+		
+		<div class="selectionDiv">
+			<span class="label">Division</span>
+			<span class="selector">
+				<select id="divisionSelect">
+					<!-- <option value="premier">Premier League</option> -->
+				</select>
+			</span>
+		</div>
+
+		<div class="selectionDiv">
+			<span class="label">Team</span>
+			<span class="selector">
+				<select id="teamSelect">
+					<!-- <option value="hull">Hull City</option> -->
+				</select>
+			</span>
+		</div>
+
+		
+	</div>
+    <div id="fixtures">
+		<table id="fixtureTable">
+			<tr>
+				<th class="date">Date</td>
+				<th class="home">Home</td>
+				<th class="score">&nbsp;</td>
+				<th class="versus">&nbsp;</td>
+				<th class="score">&nbsp;</td>
+				<th class="away">Away</td>
+			</tr>
+			<!--
+			<tr>
+				<td class="date">24/11/2013</td>
+				<td class="home">Portsmouth</td>
+				<td class="score">3</td>
+				<td class="versus">-</td>
+				<td class="score">1</td>
+				<td class="away">Torquay</td>
+			</tr>
+			-->
+		</table>
+    </div>
+  </body>
+</html>

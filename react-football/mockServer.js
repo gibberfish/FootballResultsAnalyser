@@ -102,7 +102,7 @@ app.get('/teams.json', function(req, res) {
 
 app.get('/fixtures.json', function(req, res) {
   var divUrl = req.url;
-  var team = divUrl.substring(divUrl.indexOf('?team=')+6);
+  var team = unescape(divUrl.substring(divUrl.indexOf('?team=')+6));
   
   console.log("Team = " + team);
 

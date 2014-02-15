@@ -36,7 +36,7 @@ footballApp.controller ('ShowFixturesCtrl', ['$scope','$http',
 				$scope.teams = data;
 				
 				if(data.length > 0) {
-					$scope.selectedTeam = data[0].id;
+					$scope.selectedTeam = data[0].display;
 				}
 			});	
 		};

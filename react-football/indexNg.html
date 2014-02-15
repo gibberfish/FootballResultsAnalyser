@@ -23,7 +23,7 @@
 		
 		<div class="selectionDiv">
 			<span class="label">Division</span>
-			<span>
+			<span class="selector">
 				<select data-ng-model="selectedDivision">
 					<option ng-repeat="division in divisions" value="{{division.id}}">{{division.display}}</option>
 				</select>
@@ -32,9 +32,9 @@
 
 		<div class="selectionDiv">
 			<span class="label">Team</span>
-			<span>
+			<span class="selector">
 				<select data-ng-model="selectedTeam">
-					<option ng-repeat="team in teams" value="{{team.id}}">{{team.display}}</option>
+					<option ng-repeat="team in teams" value="{{team.display}}">{{team.display}}</option>
 				</select>
 			</span>
 		</div>

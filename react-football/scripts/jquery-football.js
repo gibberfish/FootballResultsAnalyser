@@ -4,7 +4,7 @@ var Football = {}; // namespace
 $(function() {
     console.log( "Loaded JQuery Page" );
 	
-	Football.Controller.loadSeasonsFromServer();
+	Model.DataAccess.loadSeasonsFromServer(Football.Controller.receiveSeasonsUpdate);
 });
 
 Football.Controller =  {
@@ -13,6 +13,17 @@ Football.Controller =  {
 	teams: [],
 	fixtures: [],
 
+	receiveSeasonsUpdate: function(data) {
+		console.log("Received new list of seasons...");
+		   
+		Football.Controller.seasons = data;
+		Football.Controller.populateValuesInSeasonDropdown ();
+			
+		if (data.length > 0) {
+			Football.Controller.loadDivisionsFromServer (data[0].id);
+		}
+	},
+  
 	populateValuesInSeasonDropdown: function () {
 		console.log("populateValuesInSeasonDropdown: " + this.seasons);
 		
@@ -61,22 +72,6 @@ Football.Controller =  {
 						
 			$('#fixtureTable').append(fixtureRow);
 		});		
-	},
-
-	loadSeasonsFromServer: function() {
-	   $.ajax({
-		 url: "/seasons.json",
-		 success: function(data) {
-			console.log("Season Ajax call returned success: " + data);
-		   
-			Football.Controller.seasons = data;
-			Football.Controller.populateValuesInSeasonDropdown ();
-			
-			if (data.length > 0) {
-				Football.Controller.loadDivisionsFromServer (data[0].id);
-			}
-		 }
-	   });
 	},
 	
 	loadDivisionsFromServer: function(season) {

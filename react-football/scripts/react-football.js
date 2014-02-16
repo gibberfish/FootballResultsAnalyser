@@ -10,19 +10,17 @@ var Season = React.createClass({
   getInitialState: function() {
     return {data: []};
   },
-  loadSeasonsFromServer: function() {
-   $.ajax({
-     url: "/seasons.json",
-     success: function(data) {
-	   console.log("Season Ajax call returned success");
-       this.setState({data: data});
-     }.bind(this)
-   });
+  
+  receiveSeasonsUpdate: function(data) {
+	console.log("Received new list of seasons...");
+	this.setState({data: data});
   },
+  
   componentWillMount: function() {
 	console.log("Season componentWillMount");
-    this.loadSeasonsFromServer();
+	Model.DataAccess.loadSeasonsFromServer(this.receiveSeasonsUpdate);
   },
+  
   componentDidUpdate: function (prevProps, prevState, rootNode) {
 	console.log("Season componentDidUpdate");
 	var newSeason = this.refs.seasonSelection.getDOMNode().value.trim();
@@ -31,6 +29,7 @@ var Season = React.createClass({
 		<Division season={newSeason} />, document.getElementById('division')
 	);
   },
+  
   changeSeason: function () {
 	var newSeason = this.refs.seasonSelection.getDOMNode().value.trim();
 	console.log("Changing Season: " + newSeason);
@@ -39,6 +38,7 @@ var Season = React.createClass({
 		<Division season={newSeason} />, document.getElementById('division')
 	);
   },
+  
   render: function() {
     console.log("Render Season: " + this.state.data.length);
   

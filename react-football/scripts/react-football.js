@@ -12,19 +12,15 @@ var Season = React.createClass({
   },
   
   receiveSeasonsUpdate: function(data) {
-	console.log("Received new list of seasons...");
 	this.setState({data: data});
   },
   
   componentWillMount: function() {
-	console.log("Season componentWillMount");
 	Model.DataAccess.loadSeasonsFromServer(this.receiveSeasonsUpdate);
   },
   
   componentDidUpdate: function (prevProps, prevState, rootNode) {
-	console.log("Season componentDidUpdate");
 	var newSeason = this.refs.seasonSelection.getDOMNode().value.trim();
-	console.log("...newSeason = " + newSeason);
 	React.renderComponent(
 		<Division season={newSeason} />, document.getElementById('division')
 	);
@@ -32,16 +28,12 @@ var Season = React.createClass({
   
   changeSeason: function () {
 	var newSeason = this.refs.seasonSelection.getDOMNode().value.trim();
-	console.log("Changing Season: " + newSeason);
-	
 	React.renderComponent(
 		<Division season={newSeason} />, document.getElementById('division')
 	);
   },
   
   render: function() {
-    console.log("Render Season: " + this.state.data.length);
-  
 	var seasonRows = this.state.data.map(function (selectOption, index) {
 	  return <SelectOption selectOption={selectOption} />;
 	});
@@ -57,7 +49,6 @@ var Division = React.createClass({
   },
   
   receiveDivisionsUpdate: function(data) {
-	console.log("Received new list of divisions...");
 	this.setState({data: data});
   },
 
@@ -69,33 +60,25 @@ var Division = React.createClass({
 	Model.DataAccess.loadDivisionsFromServer(nextProps.season, this.receiveDivisionsUpdate);
   },
   
-  
   componentDidUpdate: function (prevProps, prevState, rootNode) {
-	console.log("Division componentDidUpdate");
-	var newDivision = this.refs.divisionSelection.getDOMNode().value.trim();
-	console.log("...newDivision = " + newDivision);
+    console.log("UPDATING DIV: " + prevState);
+	var newDivision = this.refs.divisionSelection.getDOMNode().value.trim();	
 	React.renderComponent(
 		<Team division={newDivision} />, document.getElementById('team')
 	);
   },
+  
   changeDivision: function () {
 	var newDivision = this.refs.divisionSelection.getDOMNode().value.trim();
-	console.log("Changing Division: " + newDivision);
-	
 	React.renderComponent(
 		<Team division={newDivision} />, document.getElementById('team')
 	);
   },
+  
   render: function() {
-	console.log("Render Division: " + this.props.season + ", " + this.state.data);
-	
-	//var firstId;
-	
 	var divisionRows = this.state.data.map(function (selectOption, index) {
-	   //if (index==0) firstId = selectOption.id;
 	   return <SelectOption selectOption={selectOption} />;
 	});
-	//return (<div><span className="label">Division</span><span className="selector"><select value={firstId} onChange={this.changeDivision} ref="divisionSelection">{divisionRows}</select></span></div>);
 	return (<div><span className="label">Division</span><span className="selector"><select onChange={this.changeDivision} ref="divisionSelection">{divisionRows}</select></span></div>);
   }
 });
@@ -106,15 +89,16 @@ var Team = React.createClass({
   },
 	
   receiveTeamsUpdate: function(data) {
-	console.log("Received new list of teams...");
 	this.setState({data: data});
   },
 
   componentWillMount: function() {
+    console.log("Team mount: " + this.props.division);
 	Model.DataAccess.loadTeamsFromServer(this.props.division, this.receiveTeamsUpdate);
   },
   
   componentWillReceiveProps: function(nextProps) {
+	console.log("Team receving props" + nextProps.division);
   	Model.DataAccess.loadTeamsFromServer(nextProps.division, this.receiveTeamsUpdate);
   },
   
@@ -122,35 +106,29 @@ var Team = React.createClass({
 	var newTeam = this.refs.teamSelection.getDOMNode();
 	var selectedIndex = newTeam.selectedIndex;
 	var teamName = newTeam.options[selectedIndex].text;
-	console.log("Team componentDidUpdate");
+
 	
 	React.renderComponent(
 		<Fixtures team={teamName} />, document.getElementById('fixtures')
 	);
   },
-  changeDivision: function () {
+  
+  changeTeam: function () {
 	var newTeam = this.refs.teamSelection.getDOMNode();  
 	var selectedIndex = newTeam.selectedIndex;
 	var teamName = newTeam.options[selectedIndex].text;
-	console.log("Changing Team: " + teamName);
 	
 	React.renderComponent(
 		<Fixtures team={teamName} />, document.getElementById('fixtures')
 	);
   },
 
-	render: function () {
-		console.log("Render Team: " + this.props.division + ", " + this.state.data);
-		
-		//var firstId;
-		
-		var teamRows = this.state.data.map(function (selectOption, index) {
-		  //if (index==0) firstId = selectOption.id;
-		  return <SelectOption selectOption={selectOption} />;
-		});
-		//return (<div><span className="label">Team</span><span className="selector"><select value={firstId} onChange={this.changeDivision} ref="teamSelection">{teamRows}</select></span></div>);
-		return (<div><span className="label">Team</span><span className="selector"><select onChange={this.changeDivision} ref="teamSelection">{teamRows}</select></span></div>);
-	}
+  render: function () {
+	var teamRows = this.state.data.map(function (selectOption, index) {
+	  return <SelectOption selectOption={selectOption} />;
+	});
+	return (<div><span className="label">Team</span><span className="selector"><select onChange={this.changeTeam} ref="teamSelection">{teamRows}</select></span></div>);
+  }
 });
 
 
@@ -176,7 +154,6 @@ var Fixtures = React.createClass({
   },
   
   receiveFixtures: function(data) {
-	console.log("Received new list of fixtures...");
 	this.setState({data: data});
   },
   
@@ -189,8 +166,6 @@ var Fixtures = React.createClass({
   },
   
   render: function () {
-	console.log("Render Team: " + this.props.division + ", " + this.state.data);
-	
 	var fixtureRows = this.state.data.map(function (fixture, index) {
 	  return <Fixture date={fixture.date} home={fixture.home} away={fixture.away} homeGoals={fixture.homeGoals} awayGoals={fixture.awayGoals} />;
 	});

@@ -1,9 +1,7 @@
 
 var Football = {}; // namespace
 
-$(function() {
-    console.log( "Loaded JQuery Page" );
-	
+$(function() {	
 	Model.DataAccess.loadSeasonsFromServer(Football.Controller.receiveSeasonsUpdate);
 });
 
@@ -13,9 +11,7 @@ Football.Controller =  {
 	teams: [],
 	fixtures: [],
 
-	receiveSeasonsUpdate: function(data) {
-		console.log("Received new list of seasons...");
-		   
+	receiveSeasonsUpdate: function(data) {		   
 		Football.Controller.seasons = data;
 		Football.Controller.populateValuesInSeasonDropdown ();
 			
@@ -25,8 +21,6 @@ Football.Controller =  {
 	},
 
 	receiveDivisionsUpdate: function (data) {
-		console.log("Received new list of division...");
-		
 		Football.Controller.divisions = data;
 		Football.Controller.populateValuesInDivisionDropdown ();
 			
@@ -36,8 +30,6 @@ Football.Controller =  {
 	},
 	
 	receiveTeamsUpdate: function(data) {
-		console.log("Received new list of teams...");
-	   
 		Football.Controller.teams = data;
 		Football.Controller.populateValuesInTeamDropdown ();
 		
@@ -47,49 +39,34 @@ Football.Controller =  {
 	},
 
 	receiveFixtures: function(data) {
-		console.log("Received new list of fixtures...");
-		   
 		Football.Controller.fixtures = data;
 		Football.Controller.populateFixtures ();
 	},
 	
 	populateValuesInSeasonDropdown: function () {
-		console.log("populateValuesInSeasonDropdown: " + this.seasons);
-		
 		$('#seasonSelect option').remove();
 		this.seasons.map(function (season, index) {
-			console.log("Adding option for season " + season.display);
 			$('#seasonSelect').append('<option value="'+season.id+'">'+season.display+'</option>');
 		});		
 	},
 
-	populateValuesInDivisionDropdown: function () {
-		console.log("populateValuesInDivisionDropdown: " + this.divisions);
-		
+	populateValuesInDivisionDropdown: function () {		
 		$('#divisionSelect option').remove();
 		this.divisions.map(function (division, index) {
-			console.log("Adding option for division " + division.display);
 			$('#divisionSelect').append('<option value="'+division.id+'">'+division.display+'</option>');
 		});		
 	},
 
 	populateValuesInTeamDropdown: function () {
-		console.log("populateValuesInTeamDropdown: " + this.teams);
-
 		$('#teamSelect option').remove();		
 		this.teams.map(function (team, index) {
-			console.log("Adding option for team " + team.display);
 			$('#teamSelect').append('<option value="'+team.id+'">'+team.display+'</option>');
 		});		
 	},
 
-	populateFixtures: function () {
-		console.log("populateFixtures");
-		
+	populateFixtures: function () {		
 		$('#fixtureTable .fixtureRow').remove();
-		this.fixtures.map(function (fixture, index) {
-			console.log("Adding option for fixture " + fixture);
-			
+		this.fixtures.map(function (fixture, index) {			
 			var fixtureRow = '<tr class="fixtureRow">' +
 				'<td class="date">'+fixture.date+'</td>' + 
 				'<td class="home">'+fixture.home+'</td>' +

@@ -13,7 +13,7 @@
 		<div class="selectionDiv">
 			<span class="label">Season</span>
 			<span class="selector">
-				<select id="seasonSelect">
+				<select id="seasonSelect" onChange="Football.Controller.loadDivisionsFromServer($('#seasonSelect option:selected').val());">
 					<!-- <option value="2013">2013/2014</option> -->
 				</select>
 			</span>
@@ -22,7 +22,7 @@
 		<div class="selectionDiv">
 			<span class="label">Division</span>
 			<span class="selector">
-				<select id="divisionSelect">
+				<select id="divisionSelect" onChange="Football.Controller.loadTeamsFromServer($('#divisionSelect option:selected').val());">
 					<!-- <option value="premier">Premier League</option> -->
 				</select>
 			</span>
@@ -31,12 +31,11 @@
 		<div class="selectionDiv">
 			<span class="label">Team</span>
 			<span class="selector">
-				<select id="teamSelect">
+				<select id="teamSelect" onChange="Football.Controller.loadFixturesFromServer($('#teamSelect option:selected').text());">
 					<!-- <option value="hull">Hull City</option> -->
 				</select>
 			</span>
 		</div>
-
 		
 	</div>
     <div id="fixtures">

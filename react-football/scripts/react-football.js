@@ -51,22 +51,22 @@ var Season = React.createClass({
 
 
 var Division = React.createClass({
+
   getInitialState: function() {
     return {data: []};
   },
-  loadDivisionsFromServer: function(season) {
-    $.ajax({
-      url: "/divisions.json?season="+season,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this)
-    });
+  
+  receiveDivisionsUpdate: function(data) {
+	console.log("Received new list of divisions...");
+	this.setState({data: data});
   },
+
   componentWillMount: function() {
-    this.loadDivisionsFromServer(this.props.season);
+	Model.DataAccess.loadDivisionsFromServer(this.props.season, this.receiveDivisionsUpdate);
   },
+  
   componentWillReceiveProps: function(nextProps) {
-    this.loadDivisionsFromServer(nextProps.season);
+	Model.DataAccess.loadDivisionsFromServer(nextProps.season, this.receiveDivisionsUpdate);
   },
   
   
@@ -87,34 +87,37 @@ var Division = React.createClass({
 	);
   },
   render: function() {
-	
 	console.log("Render Division: " + this.props.season + ", " + this.state.data);
 	
+	//var firstId;
+	
 	var divisionRows = this.state.data.map(function (selectOption, index) {
-	  return <SelectOption selectOption={selectOption} />;
+	   //if (index==0) firstId = selectOption.id;
+	   return <SelectOption selectOption={selectOption} />;
 	});
+	//return (<div><span className="label">Division</span><span className="selector"><select value={firstId} onChange={this.changeDivision} ref="divisionSelection">{divisionRows}</select></span></div>);
 	return (<div><span className="label">Division</span><span className="selector"><select onChange={this.changeDivision} ref="divisionSelection">{divisionRows}</select></span></div>);
   }
 });
 
 var Team = React.createClass({
-    getInitialState: function() {
-      return {data: []};
-    },
-  loadTeamsFromServer: function(division) {
-    $.ajax({
-      url: "/teams.json?division="+division,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this)
-    });
+  getInitialState: function() {
+    return {data: []};
   },
+	
+  receiveTeamsUpdate: function(data) {
+	console.log("Received new list of teams...");
+	this.setState({data: data});
+  },
+
   componentWillMount: function() {
-    this.loadTeamsFromServer(this.props.division);
+	Model.DataAccess.loadTeamsFromServer(this.props.division, this.receiveTeamsUpdate);
   },
+  
   componentWillReceiveProps: function(nextProps) {
-    this.loadTeamsFromServer(nextProps.division);
+  	Model.DataAccess.loadTeamsFromServer(nextProps.division, this.receiveTeamsUpdate);
   },
+  
   componentDidUpdate: function (prevProps, prevState, rootNode) {
 	var newTeam = this.refs.teamSelection.getDOMNode();
 	var selectedIndex = newTeam.selectedIndex;
@@ -139,9 +142,13 @@ var Team = React.createClass({
 	render: function () {
 		console.log("Render Team: " + this.props.division + ", " + this.state.data);
 		
+		//var firstId;
+		
 		var teamRows = this.state.data.map(function (selectOption, index) {
+		  //if (index==0) firstId = selectOption.id;
 		  return <SelectOption selectOption={selectOption} />;
 		});
+		//return (<div><span className="label">Team</span><span className="selector"><select value={firstId} onChange={this.changeDivision} ref="teamSelection">{teamRows}</select></span></div>);
 		return (<div><span className="label">Team</span><span className="selector"><select onChange={this.changeDivision} ref="teamSelection">{teamRows}</select></span></div>);
 	}
 });
@@ -164,50 +171,45 @@ var Fixture = React.createClass({
 
 
 var Fixtures = React.createClass({
-    getInitialState: function() {
-      return {data: []};
-    },
-  loadFixturesFromServer: function(team) {
-    $.ajax({
-      url: "/fixtures.json?team="+team,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this)
-    });
+  getInitialState: function() {
+    return {data: []};
   },
+  
+  receiveFixtures: function(data) {
+	console.log("Received new list of fixtures...");
+	this.setState({data: data});
+  },
+  
   componentWillMount: function() {
-    this.loadFixturesFromServer(this.props.team);
+	Model.DataAccess.loadFixturesFromServer(this.props.team, this.receiveFixtures);
   },
+  
   componentWillReceiveProps: function(nextProps) {
-    this.loadFixturesFromServer(nextProps.team);
+	Model.DataAccess.loadFixturesFromServer(nextProps.team, this.receiveFixtures);
   },
-	render: function () {
-		console.log("Render Team: " + this.props.division + ", " + this.state.data);
-		
-		var fixtureRows = this.state.data.map(function (fixture, index) {
-		  return <Fixture date={fixture.date} home={fixture.home} away={fixture.away} homeGoals={fixture.homeGoals} awayGoals={fixture.awayGoals} />;
-		});
-		return (
-		<table>
-			<tr>
-				<th className="date">Date</th>
-				<th className="home">Home</th>
-				<th className="score"> </th>
-				<th className="versus">-</th>
-				<th className="score"> </th>
-				<th className="away">Away</th>
-			</tr>
-			{fixtureRows}
-		</table>);
-	}
+  
+  render: function () {
+	console.log("Render Team: " + this.props.division + ", " + this.state.data);
+	
+	var fixtureRows = this.state.data.map(function (fixture, index) {
+	  return <Fixture date={fixture.date} home={fixture.home} away={fixture.away} homeGoals={fixture.homeGoals} awayGoals={fixture.awayGoals} />;
+	});
+	return (
+	<table>
+		<tr>
+			<th className="date">Date</th>
+			<th className="home">Home</th>
+			<th className="score"> </th>
+			<th className="versus">-</th>
+			<th className="score"> </th>
+			<th className="away">Away</th>
+		</tr>
+		{fixtureRows}
+	</table>);
+  }
 });
-
-
-
 
 React.renderComponent(
   <Season />,
   document.getElementById('season')
 );
-
-

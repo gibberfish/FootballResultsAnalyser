@@ -11,62 +11,56 @@ footballApp.controller ('ShowFixturesCtrl', ['$scope','$http',
 		$scope.selectedSeason = 0;
 		$scope.selectedDivision = 0;
 		$scope.selectedTeam = 0;
-		
-		
+
 		$scope.receiveSeasonsUpdate = function(data) {
 			console.log("Received new list of seasons...");
 			
 			$scope.seasons = data;
 			if (data.length > 0) {
 				$scope.selectedSeason = data[0].id;
-			}			
+			}
+			$scope.$apply(); // Needed to force Angular to respond to the change in model
 		},
 		
-		$scope.getDivisions = function($http, seasonId) {
-			$http.get('/divisions.json?season='+seasonId).success(function(data) {
-				$scope.divisions = data;
-				
-				if(data.length > 0) {
-					$scope.selectedDivision = data[0].id;
-				}
-			});	
-		};
-		
-		$scope.getTeams = function($http, divisionId) {
-			$http.get('/teams.json?division='+divisionId).success(function(data) {
-				$scope.teams = data;
-				
-				if(data.length > 0) {
-					$scope.selectedTeam = data[0].display;
-				}
-			});	
+		$scope.receiveDivisionsUpdate = function (data) {
+			$scope.divisions = data;
+			
+			if(data.length > 0) {
+				$scope.selectedDivision = data[0].id;
+			}
+			$scope.$apply(); // Needed to force Angular to respond to the change in model
 		};
 
-		$scope.getFixtures = function($http, teamId) {
-			$http.get('/fixtures.json?team='+teamId).success(function(data) {
-				$scope.fixtures = data;
-			});	
+		$scope.receiveTeamsUpdate = function (data) {
+			$scope.teams = data;
+			
+			if(data.length > 0) {
+				$scope.selectedTeam = data[0].display;
+			}
+			$scope.$apply(); // Needed to force Angular to respond to the change in model
 		};
 		
-		Model.DataAccess.loadSeasonsFromServer($scope.receiveSeasonsUpdate);
-
+		$scope.receiveFixtures = function (data) {
+			$scope.fixtures = data;
+			$scope.$apply(); // Needed to force Angular to respond to the change in model
+		};
 		
 		$scope.$watch("selectedSeason", function(newValue, oldValue) {
-			console.log("Changed selected season: " + newValue);
-			
-			$scope.getDivisions ($http, newValue);
+			console.log("Changed selected season: " + newValue);			
+			Model.DataAccess.loadDivisionsFromServer(newValue, $scope.receiveDivisionsUpdate);
 		});
 		
 		$scope.$watch("selectedDivision", function(newValue, oldValue) {
 			console.log("Changed selected division: " + newValue);
-			
-			$scope.getTeams ($http, newValue);
+			Model.DataAccess.loadTeamsFromServer(newValue, $scope.receiveTeamsUpdate);
 		});
 		
 		$scope.$watch("selectedTeam", function(newValue, oldValue) {
 			console.log("Changed selected team: " + newValue);
-			
-			$scope.getFixtures ($http, newValue);
+			Model.DataAccess.loadFixturesFromServer(newValue, $scope.receiveFixtures);
 		});
+		
+		// Initialise the model
+		Model.DataAccess.loadSeasonsFromServer($scope.receiveSeasonsUpdate);
 	}
 ]);

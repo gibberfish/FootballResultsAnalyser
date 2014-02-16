@@ -45,23 +45,24 @@ var Season = React.createClass({
 var Division = React.createClass({
 
   getInitialState: function() {
-    return {data: []};
+    return {data: [], selectedId: -1};
   },
   
   receiveDivisionsUpdate: function(data) {
-	this.setState({data: data});
+	if (data.length > 0) {
+		this.setState({data: data, selectedId: data[0].id});
+	}
   },
 
   componentWillMount: function() {
 	Model.DataAccess.loadDivisionsFromServer(this.props.season, this.receiveDivisionsUpdate);
   },
-  
+    
   componentWillReceiveProps: function(nextProps) {
 	Model.DataAccess.loadDivisionsFromServer(nextProps.season, this.receiveDivisionsUpdate);
   },
   
   componentDidUpdate: function (prevProps, prevState, rootNode) {
-    console.log("UPDATING DIV: " + prevState);
 	var newDivision = this.refs.divisionSelection.getDOMNode().value.trim();	
 	React.renderComponent(
 		<Team division={newDivision} />, document.getElementById('team')
@@ -70,6 +71,10 @@ var Division = React.createClass({
   
   changeDivision: function () {
 	var newDivision = this.refs.divisionSelection.getDOMNode().value.trim();
+	
+	this.state.selectedId = newDivision;
+	this.forceUpdate();
+	
 	React.renderComponent(
 		<Team division={newDivision} />, document.getElementById('team')
 	);
@@ -79,26 +84,26 @@ var Division = React.createClass({
 	var divisionRows = this.state.data.map(function (selectOption, index) {
 	   return <SelectOption selectOption={selectOption} />;
 	});
-	return (<div><span className="label">Division</span><span className="selector"><select onChange={this.changeDivision} ref="divisionSelection">{divisionRows}</select></span></div>);
+	return (<div><span className="label">Division</span><span className="selector"><select value={this.state.selectedId} onChange={this.changeDivision} ref="divisionSelection">{divisionRows}</select></span></div>);
   }
 });
 
 var Team = React.createClass({
   getInitialState: function() {
-    return {data: []};
+    return {data: [], selectedId: -1};
   },
 	
   receiveTeamsUpdate: function(data) {
-	this.setState({data: data});
+	if (data.length > 0) {
+		this.setState({data: data, selectedId: data[0].id});
+	}
   },
 
   componentWillMount: function() {
-    console.log("Team mount: " + this.props.division);
 	Model.DataAccess.loadTeamsFromServer(this.props.division, this.receiveTeamsUpdate);
   },
   
   componentWillReceiveProps: function(nextProps) {
-	console.log("Team receving props" + nextProps.division);
   	Model.DataAccess.loadTeamsFromServer(nextProps.division, this.receiveTeamsUpdate);
   },
   
@@ -107,7 +112,6 @@ var Team = React.createClass({
 	var selectedIndex = newTeam.selectedIndex;
 	var teamName = newTeam.options[selectedIndex].text;
 
-	
 	React.renderComponent(
 		<Fixtures team={teamName} />, document.getElementById('fixtures')
 	);
@@ -118,6 +122,9 @@ var Team = React.createClass({
 	var selectedIndex = newTeam.selectedIndex;
 	var teamName = newTeam.options[selectedIndex].text;
 	
+	this.state.selectedId = newTeam.options[selectedIndex].val;
+	this.forceUpdate();
+
 	React.renderComponent(
 		<Fixtures team={teamName} />, document.getElementById('fixtures')
 	);
@@ -127,7 +134,7 @@ var Team = React.createClass({
 	var teamRows = this.state.data.map(function (selectOption, index) {
 	  return <SelectOption selectOption={selectOption} />;
 	});
-	return (<div><span className="label">Team</span><span className="selector"><select onChange={this.changeTeam} ref="teamSelection">{teamRows}</select></span></div>);
+	return (<div><span className="label">Team</span><span className="selector"><select value={this.state.selectedId} onChange={this.changeTeam} ref="teamSelection">{teamRows}</select></span></div>);
   }
 });
 

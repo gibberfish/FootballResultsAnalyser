@@ -11,7 +11,7 @@ Model.DataAccess =  {
 	   $.ajax({
 		 url: "/seasons.json",
 		 success: function(data) {
-			console.log("Season Ajax call returned success: " + data);
+			//console.log("Season Ajax call returned success: " + data);
 			callBack(data);		   
 		 }
 	   });
@@ -21,7 +21,7 @@ Model.DataAccess =  {
 	   $.ajax({
 		 url: "/divisions.json?season="+season,
 		 success: function(data) {
-			console.log("Division Ajax call returned success: " + data);
+			//console.log("Division Ajax call returned success: " + data);
 			callBack(data);		   
 		 }
 	   });
@@ -31,7 +31,7 @@ Model.DataAccess =  {
 	   $.ajax({
 		 url: "/teams.json?division="+division,
 		 success: function(data) {
-			console.log("Team Ajax call returned success: " + data);
+			//console.log("Team Ajax call returned success: " + data);
 			callBack(data);		   
 		 }
 	   });
@@ -41,7 +41,7 @@ Model.DataAccess =  {
 	   $.ajax({
 		 url: "/fixtures.json?team="+team,
 		 success: function(data) {
-			console.log("Fixture Ajax call returned success: " + data);
+			//console.log("Fixture Ajax call returned success: " + data);
 			callBack(data);		   
 		 }
 	   });

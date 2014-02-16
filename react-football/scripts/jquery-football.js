@@ -23,7 +23,18 @@ Football.Controller =  {
 			Football.Controller.loadDivisionsFromServer (data[0].id);
 		}
 	},
-  
+
+	receiveDivisionsUpdate: function (data) {
+		console.log("Received new list of division...");
+		
+		Football.Controller.divisions = data;
+		Football.Controller.populateValuesInDivisionDropdown ();
+			
+		if (data.length > 0) {
+			Football.Controller.loadTeamsFromServer (data[0].id);
+		}
+	},
+	
 	populateValuesInSeasonDropdown: function () {
 		console.log("populateValuesInSeasonDropdown: " + this.seasons);
 		

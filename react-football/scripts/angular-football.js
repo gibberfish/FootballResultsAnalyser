@@ -12,14 +12,15 @@ footballApp.controller ('ShowFixturesCtrl', ['$scope','$http',
 		$scope.selectedDivision = 0;
 		$scope.selectedTeam = 0;
 		
-		$scope.getSeasons = function($http) {		
-			$http.get('/seasons.json').success(function(data) {
-				$scope.seasons = data;
-				if (data.length > 0) {
-					$scope.selectedSeason = data[0].id;
-				}
-			});
-		};
+		
+		$scope.receiveSeasonsUpdate = function(data) {
+			console.log("Received new list of seasons...");
+			
+			$scope.seasons = data;
+			if (data.length > 0) {
+				$scope.selectedSeason = data[0].id;
+			}			
+		},
 		
 		$scope.getDivisions = function($http, seasonId) {
 			$http.get('/divisions.json?season='+seasonId).success(function(data) {
@@ -47,7 +48,7 @@ footballApp.controller ('ShowFixturesCtrl', ['$scope','$http',
 			});	
 		};
 		
-		$scope.getSeasons ($http);
+		Model.DataAccess.loadSeasonsFromServer($scope.receiveSeasonsUpdate);
 
 		
 		$scope.$watch("selectedSeason", function(newValue, oldValue) {

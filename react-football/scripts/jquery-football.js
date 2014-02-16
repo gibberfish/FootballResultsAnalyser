@@ -20,7 +20,7 @@ Football.Controller =  {
 		Football.Controller.populateValuesInSeasonDropdown ();
 			
 		if (data.length > 0) {
-			Football.Controller.loadDivisionsFromServer (data[0].id);
+			Model.DataAccess.loadDivisionsFromServer (data[0].id, Football.Controller.receiveDivisionsUpdate);
 		}
 	},
 
@@ -31,8 +31,26 @@ Football.Controller =  {
 		Football.Controller.populateValuesInDivisionDropdown ();
 			
 		if (data.length > 0) {
-			Football.Controller.loadTeamsFromServer (data[0].id);
+			Model.DataAccess.loadTeamsFromServer (data[0].id, Football.Controller.receiveTeamsUpdate);
 		}
+	},
+	
+	receiveTeamsUpdate: function(data) {
+		console.log("Received new list of teams...");
+	   
+		Football.Controller.teams = data;
+		Football.Controller.populateValuesInTeamDropdown ();
+		
+		if (data.length > 0) {
+			Model.DataAccess.loadFixturesFromServer (data[0].display, Football.Controller.receiveFixtures);
+		}
+	},
+
+	receiveFixtures: function(data) {
+		console.log("Received new list of fixtures...");
+		   
+		Football.Controller.fixtures = data;
+		Football.Controller.populateFixtures ();
 	},
 	
 	populateValuesInSeasonDropdown: function () {
@@ -84,49 +102,4 @@ Football.Controller =  {
 			$('#fixtureTable').append(fixtureRow);
 		});		
 	},
-	
-	loadDivisionsFromServer: function(season) {
-	   $.ajax({
-		 url: "/divisions.json?season="+season,
-		 success: function(data) {
-			console.log("Division Ajax call returned success: " + data);
-		   
-			Football.Controller.divisions = data;
-			Football.Controller.populateValuesInDivisionDropdown ();
-			
-			if (data.length > 0) {
-				Football.Controller.loadTeamsFromServer (data[0].id);
-			}
-		 }
-	   });
-	},
-	
-	loadTeamsFromServer: function(division) {
-	   $.ajax({
-		 url: "/teams.json?division="+division,
-		 success: function(data) {
-			console.log("Team Ajax call returned success: " + data);
-		   
-			Football.Controller.teams = data;
-			Football.Controller.populateValuesInTeamDropdown ();
-			
-			if (data.length > 0) {
-				Football.Controller.loadFixturesFromServer (data[0].display);
-			}
-		 }
-	   });
-	},
-	
-	loadFixturesFromServer: function(team) {
-	   $.ajax({
-		 url: "/fixtures.json?team="+team,
-		 success: function(data) {
-			console.log("Fixture Ajax call returned success: " + data);
-		   
-			Football.Controller.fixtures = data;
-			Football.Controller.populateFixtures ();
-		 }
-	   });
-	}
-
 };

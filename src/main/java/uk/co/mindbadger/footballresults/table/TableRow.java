@@ -26,4 +26,31 @@ public class TableRow {
 		return 0;
 	}
 
+	public Object getGamesWon() {
+		return 0;
+	}
+
+	public Object getGamesDrawn() {
+		return 0;
+	}
+
+	public Object getGamesLost() {
+		return 0;
+	}
+
+	public Object getGoalsScored() {
+		return 0;
+	}
+
+	public Object getGoalsConceded() {
+		return 0;
+	}
+
+	public Object getGoalDifference() {
+		return 0;
+	}
+
+	public Object getPoints() {
+		return 0;
+	}
 }

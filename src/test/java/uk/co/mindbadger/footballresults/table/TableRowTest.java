@@ -45,6 +45,12 @@ public class TableRowTest {
 		assertEquals (TEAM_ID, objectUnderTest.getTeamId());
 		assertEquals (TEAM_NAME, objectUnderTest.getTeamName());
 		assertEquals (0, objectUnderTest.getGamesPlayed());
+		assertEquals (0, objectUnderTest.getGamesWon());
+		assertEquals (0, objectUnderTest.getGamesDrawn());
+		assertEquals (0, objectUnderTest.getGamesLost());
+		assertEquals (0, objectUnderTest.getGoalsScored());
+		assertEquals (0, objectUnderTest.getGoalsConceded());
+		assertEquals (0, objectUnderTest.getGoalDifference());
+		assertEquals (0, objectUnderTest.getPoints());
 	}
-
 }

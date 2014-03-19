@@ -44,6 +44,7 @@ public class TableRowTest {
 		// Then
 		assertEquals (TEAM_ID, objectUnderTest.getTeamId());
 		assertEquals (TEAM_NAME, objectUnderTest.getTeamName());
+		assertEquals (0, objectUnderTest.getGamesPlayed());
 	}
 
 }

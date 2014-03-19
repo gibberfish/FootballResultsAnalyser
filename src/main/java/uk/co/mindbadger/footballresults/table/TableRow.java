@@ -22,4 +22,8 @@ public class TableRow {
 		return team.getTeamName();
 	}
 
+	public int getGamesPlayed() {
+		return 0;
+	}
+
 }

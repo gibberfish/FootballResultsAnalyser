@@ -16,8 +16,17 @@ public abstract class TableRow implements Comparable<TableRow> {
 	public int compareTo (TableRow otherRow) {
 		if (otherRow.getPoints() != getPoints()) {
 			return (otherRow.getPoints() < getPoints()) ? -1 : 1;
+		} else if (otherRow.getGoalDifference() != getGoalDifference()) {
+			return (otherRow.getGoalDifference() < getGoalDifference()) ? -1 : 1;
+		} else if (otherRow.getGoalsScored() != getGoalsScored()) {
+			return (otherRow.getGoalsScored() < getGoalsScored()) ? -1 : 1;
+		} else {
+			return getTeamName().compareTo(otherRow.getTeamName());
 		}
-		
-		return 0;
+	}
+	
+	@Override
+	public String toString () {
+		return "TableRow: " + getTeamName();
 	}
 }

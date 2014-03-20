@@ -16,4 +16,8 @@ public abstract class Table {
 		Collections.sort(list);
 		return list;
 	}
+
+	public int getIndexOfTableRow(TableRow tableRow) {
+		return (getSortedTable().indexOf(tableRow)+1);
+	}
 }

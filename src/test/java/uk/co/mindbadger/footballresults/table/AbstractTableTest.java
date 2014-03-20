@@ -76,5 +76,11 @@ public class AbstractTableTest {
 		assertEquals (row4, sortedTable.get(1));
 		assertEquals (row3, sortedTable.get(2));
 		assertEquals (row2, sortedTable.get(3));
+		
+		// When
+		int index = table.getIndexOfTableRow (row3);
+		
+		// Then
+		assertEquals (3, index);
 	}
 }

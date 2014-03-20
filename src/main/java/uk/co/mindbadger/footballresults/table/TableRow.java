@@ -1,6 +1,8 @@
 package uk.co.mindbadger.footballresults.table;
 
 public abstract class TableRow implements Comparable<TableRow> {
+	protected Table parentTable;
+	
 	abstract public Integer getTeamId ();
 	abstract public String getTeamName ();
 	abstract public int getGamesPlayed();
@@ -28,5 +30,9 @@ public abstract class TableRow implements Comparable<TableRow> {
 	@Override
 	public String toString () {
 		return "TableRow: " + getTeamName();
+	}
+	
+	public int getLeaguePosition() {
+		return parentTable.getIndexOfTableRow(this);
 	}
 }

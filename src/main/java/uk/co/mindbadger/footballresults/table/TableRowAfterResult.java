@@ -20,6 +20,7 @@ public class TableRowAfterResult implements TableRow {
 		this.team = team;
 		this.previousTableRow = previousTableRow;
 		this.fixture = fixture;
+		
 		homeFixture = (fixture.getHomeTeam() == team);
 		goalsFor = (homeFixture ? fixture.getHomeGoals() : fixture.getAwayGoals());
 		goalsAgainst = (homeFixture ? fixture.getAwayGoals() : fixture.getHomeGoals());
@@ -45,72 +46,42 @@ public class TableRowAfterResult implements TableRow {
 
 	@Override
 	public int getGamesPlayed() {
-		if (previousTableRow == null) {
-			return 0;
-		} else {
-			return previousTableRow.getGamesPlayed() + 1;
-		}
+		return previousTableRow.getGamesPlayed() + 1;
 	}
 
 	@Override
 	public int getGamesWon() {
-		if (previousTableRow == null) {
-			return 0;
-		} else {
-			return (winLoseOrDraw == 'W' ? previousTableRow.getGamesWon() + 1 : previousTableRow.getGamesWon());
-		}
+		return (winLoseOrDraw == 'W' ? previousTableRow.getGamesWon() + 1 : previousTableRow.getGamesWon());
 	}
 
 	@Override
 	public int getGamesDrawn() {
-		if (previousTableRow == null) {
-			return 0;
-		} else {
-			return (winLoseOrDraw == 'D' ? previousTableRow.getGamesDrawn() + 1 : previousTableRow.getGamesDrawn());
-		}
+		return (winLoseOrDraw == 'D' ? previousTableRow.getGamesDrawn() + 1 : previousTableRow.getGamesDrawn());
 	}
 
 	@Override
 	public int getGamesLost() {
-		if (previousTableRow == null) {
-			return 0;
-		} else {
-			return (winLoseOrDraw == 'L' ? previousTableRow.getGamesLost() + 1 : previousTableRow.getGamesLost());
-		}
+		return (winLoseOrDraw == 'L' ? previousTableRow.getGamesLost() + 1 : previousTableRow.getGamesLost());
 	}
 
 	@Override
 	public int getGoalsScored() {
-		if (previousTableRow == null) {
-			return 0;
-		} else {
-			return previousTableRow.getGoalsScored() + goalsFor;
-		}
+		return previousTableRow.getGoalsScored() + goalsFor;
 	}
 
 	@Override
 	public int getGoalsConceded() {
-		if (previousTableRow == null) {
-			return 0;
-		} else {
-			return previousTableRow.getGoalsConceded() + goalsAgainst;
-		}
+		return previousTableRow.getGoalsConceded() + goalsAgainst;
 	}
 
 	@Override
 	public int getGoalDifference() {
-		if (previousTableRow == null) {
-			return 0;
-		} else {
-			return previousTableRow.getGoalDifference() + (goalsFor - goalsAgainst);
-		}
+		return previousTableRow.getGoalDifference() + (goalsFor - goalsAgainst);
 	}
 
 	@Override
 	public int getPoints() {
-		if (previousTableRow == null) {
-			return 0;
-		} else if (winLoseOrDraw == 'W') {
+		if (winLoseOrDraw == 'W') {
 			return previousTableRow.getPoints() + 3;
 		} else if (winLoseOrDraw == 'D') {
 			return previousTableRow.getPoints() + 1;

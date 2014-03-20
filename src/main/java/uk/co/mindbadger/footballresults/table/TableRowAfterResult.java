@@ -3,7 +3,7 @@ package uk.co.mindbadger.footballresults.table;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-public class TableRowAfterResult implements TableRow {
+public class TableRowAfterResult extends TableRow {
 	private Team team;
 	private TableRow previousTableRow;
 	private Fixture fixture;

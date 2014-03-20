@@ -2,7 +2,7 @@ package uk.co.mindbadger.footballresults.table;
 
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-public class InitialTableRow implements TableRow {
+public class InitialTableRow extends TableRow {
 
 	private Team team;
 

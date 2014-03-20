@@ -1,14 +1,14 @@
 package uk.co.mindbadger.footballresults.table;
 
-public interface TableRow {
-	public Integer getTeamId ();
-	public String getTeamName ();
-	public int getGamesPlayed();
-	public int getGamesWon();
-	public int getGamesDrawn();
-	public int getGamesLost();
-	public int getGoalsScored();
-	public int getGoalsConceded();
-	public int getGoalDifference();
-	public int getPoints();
+public abstract class TableRow {
+	abstract public Integer getTeamId ();
+	abstract public String getTeamName ();
+	abstract public int getGamesPlayed();
+	abstract public int getGamesWon();
+	abstract public int getGamesDrawn();
+	abstract public int getGamesLost();
+	abstract public int getGoalsScored();
+	abstract public int getGoalsConceded();
+	abstract public int getGoalDifference();
+	abstract public int getPoints();
 }

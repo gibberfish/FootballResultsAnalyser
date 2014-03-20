@@ -7,9 +7,8 @@ import java.util.Set;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
 
-public class InitialTable implements Table {
+public class InitialTable extends Table {
 	private SeasonDivision seasonDivision;
-	private Map<Integer, TableRow> tableRows = new HashMap<Integer, TableRow> ();
 
 	public InitialTable (SeasonDivision seasonDivision) {
 		this.seasonDivision = seasonDivision;

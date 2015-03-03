@@ -1,27 +1,26 @@
 package uk.co.mindbadger.footballresults.table;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
 
-public class InitialTable extends Table {
-	private SeasonDivision seasonDivision;
+public class InitialTable<K> extends Table<K> {
+	private SeasonDivision<K> seasonDivision;
 
-	public InitialTable (SeasonDivision seasonDivision) {
+	public InitialTable (SeasonDivision<K> seasonDivision) {
 		this.seasonDivision = seasonDivision;
 		
-		Set<SeasonDivisionTeam> seasonDivisionTeams = seasonDivision.getTeamsInSeasonDivision();
-		for (SeasonDivisionTeam seasonDivisionTeam : seasonDivisionTeams) {
-			TableRow newRow = new InitialTableRow(seasonDivisionTeam.getTeam());
+		Set<SeasonDivisionTeam<K>> seasonDivisionTeams = seasonDivision.getTeamsInSeasonDivision();
+		for (SeasonDivisionTeam<K> seasonDivisionTeam : seasonDivisionTeams) {
+			TableRow<K> newRow = new InitialTableRow<K>(seasonDivisionTeam.getTeam());
 			
 			tableRows.put(seasonDivisionTeam.getTeam().getTeamId(), newRow);
 		}
 	}
 
-	public Map<Integer, TableRow> getTableRows() {
+	public Map<K, TableRow<K>> getTableRows() {
 		return tableRows;
 	}
 }

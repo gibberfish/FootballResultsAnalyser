@@ -2,16 +2,16 @@ package uk.co.mindbadger.footballresults.table;
 
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-public class InitialTableRow extends TableRow {
+public class InitialTableRow<K> extends TableRow<K> {
 
-	private Team team;
+	private Team<K> team;
 
-	public InitialTableRow(Team team) {
+	public InitialTableRow(Team<K> team) {
 		this.team = team;
 	}
 
 	@Override
-	public Integer getTeamId () {
+	public K getTeamId () {
 		return team.getTeamId();
 	}
 

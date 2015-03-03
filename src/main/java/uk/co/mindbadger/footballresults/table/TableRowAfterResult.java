@@ -3,16 +3,16 @@ package uk.co.mindbadger.footballresults.table;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-public class TableRowAfterResult extends TableRow {
-	private Team team;
-	private TableRow previousTableRow;
-	private Fixture fixture;
+public class TableRowAfterResult<K> extends TableRow<K> {
+	private Team<K> team;
+	private TableRow<K> previousTableRow;
+	private Fixture<K> fixture;
 	private boolean homeFixture;
 	private char winLoseOrDraw;
 	private int goalsFor;
 	private int goalsAgainst;
 		
-	public TableRowAfterResult (Team team, TableRow previousTableRow, Fixture fixture) {
+	public TableRowAfterResult (Team<K> team, TableRow<K> previousTableRow, Fixture<K> fixture) {
 		if (team == null || previousTableRow == null || fixture == null) {
 			throw new IllegalArgumentException("Please supply a Team, a previous TableRow and a Fixture");
 		}
@@ -35,7 +35,7 @@ public class TableRowAfterResult extends TableRow {
 	}
 
 	@Override
-	public Integer getTeamId () {
+	public K getTeamId () {
 		return team.getTeamId();
 	}
 

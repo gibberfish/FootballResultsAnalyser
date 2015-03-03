@@ -18,11 +18,11 @@ import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 @Controller
-public class GetDivisionsForSeasonController {
+public class GetDivisionsForSeasonController<K> {
 	Logger logger = Logger.getLogger(GetDivisionsForSeasonController.class);
 
 	@Autowired
-	FootballResultsAnalyserDAO dao;
+	FootballResultsAnalyserDAO<K> dao;
 	
 	@RequestMapping(value = "/getDivisionsForSeason.html", method = RequestMethod.GET)
 	public @ResponseBody String getDivisionsForSeason(@RequestParam("ssn") int seasonNumber) {
@@ -31,16 +31,16 @@ public class GetDivisionsForSeasonController {
 
 		dao.startSession();
 		
-		Set<SeasonDivision> seasonDivisions = dao.getDivisionsForSeason(seasonNumber);
+		Set<SeasonDivision<K>> seasonDivisions = dao.getDivisionsForSeason(seasonNumber);
 		
-		Division[] divisions = new Division[seasonDivisions.size()];
-		for (SeasonDivision seasonDivision : seasonDivisions) {
+		Division<K>[] divisions = new Division[seasonDivisions.size()];
+		for (SeasonDivision<K> seasonDivision : seasonDivisions) {
 		    divisions[seasonDivision.getDivisionPosition()-1] = seasonDivision.getDivision();
 		}
 
 		//TODO CLUNKY APPROACH - need to get Jackson working properly
 		String output = "{\"divisions\": [";
-		for (Division division : divisions) {
+		for (Division<K> division : divisions) {
 		    output+="{\"id\":"+division.getDivisionId()+",\"name\":\""+division.getDivisionName()+"\"},";
 		}
 		if (output.length() > 1) {

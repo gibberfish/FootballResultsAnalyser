@@ -1,9 +1,9 @@
 package uk.co.mindbadger.footballresults.table;
 
-public abstract class TableRow implements Comparable<TableRow> {
-	protected Table parentTable;
+public abstract class TableRow<K> implements Comparable<TableRow<K>> {
+	protected Table<K> parentTable;
 	
-	abstract public Integer getTeamId ();
+	abstract public K getTeamId ();
 	abstract public String getTeamName ();
 	abstract public int getGamesPlayed();
 	abstract public int getGamesWon();
@@ -15,7 +15,7 @@ public abstract class TableRow implements Comparable<TableRow> {
 	abstract public int getPoints();
 	
 	@Override
-	public int compareTo (TableRow otherRow) {
+	public int compareTo (TableRow<K> otherRow) {
 		if (otherRow.getPoints() != getPoints()) {
 			return (otherRow.getPoints() < getPoints()) ? -1 : 1;
 		} else if (otherRow.getGoalDifference() != getGoalDifference()) {

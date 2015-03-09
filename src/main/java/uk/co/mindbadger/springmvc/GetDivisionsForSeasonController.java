@@ -13,16 +13,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
 import uk.co.mindbadger.footballresultsanalyser.domain.Division;
+import uk.co.mindbadger.footballresultsanalyser.domain.Season;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 @Controller
-public class GetDivisionsForSeasonController<K> {
+public class GetDivisionsForSeasonController {
 	Logger logger = Logger.getLogger(GetDivisionsForSeasonController.class);
 
 	@Autowired
-	FootballResultsAnalyserDAO<K> dao;
+	FootballResultsAnalyserDAO<String,String,String> dao;
 	
 	@RequestMapping(value = "/getDivisionsForSeason.html", method = RequestMethod.GET)
 	public @ResponseBody String getDivisionsForSeason(@RequestParam("ssn") int seasonNumber) {
@@ -31,16 +32,17 @@ public class GetDivisionsForSeasonController<K> {
 
 		dao.startSession();
 		
-		Set<SeasonDivision<K>> seasonDivisions = dao.getDivisionsForSeason(seasonNumber);
+		Season<String> season = dao.getSeason(seasonNumber);
+		Set<SeasonDivision<String,String>> seasonDivisions = dao.getDivisionsForSeason(season);
 		
-		Division<K>[] divisions = new Division[seasonDivisions.size()];
-		for (SeasonDivision<K> seasonDivision : seasonDivisions) {
+		Division<String>[] divisions = new Division[seasonDivisions.size()];
+		for (SeasonDivision<String,String> seasonDivision : seasonDivisions) {
 		    divisions[seasonDivision.getDivisionPosition()-1] = seasonDivision.getDivision();
 		}
 
 		//TODO CLUNKY APPROACH - need to get Jackson working properly
 		String output = "{\"divisions\": [";
-		for (Division<K> division : divisions) {
+		for (Division<String> division : divisions) {
 		    output+="{\"id\":"+division.getDivisionId()+",\"name\":\""+division.getDivisionName()+"\"},";
 		}
 		if (output.length() > 1) {

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
+import uk.co.mindbadger.footballresultsanalyser.domain.Division;
+import uk.co.mindbadger.footballresultsanalyser.domain.Season;
+import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
 
 @Controller
@@ -18,19 +21,22 @@ public class GetTeamsForDivisionInSeasonController {
 	Logger logger = Logger.getLogger(GetTeamsForDivisionInSeasonController.class);
 
 	@Autowired
-	FootballResultsAnalyserDAO dao;
+	FootballResultsAnalyserDAO<String,String,String> dao;
 	
 	@RequestMapping(value = "/getTeamsForDivision.html", method = RequestMethod.GET)
-	public @ResponseBody String getTeamsForDivision(@RequestParam("ssn") int seasonNumber, @RequestParam("div") int divisionId) {
+	public @ResponseBody String getTeamsForDivision(@RequestParam("ssn") int seasonNumber, @RequestParam("div") String divisionId) {
 		logger.debug("CONTROLLER: getTeamsForDivision: " + seasonNumber + ", " + divisionId);
 
 		dao.startSession();
+		Season<String> season = dao.getSeason(seasonNumber);
+		Division<String> division = dao.getDivision(divisionId);
+		SeasonDivision<String,String> seasonDivision = dao.getSeasonDivision(season, division);
 		
-		Set<SeasonDivisionTeam> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonNumber, divisionId);
+		Set<SeasonDivisionTeam<String,String,String>> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
 		
 		//TODO CLUNKY APPROACH - need to get Jackson working properly
 		String output = "{\"teams\": [";
-		for (SeasonDivisionTeam seasonDivisionTeam : seasonDivisionTeams) {
+		for (SeasonDivisionTeam<String,String,String> seasonDivisionTeam : seasonDivisionTeams) {
 		    output+="{\"id\":"+ seasonDivisionTeam.getTeam().getTeamId()+",\"name\":\""+seasonDivisionTeam.getTeam().getTeamName()+"\"},";
 		}
 		if (output.length() > 1) {

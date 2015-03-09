@@ -2,7 +2,6 @@ package uk.co.mindbadger.springmvc;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,29 +12,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
+import uk.co.mindbadger.footballresultsanalyser.domain.Division;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
-import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
+import uk.co.mindbadger.footballresultsanalyser.domain.Season;
+import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 @Controller
 public class GetFixturesForTeamInSeasonController {
 	Logger logger = Logger.getLogger(GetFixturesForTeamInSeasonController.class);
 
 	@Autowired
-	FootballResultsAnalyserDAO dao;
+	FootballResultsAnalyserDAO<String,String,String> dao;
 	
 	@RequestMapping(value = "/getFixturesForTeamInSeason.html", method = RequestMethod.GET)
-	public @ResponseBody String getTeamsForDivision(@RequestParam("ssn") int seasonNumber, @RequestParam("div") int divisionId, @RequestParam("team") int teamId) {
+	public @ResponseBody String getTeamsForDivision(@RequestParam("ssn") int seasonNumber, @RequestParam("div") String divisionId, @RequestParam("team") String teamId) {
 		logger.debug("CONTROLLER: getFixturesForTeamInSeason: " + seasonNumber + ", " + divisionId + ", " + teamId);
 
 		dao.startSession();
+		Season<String> season = dao.getSeason(seasonNumber);
+		Division<String> division = dao.getDivision(divisionId);
+		Team<String> team = dao.getTeam(teamId);
 		
-		List<Fixture> fixtures = dao.getFixturesForTeamInDivisionInSeason(seasonNumber, divisionId, teamId);
+		List<Fixture<String>> fixtures = dao.getFixturesForTeamInDivisionInSeason(season, division, team);
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		
 		//TODO CLUNKY APPROACH - need to get Jackson working properly
 		String output = "{\"fixtures\": [";
-		for (Fixture fixture : fixtures) {
+		for (Fixture<String> fixture : fixtures) {
 		    String fixtureDate = dateFormat.format(fixture.getFixtureDate().getTime());
 		    Integer homeGoals = fixture.getHomeGoals();
 		    Integer awayGoals = fixture.getAwayGoals();

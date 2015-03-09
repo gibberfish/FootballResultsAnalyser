@@ -7,17 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class Table<K> {
-	protected Map<K, TableRow<K>> tableRows = new HashMap<K, TableRow<K>> ();
+public abstract class Table<K,L,M> {
+	protected Map<K, TableRow<K,L,M>> tableRows = new HashMap<K, TableRow<K,L,M>> ();
 
-	public List<TableRow<K>> getSortedTable() {
-		Collection<TableRow<K>> values = tableRows.values();
-		List<TableRow<K>> list = new ArrayList<TableRow<K>>(values);
+	public List<TableRow<K,L,M>> getSortedTable() {
+		Collection<TableRow<K,L,M>> values = tableRows.values();
+		List<TableRow<K,L,M>> list = new ArrayList<TableRow<K,L,M>>(values);
 		Collections.sort(list);
 		return list;
 	}
 
-	public int getIndexOfTableRow(TableRow<K> tableRow) {
+	public int getIndexOfTableRow(TableRow<K,L,M> tableRow) {
 		return (getSortedTable().indexOf(tableRow)+1);
 	}
 }

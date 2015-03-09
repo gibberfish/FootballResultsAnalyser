@@ -51,7 +51,7 @@ public class InitialTableTest {
 
 		when (mockSeasonDivision.getSeason()).thenReturn(mockSeason);
 		when (mockSeasonDivision.getDivision()).thenReturn(mockDivision);
-		when (mockSeasonDivision.getTeamsInSeasonDivision()).thenReturn(seasonDivisionTeams);
+		//when (mockSeasonDivision.getTeamsInSeasonDivision()).thenReturn(seasonDivisionTeams);
 		when (seasonDivisionTeam1.getTeam()).thenReturn(team1);
 		when (seasonDivisionTeam2.getTeam()).thenReturn(team2);
 		when (seasonDivisionTeam3.getTeam()).thenReturn(team3);
@@ -70,7 +70,7 @@ public class InitialTableTest {
 		// Given
 		
 		// When
-		objectUnderTest = new InitialTable (mockSeasonDivision);
+		objectUnderTest = new InitialTable (mockSeasonDivision, seasonDivisionTeams);
 		
 		// Then
 		Map<Integer, TableRow> tableRows = objectUnderTest.getTableRows ();

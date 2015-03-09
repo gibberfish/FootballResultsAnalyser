@@ -11,13 +11,13 @@ import org.mockito.MockitoAnnotations;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class InitialTableRowTest {	
-	private final Integer TEAM_ID = 123;
+	private final String TEAM_ID = "123";
 	private final String TEAM_NAME = "Portsmouth";
 	
-	private InitialTableRow objectUnderTest;
+	private InitialTableRow<String,String,String> objectUnderTest;
 	
 	@Mock
-	private Team mockTeam1;
+	private Team<String> mockTeam1;
 
 	@Before
 	public void setup() {
@@ -30,7 +30,7 @@ public class InitialTableRowTest {
 	@Test
 	public void shouldCreateAnInitialTableRow () {
 		// Given
-		objectUnderTest = new InitialTableRow (mockTeam1);
+		objectUnderTest = new InitialTableRow<String,String,String> (mockTeam1);
 
 		// When
 

@@ -14,23 +14,23 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class TableRowAfterResultTest {	
-	private final Integer TEAM_ID = 123;
+	private final String TEAM_ID = "123";
 	private final String TEAM_NAME = "Portsmouth";
 	private final Calendar FIXTURE_DATE = Calendar.getInstance();
 	
-	private TableRowAfterResult objectUnderTest;
+	private TableRowAfterResult<String,String,String> objectUnderTest;
 	
 	@Mock
-	private TableRowAfterResult mockPreviousTableRow;
+	private TableRowAfterResult<String,String,String> mockPreviousTableRow;
 	
 	@Mock
-	private Fixture mockFixture;
+	private Fixture<String> mockFixture;
 	
 	@Mock
-	private Team mockTeam1;
+	private Team<String> mockTeam1;
 
 	@Mock
-	private Team mockTeam2;
+	private Team<String> mockTeam2;
 
 	@Before
 	public void setup() {
@@ -43,11 +43,11 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldThrowExceptionIfTeamNotSupplied () {
 		// Given
-		TableRow previousTableRow = new InitialTableRow (mockTeam1);
+		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
 		
 		// When
 		try {
-			objectUnderTest = new TableRowAfterResult (null, previousTableRow, mockFixture);
+			objectUnderTest = new TableRowAfterResult<String,String,String> (null, previousTableRow, mockFixture);
 			fail("Should throw an illegal argument exception");
 		} catch (IllegalArgumentException e) {
 			// Then
@@ -61,7 +61,7 @@ public class TableRowAfterResultTest {
 		
 		// When
 		try {
-			objectUnderTest = new TableRowAfterResult (mockTeam1, null, mockFixture);
+			objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, null, mockFixture);
 			fail("Should throw an illegal argument exception");
 		} catch (IllegalArgumentException e) {
 			// Then
@@ -72,11 +72,11 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldThrowExceptionIfFixtureNotSupplied () {
 		// Given
-		TableRow previousTableRow = new InitialTableRow (mockTeam1);
+		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
 		
 		// When
 		try {
-			objectUnderTest = new TableRowAfterResult (mockTeam1, previousTableRow, null);
+			objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, null);
 			fail("Should throw an illegal argument exception");
 		} catch (IllegalArgumentException e) {
 			// Then
@@ -88,7 +88,7 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldCreateATableRowForAHomeTeamWinning () {
 		// Given
-		TableRow previousTableRow = new InitialTableRow (mockTeam1);
+		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
 		
 		when (mockFixture.getHomeTeam()).thenReturn(mockTeam1);
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
@@ -96,7 +96,7 @@ public class TableRowAfterResultTest {
 		when (mockFixture.getHomeGoals()).thenReturn(2);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
 		
-		objectUnderTest = new TableRowAfterResult (mockTeam1, previousTableRow, mockFixture);
+		objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, mockFixture);
 		
 		// When
 		
@@ -116,7 +116,7 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldCreateATableRowForAHomeTeamLosing () {
 		// Given
-		TableRow previousTableRow = new InitialTableRow (mockTeam1);
+		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
 		
 		when (mockFixture.getHomeTeam()).thenReturn(mockTeam1);
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
@@ -124,7 +124,7 @@ public class TableRowAfterResultTest {
 		when (mockFixture.getHomeGoals()).thenReturn(2);
 		when (mockFixture.getAwayGoals()).thenReturn(4);
 		
-		objectUnderTest = new TableRowAfterResult (mockTeam1, previousTableRow, mockFixture);
+		objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, mockFixture);
 		
 		// When
 		
@@ -144,7 +144,7 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldCreateATableRowForAHomeTeamDrawing () {
 		// Given
-		TableRow previousTableRow = new InitialTableRow (mockTeam1);
+		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
 		
 		when (mockFixture.getHomeTeam()).thenReturn(mockTeam1);
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
@@ -152,7 +152,7 @@ public class TableRowAfterResultTest {
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(3);
 		
-		objectUnderTest = new TableRowAfterResult (mockTeam1, previousTableRow, mockFixture);
+		objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, mockFixture);
 		
 		// When
 		
@@ -172,7 +172,7 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldCreateATableRowForAnAwayTeamWinning () {
 		// Given
-		TableRow previousTableRow = new InitialTableRow (mockTeam1);
+		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
 		
 		when (mockFixture.getHomeTeam()).thenReturn(mockTeam2);
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
@@ -180,7 +180,7 @@ public class TableRowAfterResultTest {
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(2);
 		
-		objectUnderTest = new TableRowAfterResult (mockTeam1, previousTableRow, mockFixture);
+		objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, mockFixture);
 		
 		// When
 		
@@ -200,7 +200,7 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldCreateATableRowForAnAwayTeamLosing () {
 		// Given
-		TableRow previousTableRow = new InitialTableRow (mockTeam1);
+		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
 		
 		when (mockFixture.getHomeTeam()).thenReturn(mockTeam2);
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
@@ -208,7 +208,7 @@ public class TableRowAfterResultTest {
 		when (mockFixture.getHomeGoals()).thenReturn(4);
 		when (mockFixture.getAwayGoals()).thenReturn(2);
 		
-		objectUnderTest = new TableRowAfterResult (mockTeam1, previousTableRow, mockFixture);
+		objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, mockFixture);
 		
 		// When
 		
@@ -228,7 +228,7 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldCreateATableRowForAnAwayTeamDrawing () {
 		// Given
-		TableRow previousTableRow = new InitialTableRow (mockTeam1);
+		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
 		
 		when (mockFixture.getHomeTeam()).thenReturn(mockTeam2);
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
@@ -236,7 +236,7 @@ public class TableRowAfterResultTest {
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(3);
 		
-		objectUnderTest = new TableRowAfterResult (mockTeam1, previousTableRow, mockFixture);
+		objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, mockFixture);
 		
 		// When
 		

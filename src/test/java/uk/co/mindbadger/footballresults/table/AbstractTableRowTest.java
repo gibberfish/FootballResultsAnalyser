@@ -1,13 +1,10 @@
 package uk.co.mindbadger.footballresults.table;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -15,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 public class AbstractTableRowTest {
 	
 	@Mock
-	Table mockTable;
+	Table<String,String,String> mockTable;
 	
 	@Before
 	public void setup() {
@@ -25,8 +22,8 @@ public class AbstractTableRowTest {
 	@Test
 	public void shouldCorrectlyCompareRowsWhereThePointsAreDifferent () {
 		// Given
-		TableRow row1 = new TableRow () {
-			public Integer getTeamId() {return 123;}
+		TableRow<String,String,String> row1 = new TableRow<String,String,String> () {
+			public String getTeamId() {return "123";}
 			public String getTeamName() {return "Portsmouth";}
 			public int getGamesPlayed() {return 18;}
 			public int getGamesWon() {return 12;}
@@ -38,8 +35,8 @@ public class AbstractTableRowTest {
 			public int getPoints() {return 40;}
 		};
 		
-		TableRow row2 = new TableRow () {
-			public Integer getTeamId() {return 456;}
+		TableRow<String,String,String> row2 = new TableRow<String,String,String> () {
+			public String getTeamId() {return "456";}
 			public String getTeamName() {return "Southampton";}
 			public int getGamesPlayed() {return 18;}
 			public int getGamesWon() {return 2;}
@@ -67,8 +64,8 @@ public class AbstractTableRowTest {
 	@Test
 	public void shouldCorrectlyCompareRowsWhereThePointsAreTheSameButGoalDifferenceIsDifferent () {
 		// Given
-		TableRow row1 = new TableRow () {
-			public Integer getTeamId() {return 123;}
+		TableRow<String,String,String> row1 = new TableRow<String,String,String> () {
+			public String getTeamId() {return "123";}
 			public String getTeamName() {return "Portsmouth";}
 			public int getGamesPlayed() {return 18;}
 			public int getGamesWon() {return 12;}
@@ -80,8 +77,8 @@ public class AbstractTableRowTest {
 			public int getPoints() {return 40;}
 		};
 		
-		TableRow row2 = new TableRow () {
-			public Integer getTeamId() {return 456;}
+		TableRow<String,String,String> row2 = new TableRow<String,String,String> () {
+			public String getTeamId() {return "456";}
 			public String getTeamName() {return "Southampton";}
 			public int getGamesPlayed() {return 18;}
 			public int getGamesWon() {return 12;}
@@ -109,8 +106,8 @@ public class AbstractTableRowTest {
 	@Test
 	public void shouldCorrectlyCompareRowsWhereThePointsAreTheSameAndTheGoalDifferenceIsTheSameButTheGoalsScoredIsDifferent () {
 		// Given
-		TableRow row1 = new TableRow () {
-			public Integer getTeamId() {return 123;}
+		TableRow<String,String,String> row1 = new TableRow<String,String,String> () {
+			public String getTeamId() {return "123";}
 			public String getTeamName() {return "Portsmouth";}
 			public int getGamesPlayed() {return 18;}
 			public int getGamesWon() {return 12;}
@@ -122,8 +119,8 @@ public class AbstractTableRowTest {
 			public int getPoints() {return 40;}
 		};
 		
-		TableRow row2 = new TableRow () {
-			public Integer getTeamId() {return 456;}
+		TableRow<String,String,String> row2 = new TableRow<String,String,String> () {
+			public String getTeamId() {return "456";}
 			public String getTeamName() {return "Southampton";}
 			public int getGamesPlayed() {return 18;}
 			public int getGamesWon() {return 12;}
@@ -151,8 +148,8 @@ public class AbstractTableRowTest {
 	@Test
 	public void shouldCorrectlyCompareRowsWhereEverythingIsEqualInWhichCaseWeDoItAlphabetically () {
 		// Given
-		TableRow row1 = new TableRow () {
-			public Integer getTeamId() {return 123;}
+		TableRow<String,String,String> row1 = new TableRow<String,String,String> () {
+			public String getTeamId() {return "123";}
 			public String getTeamName() {return "Portsmouth";}
 			public int getGamesPlayed() {return 18;}
 			public int getGamesWon() {return 12;}
@@ -164,8 +161,8 @@ public class AbstractTableRowTest {
 			public int getPoints() {return 40;}
 		};
 		
-		TableRow row2 = new TableRow () {
-			public Integer getTeamId() {return 456;}
+		TableRow<String,String,String> row2 = new TableRow<String,String,String> () {
+			public String getTeamId() {return "456";}
 			public String getTeamName() {return "Southampton";}
 			public int getGamesPlayed() {return 18;}
 			public int getGamesWon() {return 12;}
@@ -193,8 +190,8 @@ public class AbstractTableRowTest {
 	@Test
 	public void shouldGetLeaguePositionFromTable () {
 		// Given
-		TableRow row1 = new TableRow () {
-			public Integer getTeamId() {return 123;}
+		TableRow<String,String,String> row1 = new TableRow<String,String,String> () {
+			public String getTeamId() {return "123";}
 			public String getTeamName() {return "Portsmouth";}
 			public int getGamesPlayed() {return 18;}
 			public int getGamesWon() {return 12;}

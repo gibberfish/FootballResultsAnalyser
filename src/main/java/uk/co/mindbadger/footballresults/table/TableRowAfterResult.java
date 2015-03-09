@@ -6,7 +6,7 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 public class TableRowAfterResult<K,L,M> extends TableRow<K,L,M> {
 	private Team<K> team;
 	private TableRow<K,L,M> previousTableRow;
-	private Fixture<K> fixture;
+	//private Fixture<K> fixture;
 	private boolean homeFixture;
 	private char winLoseOrDraw;
 	private int goalsFor;
@@ -19,7 +19,7 @@ public class TableRowAfterResult<K,L,M> extends TableRow<K,L,M> {
 		
 		this.team = team;
 		this.previousTableRow = previousTableRow;
-		this.fixture = fixture;
+		//this.fixture = fixture;
 		
 		homeFixture = (fixture.getHomeTeam() == team);
 		goalsFor = (homeFixture ? fixture.getHomeGoals() : fixture.getAwayGoals());

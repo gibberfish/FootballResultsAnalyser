@@ -10,8 +10,8 @@ public class AbstractTableTest {
 	@Test
 	public void shouldSortTableRows () {
 		// Given
-		TableRow row1 = new TableRow () {
-			public Integer getTeamId() {return 123;}
+		TableRow<String,String,String> row1 = new TableRow<String,String,String> () {
+			public String getTeamId() {return "123";}
 			public String getTeamName() {return "Portsmouth";}
 			public int getGamesPlayed() {return 18;}
 			public int getGamesWon() {return 12;}
@@ -23,8 +23,8 @@ public class AbstractTableTest {
 			public int getPoints() {return 40;}
 		};
 		
-		TableRow row2 = new TableRow () {
-			public Integer getTeamId() {return 456;}
+		TableRow<String,String,String> row2 = new TableRow<String,String,String> () {
+			public String getTeamId() {return "456";}
 			public String getTeamName() {return "Southampton";}
 			public int getGamesPlayed() {return 18;}
 			public int getGamesWon() {return 2;}
@@ -36,8 +36,8 @@ public class AbstractTableTest {
 			public int getPoints() {return 11;}
 		};
 
-		TableRow row3 = new TableRow () {
-			public Integer getTeamId() {return 789;}
+		TableRow<String,String,String> row3 = new TableRow<String,String,String> () {
+			public String getTeamId() {return "789";}
 			public String getTeamName() {return "Aston Villa";}
 			public int getGamesPlayed() {return 18;}
 			public int getGamesWon() {return 2;}
@@ -49,8 +49,8 @@ public class AbstractTableTest {
 			public int getPoints() {return 11;}
 		};
 
-		TableRow row4 = new TableRow () {
-			public Integer getTeamId() {return 159;}
+		TableRow<String,String,String> row4 = new TableRow<String,String,String> () {
+			public String getTeamId() {return "159";}
 			public String getTeamName() {return "Manchester United";}
 			public int getGamesPlayed() {return 18;}
 			public int getGamesWon() {return 12;}
@@ -62,14 +62,14 @@ public class AbstractTableTest {
 			public int getPoints() {return 40;}
 		};
 
-		Table table = new Table () { };
-		table.tableRows.put(123, row1);
-		table.tableRows.put(456, row2);
-		table.tableRows.put(789, row3);
-		table.tableRows.put(159, row4);
+		Table<String,String,String> table = new Table<String,String,String> () { };
+		table.tableRows.put("123", row1);
+		table.tableRows.put("456", row2);
+		table.tableRows.put("789", row3);
+		table.tableRows.put("159", row4);
 		
 		// When
-		List<TableRow> sortedTable = table.getSortedTable ();
+		List<TableRow<String,String,String>> sortedTable = table.getSortedTable ();
 		
 		// Then
 		assertEquals (row1, sortedTable.get(0));

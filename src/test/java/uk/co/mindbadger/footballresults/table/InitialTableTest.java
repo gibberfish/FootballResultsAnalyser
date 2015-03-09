@@ -1,14 +1,17 @@
 package uk.co.mindbadger.footballresults.table;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 import java.util.HashSet;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 
-import org.junit.*;
-import org.mockito.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import uk.co.mindbadger.footballresultsanalyser.domain.Division;
 import uk.co.mindbadger.footballresultsanalyser.domain.Season;
@@ -17,34 +20,34 @@ import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class InitialTableTest {
-	private InitialTable objectUnderTest;
+	private InitialTable<String,String,String> objectUnderTest;
 	
-	private Set<SeasonDivisionTeam> seasonDivisionTeams;
+	private Set<SeasonDivisionTeam<String,String,String>> seasonDivisionTeams;
 	
 	@Mock
-	private SeasonDivision mockSeasonDivision;
+	private SeasonDivision<String,String> mockSeasonDivision;
 	@Mock
-	private Season mockSeason;
+	private Season<String> mockSeason;
 	@Mock
-	private Division mockDivision;
+	private Division<String> mockDivision;
 	@Mock
-	private SeasonDivisionTeam seasonDivisionTeam1;
+	private SeasonDivisionTeam<String,String,String> seasonDivisionTeam1;
 	@Mock
-	private SeasonDivisionTeam seasonDivisionTeam2;
+	private SeasonDivisionTeam<String,String,String> seasonDivisionTeam2;
 	@Mock
-	private SeasonDivisionTeam seasonDivisionTeam3;
+	private SeasonDivisionTeam<String,String,String> seasonDivisionTeam3;
 	@Mock
-	private Team team1;
+	private Team<String> team1;
 	@Mock
-	private Team team2;
+	private Team<String> team2;
 	@Mock
-	private Team team3;
+	private Team<String> team3;
 	
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 
-		seasonDivisionTeams = new HashSet <SeasonDivisionTeam> ();
+		seasonDivisionTeams = new HashSet <SeasonDivisionTeam<String,String,String>> ();
 		seasonDivisionTeams.add(seasonDivisionTeam1);
 		seasonDivisionTeams.add(seasonDivisionTeam2);
 		seasonDivisionTeams.add(seasonDivisionTeam3);
@@ -60,9 +63,9 @@ public class InitialTableTest {
 		when (team2.getTeamName()).thenReturn("Aston Villa");
 		when (team3.getTeamName()).thenReturn("West Brom");
 		
-		when (team1.getTeamId()).thenReturn(123);
-		when (team2.getTeamId()).thenReturn(456);
-		when (team3.getTeamId()).thenReturn(789);
+		when (team1.getTeamId()).thenReturn("123");
+		when (team2.getTeamId()).thenReturn("456");
+		when (team3.getTeamId()).thenReturn("789");
 	}
 	
 	@Test
@@ -70,21 +73,20 @@ public class InitialTableTest {
 		// Given
 		
 		// When
-		objectUnderTest = new InitialTable (mockSeasonDivision, seasonDivisionTeams);
+		objectUnderTest = new InitialTable<String,String,String> (mockSeasonDivision, seasonDivisionTeams);
 		
 		// Then
-		Map<Integer, TableRow> tableRows = objectUnderTest.getTableRows ();
-		assertEquals (3, tableRows.size());
+		List<TableRow<String,String,String>> tableRows = objectUnderTest.getSortedTable();
 		
-		TableRow row1 = tableRows.get(123);
-		assertEquals ("Portsmouth", row1.getTeamName());
+		TableRow<String,String,String> row1 = tableRows.get(0);
+		assertEquals ("Aston Villa", row1.getTeamName());
 		assertTrue (row1 instanceof InitialTableRow);
-		
-		TableRow row2 = tableRows.get(456);
-		assertEquals ("Aston Villa", row2.getTeamName());
-		assertTrue (row2 instanceof InitialTableRow);
 
-		TableRow row3 = tableRows.get(789);
+		TableRow<String,String,String> row2 = tableRows.get(1);
+		assertEquals ("Portsmouth", row2.getTeamName());
+		assertTrue (row2 instanceof InitialTableRow);
+		
+		TableRow<String,String,String> row3 = tableRows.get(2);
 		assertEquals ("West Brom", row3.getTeamName());
 		assertTrue (row3 instanceof InitialTableRow);
 	}

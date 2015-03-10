@@ -1,6 +1,5 @@
 package uk.co.mindbadger.springmvc;
 
-import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -15,8 +14,6 @@ import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
 import uk.co.mindbadger.footballresultsanalyser.domain.Division;
 import uk.co.mindbadger.footballresultsanalyser.domain.Season;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
-import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
-import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 @Controller
 public class GetDivisionsForSeasonController {
@@ -30,20 +27,19 @@ public class GetDivisionsForSeasonController {
 	//public @ResponseBody Division[] getDivisionsForSeason(@RequestParam("ssn") int seasonNumber) {
 		logger.debug("CONTROLLER: getDivisionsForSeason: " + seasonNumber);
 
-		dao.startSession();
-		
 		Season<String> season = dao.getSeason(seasonNumber);
 		Set<SeasonDivision<String,String>> seasonDivisions = dao.getDivisionsForSeason(season);
 		
-		Division<String>[] divisions = new Division[seasonDivisions.size()];
-		for (SeasonDivision<String,String> seasonDivision : seasonDivisions) {
-		    divisions[seasonDivision.getDivisionPosition()-1] = seasonDivision.getDivision();
-		}
+//		Division<String>[] divisions = new Division[seasonDivisions.size()];
+//		for (SeasonDivision<String,String> seasonDivision : seasonDivisions) {
+//		    divisions[seasonDivision.getDivisionPosition()-1] = seasonDivision.getDivision();
+//		}
 
 		//TODO CLUNKY APPROACH - need to get Jackson working properly
 		String output = "{\"divisions\": [";
-		for (Division<String> division : divisions) {
-		    output+="{\"id\":"+division.getDivisionId()+",\"name\":\""+division.getDivisionName()+"\"},";
+//		for (Division<String> division : divisions) {
+		for (SeasonDivision<String,String> seasonDivision : seasonDivisions) {
+		    output+="{\"id\":"+seasonDivision.getDivision().getDivisionId()+",\"name\":\""+seasonDivision.getDivision().getDivisionName()+"\"},";
 		}
 		if (output.length() > 1) {
 		    output = output.substring(0, output.length() - 1);
@@ -51,8 +47,6 @@ public class GetDivisionsForSeasonController {
 		output+="]}";
 		
 		logger.debug("++++++ divisions: " + output);
-		
-		dao.closeSession();
 		
 		return output;
 	}

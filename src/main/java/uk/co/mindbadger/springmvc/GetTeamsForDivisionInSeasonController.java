@@ -27,7 +27,6 @@ public class GetTeamsForDivisionInSeasonController {
 	public @ResponseBody String getTeamsForDivision(@RequestParam("ssn") int seasonNumber, @RequestParam("div") String divisionId) {
 		logger.debug("CONTROLLER: getTeamsForDivision: " + seasonNumber + ", " + divisionId);
 
-		dao.startSession();
 		Season<String> season = dao.getSeason(seasonNumber);
 		Division<String> division = dao.getDivision(divisionId);
 		SeasonDivision<String,String> seasonDivision = dao.getSeasonDivision(season, division);
@@ -45,8 +44,6 @@ public class GetTeamsForDivisionInSeasonController {
 		output+="]}";
 		
 		logger.debug("++++++ teams: " + output);
-		
-		dao.closeSession();
 		
 		return output;
 	}

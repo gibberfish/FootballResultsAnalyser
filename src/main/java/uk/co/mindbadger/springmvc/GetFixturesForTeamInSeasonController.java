@@ -28,7 +28,6 @@ public class GetFixturesForTeamInSeasonController {
 	public @ResponseBody String getTeamsForDivision(@RequestParam("ssn") int seasonNumber, @RequestParam("div") String divisionId, @RequestParam("team") String teamId) {
 		logger.debug("CONTROLLER: getFixturesForTeamInSeason: " + seasonNumber + ", " + divisionId + ", " + teamId);
 
-		dao.startSession();
 		Season<String> season = dao.getSeason(seasonNumber);
 		Division<String> division = dao.getDivision(divisionId);
 		Team<String> team = dao.getTeam(teamId);
@@ -64,8 +63,6 @@ public class GetFixturesForTeamInSeasonController {
 		output+="]}";
 		
 		logger.debug("++++++ fixtures: " + output);
-		
-		dao.closeSession();
 		
 		return output;
 	}

@@ -43,41 +43,27 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	  </property>
 	</bean>
 
+	<bean id="props" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+ 		<property name="locations" value="file:///C:/Mark/appConfig/mongo.properties"/>
+	</bean>
   
   <bean id="domainObjectFactory" class="uk.co.mindbadger.footballresultsanalyser.domain.DomainObjectFactoryImpl">
   </bean>
 
-  <bean id="dao" class="uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserHibernateDAO">
+	<bean id="mongoClient" class="com.mongodb.MongoClient">
+		<constructor-arg value="${mongoHost}"/>
+	</bean>
+	
+	<bean id="mongoMapper" class="uk.co.mindbadger.footballresultsanalyser.dao.MongoMapper">
+		<property name="domainObjectFactory" ref="domainObjectFactory"/>
+		<property name="dao" ref="dao"/>
+	</bean>
+
+  <bean id="dao" class="uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserMongoDAO">
       <property name="domainObjectFactory" ref="domainObjectFactory"/>
+      <property name="mongoClient" ref="mongoClient" />
+      <property name="dbName" value="${mongoDb}" />
+      <property name="mongoMapper" ref="mongoMapper"/>
   </bean>
   
-<!--   
-  <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="prefix">
-      <value>/WEB-INF/views/</value>
-    </property>
-    <property name="suffix">
-      <value>.jsp</value>
-    </property>
-  </bean>
-
-
-  <bean id="dealer" class="com.mindbadger.jaluxx.game.Dealer">
-  </bean>
-
-  <bean id="gameFactory" class="com.mindbadger.jaluxx.gamemanager.GameFactory">
-      <property name="pack" ref="pack"/>
-      <property name="dealer" ref="dealer"/>
-      <property name="basicRulesCards">
-          <list>
-              <ref bean="draw1"/>
-              <ref bean="play1"/>
-          </list>
-      </property>
-  </bean>
-   
-  <bean id="gameManager" class="com.mindbadger.jaluxx.gamemanager.GameManager">
-      <property name="gameFactory" ref="gameFactory"/>
-  </bean>
-   -->  
 </beans>

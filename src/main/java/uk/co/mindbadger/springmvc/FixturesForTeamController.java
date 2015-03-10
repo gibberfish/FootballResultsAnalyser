@@ -16,24 +16,20 @@ public class FixturesForTeamController {
 	Logger logger = Logger.getLogger(FixturesForTeamController.class);
 
 	@Autowired
-	FootballResultsAnalyserDAO dao;
+	FootballResultsAnalyserDAO<String,String,String> dao;
 	
 	@RequestMapping("/fixturesForTeamController.html")
 	public ModelAndView fixturesForTeam() {
 		logger.debug("CONTROLLER: fixtures for team");
 
-		dao.startSession();
-		
 		//Tester.main(null);
-		List<Season> seasons = dao.getSeasons();
+		List<Season<String>> seasons = dao.getSeasons();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("seasons", seasons);
 		
 		mav.setViewName("fixturesForTeamController");
 
-		dao.closeSession();
-		
 		return mav;
 	}
 }

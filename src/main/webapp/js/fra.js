@@ -69,7 +69,9 @@ $(function(){
 	}
 	
 	function populateDivisionDropdown(season) {
-		$.getJSON ("getDivisionsForSeason.html", "ssn="+season, function(data) {
+		var url = "getDivisionsForSeason.html?ssn=" + season;
+	
+		$.getJSON (url, function(data) {
 			$.each(data.divisions, function (index,division) {
 				$("#selectDivision").append("<option value=\""+ division.id +"\">" + division.name + "</option>");
 			});

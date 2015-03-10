@@ -39,7 +39,7 @@ public class GetDivisionsForSeasonController {
 		String output = "{\"divisions\": [";
 //		for (Division<String> division : divisions) {
 		for (SeasonDivision<String,String> seasonDivision : seasonDivisions) {
-		    output+="{\"id\":"+seasonDivision.getDivision().getDivisionId()+",\"name\":\""+seasonDivision.getDivision().getDivisionName()+"\"},";
+		    output+="{\"id\": \""+seasonDivision.getDivision().getDivisionId()+"\", \"name\":\""+seasonDivision.getDivision().getDivisionName()+"\"},";
 		}
 		if (output.length() > 1) {
 		    output = output.substring(0, output.length() - 1);

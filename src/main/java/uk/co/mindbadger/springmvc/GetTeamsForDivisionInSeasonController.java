@@ -36,7 +36,7 @@ public class GetTeamsForDivisionInSeasonController {
 		//TODO CLUNKY APPROACH - need to get Jackson working properly
 		String output = "{\"teams\": [";
 		for (SeasonDivisionTeam<String,String,String> seasonDivisionTeam : seasonDivisionTeams) {
-		    output+="{\"id\":"+ seasonDivisionTeam.getTeam().getTeamId()+",\"name\":\""+seasonDivisionTeam.getTeam().getTeamName()+"\"},";
+		    output+="{\"id\": \""+ seasonDivisionTeam.getTeam().getTeamId()+"\", \"name\":\""+seasonDivisionTeam.getTeam().getTeamName()+"\"},";
 		}
 		if (output.length() > 1) {
 		    output = output.substring(0, output.length() - 1);

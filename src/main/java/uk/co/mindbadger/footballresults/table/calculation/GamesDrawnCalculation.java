@@ -4,7 +4,7 @@ import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-public class GamesDrawnCalculation extends TableCalculation<String, String, String> {
+public class GamesDrawnCalculation extends CalculationForFixture<String, String, String> {
 	public GamesDrawnCalculation(Team<String> team, TableRow<String,String,String> previousTableRow, Fixture<String> fixture) {
 		super(team, previousTableRow, fixture);
 	}

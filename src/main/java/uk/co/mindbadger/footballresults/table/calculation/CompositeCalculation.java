@@ -1,9 +1,11 @@
 package uk.co.mindbadger.footballresults.table.calculation;
 
+import java.util.Map;
+
 public abstract class CompositeCalculation extends Calculation {
-	protected Calculation[] calculations;
+	protected Map<String,Calculation> calculations;
 	
-	public CompositeCalculation (Calculation... calcs) {
+	public CompositeCalculation (Map<String,Calculation> calcs) {
 		this.calculations = calcs;
 	}
 }

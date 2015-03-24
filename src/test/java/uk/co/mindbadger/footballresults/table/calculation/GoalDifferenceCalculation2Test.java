@@ -3,6 +3,9 @@ package uk.co.mindbadger.footballresults.table.calculation;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -24,7 +27,11 @@ public class GoalDifferenceCalculation2Test {
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		objectUnderTest = new GoalDifferenceCalculation2(mockGoalsScoredCalculation, mockGoalsConcededCalculation);
+		Map<String, Calculation> calculations = new HashMap<String, Calculation> ();
+		calculations.put("goalsScored", mockGoalsScoredCalculation);
+		calculations.put("goalsConceded", mockGoalsConcededCalculation);
+		
+		objectUnderTest = new GoalDifferenceCalculation2(calculations);
 	}
 
 	@Test

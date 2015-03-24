@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresults.table.TableRowAfterResult;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
@@ -119,7 +120,7 @@ public class GamesWonCalculationTest {
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getGamesWon()).thenReturn(3);
+		when (mockPreviousTableRow.get(TableRow.GAMES_WON)).thenReturn(3);
 		objectUnderTest = new GamesWonCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
 		
 		// When
@@ -136,7 +137,7 @@ public class GamesWonCalculationTest {
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(3);
-		when (mockPreviousTableRow.getGamesWon()).thenReturn(3);
+		when (mockPreviousTableRow.get(TableRow.GAMES_WON)).thenReturn(3);
 		objectUnderTest = new GamesWonCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
 		
 		// When
@@ -153,7 +154,7 @@ public class GamesWonCalculationTest {
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(3);
-		when (mockPreviousTableRow.getGamesWon()).thenReturn(3);
+		when (mockPreviousTableRow.get(TableRow.GAMES_WON)).thenReturn(3);
 		objectUnderTest = new GamesWonCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
 		
 		// When
@@ -170,7 +171,7 @@ public class GamesWonCalculationTest {
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(3);
-		when (mockPreviousTableRow.getGamesWon()).thenReturn(3);
+		when (mockPreviousTableRow.get(TableRow.GAMES_WON)).thenReturn(3);
 		objectUnderTest = new GamesWonCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
 		
 		// When
@@ -187,7 +188,7 @@ public class GamesWonCalculationTest {
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getGamesWon()).thenReturn(3);
+		when (mockPreviousTableRow.get(TableRow.GAMES_WON)).thenReturn(3);
 		objectUnderTest = new GamesWonCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
 		
 		// When

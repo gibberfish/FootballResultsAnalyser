@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresults.table.TableRowAfterResult;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
@@ -73,7 +74,7 @@ public class GoalsConcededCalculationTest {
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getGoalsConceded()).thenReturn(3);
+		when (mockPreviousTableRow.get(TableRow.GOALS_CONCEDED)).thenReturn(3);
 		objectUnderTest = new GoalsConcededCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
 		
 		// When
@@ -90,7 +91,7 @@ public class GoalsConcededCalculationTest {
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getGoalsConceded()).thenReturn(3);
+		when (mockPreviousTableRow.get(TableRow.GOALS_CONCEDED)).thenReturn(3);
 		objectUnderTest = new GoalsConcededCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
 		
 		// When

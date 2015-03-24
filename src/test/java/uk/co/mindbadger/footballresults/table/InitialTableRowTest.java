@@ -37,13 +37,13 @@ public class InitialTableRowTest {
 		// Then
 		assertEquals (TEAM_ID, objectUnderTest.getTeamId());
 		assertEquals (TEAM_NAME, objectUnderTest.getTeamName());
-		assertEquals (0, objectUnderTest.getGamesPlayed());
-		assertEquals (0, objectUnderTest.getGamesWon());
-		assertEquals (0, objectUnderTest.getGamesDrawn());
-		assertEquals (0, objectUnderTest.getGamesLost());
-		assertEquals (0, objectUnderTest.getGoalsScored());
-		assertEquals (0, objectUnderTest.getGoalsConceded());
-		assertEquals (0, objectUnderTest.getGoalDifference());
-		assertEquals (0, objectUnderTest.getPoints());
+		assertEquals (0, objectUnderTest.get(TableRow.GAMES_PLAYED));
+		assertEquals (0, objectUnderTest.get(TableRow.GAMES_WON));
+		assertEquals (0, objectUnderTest.get(TableRow.GAMES_DRAWN));
+		assertEquals (0, objectUnderTest.get(TableRow.GAMES_LOST));
+		assertEquals (0, objectUnderTest.get(TableRow.GOALS_SCORED));
+		assertEquals (0, objectUnderTest.get(TableRow.GOALS_CONCEDED));
+		assertEquals (0, objectUnderTest.get(TableRow.GOAL_DIFFERENCE));
+		assertEquals (0, objectUnderTest.get(TableRowAfterResult.POINTS));
 	}	
 }

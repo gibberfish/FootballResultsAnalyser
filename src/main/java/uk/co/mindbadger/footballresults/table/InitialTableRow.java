@@ -21,42 +21,7 @@ public class InitialTableRow<K,L,M> extends TableRow<K,L,M> {
 	}
 
 	@Override
-	public int getGamesPlayed() {
-		return 0;
-	}
-
-	@Override
-	public int getGamesWon() {
-		return 0;
-	}
-
-	@Override
-	public int getGamesDrawn() {
-		return 0;
-	}
-
-	@Override
-	public int getGamesLost() {
-		return 0;
-	}
-
-	@Override
-	public int getGoalsScored() {
-		return 0;
-	}
-
-	@Override
-	public int getGoalsConceded() {
-		return 0;
-	}
-
-	@Override
-	public int getGoalDifference() {
-		return 0;
-	}
-
-	@Override
-	public int getPoints() {
+	public int get(String attributeId) {
 		return 0;
 	}
 }

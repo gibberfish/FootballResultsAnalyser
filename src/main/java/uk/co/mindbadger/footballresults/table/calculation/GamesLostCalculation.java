@@ -17,7 +17,7 @@ public class GamesLostCalculation extends CalculationForFixture<String, String, 
 		
 		int previousGamesLost = 0;
 		if (previousTableRow != null) {
-			previousGamesLost = previousTableRow.getGamesLost();
+			previousGamesLost = previousTableRow.get(TableRow.GAMES_LOST);
 		}
 
 		return (goalsFor < goalsAgainst ? previousGamesLost + 1 : previousGamesLost);

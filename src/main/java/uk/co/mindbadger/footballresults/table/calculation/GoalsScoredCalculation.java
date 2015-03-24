@@ -16,7 +16,7 @@ public class GoalsScoredCalculation extends CalculationForFixture<String, String
 		
 		int previousGoalsFor = 0;
 		if (previousTableRow != null) {
-			previousGoalsFor = previousTableRow.getGoalsScored();
+			previousGoalsFor = previousTableRow.get(TableRow.GOALS_SCORED);
 		}
 
 		return previousGoalsFor + goalsFor;

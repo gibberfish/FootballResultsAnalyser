@@ -17,7 +17,7 @@ public class GamesWonCalculation extends CalculationForFixture<String, String, S
 		
 		int previousGamesWon = 0;
 		if (previousTableRow != null) {
-			previousGamesWon = previousTableRow.getGamesWon();
+			previousGamesWon = previousTableRow.get(TableRow.GAMES_WON);
 		}
 
 		return (goalsFor > goalsAgainst ? previousGamesWon + 1 : previousGamesWon);

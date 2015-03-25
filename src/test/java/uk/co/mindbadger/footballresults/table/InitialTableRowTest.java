@@ -18,6 +18,9 @@ public class InitialTableRowTest {
 	
 	@Mock
 	private Team<String> mockTeam1;
+	
+	@Mock
+	Table<String,String,String> mockParentTable;
 
 	@Before
 	public void setup() {
@@ -30,13 +33,13 @@ public class InitialTableRowTest {
 	@Test
 	public void shouldCreateAnInitialTableRow () {
 		// Given
-		objectUnderTest = new InitialTableRow<String,String,String> (mockTeam1);
+		objectUnderTest = new InitialTableRow<String,String,String> (mockTeam1, mockParentTable);
 
 		// When
 
 		// Then
-		assertEquals (TEAM_ID, objectUnderTest.getTeamId());
-		assertEquals (TEAM_NAME, objectUnderTest.getTeamName());
+		assertEquals (TEAM_ID, objectUnderTest.getTeam().getTeamId());
+		assertEquals (TEAM_NAME, objectUnderTest.getTeam().getTeamName());
 		assertEquals (0, objectUnderTest.get(TableRow.GAMES_PLAYED));
 		assertEquals (0, objectUnderTest.get(TableRow.GAMES_WON));
 		assertEquals (0, objectUnderTest.get(TableRow.GAMES_DRAWN));

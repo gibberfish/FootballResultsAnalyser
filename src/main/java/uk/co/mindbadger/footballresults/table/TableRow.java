@@ -12,11 +12,8 @@ public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	public static final String GOAL_DIFFERENCE = "goalDifference";
 	public static final String POINTS = "points";
 	
-	//private Map<String, String> calculationClasses;
-	
 	protected Team<K> team;
 	protected Table<K,L,M> parentTable;
-	//protected Map<String, Calculation> calculations;
 	
 	public TableRow (Team<K> team, Table<K,L,M> parentTable) {
 		this.team = team;
@@ -54,9 +51,4 @@ public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 //	public void getCalculations(Map<String, Calculation> calculations) {
 //		this.calculations = calculations;
 //	}
-
-	//@Autowired
-	//public void setCalculationClasses(Map<String, String> calculationClasses) {
-	//	this.calculationClasses = calculationClasses;
-	//}
 }

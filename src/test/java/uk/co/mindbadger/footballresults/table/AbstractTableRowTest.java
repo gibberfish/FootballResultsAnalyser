@@ -14,9 +14,6 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 public class AbstractTableRowTest {
 	
 	@Mock
-	Table<String,String,String> mockTable;
-	
-	@Mock
 	Team<String> mockTeam1;
 
 	@Mock
@@ -318,9 +315,9 @@ public class AbstractTableRowTest {
 			}
 		};
 
-		row1.parentTable = mockTable;
+		row1.parentTable = mockParentTable;
 		
-		when (mockTable.getIndexOfTableRow(row1)).thenReturn(4);
+		when (mockParentTable.getIndexOfTableRow(row1)).thenReturn(4);
 		
 		// When
 		int leaguePosition = row1.getLeaguePosition ();

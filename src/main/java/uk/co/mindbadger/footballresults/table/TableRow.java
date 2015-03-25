@@ -1,8 +1,6 @@
 package uk.co.mindbadger.footballresults.table;
 
-import java.util.Map;
-
-import uk.co.mindbadger.footballresults.table.calculation.Calculation;
+import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	public static final String GAMES_WON = "gamesWon";
@@ -14,12 +12,22 @@ public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	public static final String GOAL_DIFFERENCE = "goalDifference";
 	public static final String POINTS = "points";
 	
-	protected Table<K,L,M> parentTable;
-	protected Map<String, Calculation> calculations;
+	//private Map<String, String> calculationClasses;
 	
-	abstract public K getTeamId ();
-	abstract public String getTeamName ();
-	abstract public int get(String attributeId);
+	protected Team<K> team;
+	protected Table<K,L,M> parentTable;
+	//protected Map<String, Calculation> calculations;
+	
+	public TableRow (Team<K> team, Table<K,L,M> parentTable) {
+		this.team = team;
+		this.parentTable = parentTable;
+	}
+	
+	public Team<K> getTeam () {
+		return team;
+	}
+	
+	public abstract int get(String attributeId);
 	
 	@Override
 	public int compareTo (TableRow<K,L,M> otherRow) {
@@ -30,20 +38,25 @@ public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 		} else if (otherRow.get(GOALS_SCORED) != get(GOALS_SCORED)) {
 			return (otherRow.get(GOALS_SCORED) < get(GOALS_SCORED)) ? -1 : 1;
 		} else {
-			return getTeamName().compareTo(otherRow.getTeamName());
+			return team.getTeamName().compareTo(otherRow.getTeam().getTeamName());
 		}
 	}
 	
 	@Override
 	public String toString () {
-		return "TableRow: " + getTeamName();
+		return "TableRow: " + team.getTeamName();
 	}
 	
 	public int getLeaguePosition() {
 		return parentTable.getIndexOfTableRow(this);
 	}
 	
-	public void setCalculations(Map<String, Calculation> calculations) {
-		this.calculations = calculations;
-	}
+//	public void getCalculations(Map<String, Calculation> calculations) {
+//		this.calculations = calculations;
+//	}
+
+	//@Autowired
+	//public void setCalculationClasses(Map<String, String> calculationClasses) {
+	//	this.calculationClasses = calculationClasses;
+	//}
 }

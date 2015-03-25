@@ -9,10 +9,21 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import uk.co.mindbadger.footballresultsanalyser.domain.Team;
+
 public class AbstractTableRowTest {
 	
 	@Mock
 	Table<String,String,String> mockTable;
+	
+	@Mock
+	Team<String> mockTeam1;
+
+	@Mock
+	Team<String> mockTeam2;
+
+	@Mock
+	Table<String,String,String> mockParentTable;
 	
 	@Before
 	public void setup() {
@@ -22,9 +33,8 @@ public class AbstractTableRowTest {
 	@Test
 	public void shouldCorrectlyCompareRowsWhereThePointsAreDifferent () {
 		// Given
-		TableRow<String,String,String> row1 = new TableRow<String,String,String> () {
-			public String getTeamId() {return "123";}
-			public String getTeamName() {return "Portsmouth";}
+		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
+			@Override
 			public int get(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -46,11 +56,10 @@ public class AbstractTableRowTest {
 					return 0;
 				}
 			}
+			
 		};
 		
-		TableRow<String,String,String> row2 = new TableRow<String,String,String> () {
-			public String getTeamId() {return "456";}
-			public String getTeamName() {return "Southampton";}
+		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
 			public int get(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -90,9 +99,7 @@ public class AbstractTableRowTest {
 	@Test
 	public void shouldCorrectlyCompareRowsWhereThePointsAreTheSameButGoalDifferenceIsDifferent () {
 		// Given
-		TableRow<String,String,String> row1 = new TableRow<String,String,String> () {
-			public String getTeamId() {return "123";}
-			public String getTeamName() {return "Portsmouth";}
+		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
 			public int get(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -116,9 +123,7 @@ public class AbstractTableRowTest {
 			}
 		};
 		
-		TableRow<String,String,String> row2 = new TableRow<String,String,String> () {
-			public String getTeamId() {return "456";}
-			public String getTeamName() {return "Southampton";}
+		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
 			public int get(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -158,9 +163,7 @@ public class AbstractTableRowTest {
 	@Test
 	public void shouldCorrectlyCompareRowsWhereThePointsAreTheSameAndTheGoalDifferenceIsTheSameButTheGoalsScoredIsDifferent () {
 		// Given
-		TableRow<String,String,String> row1 = new TableRow<String,String,String> () {
-			public String getTeamId() {return "123";}
-			public String getTeamName() {return "Portsmouth";}
+		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
 			public int get(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -184,9 +187,7 @@ public class AbstractTableRowTest {
 			}
 		};
 		
-		TableRow<String,String,String> row2 = new TableRow<String,String,String> () {
-			public String getTeamId() {return "456";}
-			public String getTeamName() {return "Southampton";}
+		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
 			public int get(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -226,9 +227,10 @@ public class AbstractTableRowTest {
 	@Test
 	public void shouldCorrectlyCompareRowsWhereEverythingIsEqualInWhichCaseWeDoItAlphabetically () {
 		// Given
-		TableRow<String,String,String> row1 = new TableRow<String,String,String> () {
-			public String getTeamId() {return "123";}
-			public String getTeamName() {return "Portsmouth";}
+		when(mockTeam1.getTeamName()).thenReturn("Portsmouth");
+		when(mockTeam2.getTeamName()).thenReturn("Southampton");
+		
+		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
 			public int get(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -252,9 +254,7 @@ public class AbstractTableRowTest {
 			}
 		};
 		
-		TableRow<String,String,String> row2 = new TableRow<String,String,String> () {
-			public String getTeamId() {return "456";}
-			public String getTeamName() {return "Southampton";}
+		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam2, mockParentTable) {
 			public int get(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -294,9 +294,7 @@ public class AbstractTableRowTest {
 	@Test
 	public void shouldGetLeaguePositionFromTable () {
 		// Given
-		TableRow<String,String,String> row1 = new TableRow<String,String,String> () {
-			public String getTeamId() {return "123";}
-			public String getTeamName() {return "Portsmouth";}
+		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
 			public int get(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -330,4 +328,76 @@ public class AbstractTableRowTest {
 		// Then
 		assertEquals (4, leaguePosition);
 	}
+	
+	@Test
+	public void shouldGetTeam () {
+		// Given
+		when(mockTeam1.getTeamName()).thenReturn("Portsmouth");
+		
+		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
+			public int get(String attributeId) {
+				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
+					return 18;
+				} else if (TableRow.GAMES_WON.equals(attributeId)) {
+					return 12;
+				} else if (TableRow.GAMES_DRAWN.equals(attributeId)) {
+					return 4;
+				} else if (TableRow.GAMES_LOST.equals(attributeId)) {
+					return 2;
+				} else if (TableRow.GOALS_SCORED.equals(attributeId)) {
+					return 50;
+				} else if (TableRow.GOALS_CONCEDED.equals(attributeId)) {
+					return 10;
+				} else if (TableRow.GOAL_DIFFERENCE.equals(attributeId)) {
+					return 40;
+				} else if (TableRow.POINTS.equals(attributeId)) {
+					return 40;
+				} else {
+					return 0;
+				}
+			}
+		};
+
+		// When
+		Team<String> team = row1.getTeam();
+		
+		// Then
+		assertEquals (mockTeam1, team);
+	}
+	
+	@Test
+	public void shouldGetToStringValue () {
+		// Given
+		when(mockTeam1.getTeamName()).thenReturn("Portsmouth");
+		
+		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
+			public int get(String attributeId) {
+				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
+					return 18;
+				} else if (TableRow.GAMES_WON.equals(attributeId)) {
+					return 12;
+				} else if (TableRow.GAMES_DRAWN.equals(attributeId)) {
+					return 4;
+				} else if (TableRow.GAMES_LOST.equals(attributeId)) {
+					return 2;
+				} else if (TableRow.GOALS_SCORED.equals(attributeId)) {
+					return 50;
+				} else if (TableRow.GOALS_CONCEDED.equals(attributeId)) {
+					return 10;
+				} else if (TableRow.GOAL_DIFFERENCE.equals(attributeId)) {
+					return 40;
+				} else if (TableRow.POINTS.equals(attributeId)) {
+					return 40;
+				} else {
+					return 0;
+				}
+			}
+		};
+
+		// When
+		
+		// Then
+		assertEquals ("TableRow: Portsmouth", row1.toString());
+	}
+
 }

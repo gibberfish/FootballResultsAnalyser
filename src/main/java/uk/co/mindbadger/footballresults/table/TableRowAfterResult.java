@@ -40,8 +40,12 @@ public class TableRowAfterResult<K,L,M> extends TableRow<K,L,M> {
 			calculations = calculationMapFactory.createCalculations(team, previousTableRow, fixture);
 		}
 		
-		return 0;
-		//return calculations.get(attributeId).calculate();
+		Calculation calculation = calculations.get(attributeId);
+		if (calculation == null) {
+			throw new IllegalArgumentException("No value for " + attributeId);
+		}
+		
+		return calculation.calculate();
 	}
 
 	@Autowired

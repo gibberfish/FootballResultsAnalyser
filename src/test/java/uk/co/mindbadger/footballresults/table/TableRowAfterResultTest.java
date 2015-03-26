@@ -1,9 +1,11 @@
 package uk.co.mindbadger.footballresults.table;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +22,6 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 public class TableRowAfterResultTest {	
 	private final String TEAM_ID = "123";
 	private final String TEAM_NAME = "Portsmouth";
-	private final Calendar FIXTURE_DATE = Calendar.getInstance();
 	private Map<String,Calculation> calculations = new HashMap<String,Calculation> ();
 	
 	private TableRowAfterResult<String,String,String> objectUnderTest;
@@ -82,6 +83,8 @@ public class TableRowAfterResultTest {
 		calculations.put(TableRow.GOALS_CONCEDED, mockGoalsConcededCalculation);
 		calculations.put(TableRow.GOAL_DIFFERENCE, mockGoalDifferenceCalculation);
 		calculations.put(TableRow.POINTS, mockPointsCalculation);
+		
+		when(mockCalculationMapFactory.createCalculations(mockTeam1, mockPreviousTableRow, mockFixture)).thenReturn(calculations);
 	}
 	
 	
@@ -172,182 +175,36 @@ public class TableRowAfterResultTest {
 		verify(mockCalculationMapFactory, times(1)).createCalculations(mockTeam1, mockPreviousTableRow, mockFixture);
 	}
 	
-//	@Test
-//	public void shouldNotReInitialiseTheCalculationsOnSubsequentInvokationsOfGet () {
+	@Test
+	public void shouldGetData () {
+		// Given
+		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture);
+		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
 		
-//	}
+		when(mockGamesWonCalculation.calculate()).thenReturn(10);
+		
+		// When
+		int gamesWon = objectUnderTest.get(TableRowAfterResult.GAMES_WON);
+
+		// Then
+		assertEquals (10, gamesWon);
+	}
 	
-	
-//
-//	
-//	@Test
-//	public void shouldCreateATableRowForAHomeTeamWinning () {
-//		// Given
-//		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
-//		
-//		when (mockFixture.getHomeTeam()).thenReturn(mockTeam1);
-//		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
-//		when (mockFixture.getFixtureDate()).thenReturn(FIXTURE_DATE);
-//		when (mockFixture.getHomeGoals()).thenReturn(2);
-//		when (mockFixture.getAwayGoals()).thenReturn(1);
-//		
-//		objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, mockFixture);
-//		objectUnderTest.setCalculations(calculations);
-//		
-//		// When
-//		
-//		// Then
-//		assertEquals (TEAM_ID, objectUnderTest.getTeamId());
-//		assertEquals (TEAM_NAME, objectUnderTest.getTeamName());
-//		assertEquals (1, objectUnderTest.get(TableRow.GAMES_PLAYED));
-//		assertEquals (1, objectUnderTest.get(TableRow.GAMES_WON));
-//		assertEquals (0, objectUnderTest.get(TableRow.GAMES_DRAWN));
-//		assertEquals (0, objectUnderTest.get(TableRow.GAMES_LOST));
-//		assertEquals (2, objectUnderTest.get(TableRow.GOALS_SCORED));
-//		assertEquals (1, objectUnderTest.get(TableRow.GOALS_CONCEDED));
-//		assertEquals (1, objectUnderTest.get(TableRow.GOAL_DIFFERENCE));
-//		assertEquals (3, objectUnderTest.get(TableRow.POINTS));
-//	}
-//	
-//	@Test
-//	public void shouldCreateATableRowForAHomeTeamLosing () {
-//		// Given
-//		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
-//		
-//		when (mockFixture.getHomeTeam()).thenReturn(mockTeam1);
-//		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
-//		when (mockFixture.getFixtureDate()).thenReturn(FIXTURE_DATE);
-//		when (mockFixture.getHomeGoals()).thenReturn(2);
-//		when (mockFixture.getAwayGoals()).thenReturn(4);
-//		
-//		objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, mockFixture);
-//		
-//		// When
-//		
-//		// Then
-//		assertEquals (TEAM_ID, objectUnderTest.getTeamId());
-//		assertEquals (TEAM_NAME, objectUnderTest.getTeamName());
-//		assertEquals (1, objectUnderTest.get(TableRow.GAMES_PLAYED));
-//		assertEquals (0, objectUnderTest.get(TableRow.GAMES_WON));
-//		assertEquals (0, objectUnderTest.get(TableRow.GAMES_DRAWN));
-//		assertEquals (1, objectUnderTest.get(TableRow.GAMES_LOST));
-//		assertEquals (2, objectUnderTest.get(TableRow.GOALS_SCORED));
-//		assertEquals (4, objectUnderTest.get(TableRow.GOALS_CONCEDED));
-//		assertEquals (-2, objectUnderTest.get(TableRow.GOAL_DIFFERENCE));
-//		assertEquals (0, objectUnderTest.get(TableRow.POINTS));
-//	}
-//
-//	@Test
-//	public void shouldCreateATableRowForAHomeTeamDrawing () {
-//		// Given
-//		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
-//		
-//		when (mockFixture.getHomeTeam()).thenReturn(mockTeam1);
-//		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
-//		when (mockFixture.getFixtureDate()).thenReturn(FIXTURE_DATE);
-//		when (mockFixture.getHomeGoals()).thenReturn(3);
-//		when (mockFixture.getAwayGoals()).thenReturn(3);
-//		
-//		objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, mockFixture);
-//		
-//		// When
-//		
-//		// Then
-//		assertEquals (TEAM_ID, objectUnderTest.getTeamId());
-//		assertEquals (TEAM_NAME, objectUnderTest.getTeamName());
-//		assertEquals (1, objectUnderTest.get(TableRow.GAMES_PLAYED));
-//		assertEquals (0, objectUnderTest.get(TableRow.GAMES_WON));
-//		assertEquals (1, objectUnderTest.get(TableRow.GAMES_DRAWN));
-//		assertEquals (0, objectUnderTest.get(TableRow.GAMES_LOST));
-//		assertEquals (3, objectUnderTest.get(TableRow.GOALS_SCORED));
-//		assertEquals (3, objectUnderTest.get(TableRow.GOALS_CONCEDED));
-//		assertEquals (0, objectUnderTest.get(TableRow.GOAL_DIFFERENCE));
-//		assertEquals (1, objectUnderTest.get(TableRow.POINTS));
-//	}
-//	
-//	@Test
-//	public void shouldCreateATableRowForAnAwayTeamWinning () {
-//		// Given
-//		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
-//		
-//		when (mockFixture.getHomeTeam()).thenReturn(mockTeam2);
-//		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
-//		when (mockFixture.getFixtureDate()).thenReturn(FIXTURE_DATE);
-//		when (mockFixture.getHomeGoals()).thenReturn(1);
-//		when (mockFixture.getAwayGoals()).thenReturn(2);
-//		
-//		objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, mockFixture);
-//		
-//		// When
-//		
-//		// Then
-//		assertEquals (TEAM_ID, objectUnderTest.getTeamId());
-//		assertEquals (TEAM_NAME, objectUnderTest.getTeamName());
-//		assertEquals (1, objectUnderTest.get(TableRow.GAMES_PLAYED));
-//		assertEquals (1, objectUnderTest.get(TableRow.GAMES_WON));
-//		assertEquals (0, objectUnderTest.get(TableRow.GAMES_DRAWN));
-//		assertEquals (0, objectUnderTest.get(TableRow.GAMES_LOST));
-//		assertEquals (2, objectUnderTest.get(TableRow.GOALS_SCORED));
-//		assertEquals (1, objectUnderTest.get(TableRow.GOALS_CONCEDED));
-//		assertEquals (1, objectUnderTest.get(TableRow.GOAL_DIFFERENCE));
-//		assertEquals (3, objectUnderTest.get(TableRow.POINTS));
-//	}
-//	
-//	@Test
-//	public void shouldCreateATableRowForAnAwayTeamLosing () {
-//		// Given
-//		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
-//		
-//		when (mockFixture.getHomeTeam()).thenReturn(mockTeam2);
-//		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
-//		when (mockFixture.getFixtureDate()).thenReturn(FIXTURE_DATE);
-//		when (mockFixture.getHomeGoals()).thenReturn(4);
-//		when (mockFixture.getAwayGoals()).thenReturn(2);
-//		
-//		objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, mockFixture);
-//		
-//		// When
-//		
-//		// Then
-//		assertEquals (TEAM_ID, objectUnderTest.getTeamId());
-//		assertEquals (TEAM_NAME, objectUnderTest.getTeamName());
-//		assertEquals (1, objectUnderTest.get(TableRow.GAMES_PLAYED));
-//		assertEquals (0, objectUnderTest.get(TableRow.GAMES_WON));
-//		assertEquals (0, objectUnderTest.get(TableRow.GAMES_DRAWN));
-//		assertEquals (1, objectUnderTest.get(TableRow.GAMES_LOST));
-//		assertEquals (2, objectUnderTest.get(TableRow.GOALS_SCORED));
-//		assertEquals (4, objectUnderTest.get(TableRow.GOALS_CONCEDED));
-//		assertEquals (-2, objectUnderTest.get(TableRow.GOAL_DIFFERENCE));
-//		assertEquals (0, objectUnderTest.get(TableRow.POINTS));
-//	}
-//
-//	@Test
-//	public void shouldCreateATableRowForAnAwayTeamDrawing () {
-//		// Given
-//		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
-//		
-//		when (mockFixture.getHomeTeam()).thenReturn(mockTeam2);
-//		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
-//		when (mockFixture.getFixtureDate()).thenReturn(FIXTURE_DATE);
-//		when (mockFixture.getHomeGoals()).thenReturn(3);
-//		when (mockFixture.getAwayGoals()).thenReturn(3);
-//		
-//		objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, mockFixture);
-//		
-//		// When
-//		
-//		// Then
-//		assertEquals (TEAM_ID, objectUnderTest.getTeamId());
-//		assertEquals (TEAM_NAME, objectUnderTest.getTeamName());
-//		assertEquals (1, objectUnderTest.get(TableRow.GAMES_PLAYED));
-//		assertEquals (0, objectUnderTest.get(TableRow.GAMES_WON));
-//		assertEquals (1, objectUnderTest.get(TableRow.GAMES_DRAWN));
-//		assertEquals (0, objectUnderTest.get(TableRow.GAMES_LOST));
-//		assertEquals (3, objectUnderTest.get(TableRow.GOALS_SCORED));
-//		assertEquals (3, objectUnderTest.get(TableRow.GOALS_CONCEDED));
-//		assertEquals (0, objectUnderTest.get(TableRow.GOAL_DIFFERENCE));
-//		assertEquals (1, objectUnderTest.get(TableRow.POINTS));
-//	}
-	
-	
+	@Test
+	public void shouldThrowExceptionWhenInvalidAttributeRequested () {
+		// Given
+		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture);
+		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
+		
+		// When
+		try{
+			objectUnderTest.get("INVALID_ATTRIBUTE");
+			fail("Should throw an exception here");
+			
+		} catch (IllegalArgumentException e) {
+			// Then
+			assertEquals ("No value for INVALID_ATTRIBUTE", e.getMessage());
+		}
+
+	}
 }

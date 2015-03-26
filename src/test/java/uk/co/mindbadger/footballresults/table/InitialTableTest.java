@@ -79,15 +79,15 @@ public class InitialTableTest {
 		List<TableRow<String,String,String>> tableRows = objectUnderTest.getSortedTable();
 		
 		TableRow<String,String,String> row1 = tableRows.get(0);
-		assertEquals ("Aston Villa", row1.getTeamName());
+		assertEquals ("Aston Villa", row1.getTeam().getTeamName());
 		assertTrue (row1 instanceof InitialTableRow);
 
 		TableRow<String,String,String> row2 = tableRows.get(1);
-		assertEquals ("Portsmouth", row2.getTeamName());
+		assertEquals ("Portsmouth", row2.getTeam().getTeamName());
 		assertTrue (row2 instanceof InitialTableRow);
 		
 		TableRow<String,String,String> row3 = tableRows.get(2);
-		assertEquals ("West Brom", row3.getTeamName());
+		assertEquals ("West Brom", row3.getTeam().getTeamName());
 		assertTrue (row3 instanceof InitialTableRow);
 	}
 }

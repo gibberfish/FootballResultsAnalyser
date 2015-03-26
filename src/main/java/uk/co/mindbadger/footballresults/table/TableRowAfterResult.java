@@ -5,14 +5,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import uk.co.mindbadger.footballresults.table.calculation.Calculation;
+import uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class TableRowAfterResult<K,L,M> extends TableRow<K,L,M> {
 	private TableRow<K,L,M> previousTableRow;
 	private Fixture<K> fixture;
-	private Map<String, String> calculationClasses;
 	private Map<String, Calculation> calculations;
+	private CalculationMapFactory<K, L, M> calculationMapFactory;
 	
 	public TableRowAfterResult (Team<K> team, Table<K,L,M> parentTable) {
 		super(team, parentTable);
@@ -31,11 +32,20 @@ public class TableRowAfterResult<K,L,M> extends TableRow<K,L,M> {
 
 	@Override
 	public int get(String attributeId) {
-		return calculations.get(attributeId).calculate();
+		if (calculationMapFactory == null) {
+			throw new IllegalStateException("The TableRow requires a CalculationMapFactory.");
+		}
+		
+		if (calculations == null) {
+			calculations = calculationMapFactory.createCalculations(team, previousTableRow, fixture);
+		}
+		
+		return 0;
+		//return calculations.get(attributeId).calculate();
 	}
-	
+
 	@Autowired
-	public void setCalculationClasses(Map<String, String> calculationClasses) {
-		this.calculationClasses = calculationClasses;
+	public void setCalculationMapFactory(CalculationMapFactory<K, L, M> calculationMapFactory) {
+		this.calculationMapFactory = calculationMapFactory;
 	}
 }

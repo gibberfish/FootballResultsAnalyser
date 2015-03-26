@@ -2,8 +2,6 @@ package uk.co.mindbadger.footballresults.table;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import uk.co.mindbadger.footballresults.table.calculation.Calculation;
 import uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
@@ -48,7 +46,6 @@ public class TableRowAfterResult<K,L,M> extends TableRow<K,L,M> {
 		return calculation.calculate();
 	}
 
-	@Autowired
 	public void setCalculationMapFactory(CalculationMapFactory<K, L, M> calculationMapFactory) {
 		this.calculationMapFactory = calculationMapFactory;
 	}

@@ -7,11 +7,20 @@ public class SeasonCache {
 	/*
 	 * Aim of this component:
 	 * 
-	 * * Get the latest season by default
-	 * * Get all fixtures for the season
-	 * * Get all divisions for the season
-	 * * For each division, get all of the teams for the season
-	 * * Create a dummy table for 
+	 * * Get the latest season by default (DAO - getSeasons (ordered), get last row)
+	 * * Get all divisions for the season (DAO - getDivisionsForSeason)
+	 * * For each division
+	 * ** get all of the teams for the division(DAO - getTeamsForDivisionInSeason)
+	 * ** get all of the fixtures for that division, ordered by date ascending (DAO - getFixturesForDivisionInSeason - NEW!!!) 
+	 * ** Create a table for that division (TableFactory - createTableFromFixtures)
+	 *     (pass in List of Fixtures and Set of Teams)
+	 *    ** Loop through all of the teams, creating an initial table row for that team (TableRowFactory - createInitialTableRowForTeam)
+	 *    ** Loop through all of the fixtures, creating a new table row for each fixture (TableRowFactory - createTableRowFromFixture)
+	 * * Store all tables in a Map keyed by division
+	 * * Store all Fixtures in a Map keyed by  
+	 * 
+	 * * 
+	 * *  
 	 */
 	
 	private FootballResultsAnalyserDAO<String,String,String> dao;

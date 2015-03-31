@@ -51,7 +51,19 @@ public class SeasonCache {
 	
 	
 	// CONSTRUCTOR
-	public SeasonCache () {
+	public SeasonCache (FootballResultsAnalyserDAO<String, String, String> dao) {
+		this.dao = dao;
+		
+		if (dao == null) {
+			throw new IllegalStateException("Please supply a valid DAO");
+		}
+		
+		List<Season<String>> seasons = dao.getSeasons();
+		
+		if (seasons.size() == 0) {
+			throw new IllegalStateException("There is no season data available.");
+		}
+		
 		// Get the latest season (DAO - getSeasons (ordered), get last row)
 		//   create a new SeasonContainer for this season and add it to the seasons map
 		

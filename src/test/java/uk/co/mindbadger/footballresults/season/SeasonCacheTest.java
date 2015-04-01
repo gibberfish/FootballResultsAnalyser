@@ -72,7 +72,20 @@ public class SeasonCacheTest {
 		}
 				
 	}
-	
+
+	@Test
+	public void shouldXXXXX () {
+		// Given
+		List<Season<String>> emptyList = new ArrayList<Season<String>> ();
+		when(mockDao.getSeasons()).thenReturn(emptyList);
+		
+		// When
+		objectUnderTest = new SeasonCache(mockDao);
+
+		// Then
+		// WHAT????	
+	}
+
 //	@Test
 //	public void getSeasonShouldThrowExceptionIfNotInitialised() {
 //		// Given

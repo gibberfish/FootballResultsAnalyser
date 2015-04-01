@@ -36,7 +36,7 @@ public class SeasonCache {
 	 * * Store all Fixtures in a Map keyed by  
 	 */
 	private class SeasonContainer {
-		protected Map<String, DivisionContainer> divisions;
+		protected Map<String, DivisionContainer> divisions = new HashMap<String, DivisionContainer> ();
 	}
 	
 	private class DivisionContainer {
@@ -63,6 +63,9 @@ public class SeasonCache {
 		if (seasons.size() == 0) {
 			throw new IllegalStateException("There is no season data available.");
 		}
+		
+		// Assumes the seasons are in descending order
+		Season<String> latestSeason = seasons.get(0);
 		
 		// Get the latest season (DAO - getSeasons (ordered), get last row)
 		//   create a new SeasonContainer for this season and add it to the seasons map
@@ -98,7 +101,7 @@ public class SeasonCache {
 		this.dao = dao;
 	}
 
-	public Season<String> getSeason() {
+	public Season<String> getCurrentSeason() {
 		return null;
 	}
 

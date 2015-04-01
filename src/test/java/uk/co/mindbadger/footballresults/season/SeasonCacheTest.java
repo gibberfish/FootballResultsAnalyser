@@ -24,6 +24,9 @@ public class SeasonCacheTest {
 	
 	@Mock
 	private FootballResultsAnalyserDAO<String,String,String> mockDao;
+
+	@Mock
+	private Season<String> mockSeason;
 	
 	@Before
 	public void setup() {
@@ -74,16 +77,19 @@ public class SeasonCacheTest {
 	}
 
 	@Test
-	public void shouldXXXXX () {
+	public void shouldGetDivisionsWhenLoadingSeason () {
 		// Given
-		List<Season<String>> emptyList = new ArrayList<Season<String>> ();
-		when(mockDao.getSeasons()).thenReturn(emptyList);
+		List<Season<String>> list = new ArrayList<Season<String>> ();
+		list.add(mockSeason);
+		when(mockDao.getSeasons()).thenReturn(list);
+		objectUnderTest = new SeasonCache(mockDao);
 		
 		// When
-		objectUnderTest = new SeasonCache(mockDao);
+		objectUnderTest.loadSeason(mockSeason);
 
 		// Then
-		// WHAT????	
+		// Called once for the constructor, once for the load
+		verify(mockDao,times(2)).getDivisionsForSeason(mockSeason);
 	}
 
 //	@Test

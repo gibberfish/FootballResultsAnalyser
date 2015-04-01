@@ -1,15 +1,20 @@
 package uk.co.mindbadger.footballresults.season;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import uk.co.mindbadger.footballresults.table.InitialTable;
 import uk.co.mindbadger.footballresults.table.Table;
 import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
 import uk.co.mindbadger.footballresultsanalyser.domain.Division;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Season;
+import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
+import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
 
 public class SeasonCache {
 	/* The SeasonCache can hold multiple seasons - When the object loads, it will always load the latest season
@@ -67,9 +72,10 @@ public class SeasonCache {
 		// Assumes the seasons are in descending order
 		Season<String> latestSeason = seasons.get(0);
 		
-		// Get the latest season (DAO - getSeasons (ordered), get last row)
-		//   create a new SeasonContainer for this season and add it to the seasons map
+		loadSeason(latestSeason);
 		
+		// Get the latest season (DAO - getSeasons (ordered), get last row)
+		//   create a new SeasonContainer for this season and add it to the seasons map		
 		// Get all divisions for the season (DAO - getDivisionsForSeason)
 		
 		// Loop through each division
@@ -93,6 +99,33 @@ public class SeasonCache {
 		
 	}
 	
+	public void loadSeason(Season<String> season) {
+		SeasonContainer seasonContainer = new SeasonContainer ();
+		seasons.put(season.getSeasonNumber(), seasonContainer);
+		
+		Set<SeasonDivision<String, String>> seasonDivisions = dao.getDivisionsForSeason(season);
+		
+		for (SeasonDivision<String, String> seasonDivision : seasonDivisions) {
+			
+			DivisionContainer divisionContainer = new DivisionContainer();
+			seasonContainer.divisions.put(seasonDivision.getDivision().getDivisionId(), divisionContainer);
+			
+			Set<SeasonDivisionTeam<String, String, String>> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
+			
+			// Create initial table from the teams
+			Table<String,String,String> initialTable = new InitialTable<>(seasonDivision, seasonDivisionTeams);
+			Calendar seasonStartDateCalendar = Calendar.getInstance();
+			seasonStartDateCalendar.set(Calendar.DAY_OF_MONTH, 0);
+			seasonStartDateCalendar.set(Calendar.MONTH, 5);
+			seasonStartDateCalendar.set(Calendar.YEAR, season.getSeasonNumber());
+			divisionContainer.tables.put(seasonStartDateCalendar.getTime(), initialTable);
+			
+			List<Fixture<String>> fixtures = dao.getFixturesForDivisionInSeason(seasonDivision);
+			
+			// Loop through fixtures, accumulating on distinct date
+		}
+	}
+	
 	public FootballResultsAnalyserDAO<String, String, String> getDao() {
 		return dao;
 	}
@@ -104,9 +137,4 @@ public class SeasonCache {
 	public Season<String> getCurrentSeason() {
 		return null;
 	}
-
-	public void loadLatestSeason() {
-	}
-
-	
 }

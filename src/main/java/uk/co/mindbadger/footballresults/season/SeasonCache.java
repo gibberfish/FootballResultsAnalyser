@@ -1,5 +1,6 @@
 package uk.co.mindbadger.footballresults.season;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,6 +10,8 @@ import java.util.Set;
 
 import uk.co.mindbadger.footballresults.table.InitialTable;
 import uk.co.mindbadger.footballresults.table.Table;
+import uk.co.mindbadger.footballresults.table.TableRow;
+import uk.co.mindbadger.footballresults.table.TableRowFactory;
 import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
 import uk.co.mindbadger.footballresultsanalyser.domain.Division;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
@@ -45,14 +48,14 @@ public class SeasonCache {
 	}
 	
 	private class DivisionContainer {
-		protected Map<Date, List<Fixture<String>>> fixtures = new HashMap<Date, List<Fixture<String>>> ();
-		protected Map<Date, Table<String,String,String>> tables = new HashMap<Date, Table<String,String,String>> ();
+		protected Map<Calendar, List<Fixture<String>>> fixtures = new HashMap<Calendar, List<Fixture<String>>> ();
+		protected Map<Calendar, Table<String,String,String>> tables = new HashMap<Calendar, Table<String,String,String>> ();
 	}
 	
 	private Map<Integer, SeasonContainer> seasons = new HashMap<Integer, SeasonContainer> ();
 	
 	private FootballResultsAnalyserDAO<String,String,String> dao;
-	
+	private TableRowFactory<String,String,String> tableRowFactory;
 	
 	
 	// CONSTRUCTOR
@@ -118,11 +121,38 @@ public class SeasonCache {
 			seasonStartDateCalendar.set(Calendar.DAY_OF_MONTH, 0);
 			seasonStartDateCalendar.set(Calendar.MONTH, 5);
 			seasonStartDateCalendar.set(Calendar.YEAR, season.getSeasonNumber());
-			divisionContainer.tables.put(seasonStartDateCalendar.getTime(), initialTable);
+			//divisionContainer.tables.put(seasonStartDateCalendar, initialTable);
 			
 			List<Fixture<String>> fixtures = dao.getFixturesForDivisionInSeason(seasonDivision);
 			
+			Calendar currentDate = seasonStartDateCalendar;
+			List<Fixture<String>> fixturesForDate = null;
+			Table<String,String,String> tableForDate = initialTable;
+			
 			// Loop through fixtures, accumulating on distinct date
+			for (Fixture<String> fixture : fixtures) {
+				if (fixture.getFixtureDate() != currentDate) {
+					// Save the data
+					if (tableForDate != null) divisionContainer.tables.put(currentDate, tableForDate);
+					if (fixturesForDate != null) divisionContainer.fixtures.put(currentDate, fixturesForDate);
+					
+					// NEED A FACTORY FOR AN INITIAL TABLE BASED UPON A PREVIOUS ONE
+					//tableForDate = new Table<String,String,String> ();
+					fixturesForDate = new ArrayList<Fixture<String>> ();
+					
+					// Set the new current date
+					currentDate = fixture.getFixtureDate();
+				}
+				
+				fixturesForDate.add(fixture);
+				
+				TableRow<String, String, String> previousTableRow = null;
+				// If we have access to a previous table, then we should be able to get the row for a specific team from that table.
+				// Or if a new table is initialise from the previous one, then we should simply be able to update each row.
+				tableRowFactory.createTableRowFromFixture(fixture.getHomeTeam(), tableForDate, previousTableRow , fixture);
+				tableRowFactory.createTableRowFromFixture(fixture.getAwayTeam(), tableForDate, previousTableRow, fixture);
+				//fixture.g
+			}
 		}
 	}
 	
@@ -136,5 +166,13 @@ public class SeasonCache {
 
 	public Season<String> getCurrentSeason() {
 		return null;
+	}
+
+	public TableRowFactory<String,String,String> getTableRowFactory() {
+		return tableRowFactory;
+	}
+
+	public void setTableRowFactory(TableRowFactory<String,String,String> tableRowFactory) {
+		this.tableRowFactory = tableRowFactory;
 	}
 }

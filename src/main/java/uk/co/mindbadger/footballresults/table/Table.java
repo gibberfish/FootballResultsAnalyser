@@ -7,9 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class Table<K,L,M> {
-	protected Map<K, TableRow<K,L,M>> tableRows = new HashMap<K, TableRow<K,L,M>> ();
+public class Table<K,L,M> {
+	private Map<K, TableRow<K,L,M>> tableRows = new HashMap<K, TableRow<K,L,M>> ();
 
+	public Table (Table<K,L,M> previousTable) {
+		if (previousTable != null) {
+			for (TableRow<K,L,M> row : previousTable.getSortedTable()) {
+				addRow(row);
+			}
+		}
+	}
+	
 	public List<TableRow<K,L,M>> getSortedTable() {
 		Collection<TableRow<K,L,M>> values = tableRows.values();
 		List<TableRow<K,L,M>> list = new ArrayList<TableRow<K,L,M>>(values);
@@ -19,5 +27,9 @@ public abstract class Table<K,L,M> {
 
 	public int getIndexOfTableRow(TableRow<K,L,M> tableRow) {
 		return (getSortedTable().indexOf(tableRow)+1);
+	}
+	
+	public void addRow (TableRow<K,L,M> tableRow) {
+		tableRows.put(tableRow.getTeam().getTeamId(), tableRow);
 	}
 }

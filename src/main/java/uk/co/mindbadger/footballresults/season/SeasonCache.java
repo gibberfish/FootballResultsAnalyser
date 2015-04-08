@@ -136,8 +136,7 @@ public class SeasonCache {
 					if (tableForDate != null) divisionContainer.tables.put(currentDate, tableForDate);
 					if (fixturesForDate != null) divisionContainer.fixtures.put(currentDate, fixturesForDate);
 					
-					// NEED A FACTORY FOR AN INITIAL TABLE BASED UPON A PREVIOUS ONE
-					//tableForDate = new Table<String,String,String> ();
+					tableForDate = new Table<String,String,String> (tableForDate);
 					fixturesForDate = new ArrayList<Fixture<String>> ();
 					
 					// Set the new current date

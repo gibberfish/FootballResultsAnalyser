@@ -112,4 +112,20 @@ public class TableTest {
 		assertEquals (1, objectUnderTest.getSortedTable().size());
 		assertEquals (mockTableRow1, objectUnderTest.getSortedTable().get(0));
 	}
+	
+	@Test
+	public void shouldGetTableRowForTeam () {
+		// Given
+		List <TableRow<String, String, String>> list = new ArrayList<TableRow<String, String, String>> ();
+		list.add(mockTableRow1);
+		list.add(mockTableRow2);
+		when (mockPreviousTable.getSortedTable()).thenReturn(list);
+		objectUnderTest = new Table<String,String,String> (mockPreviousTable);
+		
+		// When
+		TableRow<String,String,String> row = objectUnderTest.getTableRowForTeam("123");
+
+		// Then
+		assertEquals (mockTableRow1, row);
+	}
 }

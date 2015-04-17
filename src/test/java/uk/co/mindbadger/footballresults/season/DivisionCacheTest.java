@@ -18,9 +18,9 @@ import org.mockito.MockitoAnnotations;
 
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-public class SeasonCacheTest {
+public class DivisionCacheTest {
 	
-	private SeasonCache objectUnderTest;
+	private DivisionCache objectUnderTest;
 
 	@Before
 	public void setup() {
@@ -28,11 +28,30 @@ public class SeasonCacheTest {
 	}
 	
 	@Test
-	public void shouldInitialiseWithNoRowsIfPreviousTableIsNull () {
+	public void shouldInitialiseWithNoRows () {
 		// Given
 		
 		// When
 		
 		// Then
 	}
+	
+	@Test
+	public void shouldAddFixtureRowToCache () {
+		// Given
+		
+		// When
+		
+		// Then
+	}
+
+	@Test
+	public void shouldAddTableRowToCache () {
+		// Given
+		
+		// When
+		
+		// Then
+	}
+
 }

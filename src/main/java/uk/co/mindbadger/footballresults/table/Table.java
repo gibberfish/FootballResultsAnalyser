@@ -32,4 +32,8 @@ public class Table<K,L,M> {
 	public void addRow (TableRow<K,L,M> tableRow) {
 		tableRows.put(tableRow.getTeam().getTeamId(), tableRow);
 	}
+	
+	public TableRow<K,L,M> getTableRowForTeam (K teamId) {
+		return tableRows.get(teamId);
+	}
 }

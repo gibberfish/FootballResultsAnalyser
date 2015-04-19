@@ -70,8 +70,7 @@ public class SeasonLoader {
 	}
 	
 	public void loadSeason(Season<String> season) {
-		SeasonCache seasonCache = new SeasonCache ();
-		analyserCache.addSeasonCache(season.getSeasonNumber(), seasonCache);
+		SeasonCache seasonCache = analyserCache.getCacheForSeason(season.getSeasonNumber());
 		
 		Set<SeasonDivision<String, String>> seasonDivisions = dao.getDivisionsForSeason(season);
 		

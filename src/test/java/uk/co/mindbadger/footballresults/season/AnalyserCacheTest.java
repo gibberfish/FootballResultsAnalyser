@@ -50,22 +50,41 @@ public class AnalyserCacheTest {
 		// Then
 		assertEquals (0, seasonCaches.size());
 	}
-	
+
 	@Test
-	public void shouldAddDivisionCache () {
+	public void shouldAddNewSeasonCacheIfOneDoesntExist () {
 		// Given
 		
 		// When
-		objectUnderTest.addSeasonCache(seasonNumber1, mockSeasonCache1);
-		objectUnderTest.addSeasonCache(seasonNumber2, mockSeasonCache2);
-		objectUnderTest.addSeasonCache(seasonNumber3, mockSeasonCache3);
+		SeasonCache seasonCache1 = objectUnderTest.getCacheForSeason(seasonNumber1);
 		
 		// Then
 		Map<Integer, SeasonCache> seasonCaches = objectUnderTest.getSeasonCaches();
-		assertEquals (3, seasonCaches.size());
-		assertEquals (mockSeasonCache1, seasonCaches.get(seasonNumber1));
-		assertEquals (mockSeasonCache2, seasonCaches.get(seasonNumber2));
-		assertEquals (mockSeasonCache3, seasonCaches.get(seasonNumber3));
+		assertEquals (1, seasonCaches.size());
+		assertEquals (seasonCache1, seasonCaches.get(seasonNumber1));
+		
+		// When
+		SeasonCache seasonCache2 = objectUnderTest.getCacheForSeason(seasonNumber2);
+		
+		// Then
+		seasonCaches = objectUnderTest.getSeasonCaches();
+		assertEquals (2, seasonCaches.size());
+		assertEquals (seasonCache2, seasonCaches.get(seasonNumber2));
+	}
+
+	@Test
+	public void shouldReturnExistingSeasonCacheIfItExists () {
+		// Given
+		SeasonCache seasonCache1 = objectUnderTest.getCacheForSeason(seasonNumber1);
+		
+		// When
+		SeasonCache seasonCache2 = objectUnderTest.getCacheForSeason(seasonNumber1);
+		
+		// Then
+		Map<Integer, SeasonCache> seasonCaches = objectUnderTest.getSeasonCaches();
+		assertEquals (1, seasonCaches.size());
+		assertEquals (seasonCache1, seasonCaches.get(seasonNumber1));
+		assertEquals (seasonCache1, seasonCache2);
 	}
 
 }

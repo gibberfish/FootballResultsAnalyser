@@ -77,25 +77,8 @@ public class SeasonLoaderTest {
 				
 	}
 
-	@Ignore ("THIS NEEDS FIXING!!!")
 	@Test
-	public void shouldGetDivisionsWhenLoadingSeason () {
-		// Given
-		List<Season<String>> list = new ArrayList<Season<String>> ();
-		list.add(mockSeason);
-		when(mockDao.getSeasons()).thenReturn(list);
-		objectUnderTest = new SeasonLoader(mockDao);
-		
-		// When
-		objectUnderTest.loadSeason(mockSeason);
-
-		// Then
-		// Called once for the constructor, once for the load
-		verify(mockDao,times(2)).getDivisionsForSeason(mockSeason);
-	}
-
-	@Test
-	public void shouldPopulateCurrentSeasonInTheCacheOnConstruct () {
+	public void shouldLoadSeasonFromDataInDao () {
 		// Given
 		
 		// When
@@ -105,7 +88,35 @@ public class SeasonLoaderTest {
 		
 		
 	}
+
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	@Ignore ("THIS NEEDS FIXING!!!")
+//	@Test
+//	public void shouldGetDivisionsWhenLoadingSeason () {
+//		// Given
+//		List<Season<String>> list = new ArrayList<Season<String>> ();
+//		list.add(mockSeason);
+//		when(mockDao.getSeasons()).thenReturn(list);
+//		objectUnderTest = new SeasonLoader(mockDao);
+//		
+//		// When
+//		objectUnderTest.loadSeason(mockSeason);
+//
+//		// Then
+//		// Called once for the constructor, once for the load
+//		verify(mockDao,times(2)).getDivisionsForSeason(mockSeason);
+//	}
+//
 //	@Test
 //	public void getSeasonShouldThrowExceptionIfNotInitialised() {
 //		// Given

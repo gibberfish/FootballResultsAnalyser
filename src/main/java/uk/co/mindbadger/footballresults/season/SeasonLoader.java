@@ -43,19 +43,10 @@ public class SeasonLoader {
 	 * * Store all tables in a Map keyed by division
 	 * * Store all Fixtures in a Map keyed by  
 	 */
-	private class SeasonContainer {
-		protected Map<String, DivisionContainer> divisions = new HashMap<String, DivisionContainer> ();
-	}
-	
-	private class DivisionContainer {
-		protected Map<Calendar, List<Fixture<String>>> fixtures = new HashMap<Calendar, List<Fixture<String>>> ();
-		protected Map<Calendar, Table<String,String,String>> tables = new HashMap<Calendar, Table<String,String,String>> ();
-	}
-	
-	private Map<Integer, SeasonContainer> seasons = new HashMap<Integer, SeasonContainer> ();
 	
 	private FootballResultsAnalyserDAO<String,String,String> dao;
 	private TableRowFactory<String,String,String> tableRowFactory;
+	private AnalyserCache analyserCache;
 	
 	
 	// CONSTRUCTOR
@@ -79,15 +70,15 @@ public class SeasonLoader {
 	}
 	
 	public void loadSeason(Season<String> season) {
-		SeasonContainer seasonContainer = new SeasonContainer ();
-		seasons.put(season.getSeasonNumber(), seasonContainer);
+		SeasonCache seasonCache = new SeasonCache ();
+		analyserCache.addSeasonCache(season.getSeasonNumber(), seasonCache);
 		
 		Set<SeasonDivision<String, String>> seasonDivisions = dao.getDivisionsForSeason(season);
 		
 		for (SeasonDivision<String, String> seasonDivision : seasonDivisions) {
 			
-			DivisionContainer divisionContainer = new DivisionContainer();
-			seasonContainer.divisions.put(seasonDivision.getDivision().getDivisionId(), divisionContainer);
+			DivisionCache divisionCache = new DivisionCache();
+			seasonCache.addDivisionCache(seasonDivision.getDivision().getDivisionId(), divisionCache);
 			
 			Set<SeasonDivisionTeam<String, String, String>> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
 			
@@ -98,7 +89,6 @@ public class SeasonLoader {
 			List<Fixture<String>> fixtures = dao.getFixturesForDivisionInSeason(seasonDivision);
 			
 			Calendar currentDate = seasonStartDateCalendar;
-			List<Fixture<String>> fixturesForDate = null;
 			Table<String,String,String> tableForDate = initialTable;
 			
 			// Loop through fixtures, accumulating on distinct date
@@ -107,19 +97,17 @@ public class SeasonLoader {
 				
 				if (fixtureDateHasChanged) {
 					// Save the data
-					if (tableForDate != null) divisionContainer.tables.put(currentDate, tableForDate);
-					if (fixturesForDate != null) divisionContainer.fixtures.put(currentDate, fixturesForDate);
+					if (tableForDate != null) divisionCache.addTableOnDate(currentDate, tableForDate);
 					
 					// Create new table and fixtures
 					tableForDate = new Table<String,String,String> (tableForDate);
-					fixturesForDate = new ArrayList<Fixture<String>> ();
 					
 					// Set the new current date
 					currentDate = fixture.getFixtureDate();
 				}
 
 				// Add the fixture to the list
-				fixturesForDate.add(fixture);
+				divisionCache.addFixtureOnDate(currentDate, fixture);
 				
 				// Update the table rows for the home and away teams
 				TableRow<String, String, String> previousTableRowForHomeTeam = tableForDate.getTableRowForTeam(fixture.getHomeTeam().getTeamId());
@@ -159,5 +147,13 @@ public class SeasonLoader {
 
 	public void setTableRowFactory(TableRowFactory<String,String,String> tableRowFactory) {
 		this.tableRowFactory = tableRowFactory;
+	}
+
+	public AnalyserCache getAnalyserCache() {
+		return analyserCache;
+	}
+
+	public void setAnalyserCache(AnalyserCache analyserCache) {
+		this.analyserCache = analyserCache;
 	}
 }

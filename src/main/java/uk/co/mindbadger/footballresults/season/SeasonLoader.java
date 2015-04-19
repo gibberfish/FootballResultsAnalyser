@@ -1,11 +1,7 @@
 package uk.co.mindbadger.footballresults.season;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import uk.co.mindbadger.footballresults.table.InitialTable;
@@ -13,7 +9,6 @@ import uk.co.mindbadger.footballresults.table.Table;
 import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresults.table.TableRowFactory;
 import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
-import uk.co.mindbadger.footballresultsanalyser.domain.Division;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Season;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;

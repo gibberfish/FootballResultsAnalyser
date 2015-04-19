@@ -23,16 +23,12 @@ public class SeasonCacheTest {
 	private SeasonCache objectUnderTest;
 	private String divisionId1 = "div1";
 	private String divisionId2 = "div2";
-	private String divisionId3 = "div3";
 	
 	@Mock
 	private DivisionCache mockDivisionCache1;
 	
 	@Mock
 	private DivisionCache mockDivisionCache2;
-	
-	@Mock
-	private DivisionCache mockDivisionCache3;
 
 	@Before
 	public void setup() {
@@ -52,20 +48,37 @@ public class SeasonCacheTest {
 	}
 	
 	@Test
-	public void shouldAddDivisionCache () {
+	public void shouldAddNewDivisionCacheIfOneDoesntExist () {
 		// Given
 		
 		// When
-		objectUnderTest.addDivisionCache(divisionId1, mockDivisionCache1);
-		objectUnderTest.addDivisionCache(divisionId2, mockDivisionCache2);
-		objectUnderTest.addDivisionCache(divisionId3, mockDivisionCache3);
+		DivisionCache divisionCache1 = objectUnderTest.getCacheForDivision(divisionId1);
 		
 		// Then
 		Map<String, DivisionCache> divisionCaches = objectUnderTest.getDivisionCaches();
-		assertEquals (3, divisionCaches.size());
-		assertEquals (mockDivisionCache1, divisionCaches.get(divisionId1));
-		assertEquals (mockDivisionCache2, divisionCaches.get(divisionId2));
-		assertEquals (mockDivisionCache3, divisionCaches.get(divisionId3));
+		assertEquals (1, divisionCaches.size());
+		assertEquals (divisionCache1, divisionCaches.get(divisionId1));
+		
+		// When
+		DivisionCache divisionCache2 = objectUnderTest.getCacheForDivision(divisionId2);
+		
+		// Then
+		divisionCaches = objectUnderTest.getDivisionCaches();
+		assertEquals (2, divisionCaches.size());
+		assertEquals (divisionCache2, divisionCaches.get(divisionId2));		
 	}
-
+	@Test
+	public void shouldReturnExistingSeasonCacheIfItExists () {
+		// Given
+		DivisionCache divisionCache1 = objectUnderTest.getCacheForDivision(divisionId1);
+		
+		// When
+		DivisionCache divisionCache2 = objectUnderTest.getCacheForDivision(divisionId1);
+		
+		// Then
+		Map<String, DivisionCache> divisionCaches = objectUnderTest.getDivisionCaches();
+		assertEquals (1, divisionCaches.size());
+		assertEquals (divisionCache1, divisionCaches.get(divisionId1));
+		assertEquals (divisionCache1, divisionCache2);
+	}
 }

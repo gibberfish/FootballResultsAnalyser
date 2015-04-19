@@ -76,8 +76,7 @@ public class SeasonLoader {
 		
 		for (SeasonDivision<String, String> seasonDivision : seasonDivisions) {
 			
-			DivisionCache divisionCache = new DivisionCache();
-			seasonCache.addDivisionCache(seasonDivision.getDivision().getDivisionId(), divisionCache);
+			DivisionCache divisionCache = seasonCache.getCacheForDivision(seasonDivision.getDivision().getDivisionId());
 			
 			Set<SeasonDivisionTeam<String, String, String>> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
 			

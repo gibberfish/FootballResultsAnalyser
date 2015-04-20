@@ -6,6 +6,7 @@ import java.util.Set;
 
 import uk.co.mindbadger.footballresults.table.InitialTable;
 import uk.co.mindbadger.footballresults.table.Table;
+import uk.co.mindbadger.footballresults.table.TableFactory;
 import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresults.table.TableRowFactory;
 import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
@@ -42,27 +43,10 @@ public class SeasonLoader {
 	private FootballResultsAnalyserDAO<String,String,String> dao;
 	private TableRowFactory<String,String,String> tableRowFactory;
 	private AnalyserCache analyserCache;
-	
+	private TableFactory tableFactory;
 	
 	// CONSTRUCTOR
-	public SeasonLoader (FootballResultsAnalyserDAO<String, String, String> dao) {
-		this.dao = dao;
-		
-		if (dao == null) {
-			throw new IllegalStateException("Please supply a valid DAO");
-		}
-		
-		List<Season<String>> seasons = dao.getSeasons();
-		
-		if (seasons.size() == 0) {
-			throw new IllegalStateException("There is no season data available.");
-		}
-		
-		// Assumes the seasons are in descending order
-		Season<String> latestSeason = seasons.get(0);
-		
-		loadSeason(latestSeason);		
-	}
+	public SeasonLoader () {	}
 	
 	public void loadSeason(Season<String> season) {
 		SeasonCache seasonCache = analyserCache.getCacheForSeason(season.getSeasonNumber());
@@ -76,7 +60,7 @@ public class SeasonLoader {
 			Set<SeasonDivisionTeam<String, String, String>> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
 			
 			// Create initial table from the teams
-			Table<String,String,String> initialTable = new InitialTable<>(seasonDivision, seasonDivisionTeams);
+			Table<String,String,String> initialTable = tableFactory.createInitialTable(seasonDivision, seasonDivisionTeams);
 			Calendar seasonStartDateCalendar = createInitialTableDate(season.getSeasonNumber());
 			
 			List<Fixture<String>> fixtures = dao.getFixturesForDivisionInSeason(seasonDivision);
@@ -93,7 +77,7 @@ public class SeasonLoader {
 					if (tableForDate != null) divisionCache.addTableOnDate(currentDate, tableForDate);
 					
 					// Create new table and fixtures
-					tableForDate = new Table<String,String,String> (tableForDate);
+					tableForDate = tableFactory.createTableFromPreviousTable(tableForDate);
 					
 					// Set the new current date
 					currentDate = fixture.getFixtureDate();
@@ -148,5 +132,13 @@ public class SeasonLoader {
 
 	public void setAnalyserCache(AnalyserCache analyserCache) {
 		this.analyserCache = analyserCache;
+	}
+
+	public TableFactory getTableFactory() {
+		return tableFactory;
+	}
+
+	public void setTableFactory(TableFactory tableFactory) {
+		this.tableFactory = tableFactory;
 	}
 }

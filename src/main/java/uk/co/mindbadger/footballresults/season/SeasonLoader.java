@@ -14,6 +14,7 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Season;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
+import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class SeasonLoader {
 	/* The SeasonCache can hold multiple seasons - When the object loads, it will always load the latest season
@@ -48,6 +49,17 @@ public class SeasonLoader {
 	// CONSTRUCTOR
 	public SeasonLoader () {	}
 	
+	
+	
+	/*
+	 *  Too complicated to test - too many dependencies
+	 *  
+	 *  Consider putting everything inside the first for loop inside a "SeasonCacheDivisionLoader"
+	 *  -- this will only be concerned with creating the initial date and tables and calling...
+	 *  
+	 *  Consider putting everything inside the second for loop inside a "SeasonCacheFixtureAndTableLoader"
+	 *  -- this will only be concerned with the effect a single transaction has on the cache
+	 */
 	public void loadSeason(Season<String> season) {
 		SeasonCache seasonCache = analyserCache.getCacheForSeason(season.getSeasonNumber());
 		
@@ -57,45 +69,40 @@ public class SeasonLoader {
 			
 			DivisionCache divisionCache = seasonCache.getCacheForDivision(seasonDivision.getDivision().getDivisionId());
 			
-			Set<SeasonDivisionTeam<String, String, String>> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
-			
-			// Create initial table from the teams
-			Table<String,String,String> initialTable = tableFactory.createInitialTable(seasonDivision, seasonDivisionTeams);
-			Calendar seasonStartDateCalendar = createInitialTableDate(season.getSeasonNumber());
-			
 			List<Fixture<String>> fixtures = dao.getFixturesForDivisionInSeason(seasonDivision);
 			
-			Calendar currentDate = seasonStartDateCalendar;
-			Table<String,String,String> tableForDate = initialTable;
+			Calendar currentDate = createInitialTableDate(season.getSeasonNumber());
+			Table<String,String,String> tableForDate = createInitialTable(seasonDivision);
 			
-			// Loop through fixtures, accumulating on distinct date
 			for (Fixture<String> fixture : fixtures) {
-				boolean fixtureDateHasChanged = fixture.getFixtureDate() != currentDate;
-				
-				if (fixtureDateHasChanged) {
-					// Save the data
+
+				if (fixture.getFixtureDate() != currentDate) {
 					if (tableForDate != null) divisionCache.addTableOnDate(currentDate, tableForDate);
-					
-					// Create new table and fixtures
 					tableForDate = tableFactory.createTableFromPreviousTable(tableForDate);
 					
-					// Set the new current date
 					currentDate = fixture.getFixtureDate();
 				}
 
-				// Add the fixture to the list
 				divisionCache.addFixtureOnDate(currentDate, fixture);
 				
-				// Update the table rows for the home and away teams
-				TableRow<String, String, String> previousTableRowForHomeTeam = tableForDate.getTableRowForTeam(fixture.getHomeTeam().getTeamId());
-				TableRow<String, String, String> homeTeamTableRow = tableRowFactory.createTableRowFromFixture(fixture.getHomeTeam(), tableForDate, previousTableRowForHomeTeam , fixture);
-				tableForDate.addRow(homeTeamTableRow);
-				
-				TableRow<String, String, String> previousTableRowForAwayTeam = tableForDate.getTableRowForTeam(fixture.getAwayTeam().getTeamId());
-				TableRow<String, String, String> awayTeamTableRow = tableRowFactory.createTableRowFromFixture(fixture.getAwayTeam(), tableForDate, previousTableRowForAwayTeam, fixture);
-				tableForDate.addRow(awayTeamTableRow);
+				tableForDate.addRow(createTableRow(fixture.getHomeTeam(), tableForDate, fixture));
+				tableForDate.addRow(createTableRow(fixture.getAwayTeam(), tableForDate, fixture));
 			}
+			
+			// Must save the last date
+			divisionCache.addTableOnDate(currentDate, tableForDate);
 		}
+	}
+
+	private TableRow<String, String, String> createTableRow (Team<String> team, Table<String,String,String> table, Fixture<String> fixture) {
+		TableRow<String, String, String> previousTableRow = table.getTableRowForTeam(team.getTeamId());
+		return  tableRowFactory.createTableRowFromFixture(team, table, previousTableRow , fixture);
+	}
+	
+	private Table<String, String, String> createInitialTable(SeasonDivision<String, String> seasonDivision) {
+		Set<SeasonDivisionTeam<String, String, String>> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
+		Table<String,String,String> initialTable = tableFactory.createInitialTable(seasonDivision, seasonDivisionTeams);
+		return initialTable;
 	}
 	
 	private Calendar createInitialTableDate (Integer seasonNumber) {

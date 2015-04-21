@@ -1,10 +1,7 @@
 package uk.co.mindbadger.footballresults.season;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,6 +24,7 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Season;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
+import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class SeasonLoaderTest {
 	
@@ -164,6 +162,24 @@ public class SeasonLoaderTest {
 	@Mock
 	private Table<String, String, String> mockTableDiv2Date8;
 
+	@Mock
+	private Team<String> mockTeamA;
+
+	@Mock
+	private Team<String> mockTeamB;
+
+	@Mock
+	private Team<String> mockTeamC;
+
+	@Mock
+	private Team<String> mockTeamD;
+
+	@Mock
+	private Team<String> mockTeamE;
+
+	@Mock
+	private Team<String> mockTeamF;
+
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
@@ -173,28 +189,31 @@ public class SeasonLoaderTest {
 		objectUnderTest.setDao(mockDao);
 		objectUnderTest.setTableFactory(mockTableFactory);
 		objectUnderTest.setTableRowFactory(mockTableRowFactory);
-	}
-
-	@Test
-	public void shouldLoadSeasonFromDataInDao () {
-		/*
-		 * Scenario:
-		 * * 2 divisions
-		 * * 3 teams in each division
-		 * 
-		 * Div 1: 6 fixtures AB, AC, BA, BC, CA, CB
-		 * Div 2: 6 fixtures DE, DF, ED, EF, FD, FE
-		 */
-		// Given
-		when (mockSeason2015.getSeasonNumber()).thenReturn(2015);
 		
+		when (mockSeason2015.getSeasonNumber()).thenReturn(2015);
+
 		when (mockSeasonDivision1.getDivision()).thenReturn(mockDivision1);
 		when (mockSeasonDivision2.getDivision()).thenReturn(mockDivision2);
-		
+
 		when (mockDivision1.getDivisionId()).thenReturn("DIV1");
 		when (mockDivision2.getDivisionId()).thenReturn("DIV2");
-
 		
+		when (mockTeamA.getTeamId()).thenReturn("TEAMA");
+		when (mockTeamB.getTeamId()).thenReturn("TEAMB");
+		when (mockTeamC.getTeamId()).thenReturn("TEAMC");
+		when (mockTeamD.getTeamId()).thenReturn("TEAMD");
+		when (mockTeamE.getTeamId()).thenReturn("TEAME");
+		when (mockTeamF.getTeamId()).thenReturn("TEAMF");
+	}
+
+	
+	/*
+	 * NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!
+	 */
+	
+	@Test
+	public void shouldLoadSeasonFromDataInDao () {
+		// Given
 		List<Fixture<String>> fixturesForDivision1 = new ArrayList<Fixture<String>> ();
 		when (mockDao.getFixturesForDivisionInSeason(mockSeasonDivision1)).thenReturn(fixturesForDivision1);
 		
@@ -202,63 +221,106 @@ public class SeasonLoaderTest {
 		when (mockDao.getFixturesForDivisionInSeason(mockSeasonDivision2)).thenReturn(fixturesForDivision2);
 
 		
+		//when(mockTableRowFactory.createTableRowFromFixture(eq(mockTeamA), any(), any(), any())).thenReturn(mockTableRowTeamADate1);
+		
+		// **** DATE 1 ****
 		Calendar fixtureDate1 = Calendar.getInstance();
 		fixtureDate1.set(Calendar.DAY_OF_MONTH, 1);
-		when(mockFixtureAvsB.getFixtureDate()).thenReturn(fixtureDate1);
-		when(mockFixtureDvsE.getFixtureDate()).thenReturn(fixtureDate1);
-		fixturesForDivision1.add(mockFixtureAvsB);
-		fixturesForDivision2.add(mockFixtureDvsE);
-		when(mockTableFactory.createTableFromPreviousTable(mockInitialTableDiv1)).thenReturn(mockTableDiv1Date1);
-		when(mockTableFactory.createTableFromPreviousTable(mockInitialTableDiv2)).thenReturn(mockTableDiv2Date1);
 
+		when(mockFixtureAvsB.getFixtureDate()).thenReturn(fixtureDate1);
+		when(mockFixtureAvsB.getHomeTeam()).thenReturn(mockTeamA);
+		when(mockFixtureAvsB.getAwayTeam()).thenReturn(mockTeamB);
+//		when(mockTableDiv1Date1.getTableRowForTeam("TEAMA")).thenReturn(mockInitialTableRowTeamA);
+//		when(mockTableRowFactory.createTableRowFromFixture(mockTeamA, mockTableDiv1Date1, mockInitialTableRowTeamA, mockFixtureAvsB)).thenReturn(mockTableRowTeamADate1);
+//		when(mockTableDiv1Date1.getTableRowForTeam("TEAMB")).thenReturn(mockInitialTableRowTeamB);
+//		when(mockTableRowFactory.createTableRowFromFixture(mockTeamA, mockTableDiv1Date1, mockInitialTableRowTeamB, mockFixtureAvsB)).thenReturn(mockTableRowTeamBDate1);
+		fixturesForDivision1.add(mockFixtureAvsB);
+		when(mockTableFactory.createTableFromPreviousTable(mockInitialTableDiv1)).thenReturn(mockTableDiv1Date1);
+
+		when(mockFixtureDvsE.getFixtureDate()).thenReturn(fixtureDate1);
+		when(mockFixtureDvsE.getHomeTeam()).thenReturn(mockTeamD);
+		when(mockFixtureDvsE.getAwayTeam()).thenReturn(mockTeamE);
+		fixturesForDivision2.add(mockFixtureDvsE);
+		when(mockTableFactory.createTableFromPreviousTable(mockInitialTableDiv2)).thenReturn(mockTableDiv2Date1);
+		
+		// **** DATE 2 ****
 		Calendar fixtureDate2 = Calendar.getInstance();
 		fixtureDate2.set(Calendar.DAY_OF_MONTH, 2);
+
 		when(mockFixtureAvsC.getFixtureDate()).thenReturn(fixtureDate2);
-		when(mockFixtureDvsF.getFixtureDate()).thenReturn(fixtureDate2);
+		when(mockFixtureAvsC.getHomeTeam()).thenReturn(mockTeamA);
+		when(mockFixtureAvsC.getAwayTeam()).thenReturn(mockTeamC);
 		fixturesForDivision1.add(mockFixtureAvsC);
-		fixturesForDivision2.add(mockFixtureDvsF);
 		when(mockTableFactory.createTableFromPreviousTable(mockTableDiv1Date1)).thenReturn(mockTableDiv1Date2);
+		
+		when(mockFixtureDvsF.getFixtureDate()).thenReturn(fixtureDate2);
+		when(mockFixtureDvsF.getHomeTeam()).thenReturn(mockTeamD);
+		when(mockFixtureDvsF.getAwayTeam()).thenReturn(mockTeamF);
+		fixturesForDivision2.add(mockFixtureDvsF);
 		when(mockTableFactory.createTableFromPreviousTable(mockTableDiv2Date1)).thenReturn(mockTableDiv2Date2);
 
+
+		// **** DATE 3 ****
 		Calendar fixtureDate3 = Calendar.getInstance();
 		fixtureDate3.set(Calendar.DAY_OF_MONTH, 3);
 		when(mockFixtureBvsA.getFixtureDate()).thenReturn(fixtureDate3);
+		when(mockFixtureBvsA.getHomeTeam()).thenReturn(mockTeamB);
+		when(mockFixtureBvsA.getAwayTeam()).thenReturn(mockTeamA);
 		when(mockFixtureEvsD.getFixtureDate()).thenReturn(fixtureDate3);
+		when(mockFixtureEvsD.getHomeTeam()).thenReturn(mockTeamE);
+		when(mockFixtureEvsD.getAwayTeam()).thenReturn(mockTeamD);
 		fixturesForDivision1.add(mockFixtureBvsA);
 		fixturesForDivision2.add(mockFixtureEvsD);
 		when(mockTableFactory.createTableFromPreviousTable(mockTableDiv1Date2)).thenReturn(mockTableDiv1Date3);
 		when(mockTableFactory.createTableFromPreviousTable(mockTableDiv2Date2)).thenReturn(mockTableDiv2Date3);
 
+		// **** DATE 4 ****
 		Calendar fixtureDate4 = Calendar.getInstance();
 		fixtureDate4.set(Calendar.DAY_OF_MONTH, 4);
 		when(mockFixtureBvsC.getFixtureDate()).thenReturn(fixtureDate4);
+		when(mockFixtureBvsC.getHomeTeam()).thenReturn(mockTeamB);
+		when(mockFixtureBvsC.getAwayTeam()).thenReturn(mockTeamC);
 		fixturesForDivision1.add(mockFixtureBvsC);
 		when(mockTableFactory.createTableFromPreviousTable(mockTableDiv1Date3)).thenReturn(mockTableDiv1Date4);
 		
+		// **** DATE 5 ****
 		Calendar fixtureDate5 = Calendar.getInstance();
 		fixtureDate5.set(Calendar.DAY_OF_MONTH, 5);
 		when(mockFixtureCvsA.getFixtureDate()).thenReturn(fixtureDate5);
+		when(mockFixtureCvsA.getHomeTeam()).thenReturn(mockTeamC);
+		when(mockFixtureCvsA.getAwayTeam()).thenReturn(mockTeamA);
 		fixturesForDivision1.add(mockFixtureCvsA);
 		when(mockTableFactory.createTableFromPreviousTable(mockTableDiv1Date4)).thenReturn(mockTableDiv1Date5);
 
+		// **** DATE 6 ****
 		Calendar fixtureDate6 = Calendar.getInstance();
 		fixtureDate6.set(Calendar.DAY_OF_MONTH, 6);
 		when(mockFixtureCvsB.getFixtureDate()).thenReturn(fixtureDate6);
+		when(mockFixtureCvsB.getHomeTeam()).thenReturn(mockTeamC);
+		when(mockFixtureCvsB.getAwayTeam()).thenReturn(mockTeamB);
 		when(mockFixtureFvsD.getFixtureDate()).thenReturn(fixtureDate6);
+		when(mockFixtureFvsD.getHomeTeam()).thenReturn(mockTeamF);
+		when(mockFixtureFvsD.getAwayTeam()).thenReturn(mockTeamD);
 		fixturesForDivision1.add(mockFixtureCvsB);
 		fixturesForDivision2.add(mockFixtureFvsD);
 		when(mockTableFactory.createTableFromPreviousTable(mockTableDiv1Date5)).thenReturn(mockTableDiv1Date6);
 		when(mockTableFactory.createTableFromPreviousTable(mockTableDiv2Date3)).thenReturn(mockTableDiv2Date6);
 
+		// **** DATE 7 ****
 		Calendar fixtureDate7 = Calendar.getInstance();
 		fixtureDate7.set(Calendar.DAY_OF_MONTH, 7);
 		when(mockFixtureFvsE.getFixtureDate()).thenReturn(fixtureDate7);
+		when(mockFixtureFvsE.getHomeTeam()).thenReturn(mockTeamF);
+		when(mockFixtureFvsE.getAwayTeam()).thenReturn(mockTeamE);
 		fixturesForDivision2.add(mockFixtureFvsE);
 		when(mockTableFactory.createTableFromPreviousTable(mockTableDiv2Date6)).thenReturn(mockTableDiv2Date7);
 
+		// **** DATE 8 ****
 		Calendar fixtureDate8 = Calendar.getInstance();
 		fixtureDate8.set(Calendar.DAY_OF_MONTH, 8);
 		when(mockFixtureEvsF.getFixtureDate()).thenReturn(fixtureDate8);
+		when(mockFixtureEvsF.getHomeTeam()).thenReturn(mockTeamE);
+		when(mockFixtureEvsF.getAwayTeam()).thenReturn(mockTeamF);
 		fixturesForDivision2.add(mockFixtureEvsF);
 		when(mockTableFactory.createTableFromPreviousTable(mockTableDiv2Date7)).thenReturn(mockTableDiv2Date8);
 		
@@ -289,21 +351,62 @@ public class SeasonLoaderTest {
 		when(mockTableFactory.createInitialTable(mockSeasonDivision2, teamsForDivision2)).thenReturn(mockInitialTableDiv2);
 		
 		
+		
 		// When
 		objectUnderTest.loadSeason(mockSeason2015);
 		
 		// Then
+		Calendar seasonStartDateCalendar = Calendar.getInstance();
+		seasonStartDateCalendar.set(Calendar.DAY_OF_MONTH, 0);
+		seasonStartDateCalendar.set(Calendar.MONTH, 5);
+		seasonStartDateCalendar.set(Calendar.YEAR, 2015);
+		
 		verify(mockAnalyserCache, times(1)).getCacheForSeason(2015);
-		verify(mockDao, times(1)).getDivisionsForSeason(mockSeason2015);
 		
 		verify(mockSeasonCache2015,times(1)).getCacheForDivision("DIV1");
 		verify(mockSeasonCache2015,times(1)).getCacheForDivision("DIV2");
-		
+
+		verify(mockDao, times(1)).getDivisionsForSeason(mockSeason2015);
 		verify(mockDao, times(1)).getTeamsForDivisionInSeason(mockSeasonDivision1);
 		verify(mockDao, times(1)).getTeamsForDivisionInSeason(mockSeasonDivision2);
 		
 		verify(mockTableFactory, times(1)).createInitialTable(mockSeasonDivision1, teamsForDivision1);
 		verify(mockTableFactory, times(1)).createInitialTable(mockSeasonDivision2, teamsForDivision2);
+		
+		verify(mockTableFactory, times(1)).createTableFromPreviousTable(mockInitialTableDiv1);
+		verify(mockTableFactory, times(1)).createTableFromPreviousTable(mockTableDiv1Date1);
+		verify(mockTableFactory, times(1)).createTableFromPreviousTable(mockTableDiv1Date2);
+		verify(mockTableFactory, times(1)).createTableFromPreviousTable(mockTableDiv1Date3);
+		verify(mockTableFactory, times(1)).createTableFromPreviousTable(mockTableDiv1Date4);
+		verify(mockTableFactory, times(1)).createTableFromPreviousTable(mockTableDiv1Date5);
+		verify(mockTableFactory, never()).createTableFromPreviousTable(mockTableDiv1Date6);
+
+		verify(mockTableFactory, times(1)).createTableFromPreviousTable(mockInitialTableDiv2);
+		verify(mockTableFactory, times(1)).createTableFromPreviousTable(mockTableDiv2Date1);
+		verify(mockTableFactory, times(1)).createTableFromPreviousTable(mockTableDiv2Date2);
+		verify(mockTableFactory, times(1)).createTableFromPreviousTable(mockTableDiv2Date3);
+		verify(mockTableFactory, times(1)).createTableFromPreviousTable(mockTableDiv2Date6);
+		verify(mockTableFactory, times(1)).createTableFromPreviousTable(mockTableDiv2Date7);
+		verify(mockTableFactory, never()).createTableFromPreviousTable(mockTableDiv2Date8);
+
+		verify(mockDivisionCache1).addTableOnDate((Calendar)any(), eq(mockInitialTableDiv1));
+		verify(mockDivisionCache1).addTableOnDate(fixtureDate1, mockTableDiv1Date1);
+		verify(mockDivisionCache1).addTableOnDate(fixtureDate2, mockTableDiv1Date2);
+		verify(mockDivisionCache1).addTableOnDate(fixtureDate3, mockTableDiv1Date3);
+		verify(mockDivisionCache1).addTableOnDate(fixtureDate4, mockTableDiv1Date4);
+		verify(mockDivisionCache1).addTableOnDate(fixtureDate5, mockTableDiv1Date5);
+		verify(mockDivisionCache1).addTableOnDate(fixtureDate6, mockTableDiv1Date6);
+		
+		verify(mockDivisionCache2).addTableOnDate((Calendar)any(), eq(mockInitialTableDiv2));
+		verify(mockDivisionCache2).addTableOnDate(fixtureDate1, mockTableDiv2Date1);
+		verify(mockDivisionCache2).addTableOnDate(fixtureDate2, mockTableDiv2Date2);
+		verify(mockDivisionCache2).addTableOnDate(fixtureDate3, mockTableDiv2Date3);
+		verify(mockDivisionCache2).addTableOnDate(fixtureDate6, mockTableDiv2Date6);
+		verify(mockDivisionCache2).addTableOnDate(fixtureDate7, mockTableDiv2Date7);
+		verify(mockDivisionCache2).addTableOnDate(fixtureDate8, mockTableDiv2Date8);
+
+		//verify(mockInitialTableDiv1.addRow(tableRow);)
+		
 	}
 
 	

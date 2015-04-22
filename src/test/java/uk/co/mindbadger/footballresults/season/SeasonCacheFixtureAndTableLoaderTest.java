@@ -26,9 +26,9 @@ import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-public class SeasonLoaderTest {
+public class SeasonCacheFixtureAndTableLoaderTest {
 	
-	private SeasonLoader objectUnderTest;
+	private SeasonCacheLoader objectUnderTest;
 	
 	@Mock
 	private FootballResultsAnalyserDAO<String,String,String> mockDao;
@@ -184,7 +184,7 @@ public class SeasonLoaderTest {
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		
-		objectUnderTest = new SeasonLoader();
+		objectUnderTest = new SeasonCacheLoader();
 		objectUnderTest.setAnalyserCache(mockAnalyserCache);
 		objectUnderTest.setDao(mockDao);
 		objectUnderTest.setTableFactory(mockTableFactory);

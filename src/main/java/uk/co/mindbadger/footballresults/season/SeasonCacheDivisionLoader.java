@@ -1,5 +1,7 @@
 package uk.co.mindbadger.footballresults.season;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
@@ -34,12 +36,16 @@ public class SeasonCacheDivisionLoader {
 		divisionCache.addTableOnDate(currentDate, tableForDate);
 	}
 	
-	private Calendar createInitialTableDate (Integer seasonNumber) {
-		Calendar seasonStartDateCalendar = Calendar.getInstance();
-		seasonStartDateCalendar.set(Calendar.DAY_OF_MONTH, 0);
-		seasonStartDateCalendar.set(Calendar.MONTH, 5);
-		seasonStartDateCalendar.set(Calendar.YEAR, seasonNumber);
-		return seasonStartDateCalendar;
+	protected Calendar createInitialTableDate (Integer seasonNumber) {
+		try {
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			cal.setTime(sdf.parse(seasonNumber+"-05-01 00:00:00"));
+			return cal;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new RuntimeException (e);
+		}
 	}
 	
 	private Table<String, String, String> createInitialTable(SeasonDivision<String, String> seasonDivision) {

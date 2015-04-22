@@ -21,10 +21,18 @@ public class SeasonCacheLoader {
 		}
 	}
 	
-	public Season<String> getCurrentSeason() {
-		return null;
-	}
+//	public Season<String> getCurrentSeason() {
+//		return null;
+//	}
 
+	public FootballResultsAnalyserDAO<String, String, String> getDao() {
+		return dao;
+	}
+	
+	public void setDao(FootballResultsAnalyserDAO<String, String, String> dao) {
+		this.dao = dao;
+	}
+	
 	public AnalyserCache getAnalyserCache() {
 		return analyserCache;
 	}

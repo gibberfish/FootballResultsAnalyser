@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import uk.co.mindbadger.footballresults.table.Table;
 import uk.co.mindbadger.footballresults.table.TableFactory;
 import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
@@ -14,11 +16,15 @@ import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
 
 public class SeasonCacheDivisionLoader {
+	Logger logger = Logger.getLogger(SeasonCacheDivisionLoader.class);
+	
 	private SeasonCacheFixtureAndTableLoader seasonCacheFixtureAndTableLoader;
 	private TableFactory tableFactory;
 	private FootballResultsAnalyserDAO<String,String,String> dao;
 	
 	public void loadDivision (SeasonDivision<String, String> seasonDivision, SeasonCache seasonCache) {
+		logger.info("Load Division Cache for " + seasonDivision.getDivision().getDivisionName());
+		
 		DivisionCache divisionCache = seasonCache.getCacheForDivision(seasonDivision.getDivision().getDivisionId());
 		
 		// Assumes fixtures come back in ascending date order

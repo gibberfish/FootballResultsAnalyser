@@ -2,6 +2,8 @@ package uk.co.mindbadger.footballresults.season;
 
 import java.util.Calendar;
 
+import org.apache.log4j.Logger;
+
 import uk.co.mindbadger.footballresults.table.Table;
 import uk.co.mindbadger.footballresults.table.TableFactory;
 import uk.co.mindbadger.footballresults.table.TableRow;
@@ -10,11 +12,13 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class SeasonCacheFixtureAndTableLoader {
+	Logger logger = Logger.getLogger(SeasonCacheFixtureAndTableLoader.class);
 	
 	private TableFactory tableFactory;
 	private TableRowFactory<String,String,String> tableRowFactory;
 	
 	public Table<String,String,String> loadFixtureAndTable (Fixture<String> fixture, Calendar currentDate, DivisionCache divisionCache, Table<String,String,String> tableForDate) {
+		logger.info("Load Fixture and Table Cache for " + fixture.toString());
 		
 		Table<String,String,String> currentTable = tableForDate;
 		

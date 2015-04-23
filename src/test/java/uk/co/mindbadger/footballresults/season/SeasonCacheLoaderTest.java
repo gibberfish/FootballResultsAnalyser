@@ -1,10 +1,10 @@
 package uk.co.mindbadger.footballresults.season;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Before;
@@ -30,9 +30,6 @@ public class SeasonCacheLoaderTest {
 	private AnalyserCache mockAnalyserCache;
 
 	@Mock
-	private Season<String> mockSeason2015;
-	
-	@Mock
 	private SeasonCache mockSeasonCache2015;
 
 	@Mock
@@ -41,12 +38,14 @@ public class SeasonCacheLoaderTest {
 	@Mock
 	private SeasonDivision<String, String> mockSeasonDivision2;
 
-	
-	
-	
-	
-	
+	@Mock
+	private Season<String> mockSeason2015;
 
+	@Mock
+	private Season<String> mockSeason2014;
+
+	@Mock
+	private Season<String> mockSeason2013;
 
 	@Before
 	public void setup() {
@@ -58,6 +57,8 @@ public class SeasonCacheLoaderTest {
 		objectUnderTest.setSeasonCacheDivisionLoader(mockSeasonCacheDivisionLoader);
 		
 		when (mockSeason2015.getSeasonNumber()).thenReturn(2015);
+		when (mockSeason2014.getSeasonNumber()).thenReturn(2014);
+		when (mockSeason2013.getSeasonNumber()).thenReturn(2013);
 		when(mockAnalyserCache.getCacheForSeason(2015)).thenReturn(mockSeasonCache2015);
 	}
 	
@@ -77,5 +78,26 @@ public class SeasonCacheLoaderTest {
 		verify(mockDao, times(1)).getDivisionsForSeason(mockSeason2015);
 		verify(mockSeasonCacheDivisionLoader,times(1)).loadDivision(mockSeasonDivision1, mockSeasonCache2015);
 		verify(mockSeasonCacheDivisionLoader,times(1)).loadDivision(mockSeasonDivision2, mockSeasonCache2015);
+	}
+	
+	@Test
+	public void shouldGetCurrentSeason () {
+		// Given
+		List<Season<String>> seasons = new ArrayList<Season<String>> ();
+		seasons.add(mockSeason2015);
+		seasons.add(mockSeason2014);
+		seasons.add(mockSeason2013);
+		when (mockDao.getSeasons()).thenReturn(seasons);
+		
+		// When
+		objectUnderTest.loadCurrentSeason ();
+		
+		// Then
+		verify(mockDao).getSeasons();
+		verify(mockAnalyserCache, times(1)).getCacheForSeason(2015);
+		verify(mockDao, times(1)).getDivisionsForSeason(mockSeason2015);
+
+		verify(mockAnalyserCache, never()).getCacheForSeason(2014);
+		verify(mockAnalyserCache, never()).getCacheForSeason(2013);
 	}
 }

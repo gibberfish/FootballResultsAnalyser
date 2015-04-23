@@ -47,8 +47,8 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
  		<property name="locations" value="file:///C:/Mark/appConfig/mongo.properties"/>
 	</bean>
   
-  <bean id="domainObjectFactory" class="uk.co.mindbadger.footballresultsanalyser.domain.DomainObjectFactoryImpl">
-  </bean>
+	<bean id="domainObjectFactory" class="uk.co.mindbadger.footballresultsanalyser.domain.DomainObjectFactoryImpl">
+	</bean>
 
 	<bean id="mongoClient" class="com.mongodb.MongoClient">
 		<constructor-arg value="${mongoHost}"/>
@@ -59,11 +59,57 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="dao" ref="dao"/>
 	</bean>
 
-  <bean id="dao" class="uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserMongoDAO">
+	<bean id="dao" class="uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserMongoDAO">
       <property name="domainObjectFactory" ref="domainObjectFactory"/>
       <property name="mongoClient" ref="mongoClient" />
       <property name="dbName" value="${mongoDb}" />
       <property name="mongoMapper" ref="mongoMapper"/>
-  </bean>
+	</bean>
   
+	<bean id="analyserCache" class="uk.co.mindbadger.footballresults.season.AnalyserCache">
+	</bean>
+
+	<bean id="calculationMapFactory" class="uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory">
+		<property name="rawCalculationClassMap">
+			<props>
+				<prop key="goalsScored">uk.co.mindbadger.footballresults.table.calculation.GoalsScoredCalculation</prop>
+				<prop key="goalsConceded">uk.co.mindbadger.footballresults.table.calculation.GoalsConcededCalculation</prop>
+				<prop key="gamesDrawn">uk.co.mindbadger.footballresults.table.calculation.GamesDrawnCalculation</prop>
+				<prop key="gamesWon">uk.co.mindbadger.footballresults.table.calculation.GamesWonCalculation</prop>
+				<prop key="gamesLost">uk.co.mindbadger.footballresults.table.calculation.GamesLostCalculation</prop>
+				<prop key="points">uk.co.mindbadger.footballresults.table.calculation.PointsCalculation</prop>
+			</props>
+		</property>
+		<property name="derivedCalculationClassMap">
+			<props>
+				<prop key="goalDifference">uk.co.mindbadger.footballresults.table.calculation.GoalDifferenceCalculation2</prop>
+				<prop key="gamesPlayed">uk.co.mindbadger.footballresults.table.calculation.GamesPlayedCalculation2</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="tableFactory" class="uk.co.mindbadger.footballresults.table.TableFactory">
+	</bean>
+
+	<bean id="tableRowFactory" class="uk.co.mindbadger.footballresults.table.TableRowFactory">
+		<constructor-arg ref="calculationMapFactory"/>
+	</bean>
+	
+	<bean id="seasonCacheFixtureAndTableLoader" class="uk.co.mindbadger.footballresults.season.SeasonCacheFixtureAndTableLoader">
+		<property name="tableFactory" ref="tableFactory"/>
+		<property name="tableRowFactory" ref="tableRowFactory"/>
+	</bean>
+	
+	<bean id="seasonCacheDivisionLoader" class="uk.co.mindbadger.footballresults.season.SeasonCacheDivisionLoader">
+		<property name="tableFactory" ref="tableFactory"/>
+		<property name="dao" ref="dao"/>
+		<property name="seasonCacheFixtureAndTableLoader" ref="seasonCacheFixtureAndTableLoader"/>
+	</bean>
+	
+	<bean id="seasonCacheLoader" class="uk.co.mindbadger.footballresults.season.SeasonCacheLoader">
+		<property name="dao" ref="dao"/>
+		<property name="analyserCache" ref="analyserCache"/>
+		<property name="seasonCacheDivisionLoader" ref="seasonCacheDivisionLoader"/>
+	</bean>
+	
 </beans>

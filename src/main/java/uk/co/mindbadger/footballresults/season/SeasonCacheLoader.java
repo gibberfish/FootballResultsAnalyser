@@ -31,7 +31,11 @@ public class SeasonCacheLoader {
 	
 	@PostConstruct
 	public void loadCurrentSeason() {
+		logger.info("Request to Load Season Cache for current season");
+		
 		List<Season<String>> seasons = dao.getSeasons();
+		logger.debug("...Found " + seasons.size() + " seasons");
+		
 		// Assumes the seasons are sorted in descending order
 		loadSeason(seasons.get(0));
 	}

@@ -6,16 +6,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import uk.co.mindbadger.footballresults.table.Table;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 
 public class DivisionCache {
+	Logger logger = Logger.getLogger(DivisionCache.class);
+	
 	private Map<Calendar, List<Fixture<String>>> fixtures = new HashMap<Calendar, List<Fixture<String>>> ();
 	private Map<Calendar, Table<String,String,String>> tables = new HashMap<Calendar, Table<String,String,String>> ();
 
 	public void addFixtureOnDate (Calendar date, Fixture<String> fixture) {
 		List<Fixture<String>> fixturesForDate = fixtures.get(date);
 		if (fixturesForDate == null) {
+			logger.info("Creating new fixture list in division cache for date " + date);
 			fixturesForDate = new ArrayList<Fixture<String>> ();
 			fixtures.put(date, fixturesForDate);
 		}

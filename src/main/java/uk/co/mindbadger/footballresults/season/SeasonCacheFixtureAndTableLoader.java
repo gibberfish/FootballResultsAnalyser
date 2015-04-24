@@ -23,6 +23,7 @@ public class SeasonCacheFixtureAndTableLoader {
 		Table<String,String,String> currentTable = tableForDate;
 		
 		if (fixture.getFixtureDate() != currentDate) {
+			logger.debug("... The fixture date has changed from " + currentDate + " to " + fixture.getFixtureDate());
 			if (tableForDate != null) divisionCache.addTableOnDate(currentDate, tableForDate);
 			currentTable = tableFactory.createTableFromPreviousTable(tableForDate);
 		}
@@ -36,7 +37,6 @@ public class SeasonCacheFixtureAndTableLoader {
 	}
 	
 	private TableRow<String, String, String> createTableRow (Team<String> team, Table<String,String,String> table, Fixture<String> fixture) {
-		System.out.println("team: " + team.getTeamId());
 		TableRow<String, String, String> previousTableRow = table.getTableRowForTeam(team.getTeamId());
 		return  tableRowFactory.createTableRowFromFixture(team, table, previousTableRow , fixture);
 	}

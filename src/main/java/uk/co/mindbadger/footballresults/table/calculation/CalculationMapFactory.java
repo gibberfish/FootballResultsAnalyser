@@ -5,11 +5,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class CalculationMapFactory<K,L,M> {
+	Logger logger = Logger.getLogger(CalculationMapFactory.class);
 	
 	private Map<String, String> rawCalculationClassMap;
 	private Map<String, String> derivedCalculationClassMap;
@@ -17,10 +20,14 @@ public class CalculationMapFactory<K,L,M> {
 	public Map<String, Calculation> createCalculations (Team<K> team, TableRow<K,L,M> previousTableRow, Fixture<K> fixture)  {
 		Map<String, Calculation> calculationMap = new HashMap<String, Calculation> ();
 		
+		logger.debug("createCalculations for team " + team.getTeamId() + " and fixture " + fixture.toString());
+		
 		// Loop through each value in the class map
 		for (Map.Entry<String, String> entry : rawCalculationClassMap.entrySet()) {
 			String attributeKey = entry.getKey();
 			String calculationClass = entry.getValue();
+	
+			logger.debug("Adding raw calculation for " + attributeKey);
 			
 			Class<?> clazz;
 			try {
@@ -57,6 +64,8 @@ public class CalculationMapFactory<K,L,M> {
 		for (Map.Entry<String, String> entry : derivedCalculationClassMap.entrySet()) {
 			String attributeKey = entry.getKey();
 			String calculationClass = entry.getValue();
+			
+			logger.debug("Adding derived calculation for " + attributeKey);
 			try {
 				Class<?> clazz = Class.forName(calculationClass);
 				Constructor<?> constructor = clazz.getConstructor(Map.class);

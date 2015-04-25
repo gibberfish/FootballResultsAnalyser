@@ -13,10 +13,10 @@ public class SeasonCache {
 	public DivisionCache getCacheForDivision (String divisionId) {
 		DivisionCache existing = divisions.get(divisionId);
 		if (existing != null) {
-			logger.info("Getting existing cache for division " + divisionId);
+			logger.info("Getting existing cache for division ID " + divisionId);
 			return existing;
 		} else {
-			logger.info("Creating new cache for division " + divisionId);
+			logger.info("Creating new cache for division ID " + divisionId);
 			DivisionCache newCache = new DivisionCache();
 			divisions.put(divisionId, newCache);
 			return newCache;

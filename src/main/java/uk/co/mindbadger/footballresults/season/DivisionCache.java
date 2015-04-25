@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import uk.co.mindbadger.footballresults.table.Table;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
+import uk.co.mindbadger.utils.FixtureDateFormatter;
 
 public class DivisionCache {
 	Logger logger = Logger.getLogger(DivisionCache.class);
@@ -20,7 +21,7 @@ public class DivisionCache {
 	public void addFixtureOnDate (Calendar date, Fixture<String> fixture) {
 		List<Fixture<String>> fixturesForDate = fixtures.get(date);
 		if (fixturesForDate == null) {
-			logger.info("Creating new fixture list in division cache for date " + date);
+			logger.info("Creating new fixture list in division cache for date " + FixtureDateFormatter.format(date));
 			fixturesForDate = new ArrayList<Fixture<String>> ();
 			fixtures.put(date, fixturesForDate);
 		}

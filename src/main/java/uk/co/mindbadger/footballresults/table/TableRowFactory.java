@@ -16,7 +16,7 @@ public class TableRowFactory<K,L,M> {
 	}
 	
 	public TableRow<K,L,M> createTableRowFromFixture (Team<K> team, Table<K,L,M> parentTable, TableRow<K,L,M> previousTableRow, Fixture<K> fixture) {
-		logger.info("Create table row from fixture, team="+team.getTeamId() + ", fixture=" + fixture.toString());
+		logger.info("Create table row from fixture, team="+team.getTeamName() + ", fixture=" + fixture.toString());
 		TableRowAfterResult<K,L,M> tableRow = new TableRowAfterResult<>(team, parentTable, previousTableRow, fixture);
 		tableRow.setCalculationMapFactory(calculationMapFactory);
 		return tableRow;

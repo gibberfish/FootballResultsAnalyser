@@ -25,7 +25,7 @@ public class SeasonCacheDivisionLoader {
 	public void loadDivision (SeasonDivision<String, String> seasonDivision, SeasonCache seasonCache) {
 		logger.info("Load Division Cache for " + seasonDivision.getDivision().getDivisionName());
 		
-		DivisionCache divisionCache = seasonCache.getCacheForDivision(seasonDivision.getDivision().getDivisionId());
+		DivisionCache divisionCache = seasonCache.getCacheForDivision(seasonDivision.getDivision());
 		
 		// Assumes fixtures come back in ascending date order
 		List<Fixture<String>> fixtures = dao.getFixturesForDivisionInSeason(seasonDivision);
@@ -34,8 +34,11 @@ public class SeasonCacheDivisionLoader {
 		Table<String,String,String> tableForDate = createInitialTable(seasonDivision);
 		
 		for (Fixture<String> fixture : fixtures) {
-			tableForDate = seasonCacheFixtureAndTableLoader.loadFixtureAndTable(fixture, currentDate, divisionCache, tableForDate);
-			currentDate = fixture.getFixtureDate();
+			seasonCacheFixtureAndTableLoader.loadFixture(fixture, fixture.getFixtureDate(), divisionCache);
+			if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
+				tableForDate = seasonCacheFixtureAndTableLoader.loadFixtureIntoTable(fixture, currentDate, divisionCache, tableForDate);
+				currentDate = fixture.getFixtureDate();
+			}
 		}
 		
 		// Must save the last date

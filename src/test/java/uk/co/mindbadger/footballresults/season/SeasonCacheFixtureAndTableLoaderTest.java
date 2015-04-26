@@ -67,7 +67,45 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 	}
 	
 	@Test
-	public void shouldLoadFixtureIntoTableWhereTheDateHasNotChanged () {
+	public void shouldSaveAPlayedFixture () {
+		// Given
+		Calendar fixtureDate1 = Calendar.getInstance();
+		fixtureDate1.set(Calendar.DAY_OF_MONTH, 1);
+		when(mockFixture1.getFixtureDate()).thenReturn(fixtureDate1);
+
+		when(mockFixture1.getHomeTeam()).thenReturn(mockHomeTeam);
+		when(mockFixture1.getAwayTeam()).thenReturn(mockAwayTeam);
+		when(mockFixture1.getHomeGoals()).thenReturn(2);
+		when(mockFixture1.getAwayGoals()).thenReturn(1);
+
+		// When
+		objectUnderTest.loadFixture(mockFixture1, fixtureDate1, mockDivisionCache1);
+		
+		// Then
+		verify(mockDivisionCache1,times(1)).addFixtureOnDate(fixtureDate1, mockFixture1);
+	}
+
+	@Test
+	public void shouldSaveAnUnplayedFixture () {
+		// Given
+		Calendar fixtureDate1 = Calendar.getInstance();
+		fixtureDate1.set(Calendar.DAY_OF_MONTH, 1);
+		when(mockFixture1.getFixtureDate()).thenReturn(fixtureDate1);
+
+		when(mockFixture1.getHomeTeam()).thenReturn(mockHomeTeam);
+		when(mockFixture1.getAwayTeam()).thenReturn(mockAwayTeam);
+		when(mockFixture1.getHomeGoals()).thenReturn(null);
+		when(mockFixture1.getAwayGoals()).thenReturn(null);
+
+		// When
+		objectUnderTest.loadFixture(mockFixture1, fixtureDate1, mockDivisionCache1);
+		
+		// Then
+		verify(mockDivisionCache1,times(1)).addFixtureOnDate(fixtureDate1, mockFixture1);
+	}
+
+	@Test
+	public void shouldLoadPlayedFixtureIntoTableWhereTheDateHasNotChanged () {
 		// Given
 		Calendar fixtureDate1 = Calendar.getInstance();
 		fixtureDate1.set(Calendar.DAY_OF_MONTH, 1);
@@ -89,13 +127,11 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		when(mockTableRowFactory.createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockTable1, mockFixture1)).thenReturn(mockAwayTableRow);
 		
 		// When
-		Table<String,String,String> newTable = objectUnderTest.loadFixtureAndTable(mockFixture1, fixtureDate1, mockDivisionCache1, mockTableDate1);
+		Table<String,String,String> newTable = objectUnderTest.loadFixtureIntoTable(mockFixture1, fixtureDate1, mockDivisionCache1, mockTableDate1);
 		
 		// Then
 		verify(mockDivisionCache1,never()).addTableOnDate(fixtureDate1, mockTableDate1);
 		verify(mockTableFactory,never()).createTableFromPreviousTable(mockTableDate1);
-		
-		verify(mockDivisionCache1,times(1)).addFixtureOnDate(fixtureDate1, mockFixture1);
 		
 		verify(mockTableDate1,times(1)).getTableRowForTeam("HomeId");
 		verify(mockTableRowFactory,times(1)).createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockHomeTableRow, mockFixture1);
@@ -107,7 +143,7 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 	}
 
 	@Test
-	public void shouldLoadFixtureIntoTableWhereTheDateHasChanged () {
+	public void shouldLoadPlayedFixtureIntoTableWhereTheDateHasChanged () {
 		// Given
 		Calendar fixtureDate1 = Calendar.getInstance();
 		fixtureDate1.set(Calendar.DAY_OF_MONTH, 1);
@@ -134,13 +170,11 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		when(mockTableRowFactory.createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockTable1, mockFixture1)).thenReturn(mockAwayTableRow);
 
 		// When
-		Table<String,String,String> newTable = objectUnderTest.loadFixtureAndTable(mockFixture1, fixtureDate1, mockDivisionCache1, mockTableDate1);
+		Table<String,String,String> newTable = objectUnderTest.loadFixtureIntoTable(mockFixture1, fixtureDate1, mockDivisionCache1, mockTableDate1);
 		
 		// Then
 		verify(mockDivisionCache1,times(1)).addTableOnDate(fixtureDate1, mockTableDate1);
 		verify(mockTableFactory,times(1)).createTableFromPreviousTable(mockTableDate1);
-		
-		verify(mockDivisionCache1,times(1)).addFixtureOnDate(fixtureDate1, mockFixture1);
 
 		verify(mockTableDate1,times(1)).getTableRowForTeam("HomeId");
 		verify(mockTableRowFactory,times(1)).createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockHomeTableRow, mockFixture1);
@@ -179,10 +213,18 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		when(mockTableRowFactory.createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockTable1, mockFixture1)).thenReturn(mockAwayTableRow);
 		
 		// When
-		Table<String,String,String> newTable = objectUnderTest.loadFixtureAndTable(mockFixture1, fixtureDate1, mockDivisionCache1, mockTableDate1);
+		Table<String,String,String> newTable = objectUnderTest.loadFixtureIntoTable(mockFixture1, fixtureDate1, mockDivisionCache1, mockTableDate1);
 		
 		// Then
 		verify(mockTableRowFactory,never()).createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockHomeTableRow, mockFixture1);
 		verify(mockTableRowFactory,never()).createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockAwayTableRow, mockFixture1);
+
+		verify(mockDivisionCache1,never()).addTableOnDate(fixtureDate1, mockTableDate1);
+		verify(mockTableFactory,never()).createTableFromPreviousTable(mockTableDate1);
+		verify(mockTableDate1,never()).getTableRowForTeam("HomeId");
+		verify(mockTableDate1,never()).getTableRowForTeam("AwayId");
+
+		// Table should not have changed
+		assertEquals (mockTableDate1, newTable);
 	}
 }

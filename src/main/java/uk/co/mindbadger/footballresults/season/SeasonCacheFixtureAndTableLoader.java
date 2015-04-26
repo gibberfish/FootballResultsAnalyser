@@ -30,8 +30,10 @@ public class SeasonCacheFixtureAndTableLoader {
 
 		divisionCache.addFixtureOnDate(currentDate, fixture);
 		
-		currentTable.addRow(createTableRow(fixture.getHomeTeam(), tableForDate, fixture));
-		currentTable.addRow(createTableRow(fixture.getAwayTeam(), tableForDate, fixture));
+		if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
+			currentTable.addRow(createTableRow(fixture.getHomeTeam(), tableForDate, fixture));
+			currentTable.addRow(createTableRow(fixture.getAwayTeam(), tableForDate, fixture));
+		}
 		
 		return currentTable;
 	}

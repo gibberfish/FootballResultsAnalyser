@@ -2,13 +2,14 @@ package uk.co.mindbadger.footballresults.season;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
 public class SeasonCache {
 	Logger logger = Logger.getLogger(SeasonCache.class);
 	
-	private Map<String, DivisionCache> divisions = new HashMap<String, DivisionCache> ();
+	private Map<String, DivisionCache> divisions = new TreeMap<String, DivisionCache> ();
 	
 	public DivisionCache getCacheForDivision (String divisionId) {
 		DivisionCache existing = divisions.get(divisionId);

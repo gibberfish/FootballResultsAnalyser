@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
@@ -15,8 +16,8 @@ import uk.co.mindbadger.utils.FixtureDateFormatter;
 public class DivisionCache {
 	Logger logger = Logger.getLogger(DivisionCache.class);
 	
-	private Map<Calendar, List<Fixture<String>>> fixtures = new HashMap<Calendar, List<Fixture<String>>> ();
-	private Map<Calendar, Table<String,String,String>> tables = new HashMap<Calendar, Table<String,String,String>> ();
+	private Map<Calendar, List<Fixture<String>>> fixtures = new TreeMap<Calendar, List<Fixture<String>>> ();
+	private Map<Calendar, Table<String,String,String>> tables = new TreeMap<Calendar, Table<String,String,String>> ();
 
 	public void addFixtureOnDate (Calendar date, Fixture<String> fixture) {
 		List<Fixture<String>> fixturesForDate = fixtures.get(date);

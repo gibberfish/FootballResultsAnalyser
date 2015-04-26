@@ -74,7 +74,7 @@ public class GoalsConcededCalculationTest {
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.get(TableRow.GOALS_CONCEDED)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED)).thenReturn(3);
 		objectUnderTest = new GoalsConcededCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
 		
 		// When
@@ -91,7 +91,7 @@ public class GoalsConcededCalculationTest {
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.get(TableRow.GOALS_CONCEDED)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED)).thenReturn(3);
 		objectUnderTest = new GoalsConcededCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
 		
 		// When

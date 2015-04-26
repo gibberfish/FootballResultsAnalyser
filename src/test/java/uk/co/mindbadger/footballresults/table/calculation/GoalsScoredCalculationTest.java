@@ -74,7 +74,7 @@ public class GoalsScoredCalculationTest {
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.get(TableRow.GOALS_SCORED)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_SCORED)).thenReturn(3);
 		objectUnderTest = new GoalsScoredCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
 		
 		// When
@@ -91,7 +91,7 @@ public class GoalsScoredCalculationTest {
 		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.get(TableRow.GOALS_SCORED)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_SCORED)).thenReturn(3);
 		objectUnderTest = new GoalsScoredCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
 		
 		// When

@@ -54,7 +54,7 @@ public class TableRowFactoryTest {
 		
 		// When
 		TableRow<String, String, String> tableRow = objectUnderTest.createTableRowFromFixture(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture);
-		tableRow.get("test");
+		tableRow.getAttribute("test");
 		
 		// Then
 		verify(mockCalculation).calculate();

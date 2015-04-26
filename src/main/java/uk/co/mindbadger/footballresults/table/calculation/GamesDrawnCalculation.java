@@ -17,7 +17,7 @@ public class GamesDrawnCalculation extends CalculationForFixture<String, String,
 		
 		int previousGamesDrawn = 0;
 		if (previousTableRow != null) {
-			previousGamesDrawn = previousTableRow.get(TableRow.GAMES_DRAWN);
+			previousGamesDrawn = previousTableRow.getAttribute(TableRow.GAMES_DRAWN);
 		}
 
 		return (goalsFor == goalsAgainst ? previousGamesDrawn + 1 : previousGamesDrawn);

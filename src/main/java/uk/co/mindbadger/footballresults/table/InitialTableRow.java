@@ -9,7 +9,7 @@ public class InitialTableRow<K,L,M> extends TableRow<K,L,M> {
 	}
 
 	@Override
-	public int get(String attributeId) {
+	public int getAttribute(String attributeId) {
 		return 0;
 	}
 }

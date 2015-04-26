@@ -24,16 +24,16 @@ public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 		return team;
 	}
 	
-	public abstract int get(String attributeId);
+	public abstract int getAttribute(String attributeId);
 	
 	@Override
 	public int compareTo (TableRow<K,L,M> otherRow) {
-		if (otherRow.get(POINTS) != get(POINTS)) {
-			return (otherRow.get(POINTS) < get(POINTS)) ? -1 : 1;
-		} else if (otherRow.get(GOAL_DIFFERENCE) != get(GOAL_DIFFERENCE)) {
-			return (otherRow.get(GOAL_DIFFERENCE) < get(GOAL_DIFFERENCE)) ? -1 : 1;
-		} else if (otherRow.get(GOALS_SCORED) != get(GOALS_SCORED)) {
-			return (otherRow.get(GOALS_SCORED) < get(GOALS_SCORED)) ? -1 : 1;
+		if (otherRow.getAttribute(POINTS) != getAttribute(POINTS)) {
+			return (otherRow.getAttribute(POINTS) < getAttribute(POINTS)) ? -1 : 1;
+		} else if (otherRow.getAttribute(GOAL_DIFFERENCE) != getAttribute(GOAL_DIFFERENCE)) {
+			return (otherRow.getAttribute(GOAL_DIFFERENCE) < getAttribute(GOAL_DIFFERENCE)) ? -1 : 1;
+		} else if (otherRow.getAttribute(GOALS_SCORED) != getAttribute(GOALS_SCORED)) {
+			return (otherRow.getAttribute(GOALS_SCORED) < getAttribute(GOALS_SCORED)) ? -1 : 1;
 		} else {
 			return team.getTeamName().compareTo(otherRow.getTeam().getTeamName());
 		}

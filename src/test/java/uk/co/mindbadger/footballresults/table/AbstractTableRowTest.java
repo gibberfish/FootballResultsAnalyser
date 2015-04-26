@@ -32,7 +32,7 @@ public class AbstractTableRowTest {
 		// Given
 		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
 			@Override
-			public int get(String attributeId) {
+			public int getAttribute(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
 				} else if (TableRow.GAMES_WON.equals(attributeId)) {
@@ -57,7 +57,7 @@ public class AbstractTableRowTest {
 		};
 		
 		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
-			public int get(String attributeId) {
+			public int getAttribute(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
 				} else if (TableRow.GAMES_WON.equals(attributeId)) {
@@ -97,7 +97,7 @@ public class AbstractTableRowTest {
 	public void shouldCorrectlyCompareRowsWhereThePointsAreTheSameButGoalDifferenceIsDifferent () {
 		// Given
 		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
-			public int get(String attributeId) {
+			public int getAttribute(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
 				} else if (TableRow.GAMES_WON.equals(attributeId)) {
@@ -121,7 +121,7 @@ public class AbstractTableRowTest {
 		};
 		
 		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
-			public int get(String attributeId) {
+			public int getAttribute(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
 				} else if (TableRow.GAMES_WON.equals(attributeId)) {
@@ -161,7 +161,7 @@ public class AbstractTableRowTest {
 	public void shouldCorrectlyCompareRowsWhereThePointsAreTheSameAndTheGoalDifferenceIsTheSameButTheGoalsScoredIsDifferent () {
 		// Given
 		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
-			public int get(String attributeId) {
+			public int getAttribute(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
 				} else if (TableRow.GAMES_WON.equals(attributeId)) {
@@ -185,7 +185,7 @@ public class AbstractTableRowTest {
 		};
 		
 		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
-			public int get(String attributeId) {
+			public int getAttribute(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
 				} else if (TableRow.GAMES_WON.equals(attributeId)) {
@@ -228,7 +228,7 @@ public class AbstractTableRowTest {
 		when(mockTeam2.getTeamName()).thenReturn("Southampton");
 		
 		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
-			public int get(String attributeId) {
+			public int getAttribute(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
 				} else if (TableRow.GAMES_WON.equals(attributeId)) {
@@ -252,7 +252,7 @@ public class AbstractTableRowTest {
 		};
 		
 		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam2, mockParentTable) {
-			public int get(String attributeId) {
+			public int getAttribute(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
 				} else if (TableRow.GAMES_WON.equals(attributeId)) {
@@ -292,7 +292,7 @@ public class AbstractTableRowTest {
 	public void shouldGetLeaguePositionFromTable () {
 		// Given
 		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
-			public int get(String attributeId) {
+			public int getAttribute(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
 				} else if (TableRow.GAMES_WON.equals(attributeId)) {
@@ -332,7 +332,7 @@ public class AbstractTableRowTest {
 		when(mockTeam1.getTeamName()).thenReturn("Portsmouth");
 		
 		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
-			public int get(String attributeId) {
+			public int getAttribute(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
 				} else if (TableRow.GAMES_WON.equals(attributeId)) {
@@ -368,7 +368,7 @@ public class AbstractTableRowTest {
 		when(mockTeam1.getTeamName()).thenReturn("Portsmouth");
 		
 		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1, mockParentTable) {
-			public int get(String attributeId) {
+			public int getAttribute(String attributeId) {
 				if (TableRow.GAMES_PLAYED.equals(attributeId)) {
 					return 18;
 				} else if (TableRow.GAMES_WON.equals(attributeId)) {

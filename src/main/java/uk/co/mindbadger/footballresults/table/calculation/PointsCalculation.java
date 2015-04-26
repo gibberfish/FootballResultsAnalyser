@@ -21,7 +21,7 @@ public class PointsCalculation extends CalculationForFixture<String, String, Str
 		
 		int previousPoints = 0;
 		if (previousTableRow != null) {
-			previousPoints = previousTableRow.get(TableRow.POINTS);
+			previousPoints = previousTableRow.getAttribute(TableRow.POINTS);
 		}
 
 		return (previousPoints + newPoints);

@@ -96,7 +96,7 @@ public class TableRowAfterResultTest {
 		
 		// When
 		try {
-			objectUnderTest.get("points");
+			objectUnderTest.getAttribute("points");
 			fail("Should get an exception thrown because we have not supplied the calculations");
 		} catch (Exception e) {
 			// Then
@@ -155,7 +155,7 @@ public class TableRowAfterResultTest {
 		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
 		
 		// When
-		objectUnderTest.get("points");
+		objectUnderTest.getAttribute("points");
 		
 		// Then
 		verify(mockCalculationMapFactory, times(1)).createCalculations(mockTeam1, mockPreviousTableRow, mockFixture);
@@ -168,8 +168,8 @@ public class TableRowAfterResultTest {
 		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
 		
 		// When
-		objectUnderTest.get("points");
-		objectUnderTest.get("points");
+		objectUnderTest.getAttribute("points");
+		objectUnderTest.getAttribute("points");
 		
 		// Then
 		verify(mockCalculationMapFactory, times(1)).createCalculations(mockTeam1, mockPreviousTableRow, mockFixture);
@@ -184,7 +184,7 @@ public class TableRowAfterResultTest {
 		when(mockGamesWonCalculation.calculate()).thenReturn(10);
 		
 		// When
-		int gamesWon = objectUnderTest.get(TableRowAfterResult.GAMES_WON);
+		int gamesWon = objectUnderTest.getAttribute(TableRowAfterResult.GAMES_WON);
 
 		// Then
 		assertEquals (10, gamesWon);
@@ -198,7 +198,7 @@ public class TableRowAfterResultTest {
 		
 		// When
 		try{
-			objectUnderTest.get("INVALID_ATTRIBUTE");
+			objectUnderTest.getAttribute("INVALID_ATTRIBUTE");
 			fail("Should throw an exception here");
 			
 		} catch (IllegalArgumentException e) {

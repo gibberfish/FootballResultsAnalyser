@@ -29,7 +29,7 @@ public class TableRowAfterResult<K,L,M> extends TableRow<K,L,M> {
 	}
 
 	@Override
-	public int get(String attributeId) {
+	public int getAttribute(String attributeId) {
 		if (calculationMapFactory == null) {
 			throw new IllegalStateException("The TableRow requires a CalculationMapFactory.");
 		}

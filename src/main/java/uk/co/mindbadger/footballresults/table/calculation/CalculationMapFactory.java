@@ -14,8 +14,8 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 public class CalculationMapFactory<K,L,M> {
 	Logger logger = Logger.getLogger(CalculationMapFactory.class);
 	
-	private Map<String, String> rawCalculationClassMap;
-	private Map<String, String> derivedCalculationClassMap;
+	private Map<String, AttributeDefinition> rawCalculationClassMap;
+	private Map<String, AttributeDefinition> derivedCalculationClassMap;
 	
 	public Map<String, Calculation> createCalculations (Team<K> team, TableRow<K,L,M> previousTableRow, Fixture<K> fixture)  {
 		Map<String, Calculation> calculationMap = new HashMap<String, Calculation> ();
@@ -23,15 +23,15 @@ public class CalculationMapFactory<K,L,M> {
 		logger.debug("createCalculations for team " + team.getTeamId() + " and fixture " + fixture.toString());
 		
 		// Loop through each value in the class map
-		for (Map.Entry<String, String> entry : rawCalculationClassMap.entrySet()) {
+		for (Map.Entry<String, AttributeDefinition> entry : rawCalculationClassMap.entrySet()) {
 			String attributeKey = entry.getKey();
-			String calculationClass = entry.getValue();
+			AttributeDefinition attributeDefinition = entry.getValue();
 	
 			logger.debug("Adding raw calculation for " + attributeKey);
 			
 			Class<?> clazz;
 			try {
-				clazz = Class.forName(calculationClass);
+				clazz = Class.forName(attributeDefinition.getCalculationClass());
 				Constructor<?> constructor = clazz.getConstructor(Team.class, TableRow.class, Fixture.class);
 				Object object = constructor.newInstance(new Object[] {team, previousTableRow, fixture});
 				Calculation calculation = (Calculation) object;
@@ -61,13 +61,13 @@ public class CalculationMapFactory<K,L,M> {
 			
 		}
 		
-		for (Map.Entry<String, String> entry : derivedCalculationClassMap.entrySet()) {
+		for (Map.Entry<String, AttributeDefinition> entry : derivedCalculationClassMap.entrySet()) {
 			String attributeKey = entry.getKey();
-			String calculationClass = entry.getValue();
+			AttributeDefinition attributeDefinition = entry.getValue();
 			
 			logger.debug("Adding derived calculation for " + attributeKey);
 			try {
-				Class<?> clazz = Class.forName(calculationClass);
+				Class<?> clazz = Class.forName(attributeDefinition.getCalculationClass());
 				Constructor<?> constructor = clazz.getConstructor(Map.class);
 				Object object = constructor.newInstance(new Object[] {calculationMap});
 				Calculation calculation = (Calculation) object;
@@ -100,20 +100,20 @@ public class CalculationMapFactory<K,L,M> {
 		return calculationMap;
 	}
 
-	public Map<String, String> getRawCalculationClassMap() {
+	public Map<String, AttributeDefinition> getRawCalculationClassMap() {
 		return rawCalculationClassMap;
 	}
 
-	public void setRawCalculationClassMap(Map<String, String> rawCalculationClassMap) {
+	public void setRawCalculationClassMap(Map<String, AttributeDefinition> rawCalculationClassMap) {
 		this.rawCalculationClassMap = rawCalculationClassMap;
 	}
 
-	public Map<String, String> getDerivedCalculationClassMap() {
+	public Map<String, AttributeDefinition> getDerivedCalculationClassMap() {
 		return derivedCalculationClassMap;
 	}
 
 	public void setDerivedCalculationClassMap(
-			Map<String, String> derivedCalculationClassMap) {
+			Map<String, AttributeDefinition> derivedCalculationClassMap) {
 		this.derivedCalculationClassMap = derivedCalculationClassMap;
 	}
 }

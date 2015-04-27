@@ -24,11 +24,11 @@
 					<br>  Team: <c:out value="${tableRowEntry.team.teamName}"/>
 					
 					<c:forEach var="rawCalc" items="${calculationMapFactory.rawCalculationClassMap}">
-						<br><c:out value="${rawCalc.key}"/> = <c:out value="${tableRowEntry.getAttribute(rawCalc.key)}"/>
+						<br><c:out value="${rawCalc.value.shortDescription}"/> = <c:out value="${tableRowEntry.getAttribute(rawCalc.key)}"/>
 					</c:forEach>
 
 					<c:forEach var="derivedCalc" items="${calculationMapFactory.derivedCalculationClassMap}">
-						<br><c:out value="${derivedCalc.key}"/> = <c:out value="${tableRowEntry.getAttribute(derivedCalc.key)}"/>
+						<br><c:out value="${derivedCalc.value.shortDescription}"/> = <c:out value="${tableRowEntry.getAttribute(derivedCalc.key)}"/>
 					</c:forEach>
 					
 				</c:forEach>

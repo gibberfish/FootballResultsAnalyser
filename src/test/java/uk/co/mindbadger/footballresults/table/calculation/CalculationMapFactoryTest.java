@@ -19,8 +19,8 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 public class CalculationMapFactoryTest {
 	private CalculationMapFactory<String, String, String> objectUnderTest;
 	
-	private Map<String, String> rawCalculationClassMap = new HashMap<String, String> ();
-	private Map<String, String> derivedCalculationClassMap = new HashMap<String, String> ();
+	private Map<String, AttributeDefinition> rawCalculationClassMap = new HashMap<String, AttributeDefinition> ();
+	private Map<String, AttributeDefinition> derivedCalculationClassMap = new HashMap<String, AttributeDefinition> ();
 	
 	@Mock
 	private TableRowAfterResult<String,String,String> mockPreviousTableRow;
@@ -46,10 +46,19 @@ public class CalculationMapFactoryTest {
 	@Test
 	public void shouldCreateACalculationMapFromValidConfiguration () {
 		// Given
-		rawCalculationClassMap.put("goalsScored", "uk.co.mindbadger.footballresults.table.calculation.GoalsScoredCalculation");
-		rawCalculationClassMap.put("goalsConceded", "uk.co.mindbadger.footballresults.table.calculation.GoalsConcededCalculation");
+		AttributeDefinition goalsScoredDefinition = new AttributeDefinition ();
+		goalsScoredDefinition.setCalculationClass("uk.co.mindbadger.footballresults.table.calculation.GoalsScoredCalculation");
+
+		AttributeDefinition goalsConcededDefinition = new AttributeDefinition ();
+		goalsConcededDefinition.setCalculationClass("uk.co.mindbadger.footballresults.table.calculation.GoalsConcededCalculation");
+
+		AttributeDefinition goalDifferenceDefinition = new AttributeDefinition ();
+		goalDifferenceDefinition.setCalculationClass("uk.co.mindbadger.footballresults.table.calculation.GoalDifferenceCalculation2");
+
+		rawCalculationClassMap.put("goalsScored", goalsScoredDefinition);
+		rawCalculationClassMap.put("goalsConceded", goalsConcededDefinition);
 		
-		derivedCalculationClassMap.put("goalDifference", "uk.co.mindbadger.footballresults.table.calculation.GoalDifferenceCalculation2");
+		derivedCalculationClassMap.put("goalDifference", goalDifferenceDefinition);
 		
 		// When
 		Map<String, Calculation> calculations = objectUnderTest.createCalculations (mockTeam1, mockPreviousTableRow, mockFixture);

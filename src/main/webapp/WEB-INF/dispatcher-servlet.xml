@@ -71,70 +71,86 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<bean id="analyserCache" class="uk.co.mindbadger.footballresults.season.AnalyserCache">
 	</bean>
 
-	<bean id="goalsScoredDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="description" value="Goals For" />
-		<property name="shortDescription" value="F" />
-		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredCalculation" />
-	</bean>
-
-	<bean id="goalsConcededDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="description" value="Goals Against" />
-		<property name="shortDescription" value="A" />
-		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededCalculation" />
-	</bean>
-
-	<bean id="gamesDrawnDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="description" value="Drawn" />
-		<property name="shortDescription" value="D" />
-		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesDrawnCalculation" />
-	</bean>
-
-	<bean id="gamesWonDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="description" value="Won" />
-		<property name="shortDescription" value="W" />
-		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesWonCalculation" />
-	</bean>
-
-	<bean id="gamesLostDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="description" value="Lost" />
-		<property name="shortDescription" value="L" />
-		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesLostCalculation" />
-	</bean>
-
-	<bean id="pointsDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="description" value="Points" />
-		<property name="shortDescription" value="Pts" />
-		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.PointsCalculation" />
-	</bean>
-
-	<bean id="goalDifferenceDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="description" value="Goal Difference" />
-		<property name="shortDescription" value="GD" />
-		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalDifferenceCalculation2" />
-	</bean>
-
 	<bean id="gamesPlayedDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="gamesPlayed" />
 		<property name="description" value="Games Played" />
 		<property name="shortDescription" value="P" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesPlayedCalculation2" />
+		<property name="sequence" value="1" />
+	</bean>
+
+	<bean id="gamesWonDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="gamesWon" />
+		<property name="description" value="Won" />
+		<property name="shortDescription" value="W" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesWonCalculation" />
+		<property name="sequence" value="2" />
+	</bean>
+
+	<bean id="gamesDrawnDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="gamesDrawn" />
+		<property name="description" value="Drawn" />
+		<property name="shortDescription" value="D" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesDrawnCalculation" />
+		<property name="sequence" value="3" />
+	</bean>
+
+	<bean id="gamesLostDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="gamesLost" />
+		<property name="description" value="Lost" />
+		<property name="shortDescription" value="L" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesLostCalculation" />
+		<property name="sequence" value="4" />
+	</bean>
+
+	<bean id="goalsScoredDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsScored" />
+		<property name="description" value="Goals For" />
+		<property name="shortDescription" value="F" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredCalculation" />
+		<property name="sequence" value="5" />
+	</bean>
+
+	<bean id="goalsConcededDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsConceded" />
+		<property name="description" value="Goals Against" />
+		<property name="shortDescription" value="A" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededCalculation" />
+		<property name="sequence" value="6" />
+	</bean>
+
+	<bean id="goalDifferenceDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalDifference" />
+		<property name="description" value="Goal Difference" />
+		<property name="shortDescription" value="GD" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalDifferenceCalculation2" />
+		<property name="sequence" value="7" />
+	</bean>
+
+	<bean id="pointsDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="points" />
+		<property name="description" value="Points" />
+		<property name="shortDescription" value="Pts" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.PointsCalculation" />
+		<property name="sequence" value="8" />
 	</bean>
 
 	<bean id="calculationMapFactory" class="uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory">
-		<property name="rawCalculationClassMap">
-			<map>
-				<entry key="goalsScored" value-ref="goalsScoredDefinition" />
-				<entry key="goalsConceded" value-ref="goalsConcededDefinition" />
-				<entry key="gamesDrawn" value-ref="gamesDrawnDefinition" />
-				<entry key="gamesWon" value-ref="gamesWonDefinition" />
-				<entry key="gamesLost" value-ref="gamesLostDefinition" />
-				<entry key="points" value-ref="pointsDefinition" />
-			</map>			
+		<property name="rawAttributes">
+			<list>
+				<ref bean="goalsScoredDefinition" />
+				<ref bean="goalsConcededDefinition" />
+				<ref bean="gamesDrawnDefinition" />
+				<ref bean="gamesWonDefinition" />
+				<ref bean="gamesLostDefinition" />
+				<ref bean="pointsDefinition" />
+			</list>
 		</property>
-		<property name="derivedCalculationClassMap">
-			<map>
-				<entry key="goalDifference" value-ref="goalDifferenceDefinition" />
-				<entry key="gamesPlayed" value-ref="gamesPlayedDefinition" />
-			</map>
+		<property name="derivedAttributes">
+			<list>
+				<ref bean="goalDifferenceDefinition" />
+				<ref bean="gamesPlayedDefinition" />
+			</list>
 		</property>
 	</bean>
 	

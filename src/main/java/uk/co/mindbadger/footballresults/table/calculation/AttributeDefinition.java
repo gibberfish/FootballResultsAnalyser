@@ -1,9 +1,12 @@
 package uk.co.mindbadger.footballresults.table.calculation;
 
-public class AttributeDefinition {
+public class AttributeDefinition implements Comparable<AttributeDefinition> {
+	private String attributeId;
 	private String description;
 	private String shortDescription;
 	private String calculationClass;
+	private int sequence;
+	
 	public String getDescription() {
 		return description;
 	}
@@ -21,5 +24,22 @@ public class AttributeDefinition {
 	}
 	public void setCalculationClass(String calculationClass) {
 		this.calculationClass = calculationClass;
+	}
+	public int getSequence() {
+		return sequence;
+	}
+	public void setSequence(int sequence) {
+		this.sequence = sequence;
+	}
+	public String getAttributeId() {
+		return attributeId;
+	}
+	public void setAttributeId(String attributeId) {
+		this.attributeId = attributeId;
+	}
+	
+	@Override
+	public int compareTo(AttributeDefinition objectToCompareTo) {
+		return this.sequence - objectToCompareTo.sequence;
 	}
 }

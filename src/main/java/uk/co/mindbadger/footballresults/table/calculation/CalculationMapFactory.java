@@ -2,7 +2,11 @@ package uk.co.mindbadger.footballresults.table.calculation;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -14,8 +18,8 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 public class CalculationMapFactory<K,L,M> {
 	Logger logger = Logger.getLogger(CalculationMapFactory.class);
 	
-	private Map<String, AttributeDefinition> rawCalculationClassMap;
-	private Map<String, AttributeDefinition> derivedCalculationClassMap;
+	private List<AttributeDefinition> rawAttributes;
+	private List<AttributeDefinition> derivedAttributes;
 	
 	public Map<String, Calculation> createCalculations (Team<K> team, TableRow<K,L,M> previousTableRow, Fixture<K> fixture)  {
 		Map<String, Calculation> calculationMap = new HashMap<String, Calculation> ();
@@ -23,11 +27,8 @@ public class CalculationMapFactory<K,L,M> {
 		logger.debug("createCalculations for team " + team.getTeamId() + " and fixture " + fixture.toString());
 		
 		// Loop through each value in the class map
-		for (Map.Entry<String, AttributeDefinition> entry : rawCalculationClassMap.entrySet()) {
-			String attributeKey = entry.getKey();
-			AttributeDefinition attributeDefinition = entry.getValue();
-	
-			logger.debug("Adding raw calculation for " + attributeKey);
+		for (AttributeDefinition attributeDefinition : rawAttributes) {
+			logger.debug("Adding raw calculation for " + attributeDefinition.getShortDescription());
 			
 			Class<?> clazz;
 			try {
@@ -35,7 +36,7 @@ public class CalculationMapFactory<K,L,M> {
 				Constructor<?> constructor = clazz.getConstructor(Team.class, TableRow.class, Fixture.class);
 				Object object = constructor.newInstance(new Object[] {team, previousTableRow, fixture});
 				Calculation calculation = (Calculation) object;
-				calculationMap.put(attributeKey, calculation);
+				calculationMap.put(attributeDefinition.getAttributeId(), calculation);
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -61,18 +62,15 @@ public class CalculationMapFactory<K,L,M> {
 			
 		}
 		
-		for (Map.Entry<String, AttributeDefinition> entry : derivedCalculationClassMap.entrySet()) {
-			String attributeKey = entry.getKey();
-			AttributeDefinition attributeDefinition = entry.getValue();
-			
-			logger.debug("Adding derived calculation for " + attributeKey);
+		for (AttributeDefinition attributeDefinition : derivedAttributes) {
+			logger.debug("Adding derived calculation for " + attributeDefinition.getShortDescription());
 			try {
 				Class<?> clazz = Class.forName(attributeDefinition.getCalculationClass());
 				Constructor<?> constructor = clazz.getConstructor(Map.class);
 				Object object = constructor.newInstance(new Object[] {calculationMap});
 				Calculation calculation = (Calculation) object;
 				
-				calculationMap.put(attributeKey, calculation);
+				calculationMap.put(attributeDefinition.getAttributeId(), calculation);
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -99,21 +97,30 @@ public class CalculationMapFactory<K,L,M> {
 		
 		return calculationMap;
 	}
-
-	public Map<String, AttributeDefinition> getRawCalculationClassMap() {
-		return rawCalculationClassMap;
+	
+	public List<AttributeDefinition> getAttributeDefinitionList() {
+		List<AttributeDefinition> allDefinitions = new ArrayList<AttributeDefinition> ();
+		allDefinitions.addAll(rawAttributes);
+		allDefinitions.addAll(derivedAttributes);
+		
+		Collections.sort(allDefinitions);
+		
+		return allDefinitions;
 	}
 
-	public void setRawCalculationClassMap(Map<String, AttributeDefinition> rawCalculationClassMap) {
-		this.rawCalculationClassMap = rawCalculationClassMap;
+	public List<AttributeDefinition> getRawAttributes() {
+		return rawAttributes;
 	}
 
-	public Map<String, AttributeDefinition> getDerivedCalculationClassMap() {
-		return derivedCalculationClassMap;
+	public void setRawAttributes(List<AttributeDefinition> rawCalculationClassMap) {
+		this.rawAttributes = rawCalculationClassMap;
 	}
 
-	public void setDerivedCalculationClassMap(
-			Map<String, AttributeDefinition> derivedCalculationClassMap) {
-		this.derivedCalculationClassMap = derivedCalculationClassMap;
+	public List<AttributeDefinition> getDerivedAttributes() {
+		return derivedAttributes;
+	}
+
+	public void setDerivedAttributes(List<AttributeDefinition> derivedCalculationClassMap) {
+		this.derivedAttributes = derivedCalculationClassMap;
 	}
 }

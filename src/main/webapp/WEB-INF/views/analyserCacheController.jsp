@@ -23,14 +23,10 @@
 				<c:forEach var="tableRowEntry" items="${tableCacheEntry.value.sortedTable}">
 					<br>  Team: <c:out value="${tableRowEntry.team.teamName}"/>
 					
-					<c:forEach var="rawCalc" items="${calculationMapFactory.rawCalculationClassMap}">
-						<br><c:out value="${rawCalc.value.shortDescription}"/> = <c:out value="${tableRowEntry.getAttribute(rawCalc.key)}"/>
-					</c:forEach>
-
-					<c:forEach var="derivedCalc" items="${calculationMapFactory.derivedCalculationClassMap}">
-						<br><c:out value="${derivedCalc.value.shortDescription}"/> = <c:out value="${tableRowEntry.getAttribute(derivedCalc.key)}"/>
-					</c:forEach>
 					
+					<c:forEach var="attributeDefinition" items="${calculationMapFactory.attributeDefinitionList}">
+						<br><c:out value="${attributeDefinition.shortDescription}"/> = <c:out value="${tableRowEntry.getAttribute(attributeDefinition.attributeId)}"/>
+					</c:forEach>					
 				</c:forEach>
 			</c:forEach>
 			

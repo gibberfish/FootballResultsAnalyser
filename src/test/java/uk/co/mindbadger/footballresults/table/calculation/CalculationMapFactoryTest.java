@@ -3,7 +3,9 @@ package uk.co.mindbadger.footballresults.table.calculation;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -19,8 +21,8 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 public class CalculationMapFactoryTest {
 	private CalculationMapFactory<String, String, String> objectUnderTest;
 	
-	private Map<String, AttributeDefinition> rawCalculationClassMap = new HashMap<String, AttributeDefinition> ();
-	private Map<String, AttributeDefinition> derivedCalculationClassMap = new HashMap<String, AttributeDefinition> ();
+	private List<AttributeDefinition> rawAttributes = new ArrayList<AttributeDefinition> ();
+	private List<AttributeDefinition> derivedAttributes = new ArrayList<AttributeDefinition> ();
 	
 	@Mock
 	private TableRowAfterResult<String,String,String> mockPreviousTableRow;
@@ -39,8 +41,8 @@ public class CalculationMapFactoryTest {
 		MockitoAnnotations.initMocks(this);
 		
 		objectUnderTest = new CalculationMapFactory<String,String,String>();
-		objectUnderTest.setDerivedCalculationClassMap(derivedCalculationClassMap);
-		objectUnderTest.setRawCalculationClassMap(rawCalculationClassMap);
+		objectUnderTest.setDerivedAttributes(derivedAttributes);
+		objectUnderTest.setRawAttributes(rawAttributes);
 	}
 
 	@Test
@@ -48,29 +50,37 @@ public class CalculationMapFactoryTest {
 		// Given
 		AttributeDefinition goalsScoredDefinition = new AttributeDefinition ();
 		goalsScoredDefinition.setCalculationClass("uk.co.mindbadger.footballresults.table.calculation.GoalsScoredCalculation");
+		goalsScoredDefinition.setSequence(1);
 
 		AttributeDefinition goalsConcededDefinition = new AttributeDefinition ();
 		goalsConcededDefinition.setCalculationClass("uk.co.mindbadger.footballresults.table.calculation.GoalsConcededCalculation");
+		goalsConcededDefinition.setSequence(2);
 
 		AttributeDefinition goalDifferenceDefinition = new AttributeDefinition ();
 		goalDifferenceDefinition.setCalculationClass("uk.co.mindbadger.footballresults.table.calculation.GoalDifferenceCalculation2");
+		goalDifferenceDefinition.setSequence(3);
 
-		rawCalculationClassMap.put("goalsScored", goalsScoredDefinition);
-		rawCalculationClassMap.put("goalsConceded", goalsConcededDefinition);
-		
-		derivedCalculationClassMap.put("goalDifference", goalDifferenceDefinition);
-		
+		rawAttributes.add(goalsConcededDefinition);
+		derivedAttributes.add(goalDifferenceDefinition);
+		rawAttributes.add(goalsScoredDefinition);
+
+
 		// When
-		Map<String, Calculation> calculations = objectUnderTest.createCalculations (mockTeam1, mockPreviousTableRow, mockFixture);
+		List<AttributeDefinition> attributeDefinitions = objectUnderTest.getAttributeDefinitionList ();
 		
 		// Then
-		Calculation goalsScored = calculations.get("goalsScored");
-		Calculation goalsConceded = calculations.get("goalsConceded");
-		Calculation goalDifference = calculations.get("goalDifference");
-		
-		assertTrue(goalsScored instanceof GoalsScoredCalculation);
-		assertTrue(goalsConceded instanceof GoalsConcededCalculation);
-		assertTrue(goalDifference instanceof GoalDifferenceCalculation2);
+		assertEquals (goalsScoredDefinition, attributeDefinitions.get(0));
+		assertEquals (goalsConcededDefinition, attributeDefinitions.get(1));
+		assertEquals (goalDifferenceDefinition, attributeDefinitions.get(2));
 	}
 
+	@Test
+	public void shouldReturnASortedListOfAttributeDefinitions () {
+		// Given
+		
+		// When
+		
+		// Then
+		
+	}
 }

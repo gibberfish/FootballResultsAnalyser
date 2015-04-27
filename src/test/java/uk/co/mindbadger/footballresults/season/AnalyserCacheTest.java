@@ -2,7 +2,9 @@ package uk.co.mindbadger.footballresults.season;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +16,7 @@ public class AnalyserCacheTest {
 	private AnalyserCache objectUnderTest;
 	private Integer seasonNumber1 = 2001;
 	private Integer seasonNumber2 = 2002;
+	private Integer seasonNumber3 = 2003;
 	
 	@Mock
 	private SeasonCache mockSeasonCache1;
@@ -74,4 +77,19 @@ public class AnalyserCacheTest {
 		assertEquals (seasonCache1, seasonCache2);
 	}
 
+	@Test
+	public void shouldReturnSortedListOfSeasonNumbersInCache () {
+		// Given
+		objectUnderTest.getCacheForSeason(seasonNumber2);
+		objectUnderTest.getCacheForSeason(seasonNumber1);
+		objectUnderTest.getCacheForSeason(seasonNumber3);
+		
+		// When
+		List<Integer> seasonList = objectUnderTest.getSeasonsInCache();
+		
+		// Then
+		assertEquals(seasonNumber3, seasonList.get(0));
+		assertEquals(seasonNumber2, seasonList.get(1));
+		assertEquals(seasonNumber1, seasonList.get(2));
+	}
 }

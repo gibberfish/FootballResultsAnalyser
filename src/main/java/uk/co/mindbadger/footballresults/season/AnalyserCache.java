@@ -1,7 +1,11 @@
 package uk.co.mindbadger.footballresults.season;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -25,5 +29,15 @@ public class AnalyserCache {
 			seasons.put(seasonNumber, newCache);
 			return newCache;
 		}
+	}
+
+	public List<Integer> getSeasonsInCache() {
+		Set<Integer> seasonSet = seasons.keySet();
+		
+		List<Integer> seasonList = new ArrayList<Integer> (seasonSet);
+		
+		Collections.sort(seasonList, Collections.reverseOrder());
+		
+		return seasonList;
 	}
 }

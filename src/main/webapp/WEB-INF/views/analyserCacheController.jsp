@@ -14,7 +14,7 @@
 		<h1>Season : <c:out value="${seasonCacheEntry.key}"/></h1>
 	
 		<c:forEach var="divisionCacheEntry" items="${seasonCacheEntry.value.divisionCaches}">
-			<h2>Division Name : <c:out value="${divisionCacheEntry.key.divisionName}"/></h2>
+			<h2>Division Name : <c:out value="${divisionCacheEntry.key.division.divisionName}"/></h2>
 			
 			<h3>Tables</h3>
 			<c:forEach var="tableCacheEntry" items="${divisionCacheEntry.value.tablesForDivision}">

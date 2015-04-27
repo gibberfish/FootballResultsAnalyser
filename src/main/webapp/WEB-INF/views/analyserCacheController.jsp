@@ -20,14 +20,26 @@
 			<c:forEach var="tableCacheEntry" items="${divisionCacheEntry.value.tablesForDivision}">
 				<h4>Date: <fmt:formatDate type="both" pattern="dd-MM-yyyy" value="${tableCacheEntry.key.time}"/></h4>
 				
-				<c:forEach var="tableRowEntry" items="${tableCacheEntry.value.sortedTable}">
-					<br>  Team: <c:out value="${tableRowEntry.team.teamName}"/>
-					
-					
+				<table>
+				<tr>
+					<th>Pos</th>
+					<th>Team</th>
 					<c:forEach var="attributeDefinition" items="${calculationMapFactory.attributeDefinitionList}">
-						<br><c:out value="${attributeDefinition.shortDescription}"/> = <c:out value="${tableRowEntry.getAttribute(attributeDefinition.attributeId)}"/>
+						<th><c:out value="${attributeDefinition.shortDescription}"/></th>
 					</c:forEach>					
+				</tr>				
+				
+				<c:forEach var="tableRowEntry" items="${tableCacheEntry.value.sortedTable}" varStatus="loop">
+				<tr>
+					<td><c:out value="${loop.index+1}"/></td>
+					<td><c:out value="${tableRowEntry.team.teamName}"/></td>
+					<c:forEach var="attributeDefinition" items="${calculationMapFactory.attributeDefinitionList}">
+						<td><c:out value="${tableRowEntry.getAttribute(attributeDefinition.attributeId)}"/></td>
+					</c:forEach>
+				</tr>					
 				</c:forEach>
+				
+				</table>
 			</c:forEach>
 			
 			<h3>Fixtures</h3>

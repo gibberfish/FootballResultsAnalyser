@@ -25,7 +25,7 @@ public class SeasonCacheDivisionLoader {
 	public void loadDivision (SeasonDivision<String, String> seasonDivision, SeasonCache seasonCache) {
 		logger.info("Load Division Cache for " + seasonDivision.getDivision().getDivisionName());
 		
-		DivisionCache divisionCache = seasonCache.getCacheForDivision(seasonDivision.getDivision());
+		DivisionCache divisionCache = seasonCache.getCacheForDivision(seasonDivision);
 		
 		// Assumes fixtures come back in ascending date order
 		List<Fixture<String>> fixtures = dao.getFixturesForDivisionInSeason(seasonDivision);

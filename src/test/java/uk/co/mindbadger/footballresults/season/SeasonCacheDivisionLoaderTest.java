@@ -99,7 +99,7 @@ public class SeasonCacheDivisionLoaderTest {
 		when (mockSeasonDivision1.getDivision()).thenReturn(mockDivision1);
 		when (mockDivision1.getDivisionId()).thenReturn("DIV1");
 				
-		when(mockSeasonCache2015.getCacheForDivision(mockDivision1)).thenReturn(mockDivisionCache1);
+		when(mockSeasonCache2015.getCacheForDivision(mockSeasonDivision1)).thenReturn(mockDivisionCache1);
 		
 		Calendar fixtureDate1 = Calendar.getInstance();
 		fixtureDate1.set(Calendar.DAY_OF_MONTH, 1);
@@ -152,7 +152,7 @@ public class SeasonCacheDivisionLoaderTest {
 		objectUnderTest.loadDivision(mockSeasonDivision1, mockSeasonCache2015);
 		
 		// Then
-		verify (mockSeasonCache2015,times(1)).getCacheForDivision(mockDivision1);
+		verify (mockSeasonCache2015,times(1)).getCacheForDivision(mockSeasonDivision1);
 		verify (mockDao,times(1)).getFixturesForDivisionInSeason(mockSeasonDivision1);
 		verify (mockDao,times(1)).getTeamsForDivisionInSeason(mockSeasonDivision1);
 		verify (mockTableFactory,times(1)).createInitialTable(mockSeasonDivision1, teamsForDivision1);

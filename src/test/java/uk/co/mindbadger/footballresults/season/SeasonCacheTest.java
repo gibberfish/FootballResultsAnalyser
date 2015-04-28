@@ -105,23 +105,31 @@ public class SeasonCacheTest {
 		assertEquals (divisionCache1, divisionCache2);
 	}
 	
-	@Ignore
 	@Test
 	public void shouldReturnSortedListOfDivisionsInCache () {
 		// Given
 		when(mockDivision1.getDivisionId()).thenReturn(divisionId1);
 		when(mockSeasonDivision1.getDivision()).thenReturn(mockDivision1);
+		when(mockSeasonDivision1.getDivisionPosition()).thenReturn(2);
 		
 		when(mockDivision2.getDivisionId()).thenReturn(divisionId2);
 		when(mockSeasonDivision2.getDivision()).thenReturn(mockDivision2);
+		when(mockSeasonDivision2.getDivisionPosition()).thenReturn(3);
 		
 		when(mockDivision3.getDivisionId()).thenReturn(divisionId3);
 		when(mockSeasonDivision3.getDivision()).thenReturn(mockDivision3);
+		when(mockSeasonDivision3.getDivisionPosition()).thenReturn(1);
+		
+		DivisionCache divisionCache1 = objectUnderTest.getCacheForDivision(mockSeasonDivision1);
+		DivisionCache divisionCache2 = objectUnderTest.getCacheForDivision(mockSeasonDivision2);
+		DivisionCache divisionCache3 = objectUnderTest.getCacheForDivision(mockSeasonDivision3);
 		
 		// When
 		List<Division<String>> divisions = objectUnderTest.getDivisionsInCache ();
 		
 		// Then
-		fail("Test not written yet");
+		assertEquals(mockDivision3, divisions.get(0));
+		assertEquals(mockDivision1, divisions.get(1));
+		assertEquals(mockDivision2, divisions.get(2));
 	}
 }

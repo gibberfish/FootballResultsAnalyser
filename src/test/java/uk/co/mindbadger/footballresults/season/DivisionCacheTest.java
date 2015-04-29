@@ -72,15 +72,14 @@ public class DivisionCacheTest {
 	@Test
 	public void shouldAddFixtureRowsToCache () {
 		// Given
-		
-		// When
 		objectUnderTest.addFixtureOnDate(date1, mockFixture1);
 		objectUnderTest.addFixtureOnDate(date1, mockFixture2);
 		objectUnderTest.addFixtureOnDate(date2, mockFixture3);
 		
-		// Then
+		// When
 		Map<Calendar, List<Fixture<String>>> fixtures = objectUnderTest.getFixturesForDivision();
 		
+		// Then
 		assertEquals (2, fixtures.size());
 		
 		List<Fixture<String>> fixturesForDate1 = fixtures.get(date1);
@@ -111,4 +110,17 @@ public class DivisionCacheTest {
 		assertEquals (mockTable3, tables.get(date3));
 	}
 
+	@Test
+	public void shouldGetFixtureDatesForDivision () {
+		// Given
+		objectUnderTest.addFixtureOnDate(date1, mockFixture1);
+		objectUnderTest.addFixtureOnDate(date1, mockFixture2);
+		objectUnderTest.addFixtureOnDate(date2, mockFixture3);
+		
+		// When
+		//List<Calendar> fixtureDates = objectUnderTest.getFixtureDates ();
+		
+		// Then
+		
+	}
 }

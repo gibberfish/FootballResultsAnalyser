@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.log4j.Logger;
 
@@ -34,18 +35,13 @@ public class SeasonCache {
 		return divisions;
 	}
 
-	public List<Division<String>> getDivisionsInCache() {
-		List<Division<String>> divisionList = new ArrayList<Division<String>> (); 
-		
+	public List<SeasonDivision<String,String>> getSeasonDivisionsInCache() {
 		Set<SeasonDivision<String,String>> keySet = divisions.keySet();
 		
-		for (SeasonDivision<String,String> seasonDivision : keySet) {
-			divisionList.add(seasonDivision.getDivision());
-		}
+		List<SeasonDivision<String,String>> seasonDivisionList = new ArrayList<SeasonDivision<String,String>> (keySet);
 		
-		//TODO Need to change the SeasonDivision interface to include a compareTo method so that the sort will work
-		//Collections.sort(divisionList);
+		Collections.sort(seasonDivisionList);
 		
-		return divisionList;
+		return seasonDivisionList;
 	}
 }

@@ -2,9 +2,11 @@ package uk.co.mindbadger.footballresults.season;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
@@ -39,5 +41,12 @@ public class DivisionCache {
 
 	public Map<Calendar, Table<String, String, String>> getTablesForDivision() {
 		return tables;
+	}
+
+	public List<Calendar> getFixtureDates() {
+		Set<Calendar> dateSet = fixtures.keySet();
+		List<Calendar> dateList = new ArrayList<Calendar> (dateSet);
+		Collections.sort(dateList);
+		return dateList;
 	}
 }

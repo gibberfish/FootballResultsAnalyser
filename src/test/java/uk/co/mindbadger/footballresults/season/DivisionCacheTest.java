@@ -113,14 +113,16 @@ public class DivisionCacheTest {
 	@Test
 	public void shouldGetFixtureDatesForDivision () {
 		// Given
-		objectUnderTest.addFixtureOnDate(date1, mockFixture1);
+		objectUnderTest.addFixtureOnDate(date2, mockFixture1);
 		objectUnderTest.addFixtureOnDate(date1, mockFixture2);
 		objectUnderTest.addFixtureOnDate(date2, mockFixture3);
 		
 		// When
-		//List<Calendar> fixtureDates = objectUnderTest.getFixtureDates ();
+		List<Calendar> fixtureDates = objectUnderTest.getFixtureDates ();
 		
 		// Then
-		
+		assertEquals(2, fixtureDates.size());
+		assertEquals(date1, fixtureDates.get(0));
+		assertEquals(date2, fixtureDates.get(1));
 	}
 }

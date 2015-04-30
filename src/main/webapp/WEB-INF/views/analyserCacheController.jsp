@@ -13,12 +13,13 @@
 	<c:forEach var="seasonCacheEntry" items="${analyserCache.seasonCaches}">
 		<h1>Season : <c:out value="${seasonCacheEntry.key}"/></h1>
 	
-		<c:forEach var="divisionCacheEntry" items="${seasonCacheEntry.value.divisionCaches}">
-			<h2>Division Name : <c:out value="${divisionCacheEntry.key.division.divisionName}"/></h2>
+		<c:forEach var="seasonDivision" items="${seasonCacheEntry.value.seasonDivisionsInCache}">
+			<h2>Division Name : <c:out value="${seasonDivision.division.divisionName}"/></h2>
 			
-			<h3>Tables</h3>
-			<c:forEach var="tableCacheEntry" items="${divisionCacheEntry.value.tablesForDivision}">
-				<h4>Date: <fmt:formatDate type="both" pattern="dd-MM-yyyy" value="${tableCacheEntry.key.time}"/></h4>
+			<c:set var="seasonDivisionCache" scope="session" value="${seasonCacheEntry.value.divisionCaches[seasonDivision]}"/>
+			
+			<c:forEach var="fixtureDate" items="${seasonDivisionCache.fixtureDates}">
+				<h3><fmt:formatDate type="both" pattern="dd-MM-yyyy" value="${fixtureDate.time}"/></h3>
 				
 				<table>
 				<tr>
@@ -29,7 +30,7 @@
 					</c:forEach>					
 				</tr>				
 				
-				<c:forEach var="tableRowEntry" items="${tableCacheEntry.value.sortedTable}" varStatus="loop">
+				<c:forEach var="tableRowEntry" items="${seasonDivisionCache.tablesForDivision[fixtureDate].sortedTable}" varStatus="loop">
 				<tr>
 					<td><c:out value="${loop.index+1}"/></td>
 					<td><c:out value="${tableRowEntry.team.teamName}"/></td>
@@ -40,17 +41,12 @@
 				</c:forEach>
 				
 				</table>
-			</c:forEach>
-			
-			<h3>Fixtures</h3>
-			<c:forEach var="fixtureCacheEntry" items="${divisionCacheEntry.value.fixturesForDivision}">
-				<h4>Fixture Date: <fmt:formatDate type="both" pattern="dd-MM-yyyy" value="${fixtureCacheEntry.key.time}"/></h4>
-				
-				<c:forEach var="fixture" items="${fixtureCacheEntry.value}">
+
+				<c:forEach var="fixture" items="${seasonDivisionCache.fixturesForDivision[fixtureDate]}">
 					<br>  <c:out value="${fixture}"/>
-				</c:forEach>
-			</c:forEach>	
-	
+				</c:forEach>	
+
+			</c:forEach>
 		</c:forEach>
 	</c:forEach>
 </body>

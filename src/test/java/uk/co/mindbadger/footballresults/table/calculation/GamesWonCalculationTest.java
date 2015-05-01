@@ -3,6 +3,9 @@ package uk.co.mindbadger.footballresults.table.calculation;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -28,173 +31,35 @@ public class GamesWonCalculationTest {
 	@Mock
 	private Team<String> mockTeam2;
 
+	@Mock
+	private Calculation mockGamesWonAtHomeCalculation;
+
+	@Mock
+	private Calculation mockGamesWonAwayCalculation;
+	
+	
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
+		
+		Map<String, Calculation> calculations = new HashMap<String, Calculation> ();
+		calculations.put("gamesWonAtHome", mockGamesWonAtHomeCalculation);
+		calculations.put("gamesWonAway", mockGamesWonAwayCalculation);
+		
+		objectUnderTest = new GamesWonCalculation(calculations);
+
 	}
 
 	@Test
-	public void shouldReturnOneWhenThereIsNoPreviousRowForAHomeWin () {
+	public void shouldReturnGamesWon () {
 		// Given
-		when (mockFixture.getHomeTeam()).thenReturn(mockTeam1);
-		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
-		when (mockFixture.getHomeGoals()).thenReturn(3);
-		when (mockFixture.getAwayGoals()).thenReturn(1);
-		objectUnderTest = new GamesWonCalculation(mockTeam1, null, mockFixture);
+		when(mockGamesWonAtHomeCalculation.calculate()).thenReturn(4);
+		when(mockGamesWonAwayCalculation.calculate()).thenReturn(2);
 		
 		// When
 		int result = objectUnderTest.calculate();
 		
 		// Then
-		assertEquals (1, result);
-	}
-
-	@Test
-	public void shouldReturnOneWhenThereIsNoPreviousRowForAnAwayWin () {
-		// Given
-		when (mockFixture.getHomeTeam()).thenReturn(mockTeam2);
-		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
-		when (mockFixture.getHomeGoals()).thenReturn(1);
-		when (mockFixture.getAwayGoals()).thenReturn(3);
-		objectUnderTest = new GamesWonCalculation(mockTeam1, null, mockFixture);
-		
-		// When
-		int result = objectUnderTest.calculate();
-		
-		// Then
-		assertEquals (1, result);
-	}
-
-	@Test
-	public void shouldReturnZeroWhenThereIsNoPreviousRowForADraw () {
-		// Given
-		when (mockFixture.getHomeTeam()).thenReturn(mockTeam1);
-		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
-		when (mockFixture.getHomeGoals()).thenReturn(3);
-		when (mockFixture.getAwayGoals()).thenReturn(3);
-		objectUnderTest = new GamesWonCalculation(mockTeam1, null, mockFixture);
-		
-		// When
-		int result = objectUnderTest.calculate();
-		
-		// Then
-		assertEquals (0, result);
-	}
-
-	@Test
-	public void shouldReturnZeroWhenThereIsNoPreviousRowForAHomeDefeat () {
-		// Given
-		when (mockFixture.getHomeTeam()).thenReturn(mockTeam1);
-		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
-		when (mockFixture.getHomeGoals()).thenReturn(1);
-		when (mockFixture.getAwayGoals()).thenReturn(3);
-		objectUnderTest = new GamesWonCalculation(mockTeam1, null, mockFixture);
-		
-		// When
-		int result = objectUnderTest.calculate();
-		
-		// Then
-		assertEquals (0, result);
-	}
-
-	@Test
-	public void shouldReturnZeroWhenThereIsNoPreviousRowForAnAwayDefeat () {
-		// Given
-		when (mockFixture.getHomeTeam()).thenReturn(mockTeam2);
-		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
-		when (mockFixture.getHomeGoals()).thenReturn(3);
-		when (mockFixture.getAwayGoals()).thenReturn(1);
-		objectUnderTest = new GamesWonCalculation(mockTeam1, null, mockFixture);
-		
-		// When
-		int result = objectUnderTest.calculate();
-		
-		// Then
-		assertEquals (0, result);
-	}
-
-	@Test
-	public void shouldReturnAnIncrementWhenThereIsAPreviousRowForAHomeWin () {
-		// Given
-		when (mockFixture.getHomeTeam()).thenReturn(mockTeam1);
-		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
-		when (mockFixture.getHomeGoals()).thenReturn(3);
-		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_WON)).thenReturn(3);
-		objectUnderTest = new GamesWonCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
-		
-		// When
-		int result = objectUnderTest.calculate();
-		
-		// Then
-		assertEquals (4, result);
-	}
-
-	@Test
-	public void shouldReturnAnIncrementWhenThereIsAPreviousRowForAnAwayWin () {
-		// Given
-		when (mockFixture.getHomeTeam()).thenReturn(mockTeam2);
-		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
-		when (mockFixture.getHomeGoals()).thenReturn(1);
-		when (mockFixture.getAwayGoals()).thenReturn(3);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_WON)).thenReturn(3);
-		objectUnderTest = new GamesWonCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
-		
-		// When
-		int result = objectUnderTest.calculate();
-		
-		// Then
-		assertEquals (4, result);
-	}
-
-	@Test
-	public void shouldReturnNoChangeWhenThereIsAPreviousRowForADraw () {
-		// Given
-		when (mockFixture.getHomeTeam()).thenReturn(mockTeam1);
-		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
-		when (mockFixture.getHomeGoals()).thenReturn(3);
-		when (mockFixture.getAwayGoals()).thenReturn(3);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_WON)).thenReturn(3);
-		objectUnderTest = new GamesWonCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
-		
-		// When
-		int result = objectUnderTest.calculate();
-		
-		// Then
-		assertEquals (3, result);
-	}
-
-	@Test
-	public void shouldReturnNoChangeWhenThereIsAPreviousRowForAHomeDefeat () {
-		// Given
-		when (mockFixture.getHomeTeam()).thenReturn(mockTeam1);
-		when (mockFixture.getAwayTeam()).thenReturn(mockTeam2);
-		when (mockFixture.getHomeGoals()).thenReturn(1);
-		when (mockFixture.getAwayGoals()).thenReturn(3);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_WON)).thenReturn(3);
-		objectUnderTest = new GamesWonCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
-		
-		// When
-		int result = objectUnderTest.calculate();
-		
-		// Then
-		assertEquals (3, result);
-	}
-
-	@Test
-	public void shouldReturnNoChangeWhenThereIsAPreviousRowForAnAwayDefeat () {
-		// Given
-		when (mockFixture.getHomeTeam()).thenReturn(mockTeam2);
-		when (mockFixture.getAwayTeam()).thenReturn(mockTeam1);
-		when (mockFixture.getHomeGoals()).thenReturn(3);
-		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_WON)).thenReturn(3);
-		objectUnderTest = new GamesWonCalculation(mockTeam1, mockPreviousTableRow, mockFixture);
-		
-		// When
-		int result = objectUnderTest.calculate();
-		
-		// Then
-		assertEquals (3, result);
+		assertEquals (6, result);
 	}
 }

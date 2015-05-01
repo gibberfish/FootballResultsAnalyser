@@ -2,8 +2,8 @@ package uk.co.mindbadger.footballresults.table.calculation;
 
 import java.util.Map;
 
-public class GoalDifferenceCalculation2 extends CompositeCalculation {
-	public GoalDifferenceCalculation2(Map<String,Calculation> calculations) {
+public class GoalDifferenceCalculation extends CompositeCalculation {
+	public GoalDifferenceCalculation(Map<String,Calculation> calculations) {
 		super(calculations);
 	}
 

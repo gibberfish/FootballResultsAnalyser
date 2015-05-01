@@ -75,8 +75,24 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="attributeId" value="gamesPlayed" />
 		<property name="description" value="Games Played" />
 		<property name="shortDescription" value="P" />
-		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesPlayedCalculation2" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesPlayedCalculation" />
 		<property name="sequence" value="1" />
+	</bean>
+
+	<bean id="gamesWonAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="gamesWonAtHome" />
+		<property name="description" value="Won At Home" />
+		<property name="shortDescription" value="WH" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesWonAtHomeCalculation" />
+		<property name="sequence" value="2" />
+	</bean>
+
+	<bean id="gamesWonAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="gamesWonAway" />
+		<property name="description" value="Won Away" />
+		<property name="shortDescription" value="WA" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesWonAwayCalculation" />
+		<property name="sequence" value="3" />
 	</bean>
 
 	<bean id="gamesWonDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
@@ -84,7 +100,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="description" value="Won" />
 		<property name="shortDescription" value="W" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesWonCalculation" />
-		<property name="sequence" value="2" />
+		<property name="sequence" value="4" />
 	</bean>
 
 	<bean id="gamesDrawnDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
@@ -92,7 +108,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="description" value="Drawn" />
 		<property name="shortDescription" value="D" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesDrawnCalculation" />
-		<property name="sequence" value="3" />
+		<property name="sequence" value="5" />
 	</bean>
 
 	<bean id="gamesLostDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
@@ -100,7 +116,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="description" value="Lost" />
 		<property name="shortDescription" value="L" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesLostCalculation" />
-		<property name="sequence" value="4" />
+		<property name="sequence" value="6" />
 	</bean>
 
 	<bean id="goalsScoredDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
@@ -108,7 +124,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="description" value="Goals For" />
 		<property name="shortDescription" value="F" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredCalculation" />
-		<property name="sequence" value="5" />
+		<property name="sequence" value="7" />
 	</bean>
 
 	<bean id="goalsConcededDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
@@ -116,15 +132,15 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="description" value="Goals Against" />
 		<property name="shortDescription" value="A" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededCalculation" />
-		<property name="sequence" value="6" />
+		<property name="sequence" value="8" />
 	</bean>
 
 	<bean id="goalDifferenceDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalDifference" />
 		<property name="description" value="Goal Difference" />
 		<property name="shortDescription" value="GD" />
-		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalDifferenceCalculation2" />
-		<property name="sequence" value="7" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalDifferenceCalculation" />
+		<property name="sequence" value="9" />
 	</bean>
 
 	<bean id="pointsDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
@@ -132,7 +148,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="description" value="Points" />
 		<property name="shortDescription" value="Pts" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.PointsCalculation" />
-		<property name="sequence" value="8" />
+		<property name="sequence" value="10" />
 	</bean>
 
 	<bean id="calculationMapFactory" class="uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory">
@@ -141,7 +157,8 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 				<ref bean="goalsScoredDefinition" />
 				<ref bean="goalsConcededDefinition" />
 				<ref bean="gamesDrawnDefinition" />
-				<ref bean="gamesWonDefinition" />
+				<ref bean="gamesWonAtHomeDefinition" />
+				<ref bean="gamesWonAwayDefinition" />
 				<ref bean="gamesLostDefinition" />
 				<ref bean="pointsDefinition" />
 			</list>
@@ -150,6 +167,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 			<list>
 				<ref bean="goalDifferenceDefinition" />
 				<ref bean="gamesPlayedDefinition" />
+				<ref bean="gamesWonDefinition" />
 			</list>
 		</property>
 	</bean>

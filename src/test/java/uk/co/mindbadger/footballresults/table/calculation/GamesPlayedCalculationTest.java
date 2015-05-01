@@ -15,8 +15,8 @@ import uk.co.mindbadger.footballresults.table.TableRowAfterResult;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-public class GamesPlayedCalculation2Test {
-	private GamesPlayedCalculation2 objectUnderTest;
+public class GamesPlayedCalculationTest {
+	private GamesPlayedCalculation objectUnderTest;
 	
 	@Mock
 	private Calculation mockGamesWonCalculation;
@@ -35,7 +35,7 @@ public class GamesPlayedCalculation2Test {
 		calculations.put("gamesDrawn", mockGamesDrawnCalculation);
 		calculations.put("gamesLost", mockGamesLostCalculation);
 		
-		objectUnderTest = new GamesPlayedCalculation2(calculations);
+		objectUnderTest = new GamesPlayedCalculation(calculations);
 	}
 
 	@Test

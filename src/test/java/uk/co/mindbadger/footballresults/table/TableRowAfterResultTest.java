@@ -189,7 +189,20 @@ public class TableRowAfterResultTest {
 		// Then
 		assertEquals (10, gamesWon);
 	}
-	
+
+	@Test
+	public void shouldGetParentTable () {
+		// Given
+		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture);
+		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
+		
+		// When
+		Table<String,String,String> parentTable = objectUnderTest.getParentTable();
+
+		// Then
+		assertEquals (mockParentTable, parentTable);
+	}
+
 	@Test
 	public void shouldThrowExceptionWhenInvalidAttributeRequested () {
 		// Given

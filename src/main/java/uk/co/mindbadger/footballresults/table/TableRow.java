@@ -47,8 +47,8 @@ public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	public int getLeaguePosition() {
 		return parentTable.getIndexOfTableRow(this);
 	}
-	
-//	public void getCalculations(Map<String, Calculation> calculations) {
-//		this.calculations = calculations;
-//	}
+
+	public Table<K,L,M> getParentTable () {
+		return parentTable;
+	}
 }

@@ -11,6 +11,13 @@ public class GamesWonAtHomeVsTeamsAboveCalculation extends CalculationForFixture
 
 	@Override
 	public int calculate(boolean reCalculate) {
+		
+		if (previousTableRow == null) {
+			// Assumes all teams are below for the first game
+			return 0;
+		}
+		
+		
 		boolean homeFixture = (fixture.getHomeTeam() == team);
 		int goalsFor = (homeFixture ? fixture.getHomeGoals() : fixture.getAwayGoals());
 		int goalsAgainst = (homeFixture ? fixture.getAwayGoals() : fixture.getHomeGoals());

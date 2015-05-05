@@ -5,8 +5,8 @@ import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-public class GamesWonAtHomeVsTeamsAboveCalculation extends CalculationForFixture<String, String, String> {
-	public GamesWonAtHomeVsTeamsAboveCalculation(Team<String> team, TableRow<String,String,String> previousTableRow, Fixture<String> fixture) {
+public class GamesWonAtHomeVsTeamsBelowCalculation extends CalculationForFixture<String, String, String> {
+	public GamesWonAtHomeVsTeamsBelowCalculation(Team<String> team, TableRow<String,String,String> previousTableRow, Fixture<String> fixture) {
 		super(team, previousTableRow, fixture);
 	}
 
@@ -35,7 +35,7 @@ public class GamesWonAtHomeVsTeamsAboveCalculation extends CalculationForFixture
 			previousGamesWon = previousTableRow.getAttribute(TableRow.GAMES_WON);
 		}
 
-		return ((goalsFor > goalsAgainst) && homeFixture && vsTeamAbove ? previousGamesWon + 1 : previousGamesWon);
+		return ((goalsFor > goalsAgainst) && homeFixture && !vsTeamAbove ? previousGamesWon + 1 : previousGamesWon);
 	}
 
 }

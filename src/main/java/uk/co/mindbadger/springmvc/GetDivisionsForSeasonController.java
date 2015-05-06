@@ -35,7 +35,7 @@ public class GetDivisionsForSeasonController {
 //		    divisions[seasonDivision.getDivisionPosition()-1] = seasonDivision.getDivision();
 //		}
 
-		//TODO CLUNKY APPROACH - need to get Jackson working properly
+		// CLUNKY APPROACH - need to get Jackson working properly
 		String output = "{\"divisions\": [";
 //		for (Division<String> division : divisions) {
 		for (SeasonDivision<String,String> seasonDivision : seasonDivisions) {

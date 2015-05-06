@@ -36,7 +36,7 @@ public class GetFixturesForTeamInSeasonController {
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		
-		//TODO CLUNKY APPROACH - need to get Jackson working properly
+		//CLUNKY APPROACH - need to get Jackson working properly
 		String output = "{\"fixtures\": [";
 		for (Fixture<String> fixture : fixtures) {
 		    String fixtureDate = dateFormat.format(fixture.getFixtureDate().getTime());

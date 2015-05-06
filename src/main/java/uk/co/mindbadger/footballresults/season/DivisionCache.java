@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import uk.co.mindbadger.footballresults.table.Table;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
+import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 import uk.co.mindbadger.utils.FixtureDateFormatter;
 
 public class DivisionCache {
@@ -20,7 +21,8 @@ public class DivisionCache {
 	
 	private Map<Calendar, List<Fixture<String>>> fixtures = new TreeMap<Calendar, List<Fixture<String>>> ();
 	private Map<Calendar, Table<String,String,String>> tables = new TreeMap<Calendar, Table<String,String,String>> ();
-
+	private Map<Calendar, Map<Team<String>, TeamFixtureContext>> teamFixtureContexts = new HashMap<Calendar, Map<Team<String>, TeamFixtureContext>> ();
+	
 	public void addFixtureOnDate (Calendar date, Fixture<String> fixture) {
 		List<Fixture<String>> fixturesForDate = fixtures.get(date);
 		if (fixturesForDate == null) {
@@ -35,6 +37,11 @@ public class DivisionCache {
 		tables.put(date, table);
 	}
 
+	public void addTeamFixtureContextOnDate (Calendar date, Team<String> team, TeamFixtureContext teamFixtureContext) {
+		//TODO Implement this method
+		throw new RuntimeException ("Not implemented yet");
+	}
+	
 	public Map<Calendar, List<Fixture<String>>> getFixturesForDivision() {
 		return fixtures;
 	}

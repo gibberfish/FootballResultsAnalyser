@@ -33,7 +33,7 @@ public class GetTeamsForDivisionInSeasonController {
 		
 		Set<SeasonDivisionTeam<String,String,String>> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
 		
-		//TODO CLUNKY APPROACH - need to get Jackson working properly
+		//CLUNKY APPROACH - need to get Jackson working properly
 		String output = "{\"teams\": [";
 		for (SeasonDivisionTeam<String,String,String> seasonDivisionTeam : seasonDivisionTeams) {
 		    output+="{\"id\": \""+ seasonDivisionTeam.getTeam().getTeamId()+"\", \"name\":\""+seasonDivisionTeam.getTeam().getTeamName()+"\"},";

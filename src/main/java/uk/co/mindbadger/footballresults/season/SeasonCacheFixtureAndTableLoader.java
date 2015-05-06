@@ -16,6 +16,7 @@ public class SeasonCacheFixtureAndTableLoader {
 	
 	private TableFactory tableFactory;
 	private TableRowFactory<String,String,String> tableRowFactory;
+	private TeamFixtureContextFactory teamFixtureContextFactory;
 	
 	public void loadFixture (Fixture<String> fixture, Calendar currentDate, DivisionCache divisionCache) {
 		logger.info("Load Fixture for " + fixture.toString());
@@ -45,7 +46,31 @@ public class SeasonCacheFixtureAndTableLoader {
 	}
 	
 	public void loadTeamFixtureContextsForHomeAndAwayTeams (Fixture<String> fixture, Calendar currentDate, DivisionCache divisionCache, Table<String,String,String> tableForDate) {
-		//TODO Implement this method
+		TableRow<String, String, String> homeTableRow = tableForDate.getTableRowForTeam(fixture.getHomeTeam().getTeamId());
+		TableRow<String, String, String> awayTableRow = tableForDate.getTableRowForTeam(fixture.getAwayTeam().getTeamId());
+		int homeLeaguePosition = homeTableRow.getLeaguePosition();
+		int awayLeaguePosition = awayTableRow.getLeaguePosition();
+		
+		TeamFixtureContext homeContext = teamFixtureContextFactory.createTeamFixtureContext();
+		homeContext.setAtHome(true);
+		homeContext.setLeaguePosition(homeLeaguePosition);
+		homeContext.setTeam(fixture.getHomeTeam());
+
+		TeamFixtureContext awayContext = teamFixtureContextFactory.createTeamFixtureContext();
+		awayContext.setAtHome(false);
+		awayContext.setLeaguePosition(awayLeaguePosition);
+		awayContext.setTeam(fixture.getAwayTeam());
+
+		if (homeLeaguePosition > awayLeaguePosition) {
+			homeContext.setPlayingTeamAbove(true);
+			awayContext.setPlayingTeamAbove(false);
+		} else {
+			homeContext.setPlayingTeamAbove(false);
+			awayContext.setPlayingTeamAbove(true);
+		}
+		
+		divisionCache.addTeamFixtureContextOnDate(currentDate, fixture.getHomeTeam(), homeContext);
+		divisionCache.addTeamFixtureContextOnDate(currentDate, fixture.getAwayTeam(), awayContext);
 	}
 	
 	private TableRow<String, String, String> createTableRow (Team<String> team, Table<String,String,String> table, Fixture<String> fixture) {
@@ -67,5 +92,13 @@ public class SeasonCacheFixtureAndTableLoader {
 
 	public void setTableRowFactory(TableRowFactory<String,String,String> tableRowFactory) {
 		this.tableRowFactory = tableRowFactory;
+	}
+
+	public TeamFixtureContextFactory getTeamFixtureContextFactory() {
+		return teamFixtureContextFactory;
+	}
+
+	public void setTeamFixtureContextFactory(TeamFixtureContextFactory teamFixtureContextFactory) {
+		this.teamFixtureContextFactory = teamFixtureContextFactory;
 	}
 }

@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 
 import uk.co.mindbadger.footballresults.table.Table;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
+import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class DivisionCacheTest {
 	
@@ -32,13 +33,37 @@ public class DivisionCacheTest {
 	private Fixture<String> mockFixture3;
 
 	@Mock
-	Table<String,String,String> mockTable1;
+	private Table<String,String,String> mockTable1;
 
 	@Mock
-	Table<String,String,String> mockTable2;
+	private Table<String,String,String> mockTable2;
 
 	@Mock
-	Table<String,String,String> mockTable3;
+	private Table<String,String,String> mockTable3;
+
+	@Mock
+	private Team<String> mockTeam1;
+
+	@Mock
+	private Team<String> mockTeam2;
+
+	@Mock
+	private Team<String> mockTeam3;
+
+	@Mock
+	private Team<String> mockTeam4;
+
+	@Mock
+	private TeamFixtureContext mockTeamFixtureContent1;
+
+	@Mock
+	private TeamFixtureContext mockTeamFixtureContent2;
+
+	@Mock
+	private TeamFixtureContext mockTeamFixtureContent3;
+
+	@Mock
+	private TeamFixtureContext mockTeamFixtureContent4;
 
 	@Before
 	public void setup() {
@@ -124,5 +149,27 @@ public class DivisionCacheTest {
 		assertEquals(2, fixtureDates.size());
 		assertEquals(date1, fixtureDates.get(0));
 		assertEquals(date2, fixtureDates.get(1));
+	}
+	
+	@Test
+	public void shoulAddTeamFixtureContextOnDate () {
+		// Given
+		
+		// When
+		objectUnderTest.addTeamFixtureContextOnDate(date1, mockTeam1, mockTeamFixtureContent1);
+		objectUnderTest.addTeamFixtureContextOnDate(date2, mockTeam2, mockTeamFixtureContent2);
+		objectUnderTest.addTeamFixtureContextOnDate(date2, mockTeam3, mockTeamFixtureContent3);
+		objectUnderTest.addTeamFixtureContextOnDate(date2, mockTeam4, mockTeamFixtureContent4);
+		objectUnderTest.addTeamFixtureContextOnDate(date2, mockTeam4, mockTeamFixtureContent4);
+		
+		// Then
+		Map<Calendar, Map<Team<String>, TeamFixtureContext>> contexts = objectUnderTest.getTeamFixtureContexts();
+		assertEquals (2, contexts.size());
+		
+		Map<Team<String>, TeamFixtureContext> teamsForDate1 = contexts.get(date1);
+		assertEquals (1, teamsForDate1.size());
+		
+		Map<Team<String>, TeamFixtureContext> teamsForDate2 = contexts.get(date2);
+		assertEquals (3, teamsForDate2.size());
 	}
 }

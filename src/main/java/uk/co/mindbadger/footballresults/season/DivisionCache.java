@@ -22,7 +22,7 @@ public class DivisionCache {
 	private Map<Calendar, List<Fixture<String>>> fixtures = new TreeMap<Calendar, List<Fixture<String>>> ();
 	private Map<Calendar, Table<String,String,String>> tables = new TreeMap<Calendar, Table<String,String,String>> ();
 	private Map<Calendar, Map<Team<String>, TeamFixtureContext>> teamFixtureContexts = new HashMap<Calendar, Map<Team<String>, TeamFixtureContext>> ();
-	
+
 	public void addFixtureOnDate (Calendar date, Fixture<String> fixture) {
 		List<Fixture<String>> fixturesForDate = fixtures.get(date);
 		if (fixturesForDate == null) {
@@ -38,8 +38,13 @@ public class DivisionCache {
 	}
 
 	public void addTeamFixtureContextOnDate (Calendar date, Team<String> team, TeamFixtureContext teamFixtureContext) {
-		//TODO Implement this method
-		throw new RuntimeException ("Not implemented yet");
+		Map<Team<String>, TeamFixtureContext> teams = teamFixtureContexts.get(date);
+		if (teams == null) {
+			teams = new HashMap<Team<String>, TeamFixtureContext> ();
+			teamFixtureContexts.put(date, teams);
+		}
+		
+		teams.put(team, teamFixtureContext);
 	}
 	
 	public Map<Calendar, List<Fixture<String>>> getFixturesForDivision() {
@@ -48,6 +53,10 @@ public class DivisionCache {
 
 	public Map<Calendar, Table<String, String, String>> getTablesForDivision() {
 		return tables;
+	}
+
+	public Map<Calendar, Map<Team<String>, TeamFixtureContext>> getTeamFixtureContexts() {
+		return teamFixtureContexts;
 	}
 
 	public List<Calendar> getFixtureDates() {

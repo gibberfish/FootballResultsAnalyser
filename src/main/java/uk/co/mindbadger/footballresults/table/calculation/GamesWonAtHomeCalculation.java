@@ -17,7 +17,7 @@ public class GamesWonAtHomeCalculation extends CalculationForFixture<String, Str
 		
 		int previousGamesWon = 0;
 		if (previousTableRow != null) {
-			previousGamesWon = previousTableRow.getAttribute(TableRow.GAMES_WON);
+			previousGamesWon = previousTableRow.getAttribute(TableRow.GAMES_WON_AT_HOME);
 		}
 
 		return ((goalsFor > goalsAgainst) && homeFixture ? previousGamesWon + 1 : previousGamesWon);

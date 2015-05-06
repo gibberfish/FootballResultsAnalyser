@@ -171,6 +171,9 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 			</list>
 		</property>
 	</bean>
+
+	<bean id="teamFixtureContextFactory" class="uk.co.mindbadger.footballresults.season.TeamFixtureContextFactory">
+	</bean>
 	
 	<bean id="tableFactory" class="uk.co.mindbadger.footballresults.table.TableFactory">
 	</bean>
@@ -182,6 +185,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<bean id="seasonCacheFixtureAndTableLoader" class="uk.co.mindbadger.footballresults.season.SeasonCacheFixtureAndTableLoader">
 		<property name="tableFactory" ref="tableFactory"/>
 		<property name="tableRowFactory" ref="tableRowFactory"/>
+		<property name="teamFixtureContextFactory" ref="teamFixtureContextFactory"/>
 	</bean>
 	
 	<bean id="seasonCacheDivisionLoader" class="uk.co.mindbadger.footballresults.season.SeasonCacheDivisionLoader">

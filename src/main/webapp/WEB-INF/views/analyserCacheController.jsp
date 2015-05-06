@@ -36,7 +36,11 @@
 					<td><c:out value="${tableRowEntry.team.teamName}"/></td>
 					<c:forEach var="attributeDefinition" items="${calculationMapFactory.attributeDefinitionList}">
 						<td><c:out value="${tableRowEntry.getAttribute(attributeDefinition.attributeId)}"/></td>
-					</c:forEach>
+					</c:forEach>					
+					<td>(<c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][tableRowEntry.team].leaguePosition}"/>)
+					
+					
+					
 				</tr>					
 				</c:forEach>
 				

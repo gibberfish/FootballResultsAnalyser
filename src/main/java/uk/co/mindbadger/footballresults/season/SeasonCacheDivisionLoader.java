@@ -36,8 +36,7 @@ public class SeasonCacheDivisionLoader {
 		for (Fixture<String> fixture : fixtures) {
 			seasonCacheFixtureAndTableLoader.loadFixture(fixture, fixture.getFixtureDate(), divisionCache);
 			
-			//TODO Load the fixture and the table before modification into a TeamFixtureContext record for each team in the fixture
-			seasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForHomeAndAwayTeams(fixture, currentDate, divisionCache, tableForDate);
+			seasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForHomeAndAwayTeams(fixture, fixture.getFixtureDate(), divisionCache, tableForDate);
 			
 			if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
 				tableForDate = seasonCacheFixtureAndTableLoader.loadFixtureIntoTable(fixture, currentDate, divisionCache, tableForDate);

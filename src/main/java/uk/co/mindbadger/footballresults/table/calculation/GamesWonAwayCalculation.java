@@ -17,7 +17,7 @@ public class GamesWonAwayCalculation extends CalculationForFixture<String, Strin
 		
 		int previousGamesWon = 0;
 		if (previousTableRow != null) {
-			previousGamesWon = previousTableRow.getAttribute(TableRow.GAMES_WON);
+			previousGamesWon = previousTableRow.getAttribute(TableRow.GAMES_WON_AWAY);
 		}
 
 		return ((goalsFor > goalsAgainst) && !homeFixture ? previousGamesWon + 1 : previousGamesWon);

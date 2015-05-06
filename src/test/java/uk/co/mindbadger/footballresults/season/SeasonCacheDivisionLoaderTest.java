@@ -166,7 +166,12 @@ public class SeasonCacheDivisionLoaderTest {
 		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixture(mockFixture2, fixtureDate2, mockDivisionCache1);
 		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixture(mockFixture3, fixtureDate3, mockDivisionCache1);
 		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixture(mockFixture4, fixtureDate4, mockDivisionCache1);
-		
+
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForHomeAndAwayTeams(mockFixture1, fixtureDate1, mockDivisionCache1, mockInitialTableDiv1);
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForHomeAndAwayTeams(mockFixture2, fixtureDate2, mockDivisionCache1, mockTableDate1);
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForHomeAndAwayTeams(mockFixture3, fixtureDate3, mockDivisionCache1, mockTableDate2);
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForHomeAndAwayTeams(mockFixture4, fixtureDate4, mockDivisionCache1, mockTableDate3);
+
 		verify (mockDivisionCache1,times(1)).addTableOnDate(fixtureDate3, mockTableDate3);		
 		verify (mockDivisionCache1,never()).addTableOnDate(fixtureDate4, mockTableDate3);
 	}

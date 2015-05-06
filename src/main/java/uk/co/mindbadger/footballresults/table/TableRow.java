@@ -4,6 +4,8 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	public static final String GAMES_WON = "gamesWon";
+	public static final String GAMES_WON_AT_HOME = "gamesWonAtHome";
+	public static final String GAMES_WON_AWAY = "gamesWonAway";
 	public static final String GAMES_DRAWN = "gamesDrawn";
 	public static final String GAMES_LOST = "gamesLost";
 	public static final String GAMES_PLAYED = "gamesPlayed";

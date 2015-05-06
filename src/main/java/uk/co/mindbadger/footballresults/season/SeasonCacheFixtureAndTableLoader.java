@@ -44,6 +44,10 @@ public class SeasonCacheFixtureAndTableLoader {
 		return currentTable;
 	}
 	
+	public void loadTeamFixtureContextsForHomeAndAwayTeams (Fixture<String> fixture, Calendar currentDate, DivisionCache divisionCache, Table<String,String,String> tableForDate) {
+		//TODO Implement this method
+	}
+	
 	private TableRow<String, String, String> createTableRow (Team<String> team, Table<String,String,String> table, Fixture<String> fixture) {
 		TableRow<String, String, String> previousTableRow = table.getTableRowForTeam(team.getTeamId());
 		return  tableRowFactory.createTableRowFromFixture(team, table, previousTableRow , fixture);

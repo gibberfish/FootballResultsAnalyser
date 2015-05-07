@@ -37,10 +37,6 @@
 					<c:forEach var="attributeDefinition" items="${calculationMapFactory.attributeDefinitionList}">
 						<td><c:out value="${tableRowEntry.getAttribute(attributeDefinition.attributeId)}"/></td>
 					</c:forEach>					
-					<td>(<c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][tableRowEntry.team].leaguePosition}"/>)
-					
-					
-					
 				</tr>					
 				</c:forEach>
 				
@@ -48,6 +44,16 @@
 
 				<c:forEach var="fixture" items="${seasonDivisionCache.fixturesForDivision[fixtureDate]}">
 					<br>  <c:out value="${fixture}"/>
+					<br>(
+					Home Team: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.homeTeam].team.teamName}"/>,  
+					Pos: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.homeTeam].leaguePosition}"/>,
+					Home?: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.homeTeam].atHome}"/>,
+					vs Above?: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.homeTeam].playingTeamAbove}"/>)
+					<br>(
+					Away Team: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.awayTeam].team.teamName}"/>,  
+					Pos: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.awayTeam].leaguePosition}"/>,
+					Home?: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.awayTeam].atHome}"/>,
+					vs Above?: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.awayTeam].playingTeamAbove}"/>)
 				</c:forEach>	
 
 			</c:forEach>

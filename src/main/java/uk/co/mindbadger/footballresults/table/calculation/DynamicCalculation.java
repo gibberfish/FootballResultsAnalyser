@@ -6,7 +6,7 @@ import java.util.Map;
 public class DynamicCalculation extends Calculation {
 	protected Map<String,Calculation> calculations;
 	private String calculationString;
-	private Map<String,Float> values;
+	protected Map<String,Float> values;
 	
 	public DynamicCalculation (String calculationString, Map<String,Calculation> calculations) {
 		this.calculations = calculations;
@@ -63,24 +63,72 @@ public class DynamicCalculation extends Calculation {
 		
 		values = getValuesNeededForCalculation(currentCalculationString);
 		
+		int tempIndex = 1;
+		
 		while (hasBrackets(currentCalculationString)) {
-			currentCalculationString = evaluateBrackets(currentCalculationString);
+			currentCalculationString = evaluateOneSetOfBrackets(currentCalculationString, tempIndex);
+			tempIndex++;
 		}
 		
 		return Math.round(evalulateCalculationString(currentCalculationString));
 	}
 	
 	protected Map<String,Float> getValuesNeededForCalculation (String calculationString) {
-		return null;
-	}
-	
-	protected String evaluateBrackets (String calculationString) {
-		return null;
-	}
-	
-	protected float evaluateSingleExpression (float currentValue, String operand, String operator) {
-		int newValue = calculations.get(operand).calculate();
+		values = new HashMap<String,Float> ();
 		
+		int start = 0;
+		while (start != -1) {
+			start = calculationString.indexOf('{', start);
+			
+			if (start != -1) {
+				int end = calculationString.indexOf('}', start);
+				String operand = calculationString.substring((start+1), end);
+				int newValue = calculations.get(operand).calculate();
+				
+				values.put(operand, new Float(newValue));
+				
+				start = end+1;
+			}
+		}
+		
+		return values;
+	}
+	
+	protected String evaluateOneSetOfBrackets (String calculationString, int tempIndex) {
+		calculationString = calculationString.replaceAll("\\s+","");
+		System.out.println("calculationString="+calculationString);
+		int posOfFirstClosingBracket = calculationString.indexOf(')');
+		int posOfMatchingOpeningBracket = 0;
+		
+		int pos = 0;
+		while (pos != -1) {
+			pos = calculationString.indexOf('(', posOfMatchingOpeningBracket);
+			if (pos != -1 && pos < posOfFirstClosingBracket) {
+				posOfMatchingOpeningBracket = pos+1;
+			} else {
+				break;
+			}
+		}
+		
+		String startString = calculationString.substring(0, (posOfMatchingOpeningBracket-1));
+		System.out.println("start: " + startString);
+
+		String endString = calculationString.substring(posOfFirstClosingBracket+1);
+		System.out.println("end: " + endString);
+
+		String simplifiedString = startString + "{temp" + tempIndex + "}" + endString;
+		System.out.println("simplified string"+simplifiedString);
+		
+		String operand = calculationString.substring((posOfMatchingOpeningBracket), posOfFirstClosingBracket);
+		System.out.println("operand = " + operand);
+		
+		float calculatedValue = evalulateCalculationString (operand);
+		values.put("temp"+tempIndex, calculatedValue);
+		
+		return simplifiedString;
+	}
+	
+	protected float evaluateSingleExpression (float currentValue, float newValue, String operator) {
 		switch (operator) {
 			case "+":
 				return (float) (currentValue + newValue);
@@ -106,14 +154,10 @@ public class DynamicCalculation extends Calculation {
 		return (leftBrackets > 0);
 	}
 	
-	//TODO Needs a set of tests after the spike to get it this far... 
 	protected float evalulateCalculationString (String calculationString) {
-		// This function assumes that no brackets exist in the calculation string passed in
-		// e.g. {A}+{B}*{C}
-		
 		calculationString = calculationString.replaceAll("\\s+","");
 		boolean expectingOperand = true;
-		float value = 0;
+		float currentValue = 0;
 		String operator = "+";
 		int start = 0;
 		
@@ -124,10 +168,9 @@ public class DynamicCalculation extends Calculation {
 				if (start != -1) {
 					int end = calculationString.indexOf('}', start);
 					String operand = calculationString.substring((start+1), end);
+					float newValue = values.get(operand);
 					
-					//evaluateSingleExpression(value, operand, operator);
-					System.out.println("start = " + start + ", end = "+ end);
-					System.out.println("evaluateSingleExpression(" + value + ", " + operand + ", " + operator + ");");
+					currentValue = evaluateSingleExpression(currentValue, newValue, operator);
 					
 					start = end+1;
 					expectingOperand = false;
@@ -144,11 +187,6 @@ public class DynamicCalculation extends Calculation {
 			}
 		}
 		
-		return value;
-	}
-	
-	public static void main (String args[]) {
-		DynamicCalculation dc = new DynamicCalculation ("", null);
-		dc.evalulateCalculationString("{AAA}+{BB}-{CCCCC}*{D}/{EE}");
+		return currentValue;
 	}
 }

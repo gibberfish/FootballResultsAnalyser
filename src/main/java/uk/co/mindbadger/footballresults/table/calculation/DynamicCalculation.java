@@ -70,13 +70,34 @@ public class DynamicCalculation extends Calculation {
 		return Math.round(evalulateCalculationString(currentCalculationString));
 	}
 	
-	private Map<String,Float> getValuesNeededForCalculation (String calculationString) {
+	protected Map<String,Float> getValuesNeededForCalculation (String calculationString) {
 		return null;
 	}
 	
-	private boolean hasBrackets (String calculationString) {
-		int leftBrackets = calculationString.split("(", -1).length-1;
-		int rightBrackets = calculationString.split(")", -1).length-1;
+	protected String evaluateBrackets (String calculationString) {
+		return null;
+	}
+	
+	protected float evaluateSingleExpression (float currentValue, String operand, String operator) {
+		int newValue = calculations.get(operand).calculate();
+		
+		switch (operator) {
+			case "+":
+				return (float) (currentValue + newValue);
+			case "-":
+				return (float) (currentValue - newValue);
+			case "/":
+				return (float) (currentValue / (float)newValue);
+			case "*":
+				return (float) (currentValue * newValue);
+			default:
+				throw new IllegalArgumentException ("Invalid Calculation String (invalid operator)");
+		}
+	}
+
+	protected boolean hasBrackets (String calculationString) {
+		int leftBrackets = calculationString.split("\\(", -1).length-1;
+		int rightBrackets = calculationString.split("\\)", -1).length-1;
 		
 		if (leftBrackets != rightBrackets) {
 			throw new IllegalArgumentException ("Invalid Calculation String (brackets don't match)");
@@ -85,45 +106,49 @@ public class DynamicCalculation extends Calculation {
 		return (leftBrackets > 0);
 	}
 	
-	private String evaluateBrackets (String calculationString) {
-		return null;
-	}
-	
-	private float evalulateCalculationString (String calculationString) {
+	//TODO Needs a set of tests after the spike to get it this far... 
+	protected float evalulateCalculationString (String calculationString) {
 		// This function assumes that no brackets exist in the calculation string passed in
-		calculationString = calculationString.replaceAll("\\s+","");
+		// e.g. {A}+{B}*{C}
 		
-		int start = calculationString.indexOf('{');
-		if (start != 0) {
-			throw new IllegalArgumentException ("Invalid Calculation String (brackets don't match)");
+		calculationString = calculationString.replaceAll("\\s+","");
+		boolean expectingOperand = true;
+		float value = 0;
+		String operator = "+";
+		int start = 0;
+		
+		while (start != -1) {
+			if (expectingOperand) {
+				start = calculationString.indexOf('{', start);
+				
+				if (start != -1) {
+					int end = calculationString.indexOf('}', start);
+					String operand = calculationString.substring((start+1), end);
+					
+					//evaluateSingleExpression(value, operand, operator);
+					System.out.println("start = " + start + ", end = "+ end);
+					System.out.println("evaluateSingleExpression(" + value + ", " + operand + ", " + operator + ");");
+					
+					start = end+1;
+					expectingOperand = false;
+				}
+			} else {
+				int startOfNextOperand = calculationString.indexOf('{', start);
+				if (startOfNextOperand == -1) {
+					operator = calculationString.substring(start);
+				} else {
+					operator = calculationString.substring(start, (startOfNextOperand));
+				}
+				System.out.println("Next operator = " + operator);
+				expectingOperand = true;
+			}
 		}
 		
-		/*
-		 * Look for first value (must start with { )
-		 * Get this value
-		 * Look for operator (e.g. +, -, /, *)
-		 * Look for next value (must start with { )
-		 * Evaluate the result as a float
-		 * Look for the next 
-		 */
-		return 0;
+		return value;
 	}
 	
-	private float evaluateSingleExpression (String operand1, String operand2, String operator) {
-		int value1 = calculations.get(operand1).calculate();
-		int value2 = calculations.get(operand2).calculate();
-		
-		switch (operator) {
-			case "+":
-				return (float) (value1 + value2);
-			case "-":
-				return (float) (value1 - value2);
-			case "/":
-				return (float) ((float)value1 / (float)value2);
-			case "*":
-				return (float) (value1 * value2);
-			default:
-				throw new IllegalArgumentException ("Invalid Calculation String (invalid operator)");
-		}
+	public static void main (String args[]) {
+		DynamicCalculation dc = new DynamicCalculation ("", null);
+		dc.evalulateCalculationString("{AAA}+{BB}-{CCCCC}*{D}/{EE}");
 	}
 }

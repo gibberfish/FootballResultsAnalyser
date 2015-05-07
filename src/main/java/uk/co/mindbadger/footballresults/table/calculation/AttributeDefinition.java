@@ -6,6 +6,7 @@ public class AttributeDefinition implements Comparable<AttributeDefinition> {
 	private String shortDescription;
 	private String calculationClass;
 	private int sequence;
+	private String dynamicCalculation;
 	
 	public String getDescription() {
 		return description;
@@ -36,6 +37,12 @@ public class AttributeDefinition implements Comparable<AttributeDefinition> {
 	}
 	public void setAttributeId(String attributeId) {
 		this.attributeId = attributeId;
+	}
+	public String getDynamicCalculation() {
+		return dynamicCalculation;
+	}
+	public void setDynamicCalculation(String dynamicCalculation) {
+		this.dynamicCalculation = dynamicCalculation;
 	}
 	
 	@Override

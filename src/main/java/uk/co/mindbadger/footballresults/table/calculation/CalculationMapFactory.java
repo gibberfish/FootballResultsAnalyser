@@ -37,19 +37,19 @@ public class CalculationMapFactory<K,L,M> {
 				Calculation calculation = (Calculation) object;
 				calculationMap.put(attributeDefinition.getAttributeId(), calculation);
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage());
 			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage());
 			} catch (SecurityException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage());
 			} catch (InstantiationException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage());
 			} catch (IllegalAccessException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage());
 			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage());
 			} catch (InvocationTargetException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage());
 			}
 			
 		}
@@ -58,25 +58,36 @@ public class CalculationMapFactory<K,L,M> {
 			logger.debug("Adding derived calculation for " + attributeDefinition.getShortDescription());
 			try {
 				Class<?> clazz = Class.forName(attributeDefinition.getCalculationClass());
-				Constructor<?> constructor = clazz.getConstructor(Map.class);
-				Object object = constructor.newInstance(new Object[] {calculationMap});
+				Object object = null;
+				
+				if (attributeDefinition.getDynamicCalculation() == null) {
+					Constructor<?> constructor = clazz.getConstructor(Map.class);
+					object = constructor.newInstance(new Object[] {calculationMap});
+					logger.info("... created non-dynamic class: " + object);
+				} else {
+					Constructor<?> constructor = clazz.getDeclaredConstructor(String.class, Map.class);
+					String dynamicCalculation = attributeDefinition.getDynamicCalculation();
+					object = constructor.newInstance(new Object[] {dynamicCalculation, calculationMap});
+					logger.info("... created dynamic class: " + object);
+				}
+				
 				Calculation calculation = (Calculation) object;
 				
 				calculationMap.put(attributeDefinition.getAttributeId(), calculation);
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				logger.error(e);
 			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
+				logger.error(e);
 			} catch (SecurityException e) {
-				e.printStackTrace();
+				logger.error(e);
 			} catch (InstantiationException e) {
-				e.printStackTrace();
+				logger.error(e);
 			} catch (IllegalAccessException e) {
-				e.printStackTrace();
+				logger.error(e);
 			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
+				logger.error(e);
 			} catch (InvocationTargetException e) {
-				e.printStackTrace();
+				logger.error(e);
 			}
 		}
 		

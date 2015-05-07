@@ -143,12 +143,21 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="sequence" value="9" />
 	</bean>
 
+	<bean id="goalDifferenceDefinition2" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalDifference2" />
+		<property name="description" value="Goal Difference2" />
+		<property name="shortDescription" value="GD2" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
+		<property name="dynamicCalculation" value="{goalsScored}-{goalsConceded}"/>
+		<property name="sequence" value="10" />
+	</bean>
+
 	<bean id="pointsDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="points" />
 		<property name="description" value="Points" />
 		<property name="shortDescription" value="Pts" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.PointsCalculation" />
-		<property name="sequence" value="10" />
+		<property name="sequence" value="11" />
 	</bean>
 
 	<bean id="calculationMapFactory" class="uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory">
@@ -166,6 +175,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="derivedAttributes">
 			<list>
 				<ref bean="goalDifferenceDefinition" />
+				<ref bean="goalDifferenceDefinition2" />
 				<ref bean="gamesPlayedDefinition" />
 				<ref bean="gamesWonDefinition" />
 			</list>

@@ -60,10 +60,15 @@ public class CalculationMapFactoryTest {
 		goalDifferenceDefinition.setCalculationClass("uk.co.mindbadger.footballresults.table.calculation.GoalDifferenceCalculation2");
 		goalDifferenceDefinition.setSequence(3);
 
+		AttributeDefinition goalDifferenceDefinition2 = new AttributeDefinition ();
+		goalDifferenceDefinition2.setCalculationClass("uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation");
+		goalDifferenceDefinition2.setSequence(3);
+		goalDifferenceDefinition2.setDynamicCalculation("{goalsScored}-{goalsConceded}");
+
 		rawAttributes.add(goalsConcededDefinition);
 		derivedAttributes.add(goalDifferenceDefinition);
 		rawAttributes.add(goalsScoredDefinition);
-
+		derivedAttributes.add(goalDifferenceDefinition2);
 
 		// When
 		List<AttributeDefinition> attributeDefinitions = objectUnderTest.getAttributeDefinitionList ();
@@ -72,15 +77,6 @@ public class CalculationMapFactoryTest {
 		assertEquals (goalsScoredDefinition, attributeDefinitions.get(0));
 		assertEquals (goalsConcededDefinition, attributeDefinitions.get(1));
 		assertEquals (goalDifferenceDefinition, attributeDefinitions.get(2));
-	}
-
-	@Test
-	public void shouldReturnASortedListOfAttributeDefinitions () {
-		// Given
-		
-		// When
-		
-		// Then
-		
+		assertEquals (goalDifferenceDefinition2, attributeDefinitions.get(3));
 	}
 }

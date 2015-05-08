@@ -7,7 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 public class Table<K,L,M> {
+	Logger logger = Logger.getLogger(Table.class);
+	
 	private Map<K, TableRow<K,L,M>> tableRows = new HashMap<K, TableRow<K,L,M>> ();
 
 	public Table (Table<K,L,M> previousTable) {
@@ -22,6 +26,7 @@ public class Table<K,L,M> {
 		Collection<TableRow<K,L,M>> values = tableRows.values();
 		List<TableRow<K,L,M>> list = new ArrayList<TableRow<K,L,M>>(values);
 		Collections.sort(list);
+				
 		return list;
 	}
 

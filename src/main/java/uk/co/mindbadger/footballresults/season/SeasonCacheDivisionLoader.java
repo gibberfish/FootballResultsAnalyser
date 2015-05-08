@@ -34,9 +34,10 @@ public class SeasonCacheDivisionLoader {
 		Table<String,String,String> tableForDate = createInitialTable(seasonDivision);
 		
 		for (Fixture<String> fixture : fixtures) {
-			seasonCacheFixtureAndTableLoader.loadFixture(fixture, fixture.getFixtureDate(), divisionCache);
-			
+			//TODO #1 Find out why the league positions aren't working
 			seasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForHomeAndAwayTeams(fixture, fixture.getFixtureDate(), divisionCache, tableForDate);
+
+			seasonCacheFixtureAndTableLoader.loadFixture(fixture, fixture.getFixtureDate(), divisionCache);
 			
 			if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
 				tableForDate = seasonCacheFixtureAndTableLoader.loadFixtureIntoTable(fixture, currentDate, divisionCache, tableForDate);

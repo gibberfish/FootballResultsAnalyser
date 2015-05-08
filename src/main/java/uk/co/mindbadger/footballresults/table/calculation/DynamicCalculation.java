@@ -8,6 +8,7 @@ public class DynamicCalculation extends Calculation {
 	private String calculationString;
 	protected Map<String,Float> values;
 	
+	//TODO #5 'Configure' instances of this class in Spring that use the granular classes
 	public DynamicCalculation (String calculationString, Map<String,Calculation> calculations) {
 		this.calculations = calculations;
 		this.calculationString = calculationString;

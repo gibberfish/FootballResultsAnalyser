@@ -1,6 +1,7 @@
 package uk.co.mindbadger.footballresults.season;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -10,6 +11,7 @@ import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresults.table.TableRowFactory;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
+import uk.co.mindbadger.utils.FixtureDateFormatter;
 
 public class SeasonCacheFixtureAndTableLoader {
 	Logger logger = Logger.getLogger(SeasonCacheFixtureAndTableLoader.class);
@@ -29,25 +31,35 @@ public class SeasonCacheFixtureAndTableLoader {
 
 		if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
 			logger.info("Load Fixture and Table Cache for " + fixture.toString());
-			
-			if (fixture.getFixtureDate() != currentDate) {
-				logger.debug("... The fixture date has changed from " + currentDate + " to " + fixture.getFixtureDate());
+
+			if (!FixtureDateFormatter.isSameDate(fixture.getFixtureDate(), currentDate)) {
+				logger.info("... The fixture date has changed from " + currentDate + " to " + fixture.getFixtureDate());
 				if (tableForDate != null) divisionCache.addTableOnDate(currentDate, tableForDate);
 				currentTable = tableFactory.createTableFromPreviousTable(tableForDate);
 			}
-	
+
 			currentTable.addRow(createTableRow(fixture.getHomeTeam(), tableForDate, fixture));
 			currentTable.addRow(createTableRow(fixture.getAwayTeam(), tableForDate, fixture));
 		} else {
 			logger.info("Not loading Table Cache - unplayed " + fixture.toString());
 		}
-		
+
 		return currentTable;
 	}
 	
 	public void loadTeamFixtureContextsForHomeAndAwayTeams (Fixture<String> fixture, Calendar currentDate, DivisionCache divisionCache, Table<String,String,String> tableForDate) {
 		TableRow<String, String, String> homeTableRow = tableForDate.getTableRowForTeam(fixture.getHomeTeam().getTeamId());
 		TableRow<String, String, String> awayTableRow = tableForDate.getTableRowForTeam(fixture.getAwayTeam().getTeamId());
+		
+		
+		
+		List<TableRow<String, String, String>> sortedTable = tableForDate.getSortedTable();
+		for (TableRow<String, String, String> row : sortedTable) {
+			logger.info("... loadTeamFixtureContextsForHomeAndAwayTeams, " + row.getTeam().getTeamName() + ", pos=" + row.getLeaguePosition() + ", table: " + tableForDate);
+		}
+		
+		
+		
 		int homeLeaguePosition = homeTableRow.getLeaguePosition();
 		int awayLeaguePosition = awayTableRow.getLeaguePosition();
 		

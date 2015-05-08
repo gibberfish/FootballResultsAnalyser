@@ -14,6 +14,7 @@ import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
+import uk.co.mindbadger.utils.FixtureDateFormatter;
 
 public class SeasonCacheDivisionLoader {
 	Logger logger = Logger.getLogger(SeasonCacheDivisionLoader.class);
@@ -31,22 +32,33 @@ public class SeasonCacheDivisionLoader {
 		List<Fixture<String>> fixtures = dao.getFixturesForDivisionInSeason(seasonDivision);
 		
 		Calendar currentDate = createInitialTableDate(seasonDivision.getSeason().getSeasonNumber());
-		Table<String,String,String> tableForDate = createInitialTable(seasonDivision);
+		Table<String,String,String> tableForCurrentDate = createInitialTable(seasonDivision);
+		Table<String,String,String> tableForPreviousDate = tableForCurrentDate;
 		
 		for (Fixture<String> fixture : fixtures) {
+			logger.info("About to process fixture: " + fixture);
+			
 			//TODO #1 Find out why the league positions aren't working
-			seasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForHomeAndAwayTeams(fixture, fixture.getFixtureDate(), divisionCache, tableForDate);
+			
+			if (!FixtureDateFormatter.isSameDate(fixture.getFixtureDate(), currentDate)) {
+				logger.info("The date has changed to: " + FixtureDateFormatter.format(fixture.getFixtureDate()));
+				if (tableForCurrentDate != null) divisionCache.addTableOnDate(currentDate, tableForCurrentDate);
+				tableForPreviousDate = tableForCurrentDate;
+				tableForCurrentDate = createTableFromPreviousTable (tableForPreviousDate);
+			}
+			
+			seasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForHomeAndAwayTeams(fixture, fixture.getFixtureDate(), divisionCache, tableForPreviousDate);
 
 			seasonCacheFixtureAndTableLoader.loadFixture(fixture, fixture.getFixtureDate(), divisionCache);
 			
 			if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
-				tableForDate = seasonCacheFixtureAndTableLoader.loadFixtureIntoTable(fixture, currentDate, divisionCache, tableForDate);
+				tableForCurrentDate = seasonCacheFixtureAndTableLoader.loadFixtureIntoTable(fixture, currentDate, divisionCache, tableForCurrentDate);
 				currentDate = fixture.getFixtureDate();
 			}
 		}
 		
 		// Must save the last date
-		divisionCache.addTableOnDate(currentDate, tableForDate);
+		divisionCache.addTableOnDate(currentDate, tableForCurrentDate);
 	}
 	
 	protected Calendar createInitialTableDate (Integer seasonNumber) {
@@ -67,6 +79,10 @@ public class SeasonCacheDivisionLoader {
 		return initialTable;
 	}
 
+	private Table<String, String, String> createTableFromPreviousTable (Table<String, String, String> previousTable) {
+		return tableFactory.createTableFromPreviousTable(previousTable);
+	}
+	
 	public SeasonCacheFixtureAndTableLoader getSeasonCacheFixtureAndTableLoader() {
 		return seasonCacheFixtureAndTableLoader;
 	}

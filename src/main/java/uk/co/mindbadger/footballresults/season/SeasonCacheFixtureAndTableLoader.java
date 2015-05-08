@@ -32,11 +32,11 @@ public class SeasonCacheFixtureAndTableLoader {
 		if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
 			logger.info("Load Fixture and Table Cache for " + fixture.toString());
 
-			if (!FixtureDateFormatter.isSameDate(fixture.getFixtureDate(), currentDate)) {
-				logger.info("... The fixture date has changed from " + currentDate + " to " + fixture.getFixtureDate());
-				if (tableForDate != null) divisionCache.addTableOnDate(currentDate, tableForDate);
-				currentTable = tableFactory.createTableFromPreviousTable(tableForDate);
-			}
+//			if (!FixtureDateFormatter.isSameDate(fixture.getFixtureDate(), currentDate)) {
+//				logger.info("... The fixture date has changed from " + currentDate + " to " + fixture.getFixtureDate());
+//				if (tableForDate != null) divisionCache.addTableOnDate(currentDate, tableForDate);
+//				currentTable = tableFactory.createTableFromPreviousTable(tableForDate);
+//			}
 
 			currentTable.addRow(createTableRow(fixture.getHomeTeam(), tableForDate, fixture));
 			currentTable.addRow(createTableRow(fixture.getAwayTeam(), tableForDate, fixture));

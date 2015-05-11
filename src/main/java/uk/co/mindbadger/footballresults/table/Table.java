@@ -35,6 +35,7 @@ public class Table<K,L,M> {
 	}
 	
 	public void addRow (TableRow<K,L,M> tableRow) {
+		logger.info("Adding " + tableRow);
 		tableRows.put(tableRow.getTeam().getTeamId(), tableRow);
 	}
 	

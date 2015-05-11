@@ -43,7 +43,7 @@ public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	
 	@Override
 	public String toString () {
-		return "TableRow: " + team.getTeamName();
+		return "TableRow[team:" + team.getTeamName() + ",points:" + getAttribute(POINTS) + ",scored:" + getAttribute(GOALS_SCORED) + ",condeded:" + getAttribute(GOALS_CONCEDED) + "]";
 	}
 	
 	public int getLeaguePosition() {

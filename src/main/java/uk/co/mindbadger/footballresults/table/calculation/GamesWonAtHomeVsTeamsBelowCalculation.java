@@ -20,20 +20,20 @@ public class GamesWonAtHomeVsTeamsBelowCalculation extends CalculationForFixture
 		
 		boolean vsTeamAbove = false;
 		
-		if (previousTableRow != null) {
-			Table<String,String,String> table = previousTableRow.getParentTable();
+		if (previousTable != null) {
+			Table<String,String,String> table = previousTable.getParentTable();
 			TableRow<String,String,String> oppositionRow = null;
 			if (homeFixture) {
 				oppositionRow = table.getTableRowForTeam(fixture.getAwayTeam().getTeamId());
 			} else {
 				oppositionRow = table.getTableRowForTeam(fixture.getHomeTeam().getTeamId());
 			}
-			vsTeamAbove = oppositionRow.getLeaguePosition() < previousTableRow.getLeaguePosition();
+			vsTeamAbove = oppositionRow.getLeaguePosition() < previousTable.getLeaguePosition();
 		}
 		
 		int previousGamesWon = 0;
-		if (previousTableRow != null) {
-			previousGamesWon = previousTableRow.getAttribute(TableRow.GAMES_WON);
+		if (previousTable != null) {
+			previousGamesWon = previousTable.getAttribute(TableRow.GAMES_WON);
 		}
 
 		return ((goalsFor > goalsAgainst) && homeFixture && !vsTeamAbove ? previousGamesWon + 1 : previousGamesWon);

@@ -16,8 +16,8 @@ public class GamesWonAwayCalculation extends CalculationForFixture<String, Strin
 		int goalsAgainst = (homeFixture ? fixture.getAwayGoals() : fixture.getHomeGoals());
 		
 		int previousGamesWon = 0;
-		if (previousTableRow != null) {
-			previousGamesWon = previousTableRow.getAttribute(TableRow.GAMES_WON_AWAY);
+		if (previousTable != null) {
+			previousGamesWon = previousTable.getAttribute(TableRow.GAMES_WON_AWAY);
 		}
 
 		return ((goalsFor > goalsAgainst) && !homeFixture ? previousGamesWon + 1 : previousGamesWon);

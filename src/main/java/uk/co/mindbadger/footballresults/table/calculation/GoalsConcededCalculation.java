@@ -15,8 +15,8 @@ public class GoalsConcededCalculation extends CalculationForFixture<String, Stri
 		int goalsAgainst = (homeFixture ? fixture.getAwayGoals() : fixture.getHomeGoals());
 		
 		int previousGoalsAgainst = 0;
-		if (previousTableRow != null) {
-			previousGoalsAgainst = previousTableRow.getAttribute(TableRow.GOALS_CONCEDED);
+		if (previousTable != null) {
+			previousGoalsAgainst = previousTable.getAttribute(TableRow.GOALS_CONCEDED);
 		}
 
 		return previousGoalsAgainst + goalsAgainst;

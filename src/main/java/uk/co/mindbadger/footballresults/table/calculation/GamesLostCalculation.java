@@ -16,8 +16,8 @@ public class GamesLostCalculation extends CalculationForFixture<String, String, 
 		int goalsAgainst = (homeFixture ? fixture.getAwayGoals() : fixture.getHomeGoals());
 		
 		int previousGamesLost = 0;
-		if (previousTableRow != null) {
-			previousGamesLost = previousTableRow.getAttribute(TableRow.GAMES_LOST);
+		if (previousTable != null) {
+			previousGamesLost = previousTable.getAttribute(TableRow.GAMES_LOST);
 		}
 
 		return (goalsFor < goalsAgainst ? previousGamesLost + 1 : previousGamesLost);

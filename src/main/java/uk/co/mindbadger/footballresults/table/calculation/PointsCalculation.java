@@ -20,8 +20,8 @@ public class PointsCalculation extends CalculationForFixture<String, String, Str
 		if (goalsFor == goalsAgainst) newPoints++;
 		
 		int previousPoints = 0;
-		if (previousTableRow != null) {
-			previousPoints = previousTableRow.getAttribute(TableRow.POINTS);
+		if (previousTable != null) {
+			previousPoints = previousTable.getAttribute(TableRow.POINTS);
 		}
 
 		return (previousPoints + newPoints);

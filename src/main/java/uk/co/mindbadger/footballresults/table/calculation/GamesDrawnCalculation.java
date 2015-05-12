@@ -16,8 +16,8 @@ public class GamesDrawnCalculation extends CalculationForFixture<String, String,
 		int goalsAgainst = (homeFixture ? fixture.getAwayGoals() : fixture.getHomeGoals());
 		
 		int previousGamesDrawn = 0;
-		if (previousTableRow != null) {
-			previousGamesDrawn = previousTableRow.getAttribute(TableRow.GAMES_DRAWN);
+		if (previousTable != null) {
+			previousGamesDrawn = previousTable.getAttribute(TableRow.GAMES_DRAWN);
 		}
 
 		return (goalsFor == goalsAgainst ? previousGamesDrawn + 1 : previousGamesDrawn);

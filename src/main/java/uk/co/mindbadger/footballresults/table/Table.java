@@ -42,4 +42,9 @@ public class Table<K,L,M> {
 	public TableRow<K,L,M> getTableRowForTeam (K teamId) {
 		return tableRows.get(teamId);
 	}
+	
+	//TODO need test for this
+	public int getLeaguePositionForTeamWithId(K teamId) {
+		return (getSortedTable().indexOf(getTableRowForTeam(teamId))+1);
+	}
 }

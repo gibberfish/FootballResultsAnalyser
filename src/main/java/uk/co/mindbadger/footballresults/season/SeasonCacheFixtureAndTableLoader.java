@@ -55,7 +55,7 @@ public class SeasonCacheFixtureAndTableLoader {
 		
 		List<TableRow<String, String, String>> sortedTable = tableForDate.getSortedTable();
 		for (TableRow<String, String, String> row : sortedTable) {
-			logger.info("... loadTeamFixtureContextsForHomeAndAwayTeams, " + row.getTeam().getTeamName() + ", pos=" + row.getLeaguePosition() + ", table: " + tableForDate);
+			logger.debug("... loadTeamFixtureContextsForHomeAndAwayTeams, " + row.getTeam().getTeamName() + ", pos=" + row.getLeaguePosition() + ", table: " + tableForDate);
 		}
 		
 		

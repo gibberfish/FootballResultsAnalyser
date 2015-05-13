@@ -31,13 +31,6 @@ public class SeasonCacheFixtureAndTableLoader {
 
 		if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
 			logger.info("Load Fixture and Table Cache for " + fixture.toString());
-
-//			if (!FixtureDateFormatter.isSameDate(fixture.getFixtureDate(), currentDate)) {
-//				logger.info("... The fixture date has changed from " + currentDate + " to " + fixture.getFixtureDate());
-//				if (tableForDate != null) divisionCache.addTableOnDate(currentDate, tableForDate);
-//				currentTable = tableFactory.createTableFromPreviousTable(tableForDate);
-//			}
-
 			currentTable.addRow(createTableRow(fixture.getHomeTeam(), tableForDate, fixture));
 			currentTable.addRow(createTableRow(fixture.getAwayTeam(), tableForDate, fixture));
 		} else {
@@ -48,20 +41,8 @@ public class SeasonCacheFixtureAndTableLoader {
 	}
 	
 	public void loadTeamFixtureContextsForHomeAndAwayTeams (Fixture<String> fixture, Calendar currentDate, DivisionCache divisionCache, Table<String,String,String> tableForDate) {
-		TableRow<String, String, String> homeTableRow = tableForDate.getTableRowForTeam(fixture.getHomeTeam().getTeamId());
-		TableRow<String, String, String> awayTableRow = tableForDate.getTableRowForTeam(fixture.getAwayTeam().getTeamId());
-		
-		
-		
-		List<TableRow<String, String, String>> sortedTable = tableForDate.getSortedTable();
-		for (TableRow<String, String, String> row : sortedTable) {
-			logger.debug("... loadTeamFixtureContextsForHomeAndAwayTeams, " + row.getTeam().getTeamName() + ", pos=" + row.getLeaguePosition() + ", table: " + tableForDate);
-		}
-		
-		
-		
-		int homeLeaguePosition = homeTableRow.getLeaguePosition();
-		int awayLeaguePosition = awayTableRow.getLeaguePosition();
+		int homeLeaguePosition = tableForDate.getLeaguePositionForTeamWithId(fixture.getHomeTeam().getTeamId());
+		int awayLeaguePosition = tableForDate.getLeaguePositionForTeamWithId(fixture.getAwayTeam().getTeamId());
 		
 		TeamFixtureContext homeContext = teamFixtureContextFactory.createTeamFixtureContext();
 		homeContext.setAtHome(true);

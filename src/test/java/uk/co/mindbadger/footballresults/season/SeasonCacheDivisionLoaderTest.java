@@ -95,7 +95,6 @@ public class SeasonCacheDivisionLoaderTest {
 	}
 
 	//TODO Fix this test!!!
-	@Ignore
 	@Test
 	public void shouldLoadDivisions () {
 		// Given

@@ -38,8 +38,6 @@ public class SeasonCacheDivisionLoader {
 		for (Fixture<String> fixture : fixtures) {
 			logger.info("About to process fixture: " + fixture);
 			
-			//TODO #1 Find out why the league positions aren't working
-			
 			if (!FixtureDateFormatter.isSameDate(fixture.getFixtureDate(), currentDate)) {
 				logger.info("The date has changed to: " + FixtureDateFormatter.format(fixture.getFixtureDate()));
 				if (tableForCurrentDate != null) divisionCache.addTableOnDate(currentDate, tableForCurrentDate);

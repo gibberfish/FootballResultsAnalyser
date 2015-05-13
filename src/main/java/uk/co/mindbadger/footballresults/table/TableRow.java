@@ -46,16 +46,6 @@ public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	
 	@Override
 	public String toString () {
-		return "TableRow[team:" + team.getTeamName() + ",points:" + getAttribute(POINTS) + ",scored:" + getAttribute(GOALS_SCORED) + ",condeded:" + getAttribute(GOALS_CONCEDED) + "]";
+		return "TableRow[team:" + team.getTeamName() + ",points:" + getAttribute(POINTS) + ",scored:" + getAttribute(GOALS_SCORED) + ",conceded:" + getAttribute(GOALS_CONCEDED) + "]";
 	}
-	
-	
-	//TODO This doesn't work, as a single row could be associated to a number of different tables (can only get the league pos from the table)
-//	public int getLeaguePosition() {
-//		return parentTable.getIndexOfTableRow(this);
-//	}
-//
-//	public Table<K,L,M> getParentTable () {
-//		return parentTable;
-//	}
 }

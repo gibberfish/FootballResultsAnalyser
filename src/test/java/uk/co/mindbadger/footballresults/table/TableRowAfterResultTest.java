@@ -191,19 +191,6 @@ public class TableRowAfterResultTest {
 	}
 
 	@Test
-	public void shouldGetParentTable () {
-		// Given
-		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture);
-		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
-		
-		// When
-		Table<String,String,String> parentTable = objectUnderTest.getParentTable();
-
-		// Then
-		assertEquals (mockParentTable, parentTable);
-	}
-
-	@Test
 	public void shouldThrowExceptionWhenInvalidAttributeRequested () {
 		// Given
 		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture);

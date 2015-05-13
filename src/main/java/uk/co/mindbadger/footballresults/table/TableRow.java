@@ -3,6 +3,9 @@ package uk.co.mindbadger.footballresults.table;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
+	public static final String GAMES_WON_AT_HOME_VS_ABOVE = "gamesWonAtHomeVsAbove";
+	public static final String GAMES_WON_AT_HOME_VS_BELOW = "gamesWonAtHomevsBelow";
+	
 	public static final String GAMES_WON = "gamesWon";
 	public static final String GAMES_WON_AT_HOME = "gamesWonAtHome";
 	public static final String GAMES_WON_AWAY = "gamesWonAway";

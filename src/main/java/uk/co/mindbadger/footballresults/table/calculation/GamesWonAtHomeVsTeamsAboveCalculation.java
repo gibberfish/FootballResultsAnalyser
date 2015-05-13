@@ -20,7 +20,7 @@ public class GamesWonAtHomeVsTeamsAboveCalculation extends CalculationForFixture
 		boolean won = goalsFor > goalsAgainst;
 		
 		return ((won && fixtureTeamContext.isAtHome() && fixtureTeamContext.isPlayingTeamAbove()) ?
-				previousTableRow.getAttribute(TableRow.GAMES_WON) + 1 : previousTableRow.getAttribute(TableRow.GAMES_WON));
+				previousTableRow.getAttribute(TableRow.GAMES_WON_AT_HOME_VS_ABOVE) + 1 : previousTableRow.getAttribute(TableRow.GAMES_WON_AT_HOME_VS_ABOVE));
 	}
 
 }

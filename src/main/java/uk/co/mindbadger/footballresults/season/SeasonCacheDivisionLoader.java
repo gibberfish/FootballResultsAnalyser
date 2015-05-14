@@ -32,26 +32,30 @@ public class SeasonCacheDivisionLoader {
 		List<Fixture<String>> fixtures = dao.getFixturesForDivisionInSeason(seasonDivision);
 		
 		Calendar currentDate = createInitialTableDate(seasonDivision.getSeason().getSeasonNumber());
+		Table<String,String,String> tableForPreviousDate = null;
 		Table<String,String,String> tableForCurrentDate = createInitialTable(seasonDivision);
-		Table<String,String,String> tableForPreviousDate = tableForCurrentDate;
 		
 		for (Fixture<String> fixture : fixtures) {
 			logger.info("About to process fixture: " + fixture);
 			
-			if (!FixtureDateFormatter.isSameDate(fixture.getFixtureDate(), currentDate)) {
-				logger.info("The date has changed to: " + FixtureDateFormatter.format(fixture.getFixtureDate()));
+			Calendar fixtureDate = fixture.getFixtureDate();
+			System.err.println("fixtureDate: "+ FixtureDateFormatter.format(fixtureDate));
+			System.err.println("currentDate: "+ FixtureDateFormatter.format(currentDate));
+			if (!FixtureDateFormatter.isSameDate(fixtureDate, currentDate)) {
+				System.err.println("The date has changed to: " + FixtureDateFormatter.format(fixtureDate));
 				if (tableForCurrentDate != null) divisionCache.addTableOnDate(currentDate, tableForCurrentDate);
 				tableForPreviousDate = tableForCurrentDate;
 				tableForCurrentDate = createTableFromPreviousTable (tableForPreviousDate);
+				currentDate = fixtureDate;
+				divisionCache.addTableOnDate(currentDate, tableForCurrentDate);
 			}
 			
-			seasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForHomeAndAwayTeams(fixture, fixture.getFixtureDate(), divisionCache, tableForPreviousDate);
+			seasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForHomeAndAwayTeams(fixture, fixtureDate, divisionCache, tableForPreviousDate);
 
-			seasonCacheFixtureAndTableLoader.loadFixture(fixture, fixture.getFixtureDate(), divisionCache);
+			seasonCacheFixtureAndTableLoader.loadFixture(fixture, fixtureDate, divisionCache);
 			
 			if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
-				tableForCurrentDate = seasonCacheFixtureAndTableLoader.loadFixtureIntoTable(fixture, currentDate, divisionCache, tableForCurrentDate);
-				currentDate = fixture.getFixtureDate();
+				tableForCurrentDate = seasonCacheFixtureAndTableLoader.loadFixtureIntoTable(fixture, divisionCache, tableForCurrentDate);
 			}
 		}
 		

@@ -26,7 +26,7 @@ public class SeasonCacheFixtureAndTableLoader {
 		divisionCache.addFixtureOnDate(currentDate, fixture);
 	}
 	
-	public Table<String,String,String> loadFixtureIntoTable (Fixture<String> fixture, Calendar currentDate, DivisionCache divisionCache, Table<String,String,String> tableForDate) {
+	public Table<String,String,String> loadFixtureIntoTable (Fixture<String> fixture, DivisionCache divisionCache, Table<String,String,String> tableForDate) {
 		Table<String,String,String> currentTable = tableForDate;
 
 		if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {

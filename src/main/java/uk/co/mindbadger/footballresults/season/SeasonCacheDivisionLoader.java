@@ -39,24 +39,16 @@ public class SeasonCacheDivisionLoader {
 			logger.info("About to process fixture: " + fixture);
 			
 			Calendar fixtureDate = fixture.getFixtureDate();
-			System.err.println("fixtureDate: "+ FixtureDateFormatter.format(fixtureDate));
-			System.err.println("currentDate: "+ FixtureDateFormatter.format(currentDate));
 			if (!FixtureDateFormatter.isSameDate(fixtureDate, currentDate)) {
-				System.err.println("The date has changed to: " + FixtureDateFormatter.format(fixtureDate));
-				if (tableForCurrentDate != null) divisionCache.addTableOnDate(currentDate, tableForCurrentDate);
-				tableForPreviousDate = tableForCurrentDate;
-				tableForCurrentDate = createTableFromPreviousTable (tableForPreviousDate);
-				currentDate = fixtureDate;
 				divisionCache.addTableOnDate(currentDate, tableForCurrentDate);
+				tableForPreviousDate = tableForCurrentDate;
+				tableForCurrentDate = tableFactory.createTableFromPreviousTable(tableForPreviousDate);
+				currentDate = fixtureDate;
 			}
 			
 			seasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForHomeAndAwayTeams(fixture, fixtureDate, divisionCache, tableForPreviousDate);
-
 			seasonCacheFixtureAndTableLoader.loadFixture(fixture, fixtureDate, divisionCache);
-			
-			if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
-				tableForCurrentDate = seasonCacheFixtureAndTableLoader.loadFixtureIntoTable(fixture, divisionCache, tableForCurrentDate);
-			}
+			seasonCacheFixtureAndTableLoader.loadFixtureIntoTable(fixture, tableForCurrentDate);
 		}
 		
 		// Must save the last date
@@ -81,10 +73,6 @@ public class SeasonCacheDivisionLoader {
 		return initialTable;
 	}
 
-	private Table<String, String, String> createTableFromPreviousTable (Table<String, String, String> previousTable) {
-		return tableFactory.createTableFromPreviousTable(previousTable);
-	}
-	
 	public SeasonCacheFixtureAndTableLoader getSeasonCacheFixtureAndTableLoader() {
 		return seasonCacheFixtureAndTableLoader;
 	}

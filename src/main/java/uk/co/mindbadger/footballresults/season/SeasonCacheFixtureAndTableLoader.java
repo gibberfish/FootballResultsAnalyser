@@ -26,18 +26,14 @@ public class SeasonCacheFixtureAndTableLoader {
 		divisionCache.addFixtureOnDate(currentDate, fixture);
 	}
 	
-	public Table<String,String,String> loadFixtureIntoTable (Fixture<String> fixture, DivisionCache divisionCache, Table<String,String,String> tableForDate) {
-		Table<String,String,String> currentTable = tableForDate;
-
+	public void loadFixtureIntoTable (Fixture<String> fixture, Table<String,String,String> tableForDate) {
 		if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
 			logger.info("Load Fixture and Table Cache for " + fixture.toString());
-			currentTable.addRow(createTableRow(fixture.getHomeTeam(), tableForDate, fixture));
-			currentTable.addRow(createTableRow(fixture.getAwayTeam(), tableForDate, fixture));
+			tableForDate.addRow(createTableRow(fixture.getHomeTeam(), tableForDate, fixture));
+			tableForDate.addRow(createTableRow(fixture.getAwayTeam(), tableForDate, fixture));
 		} else {
 			logger.info("Not loading Table Cache - unplayed " + fixture.toString());
 		}
-
-		return currentTable;
 	}
 	
 	public void loadTeamFixtureContextsForHomeAndAwayTeams (Fixture<String> fixture, Calendar currentDate, DivisionCache divisionCache, Table<String,String,String> tableForDate) {

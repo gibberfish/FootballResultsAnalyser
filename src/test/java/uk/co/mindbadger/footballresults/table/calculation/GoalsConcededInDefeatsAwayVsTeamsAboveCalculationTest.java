@@ -15,9 +15,8 @@ import uk.co.mindbadger.footballresults.table.TableRowAfterResult;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-//TODO implement
 public class GoalsConcededInDefeatsAwayVsTeamsAboveCalculationTest {
-	private GamesLostAwayVsTeamsAboveCalculation objectUnderTest;
+	private GoalsConcededInDefeatsAwayVsTeamsAboveCalculation objectUnderTest;
 	
 	@Mock
 	private TableRowAfterResult<String,String,String> mockPreviousTableRow;
@@ -46,9 +45,9 @@ public class GoalsConcededInDefeatsAwayVsTeamsAboveCalculationTest {
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(true);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE)).thenReturn(3);
 		
-		objectUnderTest = new GamesLostAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
+		objectUnderTest = new GoalsConcededInDefeatsAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
 		// When
 		int result = objectUnderTest.calculate();
@@ -64,9 +63,9 @@ public class GoalsConcededInDefeatsAwayVsTeamsAboveCalculationTest {
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(false);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE)).thenReturn(3);
 		
-		objectUnderTest = new GamesLostAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
+		objectUnderTest = new GoalsConcededInDefeatsAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
 		// When
 		int result = objectUnderTest.calculate();
@@ -82,9 +81,9 @@ public class GoalsConcededInDefeatsAwayVsTeamsAboveCalculationTest {
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(true);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE)).thenReturn(3);
 		
-		objectUnderTest = new GamesLostAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
+		objectUnderTest = new GoalsConcededInDefeatsAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
 		// When
 		int result = objectUnderTest.calculate();
@@ -100,9 +99,9 @@ public class GoalsConcededInDefeatsAwayVsTeamsAboveCalculationTest {
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(false);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE)).thenReturn(3);
 		
-		objectUnderTest = new GamesLostAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
+		objectUnderTest = new GoalsConcededInDefeatsAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
 		// When
 		int result = objectUnderTest.calculate();
@@ -118,9 +117,9 @@ public class GoalsConcededInDefeatsAwayVsTeamsAboveCalculationTest {
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(true);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(3);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE)).thenReturn(3);
 		
-		objectUnderTest = new GamesLostAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
+		objectUnderTest = new GoalsConcededInDefeatsAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
 		// When
 		int result = objectUnderTest.calculate();
@@ -136,9 +135,9 @@ public class GoalsConcededInDefeatsAwayVsTeamsAboveCalculationTest {
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(false);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(3);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE)).thenReturn(3);
 		
-		objectUnderTest = new GamesLostAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
+		objectUnderTest = new GoalsConcededInDefeatsAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
 		// When
 		int result = objectUnderTest.calculate();
@@ -154,9 +153,9 @@ public class GoalsConcededInDefeatsAwayVsTeamsAboveCalculationTest {
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(true);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(3);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE)).thenReturn(3);
 		
-		objectUnderTest = new GamesLostAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
+		objectUnderTest = new GoalsConcededInDefeatsAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
 		// When
 		int result = objectUnderTest.calculate();
@@ -172,9 +171,9 @@ public class GoalsConcededInDefeatsAwayVsTeamsAboveCalculationTest {
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(false);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(3);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE)).thenReturn(3);
 		
-		objectUnderTest = new GamesLostAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
+		objectUnderTest = new GoalsConcededInDefeatsAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
 		// When
 		int result = objectUnderTest.calculate();
@@ -190,9 +189,9 @@ public class GoalsConcededInDefeatsAwayVsTeamsAboveCalculationTest {
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(true);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE)).thenReturn(3);
 		
-		objectUnderTest = new GamesLostAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
+		objectUnderTest = new GoalsConcededInDefeatsAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
 		// When
 		int result = objectUnderTest.calculate();
@@ -208,9 +207,9 @@ public class GoalsConcededInDefeatsAwayVsTeamsAboveCalculationTest {
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(false);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE)).thenReturn(3);
 		
-		objectUnderTest = new GamesLostAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
+		objectUnderTest = new GoalsConcededInDefeatsAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
 		// When
 		int result = objectUnderTest.calculate();
@@ -226,15 +225,15 @@ public class GoalsConcededInDefeatsAwayVsTeamsAboveCalculationTest {
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(true);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE)).thenReturn(3);
 		
-		objectUnderTest = new GamesLostAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
+		objectUnderTest = new GoalsConcededInDefeatsAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
 		// When
 		int result = objectUnderTest.calculate();
 		
 		// Then
-		assertEquals (4, result);
+		assertEquals (6, result);
 	}
 
 	@Test
@@ -244,9 +243,9 @@ public class GoalsConcededInDefeatsAwayVsTeamsAboveCalculationTest {
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(false);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE)).thenReturn(3);
+		when (mockPreviousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE)).thenReturn(3);
 		
-		objectUnderTest = new GamesLostAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
+		objectUnderTest = new GoalsConcededInDefeatsAwayVsTeamsAboveCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
 		// When
 		int result = objectUnderTest.calculate();

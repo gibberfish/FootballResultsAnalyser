@@ -1,7 +1,6 @@
 package uk.co.mindbadger.footballresults.table.calculation;
 
 import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
-import uk.co.mindbadger.footballresults.table.Table;
 import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
@@ -11,7 +10,6 @@ public class GoalsConcededInWinsAtHomeVsTeamsBelowCalculation extends Calculatio
 		super(team, fixture, fixtureTeamContext, oppositionTeamContext, previousTableRow);
 	}
 
-	//TODO #3 Change the existing granular classes to use the team Contexts
 	@Override
 	public int calculate(boolean reCalculate) {
 		int goalsFor = (fixtureTeamContext.isAtHome() ? fixture.getHomeGoals() : fixture.getAwayGoals());
@@ -20,7 +18,7 @@ public class GoalsConcededInWinsAtHomeVsTeamsBelowCalculation extends Calculatio
 		boolean won = goalsFor > goalsAgainst;
 		
 		return ((won && !fixtureTeamContext.isAtHome() && fixtureTeamContext.isPlayingTeamAbove()) ?
-				previousTableRow.getAttribute(TableRow.GAMES_WON_AT_HOME_VS_BELOW) + 1 : previousTableRow.getAttribute(TableRow.GAMES_WON_AT_HOME_VS_BELOW));
+				previousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_WINS_AT_HOME_VS_BELOW) + goalsAgainst : previousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_WINS_AT_HOME_VS_BELOW));
 	}
 
 }

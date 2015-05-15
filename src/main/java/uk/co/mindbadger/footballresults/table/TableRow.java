@@ -19,6 +19,33 @@ public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	public static final String GOALS_SCORED_IN_DEFEATS_AT_HOME_VS_ABOVE = "goalsScoredInDefeatsAtHomeVsAbove";
 	public static final String GOALS_SCORED_IN_DRAWS_AT_HOME_VS_ABOVE = "goalsScoredInDrawsAtHomeVsAbove";
 	public static final String GOALS_SCORED_IN_WINS_AT_HOME_VS_ABOVE = "goalsScoredInWinsAtHomeVsAbove";
+	public static final String GOALS_SCORED_IN_DEFEATS_AWAY_VS_ABOVE = "goalsScoredInDefeatsAwayVsAbove";
+	public static final String GOALS_SCORED_IN_DRAWS_AWAY_VS_ABOVE = "goalsScoredInDrawsAwayVsAbove";
+	public static final String GOALS_SCORED_IN_WINS_AWAY_VS_ABOVE = "goalsScoredInWinsAwayVsAbove";
+	public static final String GOALS_SCORED_IN_DEFEATS_AT_HOME_VS_BELOW = "goalsScoredInDefeatsAtHomeVsBelow";
+	public static final String GOALS_SCORED_IN_DRAWS_AT_HOME_VS_BELOW = "goalsScoredInDrawsAtHomeVsBelow";
+	public static final String GOALS_SCORED_IN_WINS_AT_HOME_VS_BELOW = "goalsScoredInWinsAtHomeVsBelow";
+	public static final String GOALS_SCORED_IN_DEFEATS_AWAY_VS_BELOW = "goalsScoredInDefeatsAwayVsBelow";
+	public static final String GOALS_SCORED_IN_DRAWS_AWAY_VS_BELOW = "goalsScoredInDrawsAwayVsBelow";
+	public static final String GOALS_SCORED_IN_WINS_AWAY_VS_BELOW = "goalsScoredInWinsAwayVsBelow";
+
+	public static final String GOALS_CONCEDED_IN_DEFEATS_AT_HOME_VS_ABOVE = "goalsConcededInDefeatsAtHomeVsAbove";
+	public static final String GOALS_CONCEDED_IN_DRAWS_AT_HOME_VS_ABOVE = "goalsConcededInDrawsAtHomeVsAbove";
+	public static final String GOALS_CONCEDED_IN_WINS_AT_HOME_VS_ABOVE = "goalsConcededInWinsAtHomeVsAbove";
+	public static final String GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE = "goalsConcededInDefeatsAwayVsAbove";
+	public static final String GOALS_CONCEDED_IN_DRAWS_AWAY_VS_ABOVE = "goalsConcededInDrawsAwayVsAbove";
+	public static final String GOALS_CONCEDED_IN_WINS_AWAY_VS_ABOVE = "goalsConcededInWinsAwayVsAbove";
+	public static final String GOALS_CONCEDED_IN_DEFEATS_AT_HOME_VS_BELOW = "goalsConcededInDefeatsAtHomeVsBelow";
+	public static final String GOALS_CONCEDED_IN_DRAWS_AT_HOME_VS_BELOW = "goalsConcededInDrawsAtHomeVsBelow";
+	public static final String GOALS_CONCEDED_IN_WINS_AT_HOME_VS_BELOW = "goalsConcededInWinsAtHomeVsBelow";
+	public static final String GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_BELOW = "goalsConcededInDefeatsAwayVsBelow";
+	public static final String GOALS_CONCEDED_IN_DRAWS_AWAY_VS_BELOW = "goalsConcededInDrawsAwayVsBelow";
+	public static final String GOALS_CONCEDED_IN_WINS_AWAY_VS_BELOW = "goalsConcededInWinsAwayVsBelow";
+
+	
+	
+	
+	
 	
 	public static final String GOALS_SCORED_AT_HOME_VS_BELOW = "goalsScoredAtHomeVsBelow";
 	public static final String GOALS_SCORED_AWAY_VS_ABOVE = "goalsScoredAwayVsAbove";

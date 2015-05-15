@@ -5,7 +5,6 @@ import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-//TODO 999 The use of generics has gone wild!! Need to standardise on Strings for IDs
 public class GoalsScoredInDrawsAwayVsTeamsBelowCalculation extends CalculationForFixture<String, String, String> {
 	public GoalsScoredInDrawsAwayVsTeamsBelowCalculation(Team<String> team, Fixture<String> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext, TableRow<String,String,String> previousTableRow) {
 		super(team, fixture, fixtureTeamContext, oppositionTeamContext, previousTableRow);
@@ -20,7 +19,7 @@ public class GoalsScoredInDrawsAwayVsTeamsBelowCalculation extends CalculationFo
 		boolean drawn = goalsFor == goalsAgainst;
 		
 		return ((drawn && !fixtureTeamContext.isAtHome() && !fixtureTeamContext.isPlayingTeamAbove()) ?
-				previousTableRow.getAttribute(TableRow.GAMES_DRAWN_AWAY_VS_BELOW) + 1 : previousTableRow.getAttribute(TableRow.GAMES_DRAWN_AWAY_VS_BELOW));
+				previousTableRow.getAttribute(TableRow.GOALS_SCORED_IN_DRAWS_AWAY_VS_BELOW) + goalsFor : previousTableRow.getAttribute(TableRow.GOALS_SCORED_IN_DRAWS_AWAY_VS_BELOW));
 	}
 
 }

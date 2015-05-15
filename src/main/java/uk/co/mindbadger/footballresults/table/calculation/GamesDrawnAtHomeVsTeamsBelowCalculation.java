@@ -11,7 +11,6 @@ public class GamesDrawnAtHomeVsTeamsBelowCalculation extends CalculationForFixtu
 		super(team, fixture, fixtureTeamContext, oppositionTeamContext, previousTableRow);
 	}
 
-	//TODO #3 Change the existing granular classes to use the team Contexts
 	@Override
 	public int calculate(boolean reCalculate) {
 		int goalsFor = (fixtureTeamContext.isAtHome() ? fixture.getHomeGoals() : fixture.getAwayGoals());
@@ -19,7 +18,7 @@ public class GamesDrawnAtHomeVsTeamsBelowCalculation extends CalculationForFixtu
 		
 		boolean drawn = goalsFor == goalsAgainst;
 		
-		return ((drawn && !fixtureTeamContext.isAtHome() && fixtureTeamContext.isPlayingTeamAbove()) ?
+		return ((drawn && fixtureTeamContext.isAtHome() && !fixtureTeamContext.isPlayingTeamAbove()) ?
 				previousTableRow.getAttribute(TableRow.GAMES_DRAWN_AT_HOME_VS_BELOW) + 1 : previousTableRow.getAttribute(TableRow.GAMES_DRAWN_AT_HOME_VS_BELOW));
 	}
 

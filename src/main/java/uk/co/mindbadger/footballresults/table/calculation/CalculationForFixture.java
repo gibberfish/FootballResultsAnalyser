@@ -13,7 +13,6 @@ public abstract class CalculationForFixture<K,L,M> extends Calculation {
 	protected TeamFixtureContext fixtureTeamContext;
 	protected TeamFixtureContext oppositionTeamContext;
 	
-	//TODO #1 Implement the remaining granular classes
 	public CalculationForFixture (Team<K> team, Fixture<K> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext, TableRow<K,L,M> previousTableRow) {
 		this.team = team;
 		this.previousTableRow = previousTableRow;

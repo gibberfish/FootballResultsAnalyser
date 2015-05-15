@@ -5,7 +5,6 @@ import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-//TODO 999 The use of generics has gone wild!! Need to standardise on Strings for IDs
 public class GamesDrawnAwayVsTeamsAboveCalculation extends CalculationForFixture<String, String, String> {
 	public GamesDrawnAwayVsTeamsAboveCalculation(Team<String> team, Fixture<String> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext, TableRow<String,String,String> previousTableRow) {
 		super(team, fixture, fixtureTeamContext, oppositionTeamContext, previousTableRow);

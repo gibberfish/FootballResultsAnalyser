@@ -1,7 +1,7 @@
 package uk.co.mindbadger.footballresults.table.calculation;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
-import uk.co.mindbadger.footballresults.table.Table;
 import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresults.table.TableRowAfterResult;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
@@ -38,34 +37,6 @@ public class GamesLostAtHomeVsTeamsBelowCalculationTest {
 		MockitoAnnotations.initMocks(this);
 	}
 
-	/*
-	 * SCENARIOS
-	 * 
-	 * First Game of Season (no above or below)
-	 * --------------------
-	 * Home Win
-	 * Home Defeat
-	 * Home Draw
-	 * Away Win
-	 * Away Defeat
-	 * Away Draw
-	 * 
-	 * After First Game of Season
-	 * --------------------------
-	 * Home Win vs Team Above
-	 * Home Win vs Team Below
-	 * Home Defeat vs Team Above
-	 * Home Defeat vs Team Below
-	 * Home Draw vs Team Above
-	 * Home Draw vs Team Below
-	 * Away Win vs Team Above
-	 * Away Win vs Team Below
-	 * Away Defeat vs Team Above
-	 * Away Defeat vs Team Below
-	 * Away Draw vs Team Above
-	 * Away Draw vs Team Below
-	 */
-	
 	@Test
 	public void shouldReturnNoChangeWhenThereIsAPreviousRowForAHomeWinAgainstATeamAbove () {
 		// Given
@@ -157,7 +128,7 @@ public class GamesLostAtHomeVsTeamsBelowCalculationTest {
 	}
 
 	@Test
-	public void shouldReturnNoChangeWhenThereIsAPreviousRowForAHomeDefeatAgainstATeamBelow () {
+	public void shouldReturnAnIncrementWhenThereIsAPreviousRowForAHomeDefeatAgainstATeamBelow () {
 		// Given
 		when (mockFixtureTeamContext.isAtHome()).thenReturn(true);
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(false);
@@ -171,7 +142,7 @@ public class GamesLostAtHomeVsTeamsBelowCalculationTest {
 		int result = objectUnderTest.calculate();
 		
 		// Then
-		assertEquals (3, result);
+		assertEquals (4, result);
 	}
 
 	@Test
@@ -247,7 +218,7 @@ public class GamesLostAtHomeVsTeamsBelowCalculationTest {
 	}
 
 	@Test
-	public void shouldReturnAnIncrementWhenThereIsAPreviousRowForAnAwayDefeatAgainstATeamAbove () {
+	public void shouldReturnNoChangeWhenThereIsAPreviousRowForAnAwayDefeatAgainstATeamAbove () {
 		// Given
 		when (mockFixtureTeamContext.isAtHome()).thenReturn(false);
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(true);
@@ -261,7 +232,7 @@ public class GamesLostAtHomeVsTeamsBelowCalculationTest {
 		int result = objectUnderTest.calculate();
 		
 		// Then
-		assertEquals (4, result);
+		assertEquals (3, result);
 	}
 
 	@Test

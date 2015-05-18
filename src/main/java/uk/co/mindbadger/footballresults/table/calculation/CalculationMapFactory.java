@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
 import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
@@ -20,7 +21,11 @@ public class CalculationMapFactory<K,L,M> {
 	private List<AttributeDefinition> rawAttributes;
 	private List<AttributeDefinition> derivedAttributes;
 	
-	public Map<String, Calculation> createCalculations (Team<K> team, TableRow<K,L,M> previousTableRow, Fixture<K> fixture)  {
+	
+	
+	
+	public Map<String, Calculation> createCalculations (Team<K> team, Fixture<K> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext, TableRow<K,L,M> previousTableRow)  {
+	//public Map<String, Calculation> createCalculations (Team<K> team, TableRow<K,L,M> previousTableRow, Fixture<K> fixture)  {
 		Map<String, Calculation> calculationMap = new HashMap<String, Calculation> ();
 		
 		logger.debug("createCalculations for team " + team.getTeamId() + " and fixture " + fixture.toString());
@@ -32,26 +37,14 @@ public class CalculationMapFactory<K,L,M> {
 			Class<?> clazz;
 			try {
 				clazz = Class.forName(attributeDefinition.getCalculationClass());
-				Constructor<?> constructor = clazz.getConstructor(Team.class, TableRow.class, Fixture.class);
-				Object object = constructor.newInstance(new Object[] {team, previousTableRow, fixture});
+				Constructor<?> constructor = clazz.getConstructor(Team.class, Fixture.class, TeamFixtureContext.class, TeamFixtureContext.class, TableRow.class);
+				Object object = constructor.newInstance(new Object[] {team, fixture, fixtureTeamContext, oppositionTeamContext, previousTableRow});
 				Calculation calculation = (Calculation) object;
 				calculationMap.put(attributeDefinition.getAttributeId(), calculation);
-			} catch (ClassNotFoundException e) {
+			} catch (Exception e) {
+				e.printStackTrace();
 				logger.error(e.getMessage());
-			} catch (NoSuchMethodException e) {
-				logger.error(e.getMessage());
-			} catch (SecurityException e) {
-				logger.error(e.getMessage());
-			} catch (InstantiationException e) {
-				logger.error(e.getMessage());
-			} catch (IllegalAccessException e) {
-				logger.error(e.getMessage());
-			} catch (IllegalArgumentException e) {
-				logger.error(e.getMessage());
-			} catch (InvocationTargetException e) {
-				logger.error(e.getMessage());
-			}
-			
+			}			
 		}
 		
 		for (AttributeDefinition attributeDefinition : derivedAttributes) {
@@ -74,21 +67,10 @@ public class CalculationMapFactory<K,L,M> {
 				Calculation calculation = (Calculation) object;
 				
 				calculationMap.put(attributeDefinition.getAttributeId(), calculation);
-			} catch (ClassNotFoundException e) {
-				logger.error(e);
-			} catch (NoSuchMethodException e) {
-				logger.error(e);
-			} catch (SecurityException e) {
-				logger.error(e);
-			} catch (InstantiationException e) {
-				logger.error(e);
-			} catch (IllegalAccessException e) {
-				logger.error(e);
-			} catch (IllegalArgumentException e) {
-				logger.error(e);
-			} catch (InvocationTargetException e) {
-				logger.error(e);
-			}
+			} catch (Exception e) {
+				e.printStackTrace();
+				logger.error(e.getMessage());
+			}			
 		}
 		
 		return calculationMap;

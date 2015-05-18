@@ -2,6 +2,7 @@ package uk.co.mindbadger.footballresults.table;
 
 import org.apache.log4j.Logger;
 
+import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
 import uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
@@ -15,9 +16,9 @@ public class TableRowFactory<K,L,M> {
 		this.calculationMapFactory = calculationMapFactory;
 	}
 	
-	public TableRow<K,L,M> createTableRowFromFixture (Team<K> team, Table<K,L,M> parentTable, TableRow<K,L,M> previousTableRow, Fixture<K> fixture) {
+	public TableRow<K,L,M> createTableRowFromFixture (Team<K> team, Table<K,L,M> parentTable, TableRow<K,L,M> previousTableRow, Fixture<K> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext) {
 		logger.info("Create table row from fixture, team="+team.getTeamName() + ", fixture=" + fixture.toString());
-		TableRowAfterResult<K,L,M> tableRow = new TableRowAfterResult<>(team, parentTable, previousTableRow, fixture);
+		TableRowAfterResult<K,L,M> tableRow = new TableRowAfterResult<>(team, parentTable, previousTableRow, fixture, fixtureTeamContext, oppositionTeamContext);
 		tableRow.setCalculationMapFactory(calculationMapFactory);
 		return tableRow;
 	}

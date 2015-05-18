@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
 import uk.co.mindbadger.footballresults.table.calculation.Calculation;
 import uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
@@ -32,6 +33,12 @@ public class TableRowFactoryTest {
 
 	@Mock
 	private Table<String,String,String> mockParentTable;
+
+	@Mock
+	private TeamFixtureContext mockFixtureTeamContext;
+	
+	@Mock
+	private TeamFixtureContext mockOppositionTeamContext;
 	
 	@Mock
 	private CalculationMapFactory<String, String, String> mockCalculationMapFactory;
@@ -43,7 +50,7 @@ public class TableRowFactoryTest {
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		
-		when(mockCalculationMapFactory.createCalculations(mockTeam1, mockPreviousTableRow, mockFixture)).thenReturn(calculations);
+		when(mockCalculationMapFactory.createCalculations(mockTeam1, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow)).thenReturn(calculations);
 		calculations.put("test", mockCalculation);
 	}
 	
@@ -53,7 +60,7 @@ public class TableRowFactoryTest {
 		objectUnderTest = new TableRowFactory<>(mockCalculationMapFactory);
 		
 		// When
-		TableRow<String, String, String> tableRow = objectUnderTest.createTableRowFromFixture(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture);
+		TableRow<String, String, String> tableRow = objectUnderTest.createTableRowFromFixture(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 		tableRow.getAttribute("test");
 		
 		// Then

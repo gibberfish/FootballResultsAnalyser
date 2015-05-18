@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
 import uk.co.mindbadger.footballresults.table.calculation.Calculation;
 import uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
@@ -41,6 +42,12 @@ public class TableRowAfterResultTest {
 	@Mock
 	private Table<String,String,String> mockParentTable;
 	
+	@Mock
+	private TeamFixtureContext mockFixtureTeamContext;
+	
+	@Mock
+	private TeamFixtureContext mockOppositionTeamContext;
+
 	@Mock
 	private Calculation mockGamesPlayedCalculation;
 
@@ -84,7 +91,7 @@ public class TableRowAfterResultTest {
 		calculations.put(TableRow.GOAL_DIFFERENCE, mockGoalDifferenceCalculation);
 		calculations.put(TableRow.POINTS, mockPointsCalculation);
 		
-		when(mockCalculationMapFactory.createCalculations(mockTeam1, mockPreviousTableRow, mockFixture)).thenReturn(calculations);
+		when(mockCalculationMapFactory.createCalculations(mockTeam1, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow)).thenReturn(calculations);
 	}
 	
 	
@@ -92,7 +99,7 @@ public class TableRowAfterResultTest {
 	public void shouldThrowAnExceptionWhenTryingToAccessDataBeforeTheCalculationsHaveBeenInitialised () {
 		// Given
 		//TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1, mockParentTable);
-		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture);
+		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 		
 		// When
 		try {
@@ -111,7 +118,7 @@ public class TableRowAfterResultTest {
 		
 		// When
 		try {
-			objectUnderTest = new TableRowAfterResult<String,String,String> (null, mockParentTable, previousTableRow, mockFixture);
+			objectUnderTest = new TableRowAfterResult<String,String,String> (null, mockParentTable, previousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 			fail("Should throw an illegal argument exception");
 		} catch (IllegalArgumentException e) {
 			// Then
@@ -125,7 +132,7 @@ public class TableRowAfterResultTest {
 		
 		// When
 		try {
-			objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, mockParentTable, null, mockFixture);
+			objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, mockParentTable, null, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 			fail("Should throw an illegal argument exception");
 		} catch (IllegalArgumentException e) {
 			// Then
@@ -140,7 +147,7 @@ public class TableRowAfterResultTest {
 		
 		// When
 		try {
-			objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, mockParentTable, previousTableRow, null);
+			objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, mockParentTable, previousTableRow, null, mockFixtureTeamContext, mockOppositionTeamContext);
 			fail("Should throw an illegal argument exception");
 		} catch (IllegalArgumentException e) {
 			// Then
@@ -151,20 +158,20 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldInitialiseTheCalculationsOnFirstInvokationOfGet () {
 		// Given
-		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture);
+		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
 		
 		// When
 		objectUnderTest.getAttribute("points");
 		
 		// Then
-		verify(mockCalculationMapFactory, times(1)).createCalculations(mockTeam1, mockPreviousTableRow, mockFixture);
+		verify(mockCalculationMapFactory, times(1)).createCalculations(mockTeam1, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 	}
 
 	@Test
 	public void shouldNotReInitialiseTheCalculationsOnSubsequentInvokationsOfGet () {
 		// Given
-		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture);
+		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
 		
 		// When
@@ -172,13 +179,13 @@ public class TableRowAfterResultTest {
 		objectUnderTest.getAttribute("points");
 		
 		// Then
-		verify(mockCalculationMapFactory, times(1)).createCalculations(mockTeam1, mockPreviousTableRow, mockFixture);
+		verify(mockCalculationMapFactory, times(1)).createCalculations(mockTeam1, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 	}
 	
 	@Test
 	public void shouldGetData () {
 		// Given
-		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture);
+		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
 		
 		when(mockGamesWonCalculation.calculate()).thenReturn(10);
@@ -193,7 +200,7 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldThrowExceptionWhenInvalidAttributeRequested () {
 		// Given
-		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture);
+		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
 		
 		// When

@@ -524,7 +524,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 
 
-
+<!--
 	<bean id="gamesWonAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesWonAtHome" />
 		<property name="description" value="Won At Home" />
@@ -564,7 +564,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesLostCalculation" />
 		<property name="sequence" value="6" />
 	</bean>
-
+-->
 	<bean id="goalsScoredDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScored" />
 		<property name="description" value="Goals For" />

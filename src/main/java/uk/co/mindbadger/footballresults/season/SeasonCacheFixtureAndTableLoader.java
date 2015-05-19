@@ -1,7 +1,6 @@
 package uk.co.mindbadger.footballresults.season;
 
 import java.util.Calendar;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -11,7 +10,6 @@ import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresults.table.TableRowFactory;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
-import uk.co.mindbadger.utils.FixtureDateFormatter;
 
 public class SeasonCacheFixtureAndTableLoader {
 	Logger logger = Logger.getLogger(SeasonCacheFixtureAndTableLoader.class);
@@ -26,45 +24,41 @@ public class SeasonCacheFixtureAndTableLoader {
 		divisionCache.addFixtureOnDate(currentDate, fixture);
 	}
 	
-	public void loadFixtureIntoTable (Fixture<String> fixture, Table<String,String,String> tableForDate) {
+	public void loadFixtureIntoTable (Fixture<String> fixture, Table<String,String,String> tableForDate, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext) {
 		if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
 			logger.info("Load Fixture and Table Cache for " + fixture.toString());
-			tableForDate.addRow(createTableRow(fixture.getHomeTeam(), tableForDate, fixture));
-			tableForDate.addRow(createTableRow(fixture.getAwayTeam(), tableForDate, fixture));
+			tableForDate.addRow(createTableRow(fixture.getHomeTeam(), tableForDate, fixture, fixtureTeamContext, oppositionTeamContext));
+			tableForDate.addRow(createTableRow(fixture.getAwayTeam(), tableForDate, fixture, fixtureTeamContext, oppositionTeamContext));
 		} else {
 			logger.info("Not loading Table Cache - unplayed " + fixture.toString());
 		}
 	}
 	
-	public void loadTeamFixtureContextsForHomeAndAwayTeams (Fixture<String> fixture, Calendar currentDate, DivisionCache divisionCache, Table<String,String,String> tableForDate) {
+	public TeamFixtureContext loadTeamFixtureContextsForTeam (boolean homeTeam, Fixture<String> fixture, Calendar currentDate, DivisionCache divisionCache, Table<String,String,String> tableForDate) {
 		int homeLeaguePosition = tableForDate.getLeaguePositionForTeamWithId(fixture.getHomeTeam().getTeamId());
 		int awayLeaguePosition = tableForDate.getLeaguePositionForTeamWithId(fixture.getAwayTeam().getTeamId());
 		
-		TeamFixtureContext homeContext = teamFixtureContextFactory.createTeamFixtureContext();
-		homeContext.setAtHome(true);
-		homeContext.setLeaguePosition(homeLeaguePosition);
-		homeContext.setTeam(fixture.getHomeTeam());
+		TeamFixtureContext context = teamFixtureContextFactory.createTeamFixtureContext();
+		context.setAtHome(homeTeam);
+		context.setLeaguePosition(homeTeam ? homeLeaguePosition : awayLeaguePosition);
+		context.setTeam(homeTeam ? fixture.getHomeTeam() : fixture.getAwayTeam());
 
-		TeamFixtureContext awayContext = teamFixtureContextFactory.createTeamFixtureContext();
-		awayContext.setAtHome(false);
-		awayContext.setLeaguePosition(awayLeaguePosition);
-		awayContext.setTeam(fixture.getAwayTeam());
-
-		if (homeLeaguePosition > awayLeaguePosition) {
-			homeContext.setPlayingTeamAbove(true);
-			awayContext.setPlayingTeamAbove(false);
+		boolean homeIsAbove = homeLeaguePosition < awayLeaguePosition;
+		
+		if (homeTeam) {
+			context.setPlayingTeamAbove(!homeIsAbove);
 		} else {
-			homeContext.setPlayingTeamAbove(false);
-			awayContext.setPlayingTeamAbove(true);
+			context.setPlayingTeamAbove(homeIsAbove);
 		}
 		
-		divisionCache.addTeamFixtureContextOnDate(currentDate, fixture.getHomeTeam(), homeContext);
-		divisionCache.addTeamFixtureContextOnDate(currentDate, fixture.getAwayTeam(), awayContext);
+		divisionCache.addTeamFixtureContextOnDate(currentDate, (homeTeam ? fixture.getHomeTeam() : fixture.getAwayTeam()), context);
+		
+		return context;
 	}
 	
-	private TableRow<String, String, String> createTableRow (Team<String> team, Table<String,String,String> table, Fixture<String> fixture) {
-		TableRow<String, String, String> previousTableRow = table.getTableRowForTeam(team.getTeamId());
-		return  tableRowFactory.createTableRowFromFixture(team, table, previousTableRow , fixture);
+	private TableRow<String, String, String> createTableRow (Team<String> team, Table<String,String,String> parentTable, Fixture<String> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext) {
+		TableRow<String, String, String> previousTableRow = parentTable.getTableRowForTeam(team.getTeamId());
+		return  tableRowFactory.createTableRowFromFixture(team, parentTable, previousTableRow , fixture, fixtureTeamContext, oppositionTeamContext);
 	}
 
 	public TableFactory getTableFactory() {

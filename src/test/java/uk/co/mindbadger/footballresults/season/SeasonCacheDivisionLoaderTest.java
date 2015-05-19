@@ -92,6 +92,12 @@ public class SeasonCacheDivisionLoaderTest {
 	@Mock
 	private Table<String, String, String> mockTableDate5;
 
+	@Mock
+	private TeamFixtureContext mockFixture1HomeTeamContext;
+	
+	@Mock
+	private TeamFixtureContext mockFixture1AwayTeamContext;
+	
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
@@ -168,6 +174,10 @@ public class SeasonCacheDivisionLoaderTest {
 		when(mockTableFactory.createTableFromPreviousTable(mockTableDate3)).thenReturn(mockTableDate4);
 		when(mockTableFactory.createTableFromPreviousTable(mockTableDate4)).thenReturn(mockTableDate5);
 		
+		// CONTEXTS
+		when(mockSeasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForTeam(eq(true), eq(mockFixture1), eq(fixtureDate1), eq(mockDivisionCache1), eq(mockInitialTableDiv1))).thenReturn(mockFixture1HomeTeamContext);
+		when(mockSeasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForTeam(eq(false), eq(mockFixture1), eq(fixtureDate1), eq(mockDivisionCache1), eq(mockInitialTableDiv1))).thenReturn(mockFixture1AwayTeamContext);
+		
 		// When
 		objectUnderTest.loadDivision(mockSeasonDivision1, mockSeasonCache2015);
 		
@@ -179,9 +189,10 @@ public class SeasonCacheDivisionLoaderTest {
 		
 		verify (mockDivisionCache1,times(1)).addTableOnDate(eq(initialDate), eq(mockInitialTableDiv1));
 		verify (mockTableFactory,times(1)).createTableFromPreviousTable(eq(mockInitialTableDiv1));
-		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForHomeAndAwayTeams(eq(mockFixture1), eq(fixtureDate1), eq(mockDivisionCache1), eq(mockInitialTableDiv1));
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForTeam(eq(true), eq(mockFixture1), eq(fixtureDate1), eq(mockDivisionCache1), eq(mockInitialTableDiv1));
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForTeam(eq(false), eq(mockFixture1), eq(fixtureDate1), eq(mockDivisionCache1), eq(mockInitialTableDiv1));
 		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixture(eq(mockFixture1), eq(fixtureDate1), eq(mockDivisionCache1));
-		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixtureIntoTable(eq(mockFixture1), eq(mockTableDate1));
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixtureIntoTable(eq(mockFixture1), eq(mockTableDate1), eq(mockFixture1HomeTeamContext), eq(mockFixture1AwayTeamContext));
 
 		verify (mockDivisionCache1,times(1)).addTableOnDate(eq(fixtureDate1), eq(mockTableDate1));
 		verify (mockTableFactory,times(1)).createTableFromPreviousTable(eq(mockTableDate1));

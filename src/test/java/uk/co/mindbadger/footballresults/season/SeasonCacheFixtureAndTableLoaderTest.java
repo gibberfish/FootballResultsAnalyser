@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 import java.util.Calendar;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -132,23 +131,23 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		when(mockAwayTeam.getTeamId()).thenReturn("AwayId");
 		
 		when(mockTableDate1.getTableRowForTeam("HomeId")).thenReturn(mockHomeTableRow);
-		when(mockTableRowFactory.createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockTable1, mockFixture1)).thenReturn(mockHomeTableRow);
+		when(mockTableRowFactory.createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockTable1, mockFixture1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext)).thenReturn(mockHomeTableRow);
 
 		when(mockTableDate1.getTableRowForTeam("AwayId")).thenReturn(mockAwayTableRow);
-		when(mockTableRowFactory.createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockTable1, mockFixture1)).thenReturn(mockAwayTableRow);
+		when(mockTableRowFactory.createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockTable1, mockFixture1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext)).thenReturn(mockAwayTableRow);
 		
 		// When
-		objectUnderTest.loadFixtureIntoTable(mockFixture1, mockTableDate1);
+		objectUnderTest.loadFixtureIntoTable(mockFixture1, mockTableDate1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext);
 		
 		// Then
 		verify(mockDivisionCache1,never()).addTableOnDate(fixtureDate1, mockTableDate1);
 		verify(mockTableFactory,never()).createTableFromPreviousTable(mockTableDate1);
 		
 		verify(mockTableDate1,times(1)).getTableRowForTeam("HomeId");
-		verify(mockTableRowFactory,times(1)).createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockHomeTableRow, mockFixture1);
+		verify(mockTableRowFactory,times(1)).createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockHomeTableRow, mockFixture1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext);
 		
 		verify(mockTableDate1,times(1)).getTableRowForTeam("AwayId");
-		verify(mockTableRowFactory,times(1)).createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockAwayTableRow, mockFixture1);
+		verify(mockTableRowFactory,times(1)).createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockAwayTableRow, mockFixture1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext);
 	}
 
 	@Test
@@ -174,20 +173,20 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		when(mockAwayTeam.getTeamId()).thenReturn("AwayId");
 		
 		when(mockTableDate1.getTableRowForTeam("HomeId")).thenReturn(mockHomeTableRow);
-		when(mockTableRowFactory.createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockTable1, mockFixture1)).thenReturn(mockHomeTableRow);
+		when(mockTableRowFactory.createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockTable1, mockFixture1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext)).thenReturn(mockHomeTableRow);
 
 		when(mockTableDate1.getTableRowForTeam("AwayId")).thenReturn(mockAwayTableRow);
-		when(mockTableRowFactory.createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockTable1, mockFixture1)).thenReturn(mockAwayTableRow);
+		when(mockTableRowFactory.createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockTable1, mockFixture1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext)).thenReturn(mockAwayTableRow);
 
 		// When
-		objectUnderTest.loadFixtureIntoTable(mockFixture1, mockTableDate1);
+		objectUnderTest.loadFixtureIntoTable(mockFixture1, mockTableDate1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext);
 		
 		// Then
 		verify(mockTableDate1,times(1)).getTableRowForTeam("HomeId");
-		verify(mockTableRowFactory,times(1)).createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockHomeTableRow, mockFixture1);
+		verify(mockTableRowFactory,times(1)).createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockHomeTableRow, mockFixture1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext);
 		
 		verify(mockTableDate1,times(1)).getTableRowForTeam("AwayId");
-		verify(mockTableRowFactory,times(1)).createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockAwayTableRow, mockFixture1);
+		verify(mockTableRowFactory,times(1)).createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockAwayTableRow, mockFixture1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext);
 	}
 	
 	@Test
@@ -212,17 +211,17 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		when(mockAwayTeam.getTeamId()).thenReturn("AwayId");
 		
 		when(mockTableDate1.getTableRowForTeam("HomeId")).thenReturn(mockHomeTableRow);
-		when(mockTableRowFactory.createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockTable1, mockFixture1)).thenReturn(mockHomeTableRow);
+		when(mockTableRowFactory.createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockTable1, mockFixture1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext)).thenReturn(mockHomeTableRow);
 
 		when(mockTableDate1.getTableRowForTeam("AwayId")).thenReturn(mockAwayTableRow);
-		when(mockTableRowFactory.createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockTable1, mockFixture1)).thenReturn(mockAwayTableRow);
+		when(mockTableRowFactory.createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockTable1, mockFixture1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext)).thenReturn(mockAwayTableRow);
 		
 		// When
-		objectUnderTest.loadFixtureIntoTable(mockFixture1, mockTableDate1);
+		objectUnderTest.loadFixtureIntoTable(mockFixture1, mockTableDate1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext);
 		
 		// Then
-		verify(mockTableRowFactory,never()).createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockHomeTableRow, mockFixture1);
-		verify(mockTableRowFactory,never()).createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockAwayTableRow, mockFixture1);
+		verify(mockTableRowFactory,never()).createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockHomeTableRow, mockFixture1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext);
+		verify(mockTableRowFactory,never()).createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockAwayTableRow, mockFixture1, mockHomeTeamFixtureContext, mockAwayTeamFixtureContext);
 
 		verify(mockDivisionCache1,never()).addTableOnDate(fixtureDate1, mockTableDate1);
 		verify(mockTableFactory,never()).createTableFromPreviousTable(mockTableDate1);
@@ -231,7 +230,7 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 	}
 	
 	@Test
-	public void shouldLoadTeamFixtureContextForHomeTeamAboveAwayTeam () {
+	public void shouldLoadTeamFixtureContextForHomeTeamPlayingTeamBelow () {
 		// Given
 		Calendar fixtureDate1 = Calendar.getInstance();
 		fixtureDate1.set(Calendar.DAY_OF_MONTH, 1);
@@ -243,35 +242,29 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		when(mockAwayTeam.getTeamId()).thenReturn("AwayId");
 		
 		when(mockTableDate1.getTableRowForTeam("HomeId")).thenReturn(mockHomeTableRow);
-		when(mockTableRowFactory.createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockTable1, mockFixture1)).thenReturn(mockHomeTableRow);
 		when(mockTableDate1.getLeaguePositionForTeamWithId("HomeId")).thenReturn(5);
 
 		when(mockTableDate1.getTableRowForTeam("AwayId")).thenReturn(mockAwayTableRow);
-		when(mockTableRowFactory.createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockTable1, mockFixture1)).thenReturn(mockAwayTableRow);
 		when(mockTableDate1.getLeaguePositionForTeamWithId("AwayId")).thenReturn(10);
 		
-		when(mockTeamFixtureContextFactory.createTeamFixtureContext()).thenReturn(mockHomeTeamFixtureContext, mockAwayTeamFixtureContext);
+		when(mockTeamFixtureContextFactory.createTeamFixtureContext()).thenReturn(mockHomeTeamFixtureContext);
 
 		// When
-		objectUnderTest.loadTeamFixtureContextsForHomeAndAwayTeams(mockFixture1, fixtureDate1, mockDivisionCache1, mockTableDate1);
+		TeamFixtureContext context = objectUnderTest.loadTeamFixtureContextsForTeam(true, mockFixture1, fixtureDate1, mockDivisionCache1, mockTableDate1);
 		
 		// Then
+		assertEquals(mockHomeTeamFixtureContext, context);
+		
 		verify(mockHomeTeamFixtureContext,times(1)).setAtHome(true);
 		verify(mockHomeTeamFixtureContext,times(1)).setLeaguePosition(5);
 		verify(mockHomeTeamFixtureContext,times(1)).setPlayingTeamAbove(false);
 		verify(mockHomeTeamFixtureContext,times(1)).setTeam(mockHomeTeam);
 
-		verify(mockAwayTeamFixtureContext,times(1)).setAtHome(false);
-		verify(mockAwayTeamFixtureContext,times(1)).setLeaguePosition(10);
-		verify(mockAwayTeamFixtureContext,times(1)).setPlayingTeamAbove(true);
-		verify(mockAwayTeamFixtureContext,times(1)).setTeam(mockAwayTeam);
-
 		verify(mockDivisionCache1,times(1)).addTeamFixtureContextOnDate(fixtureDate1, mockHomeTeam, mockHomeTeamFixtureContext);
-		verify(mockDivisionCache1,times(1)).addTeamFixtureContextOnDate(fixtureDate1, mockAwayTeam, mockAwayTeamFixtureContext);
 	}
-	
+
 	@Test
-	public void shouldLoadTeamFixtureContextForHomeTeamBelowAwayTeam () {
+	public void shouldLoadTeamFixtureContextForHomeTeamPlayingTeamAbove () {
 		// Given
 		Calendar fixtureDate1 = Calendar.getInstance();
 		fixtureDate1.set(Calendar.DAY_OF_MONTH, 1);
@@ -283,30 +276,92 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		when(mockAwayTeam.getTeamId()).thenReturn("AwayId");
 		
 		when(mockTableDate1.getTableRowForTeam("HomeId")).thenReturn(mockHomeTableRow);
-		when(mockTableRowFactory.createTableRowFromFixture(mockHomeTeam, mockTableDate1, mockTable1, mockFixture1)).thenReturn(mockHomeTableRow);
 		when(mockTableDate1.getLeaguePositionForTeamWithId("HomeId")).thenReturn(10);
 
 		when(mockTableDate1.getTableRowForTeam("AwayId")).thenReturn(mockAwayTableRow);
-		when(mockTableRowFactory.createTableRowFromFixture(mockAwayTeam, mockTableDate1, mockTable1, mockFixture1)).thenReturn(mockAwayTableRow);
 		when(mockTableDate1.getLeaguePositionForTeamWithId("AwayId")).thenReturn(5);
 		
-		when(mockTeamFixtureContextFactory.createTeamFixtureContext()).thenReturn(mockHomeTeamFixtureContext, mockAwayTeamFixtureContext);
+		when(mockTeamFixtureContextFactory.createTeamFixtureContext()).thenReturn(mockHomeTeamFixtureContext);
 
 		// When
-		objectUnderTest.loadTeamFixtureContextsForHomeAndAwayTeams(mockFixture1, fixtureDate1, mockDivisionCache1, mockTableDate1);
+		TeamFixtureContext context = objectUnderTest.loadTeamFixtureContextsForTeam(true, mockFixture1, fixtureDate1, mockDivisionCache1, mockTableDate1);
 		
 		// Then
+		assertEquals(mockHomeTeamFixtureContext, context);
+		
 		verify(mockHomeTeamFixtureContext,times(1)).setAtHome(true);
 		verify(mockHomeTeamFixtureContext,times(1)).setLeaguePosition(10);
 		verify(mockHomeTeamFixtureContext,times(1)).setPlayingTeamAbove(true);
 		verify(mockHomeTeamFixtureContext,times(1)).setTeam(mockHomeTeam);
 
+		verify(mockDivisionCache1,times(1)).addTeamFixtureContextOnDate(fixtureDate1, mockHomeTeam, mockHomeTeamFixtureContext);
+	}
+
+	@Test
+	public void shouldLoadTeamFixtureContextForAwayTeamPlayingTeamBelow () {
+		// Given
+		Calendar fixtureDate1 = Calendar.getInstance();
+		fixtureDate1.set(Calendar.DAY_OF_MONTH, 1);
+		
+		when(mockFixture1.getHomeTeam()).thenReturn(mockHomeTeam);
+		when(mockFixture1.getAwayTeam()).thenReturn(mockAwayTeam);
+
+		when(mockHomeTeam.getTeamId()).thenReturn("HomeId");
+		when(mockAwayTeam.getTeamId()).thenReturn("AwayId");
+		
+		when(mockTableDate1.getTableRowForTeam("HomeId")).thenReturn(mockHomeTableRow);
+		when(mockTableDate1.getLeaguePositionForTeamWithId("HomeId")).thenReturn(10);
+
+		when(mockTableDate1.getTableRowForTeam("AwayId")).thenReturn(mockAwayTableRow);
+		when(mockTableDate1.getLeaguePositionForTeamWithId("AwayId")).thenReturn(5);
+		
+		when(mockTeamFixtureContextFactory.createTeamFixtureContext()).thenReturn(mockAwayTeamFixtureContext);
+
+		// When
+		TeamFixtureContext context = objectUnderTest.loadTeamFixtureContextsForTeam(false, mockFixture1, fixtureDate1, mockDivisionCache1, mockTableDate1);
+		
+		// Then
+		assertEquals(mockAwayTeamFixtureContext, context);
+		
 		verify(mockAwayTeamFixtureContext,times(1)).setAtHome(false);
 		verify(mockAwayTeamFixtureContext,times(1)).setLeaguePosition(5);
 		verify(mockAwayTeamFixtureContext,times(1)).setPlayingTeamAbove(false);
 		verify(mockAwayTeamFixtureContext,times(1)).setTeam(mockAwayTeam);
 
-		verify(mockDivisionCache1,times(1)).addTeamFixtureContextOnDate(fixtureDate1, mockHomeTeam, mockHomeTeamFixtureContext);
 		verify(mockDivisionCache1,times(1)).addTeamFixtureContextOnDate(fixtureDate1, mockAwayTeam, mockAwayTeamFixtureContext);
-	}	
+	}
+
+	@Test
+	public void shouldLoadTeamFixtureContextForAwayTeamPlayingTeamAbove () {
+		// Given
+		Calendar fixtureDate1 = Calendar.getInstance();
+		fixtureDate1.set(Calendar.DAY_OF_MONTH, 1);
+		
+		when(mockFixture1.getHomeTeam()).thenReturn(mockHomeTeam);
+		when(mockFixture1.getAwayTeam()).thenReturn(mockAwayTeam);
+
+		when(mockHomeTeam.getTeamId()).thenReturn("HomeId");
+		when(mockAwayTeam.getTeamId()).thenReturn("AwayId");
+		
+		when(mockTableDate1.getTableRowForTeam("HomeId")).thenReturn(mockHomeTableRow);
+		when(mockTableDate1.getLeaguePositionForTeamWithId("HomeId")).thenReturn(5);
+
+		when(mockTableDate1.getTableRowForTeam("AwayId")).thenReturn(mockAwayTableRow);
+		when(mockTableDate1.getLeaguePositionForTeamWithId("AwayId")).thenReturn(10);
+		
+		when(mockTeamFixtureContextFactory.createTeamFixtureContext()).thenReturn(mockAwayTeamFixtureContext);
+
+		// When
+		TeamFixtureContext context = objectUnderTest.loadTeamFixtureContextsForTeam(false, mockFixture1, fixtureDate1, mockDivisionCache1, mockTableDate1);
+		
+		// Then
+		assertEquals(mockAwayTeamFixtureContext, context);
+		
+		verify(mockAwayTeamFixtureContext,times(1)).setAtHome(false);
+		verify(mockAwayTeamFixtureContext,times(1)).setLeaguePosition(10);
+		verify(mockAwayTeamFixtureContext,times(1)).setPlayingTeamAbove(true);
+		verify(mockAwayTeamFixtureContext,times(1)).setTeam(mockAwayTeam);
+
+		verify(mockDivisionCache1,times(1)).addTeamFixtureContextOnDate(fixtureDate1, mockAwayTeam, mockAwayTeamFixtureContext);
+	}
 }

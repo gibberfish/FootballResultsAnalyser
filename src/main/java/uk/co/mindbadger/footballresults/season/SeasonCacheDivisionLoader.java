@@ -46,9 +46,10 @@ public class SeasonCacheDivisionLoader {
 				currentDate = fixtureDate;
 			}
 			
-			seasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForHomeAndAwayTeams(fixture, fixtureDate, divisionCache, tableForPreviousDate);
+			TeamFixtureContext homeContext = seasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForTeam(true, fixture, fixtureDate, divisionCache, tableForPreviousDate);
+			TeamFixtureContext awayContext = seasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForTeam(false, fixture, fixtureDate, divisionCache, tableForPreviousDate);
 			seasonCacheFixtureAndTableLoader.loadFixture(fixture, fixtureDate, divisionCache);
-			seasonCacheFixtureAndTableLoader.loadFixtureIntoTable(fixture, tableForCurrentDate);
+			seasonCacheFixtureAndTableLoader.loadFixtureIntoTable(fixture, tableForCurrentDate, homeContext, awayContext);
 		}
 		
 		// Must save the last date

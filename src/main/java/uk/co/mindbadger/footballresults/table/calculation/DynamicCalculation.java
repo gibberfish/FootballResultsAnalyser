@@ -1,9 +1,16 @@
 package uk.co.mindbadger.footballresults.table.calculation;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
+import uk.co.mindbadger.footballresults.table.TableRowAfterResult;
+
 public class DynamicCalculation extends Calculation {
+	Logger logger = Logger.getLogger(DynamicCalculation.class);
+	
 	protected Map<String,Calculation> calculations;
 	private String calculationString;
 	protected Map<String,Float> values;
@@ -40,7 +47,21 @@ public class DynamicCalculation extends Calculation {
 			if (start != -1) {
 				int end = calculationString.indexOf('}', start);
 				String operand = calculationString.substring((start+1), end);
-				int newValue = calculations.get(operand).calculate();
+				Calculation calculation = calculations.get(operand);
+				
+				
+				//TODO debug only - remove
+				if (calculation == null) {
+					logger.error("We want to get attribute :" + operand + " but it cannot be found. The attributes we have for this table row are:");
+					Iterator i = calculations.keySet().iterator();
+					while (i.hasNext()) {
+						logger.error("...KEY: " + i.next());
+					}
+
+				}
+				
+				
+				int newValue = calculation.calculate();
 				
 				values.put(operand, new Float(newValue));
 				

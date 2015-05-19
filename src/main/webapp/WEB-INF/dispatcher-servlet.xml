@@ -516,21 +516,21 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 
 
-	<bean id="goalsScoredInWinAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="attributeId" value="goalsScoredInWinAtHome" />
+	<bean id="goalsScoredInWinsAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsScoredInWinsAtHome" />
 		<property name="description" value="Goals Scored in Wins At Home" />
 		<property name="shortDescription" value="SWH" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{goalsScoredInWinAtHomeVsAbove}+{goalsScoredInWinAtHomeVsBelow}"/>
+		<property name="dynamicCalculation" value="{goalsScoredInWinsAtHomeVsAbove}+{goalsScoredInWinsAtHomeVsBelow}"/>
 		<property name="sequence" value="80" />
 	</bean>
 
-	<bean id="goalsScoredInWinAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="attributeId" value="goalsScoredInWinAway" />
+	<bean id="goalsScoredInWinsAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsScoredInWinsAway" />
 		<property name="description" value="Goals Scored in Wins Away" />
 		<property name="shortDescription" value="SWA" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{goalsScoredInWinAwayVsAbove}+{goalsScoredInWinAwayVsBelow}"/>
+		<property name="dynamicCalculation" value="{goalsScoredInWinsAwayVsAbove}+{goalsScoredInWinsAwayVsBelow}"/>
 		<property name="sequence" value="81" />
 	</bean>
 
@@ -570,21 +570,21 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="sequence" value="85" />
 	</bean>
 
-	<bean id="goalsScoredInWinVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="attributeId" value="goalsScoredInWinVsAbove" />
+	<bean id="goalsScoredInWinsVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsScoredInWinsVsAbove" />
 		<property name="description" value="Goals Scored in Wins vs Teams Above" />
 		<property name="shortDescription" value="SWvA" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{goalsScoredInWinAtHomeVsAbove}+{goalsScoredInWinAwayVsAbove}"/>
+		<property name="dynamicCalculation" value="{goalsScoredInWinsAtHomeVsAbove}+{goalsScoredInWinsAwayVsAbove}"/>
 		<property name="sequence" value="86" />
 	</bean>
 
-	<bean id="goalsScoredInWinVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="attributeId" value="goalsScoredInWinVsBelow" />
+	<bean id="goalsScoredInWinsVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsScoredInWinsVsBelow" />
 		<property name="description" value="Goals Scored in Wins vs Teams Below" />
 		<property name="shortDescription" value="SWvB" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{goalsScoredInWinAtHomeVsBelow}+{goalsScoredInWinAwayVsBelow}"/>
+		<property name="dynamicCalculation" value="{goalsScoredInWinsAtHomeVsBelow}+{goalsScoredInWinsAwayVsBelow}"/>
 		<property name="sequence" value="87" />
 	</bean>
 
@@ -624,12 +624,12 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="sequence" value="87" />
 	</bean>
 
-	<bean id="goalsScoredInWinDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="attributeId" value="goalsScoredInWin" />
+	<bean id="goalsScoredInWinsDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsScoredInWins" />
 		<property name="description" value="Goals Scored in Wins" />
 		<property name="shortDescription" value="SW" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{goalsScoredInWinAtHome}+{goalsScoredInWinAway}"/>
+		<property name="dynamicCalculation" value="{goalsScoredInWinsAtHome}+{goalsScoredInWinsAway}"/>
 		<property name="sequence" value="90" />
 	</bean>
 
@@ -656,27 +656,27 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="description" value="Goals Scored" />
 		<property name="shortDescription" value="F" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{goalsScoredInWin}+{goalsScoredInDraws}+{goalsScoredInDefeats}"/>
-		<property name="sequence" value="1" />
+		<property name="dynamicCalculation" value="{goalsScoredInWins}+{goalsScoredInDraws}+{goalsScoredInDefeats}"/>
+		<property name="sequence" value="1000" />
 	</bean>
 
 
 
-	<bean id="goalsConcededInWinAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="attributeId" value="goalsConcededInWinAtHome" />
+	<bean id="goalsConcededInWinsAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsConcededInWinsAtHome" />
 		<property name="description" value="Goals Conceded in Wins At Home" />
 		<property name="shortDescription" value="CWH" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{goalsConcededInWinAtHomeVsAbove}+{goalsConcededInWinAtHomeVsBelow}"/>
+		<property name="dynamicCalculation" value="{goalsConcededInWinsAtHomeVsAbove}+{goalsConcededInWinsAtHomeVsBelow}"/>
 		<property name="sequence" value="80" />
 	</bean>
 
-	<bean id="goalsConcededInWinAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="attributeId" value="goalsConcededInWinAway" />
+	<bean id="goalsConcededInWinsAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsConcededInWinsAway" />
 		<property name="description" value="Goals Conceded in Wins Away" />
 		<property name="shortDescription" value="CWA" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{goalsConcededInWinAwayVsAbove}+{goalsConcededInWinAwayVsBelow}"/>
+		<property name="dynamicCalculation" value="{goalsConcededInWinsAwayVsAbove}+{goalsConcededInWinsAwayVsBelow}"/>
 		<property name="sequence" value="81" />
 	</bean>
 
@@ -716,21 +716,21 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="sequence" value="85" />
 	</bean>
 
-	<bean id="goalsConcededInWinVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="attributeId" value="goalsConcededInWinVsAbove" />
+	<bean id="goalsConcededInWinsVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsConcededInWinsVsAbove" />
 		<property name="description" value="Goals Conceded in Wins vs Teams Above" />
 		<property name="shortDescription" value="CWvA" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{goalsConcededInWinAtHomeVsAbove}+{goalsConcededInWinAwayVsAbove}"/>
+		<property name="dynamicCalculation" value="{goalsConcededInWinsAtHomeVsAbove}+{goalsConcededInWinsAwayVsAbove}"/>
 		<property name="sequence" value="86" />
 	</bean>
 
-	<bean id="goalsConcededInWinVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="attributeId" value="goalsConcededInWinVsBelow" />
+	<bean id="goalsConcededInWinsVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsConcededInWinsVsBelow" />
 		<property name="description" value="Goals Conceded in Wins vs Teams Below" />
 		<property name="shortDescription" value="CWvB" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{goalsConcededInWinAtHomeVsBelow}+{goalsConcededInWinAwayVsBelow}"/>
+		<property name="dynamicCalculation" value="{goalsConcededInWinsAtHomeVsBelow}+{goalsConcededInWinsAwayVsBelow}"/>
 		<property name="sequence" value="87" />
 	</bean>
 
@@ -770,12 +770,12 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="sequence" value="87" />
 	</bean>
 
-	<bean id="goalsConcededInWinDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="attributeId" value="goalsConcededInWin" />
+	<bean id="goalsConcededInWinsDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsConcededInWins" />
 		<property name="description" value="Goals Conceded in Wins" />
 		<property name="shortDescription" value="CW" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{goalsConcededInWinAtHome}+{goalsConcededInWinAway}"/>
+		<property name="dynamicCalculation" value="{goalsConcededInWinsAtHome}+{goalsConcededInWinsAway}"/>
 		<property name="sequence" value="90" />
 	</bean>
 
@@ -802,7 +802,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="description" value="Goals Conceded" />
 		<property name="shortDescription" value="A" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{goalsConcededInWin}+{goalsConcededInDraws}+{goalsConcededInDefeats}"/>
+		<property name="dynamicCalculation" value="{goalsConcededInWins}+{goalsConcededInDraws}+{goalsConcededInDefeats}"/>
 		<property name="sequence" value="1" />
 	</bean>
 
@@ -883,37 +883,39 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 				<ref bean="gamesDrawnDefinition" />
 				<ref bean="gamesLostDefinition" />
 				<ref bean="gamesPlayedDefinition" />
-				<ref bean="goalsScoredInWinAtHomeDefinition" />
-				<ref bean="goalsScoredInWinAwayDefinition" />
+				<ref bean="goalsScoredInWinsAtHomeDefinition" />
+				<ref bean="goalsScoredInWinsAwayDefinition" />
 				<ref bean="goalsScoredInDrawsAtHomeDefinition" />
 				<ref bean="goalsScoredInDrawsAwayDefinition" />
 				<ref bean="goalsScoredInDefeatsAtHomeDefinition" />
 				<ref bean="goalsScoredInDefeatsAwayDefinition" />
-				<ref bean="goalsScoredInWinVsAboveDefinition" />
-				<ref bean="goalsScoredInWinVsBelowDefinition" />
+				<ref bean="goalsScoredInWinsVsAboveDefinition" />
+				<ref bean="goalsScoredInWinsVsBelowDefinition" />
 				<ref bean="goalsScoredInDrawsVsAboveDefinition" />
 				<ref bean="goalsScoredInDrawsVsBelowDefinition" />
 				<ref bean="goalsScoredInDefeatsVsAboveDefinition" />
 				<ref bean="goalsScoredInDefeatsVsBelowDefinition" />
-				<ref bean="goalsScoredInWinDefinition" />
+				<ref bean="goalsScoredInWinsDefinition" />
 				<ref bean="goalsScoredInDrawsDefinition" />
 				<ref bean="goalsScoredInDefeatsDefinition" />
+				<ref bean="goalsScoredDefinition" />
 				<ref bean="gamesPlayedDefinition" />
-				<ref bean="goalsConcededInWinAtHomeDefinition" />
-				<ref bean="goalsConcededInWinAwayDefinition" />
+				<ref bean="goalsConcededInWinsAtHomeDefinition" />
+				<ref bean="goalsConcededInWinsAwayDefinition" />
 				<ref bean="goalsConcededInDrawsAtHomeDefinition" />
 				<ref bean="goalsConcededInDrawsAwayDefinition" />
 				<ref bean="goalsConcededInDefeatsAtHomeDefinition" />
 				<ref bean="goalsConcededInDefeatsAwayDefinition" />
-				<ref bean="goalsConcededInWinVsAboveDefinition" />
-				<ref bean="goalsConcededInWinVsBelowDefinition" />
+				<ref bean="goalsConcededInWinsVsAboveDefinition" />
+				<ref bean="goalsConcededInWinsVsBelowDefinition" />
 				<ref bean="goalsConcededInDrawsVsAboveDefinition" />
 				<ref bean="goalsConcededInDrawsVsBelowDefinition" />
 				<ref bean="goalsConcededInDefeatsVsAboveDefinition" />
 				<ref bean="goalsConcededInDefeatsVsBelowDefinition" />
-				<ref bean="goalsConcededInWinDefinition" />
+				<ref bean="goalsConcededInWinsDefinition" />
 				<ref bean="goalsConcededInDrawsDefinition" />
 				<ref bean="goalsConcededInDefeatsDefinition" />
+				<ref bean="goalsConcededDefinition" />
 				<ref bean="gamesPlayedDefinition" />
 				<ref bean="goalDifferenceDefinition" />
 			</list>

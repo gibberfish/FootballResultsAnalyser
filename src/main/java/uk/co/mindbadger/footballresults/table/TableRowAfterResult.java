@@ -1,7 +1,8 @@
 package uk.co.mindbadger.footballresults.table;
 
-import java.util.Iterator;
 import java.util.Map;
+
+import org.apache.log4j.Logger;
 
 import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
 import uk.co.mindbadger.footballresults.table.calculation.Calculation;
@@ -10,6 +11,8 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class TableRowAfterResult<K,L,M> extends TableRow<K,L,M> {
+	Logger logger = Logger.getLogger(TableRowAfterResult.class);
+	
 	private TableRow<K,L,M> previousTableRow;
 	private Fixture<K> fixture;
 	private Map<String, Calculation> calculations;
@@ -45,14 +48,7 @@ public class TableRowAfterResult<K,L,M> extends TableRow<K,L,M> {
 		}
 		
 		Calculation calculation = calculations.get(attributeId);
-		if (calculation == null) {
-			
-			System.err.println("number:"+calculations.size());
-			Iterator i = calculations.keySet().iterator();
-			while (i.hasNext()) {
-				System.err.println("KEY: " + i.next());
-			}
-			
+		if (calculation == null) {			
 			throw new IllegalArgumentException("No value for " + attributeId);
 		}
 		

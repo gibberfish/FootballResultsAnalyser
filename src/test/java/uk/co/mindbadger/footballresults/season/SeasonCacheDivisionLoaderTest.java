@@ -97,7 +97,25 @@ public class SeasonCacheDivisionLoaderTest {
 	
 	@Mock
 	private TeamFixtureContext mockFixture1AwayTeamContext;
+
+	@Mock
+	private TeamFixtureContext mockFixture2HomeTeamContext;
 	
+	@Mock
+	private TeamFixtureContext mockFixture2AwayTeamContext;
+
+	@Mock
+	private TeamFixtureContext mockFixture3HomeTeamContext;
+	
+	@Mock
+	private TeamFixtureContext mockFixture3AwayTeamContext;
+
+	@Mock
+	private TeamFixtureContext mockFixture4HomeTeamContext;
+	
+	@Mock
+	private TeamFixtureContext mockFixture4AwayTeamContext;
+
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
@@ -177,6 +195,12 @@ public class SeasonCacheDivisionLoaderTest {
 		// CONTEXTS
 		when(mockSeasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForTeam(eq(true), eq(mockFixture1), eq(fixtureDate1), eq(mockDivisionCache1), eq(mockInitialTableDiv1))).thenReturn(mockFixture1HomeTeamContext);
 		when(mockSeasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForTeam(eq(false), eq(mockFixture1), eq(fixtureDate1), eq(mockDivisionCache1), eq(mockInitialTableDiv1))).thenReturn(mockFixture1AwayTeamContext);
+		when(mockSeasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForTeam(eq(true), eq(mockFixture2), eq(fixtureDate2), eq(mockDivisionCache1), eq(mockTableDate1))).thenReturn(mockFixture2HomeTeamContext);;
+		when(mockSeasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForTeam(eq(false), eq(mockFixture2), eq(fixtureDate2), eq(mockDivisionCache1), eq(mockTableDate1))).thenReturn(mockFixture2AwayTeamContext);;
+		when(mockSeasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForTeam(eq(true), eq(mockFixture3), eq(fixtureDate3), eq(mockDivisionCache1), eq(mockTableDate2))).thenReturn(mockFixture3HomeTeamContext);;
+		when(mockSeasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForTeam(eq(false), eq(mockFixture3), eq(fixtureDate3), eq(mockDivisionCache1), eq(mockTableDate2))).thenReturn(mockFixture3AwayTeamContext);;
+		when(mockSeasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForTeam(eq(true), eq(mockFixture4), eq(fixtureDate4), eq(mockDivisionCache1), eq(mockTableDate3))).thenReturn(mockFixture4HomeTeamContext);;
+		when(mockSeasonCacheFixtureAndTableLoader.loadTeamFixtureContextsForTeam(eq(false), eq(mockFixture4), eq(fixtureDate4), eq(mockDivisionCache1), eq(mockTableDate3))).thenReturn(mockFixture4AwayTeamContext);;
 		
 		// When
 		objectUnderTest.loadDivision(mockSeasonDivision1, mockSeasonCache2015);
@@ -196,21 +220,24 @@ public class SeasonCacheDivisionLoaderTest {
 
 		verify (mockDivisionCache1,times(1)).addTableOnDate(eq(fixtureDate1), eq(mockTableDate1));
 		verify (mockTableFactory,times(1)).createTableFromPreviousTable(eq(mockTableDate1));
-		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForHomeAndAwayTeams(eq(mockFixture2), eq(fixtureDate2), eq(mockDivisionCache1), eq(mockTableDate1));
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForTeam(eq(true), eq(mockFixture2), eq(fixtureDate2), eq(mockDivisionCache1), eq(mockTableDate1));
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForTeam(eq(false), eq(mockFixture2), eq(fixtureDate2), eq(mockDivisionCache1), eq(mockTableDate1));
 		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixture(eq(mockFixture2), eq(fixtureDate2), eq(mockDivisionCache1));
-		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixtureIntoTable(eq(mockFixture2), eq(mockTableDate2));
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixtureIntoTable(eq(mockFixture2), eq(mockTableDate2), eq(mockFixture2HomeTeamContext), eq(mockFixture2AwayTeamContext));
 
 		verify (mockDivisionCache1,times(1)).addTableOnDate(eq(fixtureDate2), eq(mockTableDate2));
 		verify (mockTableFactory,times(1)).createTableFromPreviousTable(eq(mockTableDate2));
-		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForHomeAndAwayTeams(eq(mockFixture3), eq(fixtureDate3), eq(mockDivisionCache1), eq(mockTableDate2));
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForTeam(eq(true), eq(mockFixture3), eq(fixtureDate3), eq(mockDivisionCache1), eq(mockTableDate2));
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForTeam(eq(false), eq(mockFixture3), eq(fixtureDate3), eq(mockDivisionCache1), eq(mockTableDate2));
 		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixture(eq(mockFixture3), eq(fixtureDate3), eq(mockDivisionCache1));
-		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixtureIntoTable(eq(mockFixture3), eq(mockTableDate3));
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixtureIntoTable(eq(mockFixture3), eq(mockTableDate3), eq(mockFixture3HomeTeamContext), eq(mockFixture3AwayTeamContext));
 
 		verify (mockDivisionCache1,times(1)).addTableOnDate(eq(fixtureDate3), eq(mockTableDate3));
 		verify (mockTableFactory,times(1)).createTableFromPreviousTable(eq(mockTableDate3));
-		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForHomeAndAwayTeams(eq(mockFixture4), eq(fixtureDate4), eq(mockDivisionCache1), eq(mockTableDate3));
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForTeam(eq(true), eq(mockFixture4), eq(fixtureDate4), eq(mockDivisionCache1), eq(mockTableDate3));
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadTeamFixtureContextsForTeam(eq(false), eq(mockFixture4), eq(fixtureDate4), eq(mockDivisionCache1), eq(mockTableDate3));
 		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixture(eq(mockFixture4), eq(fixtureDate4), eq(mockDivisionCache1));
-		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixtureIntoTable(eq(mockFixture4), eq(mockTableDate4));
+		verify (mockSeasonCacheFixtureAndTableLoader,times(1)).loadFixtureIntoTable(eq(mockFixture4), eq(mockTableDate4), eq(mockFixture4HomeTeamContext), eq(mockFixture4AwayTeamContext));
 
 		verify (mockDivisionCache1,times(1)).addTableOnDate(eq(fixtureDate4), eq(mockTableDate4));
 	}

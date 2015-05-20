@@ -92,7 +92,7 @@ public class GoalsConcededInDrawsAtHomeVsTeamsBelowCalculationTest {
 	}
 
 	@Test
-	public void shouldReturnNoChangeWhenThereIsAPreviousRowForAHomeDrawAgainstATeamBelow () {
+	public void shouldReturnAnIncrementWhenThereIsAPreviousRowForAHomeDrawAgainstATeamBelow () {
 		// Given
 		when (mockFixtureTeamContext.isAtHome()).thenReturn(true);
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(false);
@@ -106,7 +106,7 @@ public class GoalsConcededInDrawsAtHomeVsTeamsBelowCalculationTest {
 		int result = objectUnderTest.calculate();
 		
 		// Then
-		assertEquals (3, result);
+		assertEquals (4, result);
 	}
 
 	@Test
@@ -182,7 +182,7 @@ public class GoalsConcededInDrawsAtHomeVsTeamsBelowCalculationTest {
 	}
 	
 	@Test
-	public void shouldReturnAnIncrementWhenThereIsAPreviousRowForAnAwayDrawAgainstATeamAbove () {
+	public void shouldReturnNoChangeWhenThereIsAPreviousRowForAnAwayDrawAgainstATeamAbove () {
 		// Given
 		when (mockFixtureTeamContext.isAtHome()).thenReturn(false);
 		when (mockFixtureTeamContext.isPlayingTeamAbove()).thenReturn(true);
@@ -196,7 +196,7 @@ public class GoalsConcededInDrawsAtHomeVsTeamsBelowCalculationTest {
 		int result = objectUnderTest.calculate();
 		
 		// Then
-		assertEquals (4, result);
+		assertEquals (3, result);
 	}
 
 	@Test

@@ -17,7 +17,7 @@ public class GoalsScoredInDefeatsAtHomeVsTeamsBelowCalculation extends Calculati
 		
 		boolean lost = goalsFor < goalsAgainst;
 		
-		return ((lost && !fixtureTeamContext.isAtHome() && fixtureTeamContext.isPlayingTeamAbove()) ?
+		return ((lost && fixtureTeamContext.isAtHome() && !fixtureTeamContext.isPlayingTeamAbove()) ?
 				previousTableRow.getAttribute(TableRow.GOALS_SCORED_IN_DEFEATS_AT_HOME_VS_BELOW) + goalsFor : previousTableRow.getAttribute(TableRow.GOALS_SCORED_IN_DEFEATS_AT_HOME_VS_BELOW));
 	}
 

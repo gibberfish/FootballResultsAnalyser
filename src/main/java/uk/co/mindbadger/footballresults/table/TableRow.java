@@ -41,12 +41,8 @@ public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	public static final String GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_BELOW = "goalsConcededInDefeatsAwayVsBelow";
 	public static final String GOALS_CONCEDED_IN_DRAWS_AWAY_VS_BELOW = "goalsConcededInDrawsAwayVsBelow";
 	public static final String GOALS_CONCEDED_IN_WINS_AWAY_VS_BELOW = "goalsConcededInWinsAwayVsBelow";
-
 	
-	
-	
-	
-	
+	public static final String GOALS_SCORED_AT_HOME_VS_ABOVE = "goalsScoredAtHomeVsAbove";
 	public static final String GOALS_SCORED_AT_HOME_VS_BELOW = "goalsScoredAtHomeVsBelow";
 	public static final String GOALS_SCORED_AWAY_VS_ABOVE = "goalsScoredAwayVsAbove";
 	public static final String GOALS_SCORED_AWAY_VS_BELOW = "goalsScoredAwayVsBelow";

@@ -19,7 +19,7 @@ public class GoalsConcededInDrawsAtHomeVsTeamsAboveCalculation extends Calculati
 		boolean drawn = goalsFor == goalsAgainst;
 		
 		return ((drawn && fixtureTeamContext.isAtHome() && fixtureTeamContext.isPlayingTeamAbove()) ?
-				previousTableRow.getAttribute(TableRow.GOALS_SCORED_IN_DRAWS_AT_HOME_VS_ABOVE) + goalsFor : previousTableRow.getAttribute(TableRow.GOALS_SCORED_IN_DRAWS_AT_HOME_VS_ABOVE));
+				previousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DRAWS_AT_HOME_VS_ABOVE) + goalsAgainst : previousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DRAWS_AT_HOME_VS_ABOVE));
 	}
 
 }

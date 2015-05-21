@@ -4,17 +4,17 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	public static final String GAMES_WON_AT_HOME_VS_ABOVE = "gamesWonAtHomeVsAbove";
-	public static final String GAMES_WON_AT_HOME_VS_BELOW = "gamesWonAtHomevsBelow";
+	public static final String GAMES_WON_AT_HOME_VS_BELOW = "gamesWonAtHomeVsBelow";
 	public static final String GAMES_WON_AWAY_VS_ABOVE = "gamesWonAwayVsAbove";
-	public static final String GAMES_WON_AWAY_VS_BELOW = "gamesWonAwayvsBelow";
+	public static final String GAMES_WON_AWAY_VS_BELOW = "gamesWonAwayVsBelow";
 	public static final String GAMES_DRAWN_AT_HOME_VS_ABOVE = "gamesDrawnAtHomeVsAbove";
-	public static final String GAMES_DRAWN_AT_HOME_VS_BELOW = "gamesDrawnAtHomevsBelow";
+	public static final String GAMES_DRAWN_AT_HOME_VS_BELOW = "gamesDrawnAtHomeVsBelow";
 	public static final String GAMES_DRAWN_AWAY_VS_ABOVE = "gamesDrawnAwayVsAbove";
-	public static final String GAMES_DRAWN_AWAY_VS_BELOW = "gamesDrawnAwayvsBelow";
+	public static final String GAMES_DRAWN_AWAY_VS_BELOW = "gamesDrawnAwayVsBelow";
 	public static final String GAMES_LOST_AT_HOME_VS_ABOVE = "gamesLostAtHomeVsAbove";
-	public static final String GAMES_LOST_AT_HOME_VS_BELOW = "gamesLostAtHomevsBelow";
+	public static final String GAMES_LOST_AT_HOME_VS_BELOW = "gamesLostAtHomeVsBelow";
 	public static final String GAMES_LOST_AWAY_VS_ABOVE = "gamesLostAwayVsAbove";
-	public static final String GAMES_LOST_AWAY_VS_BELOW = "gamesLostAwayvsBelow";
+	public static final String GAMES_LOST_AWAY_VS_BELOW = "gamesLostAwayVsBelow";
 
 	public static final String GOALS_SCORED_IN_DEFEATS_AT_HOME_VS_ABOVE = "goalsScoredInDefeatsAtHomeVsAbove";
 	public static final String GOALS_SCORED_IN_DRAWS_AT_HOME_VS_ABOVE = "goalsScoredInDrawsAtHomeVsAbove";

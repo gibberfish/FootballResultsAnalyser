@@ -1,0 +1,113 @@
+Pos
+Team	
+
+P			P***
+(PH)		PH**
+(PA)		PA**
+PW			P*W*
+PWH			PHW*
+PWA			PAW*
+PD			P*D*
+PDH			PHD*
+PDA			PAD*
+PL			P*L*
+PLH			PHL*
+PLA			PAL*
+
+F			S***
+(SH)		SH**
+(SA)		SA**
+
+A			C***
+(CH)		CH**
+(CA)		CA**
+
+GD			
+Pts	
+
+PWvA		P*WA
+PWHA		PHWA
+PWAA		PAWA
+
+PWvB		P*WB
+PWHB		PHWB
+PWAB		PAWB
+	
+PDvA		P*DA
+PDHA		PHDA
+PDAA		PADA
+
+PDvB		P*DB
+PDHB		PHDB
+PDAB		PADB
+
+PLvA		P*LA
+PLHA		PHLA
+PLAA		PALA
+
+PLvB		P*LB
+PLHB		PHLB
+PLAB		PALB
+
+
+SW			S*W*
+SWH			SHW*
+SWA			SAW*
+SWvA		S*WA
+SWvB		S*WB
+SWHA		SHWA
+SWHB		SHWB
+SWAA		SAWA
+SWAB		SAWB
+
+SD			S*D*
+SDH	
+SDA	
+SDvA	
+SDvB	
+SDHA	
+SDHB	
+SDAA	
+SDAB	
+
+SL	
+SLH	
+SLA	
+SLvA	
+SLvB	
+SLHA	
+SLHB	
+SLAA	
+SLAB	
+
+
+CW	
+CWH	
+CWA	
+CWvA	
+CWvB	
+CWHA	
+CWHB	
+CWAA	
+CWAB	
+
+CD	
+CDH	
+CDA	
+CDvA	
+CDvB	
+CDHA	
+CDHB	
+CDAA	
+CDAB	
+
+CL	
+CLH	
+CLA	
+CLvA	
+CLvB	
+CLHA	
+CLHB	
+CLAA	
+CLAB	
+

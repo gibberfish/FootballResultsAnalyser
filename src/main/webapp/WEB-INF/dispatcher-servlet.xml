@@ -75,8 +75,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 
 
-
-
+	<!-- RAW CALCULATIONS -->
 	<bean id="gamesWonAtHomeVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesWonAtHomeVsAbove" />
 		<property name="description" value="Games Won at Home vs teams Above" />
@@ -365,11 +364,8 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="sequence" value="610" />
 	</bean>
 
-
-
-
-
-
+	<!-- DERIVED CALCULATIONS -->
+	
 	<bean id="gamesWonAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesWonAtHome" />
 		<property name="description" value="Games Won At Home" />
@@ -882,7 +878,6 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 				<ref bean="gamesWonDefinition" />
 				<ref bean="gamesDrawnDefinition" />
 				<ref bean="gamesLostDefinition" />
-				<ref bean="gamesPlayedDefinition" />
 				<ref bean="goalsScoredInWinsAtHomeDefinition" />
 				<ref bean="goalsScoredInWinsAwayDefinition" />
 				<ref bean="goalsScoredInDrawsAtHomeDefinition" />
@@ -899,7 +894,6 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 				<ref bean="goalsScoredInDrawsDefinition" />
 				<ref bean="goalsScoredInDefeatsDefinition" />
 				<ref bean="goalsScoredDefinition" />
-				<ref bean="gamesPlayedDefinition" />
 				<ref bean="goalsConcededInWinsAtHomeDefinition" />
 				<ref bean="goalsConcededInWinsAwayDefinition" />
 				<ref bean="goalsConcededInDrawsAtHomeDefinition" />

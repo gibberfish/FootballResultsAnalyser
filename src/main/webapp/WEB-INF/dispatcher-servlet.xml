@@ -510,7 +510,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="description" value="Games Played" />
 		<property name="shortDescription" value="P" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{gamesWonDefinition}+{gamesDrawnDefinition}+{gamesLostDefinition}"/>
+		<property name="dynamicCalculation" value="{gamesWon}+{gamesDrawn}+{gamesLost}"/>
 		<property name="sequence" value="1" />
 	</bean>
 

@@ -1017,7 +1017,19 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		</property>
 		<property name="homeAwayTable">
 			<list>
-				<ref bean="gamesWonAtHomeVsAboveDefinition" />
+				<ref bean="gamesPlayedDefinition" />
+				<ref bean="gamesWonAtHomeDefinition" />
+				<ref bean="gamesDrawnAtHomeDefinition" />
+				<ref bean="gamesLostAtHomeDefinition" />
+				<ref bean="goalsScoredAtHomeDefinition" />
+				<ref bean="goalsConcededAtHomeDefinition" />
+				<ref bean="gamesWonAwayDefinition" />
+				<ref bean="gamesDrawnAwayDefinition" />
+				<ref bean="gamesLostAwayDefinition" />
+				<ref bean="goalsScoredAwayDefinition" />
+				<ref bean="goalsConcededAwayDefinition" />
+				<ref bean="goalDifferenceDefinition" />
+				<ref bean="pointsDefinition" />				
 			</list>
 		</property>	
 	</bean>

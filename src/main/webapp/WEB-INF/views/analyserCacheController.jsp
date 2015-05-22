@@ -23,7 +23,9 @@
 
     <!-- Custom styles for this template -->
     <link href="football-results-analyser.css" rel="stylesheet">
+    <!--
 	<link href="css\fra.css" rel="stylesheet">
+	-->
 	
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -65,24 +67,27 @@
 				<h3><fmt:formatDate type="both" pattern="dd-MM-yyyy" value="${fixtureDate.time}"/></h3>
 				
 				<table class="table table-striped">
+				<thead>
 				<tr>
 					<th>Pos</th>
 					<th>Team</th>
-					<c:forEach var="attributeDefinition" items="${tableShapes.shortTable}">
+					<c:forEach var="attributeDefinition" items="${tableShapes.homeAwayTable}">
 						<th><c:out value="${attributeDefinition.shortDescription}"/></th>
 					</c:forEach>					
-				</tr>				
+				</tr>
+				</thead>				
 				
+				<tbody>
 				<c:forEach var="tableRowEntry" items="${seasonDivisionCache.tablesForDivision[fixtureDate].sortedTable}" varStatus="loop">
 				<tr>
 					<td><c:out value="${loop.index+1}"/></td>
 					<td><c:out value="${tableRowEntry.team.teamName}"/></td>
-					<c:forEach var="attributeDefinition" items="${tableShapes.shortTable}">
+					<c:forEach var="attributeDefinition" items="${tableShapes.homeAwayTable}">
 						<td><c:out value="${tableRowEntry.getAttribute(attributeDefinition.attributeId)}"/></td>
 					</c:forEach>					
 				</tr>					
 				</c:forEach>
-				
+				</tbody>
 				</table>
 
 				<c:forEach var="fixture" items="${seasonDivisionCache.fixturesForDivision[fixtureDate]}">

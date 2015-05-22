@@ -79,369 +79,432 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<bean id="gamesWonAtHomeVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesWonAtHomeVsAbove" />
 		<property name="description" value="Games Won at Home vs teams Above" />
-		<property name="shortDescription" value="PWHA" />
+		<property name="shortDescription" value="PHW+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesWonAtHomeVsTeamsAboveCalculation" />
-		<property name="sequence" value="100" />
+		<property name="sequence" value="71" />
 	</bean>
 
 	<bean id="gamesWonAtHomeVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesWonAtHomeVsBelow" />
 		<property name="description" value="Games Won at Home vs teams Below" />
-		<property name="shortDescription" value="PWHB" />
+		<property name="shortDescription" value="PHW-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesWonAtHomeVsTeamsBelowCalculation" />
-		<property name="sequence" value="110" />
+		<property name="sequence" value="81" />
 	</bean>
 
 	<bean id="gamesWonAwayVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesWonAwayVsAbove" />
 		<property name="description" value="Games Won Away vs teams Above" />
-		<property name="shortDescription" value="PWAA" />
+		<property name="shortDescription" value="PAW+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesWonAwayVsTeamsAboveCalculation" />
-		<property name="sequence" value="120" />
+		<property name="sequence" value="72" />
 	</bean>
 
 	<bean id="gamesWonAwayVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesWonAwayVsBelow" />
 		<property name="description" value="Games Won Away vs teams Below" />
-		<property name="shortDescription" value="PWAB" />
+		<property name="shortDescription" value="PAW-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesWonAwayVsTeamsBelowCalculation" />
-		<property name="sequence" value="130" />
+		<property name="sequence" value="82" />
 	</bean>
 
 	<bean id="gamesDrawnAtHomeVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesDrawnAtHomeVsAbove" />
 		<property name="description" value="Games Drawn at Home vs teams Above" />
-		<property name="shortDescription" value="PDHA" />
+		<property name="shortDescription" value="PHD+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesDrawnAtHomeVsTeamsAboveCalculation" />
-		<property name="sequence" value="140" />
+		<property name="sequence" value="74" />
 	</bean>
 
 	<bean id="gamesDrawnAtHomeVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesDrawnAtHomeVsBelow" />
 		<property name="description" value="Games Drawn at Home vs teams Below" />
-		<property name="shortDescription" value="PDHB" />
+		<property name="shortDescription" value="PHD-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesDrawnAtHomeVsTeamsBelowCalculation" />
-		<property name="sequence" value="150" />
+		<property name="sequence" value="84" />
 	</bean>
 
 	<bean id="gamesDrawnAwayVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesDrawnAwayVsAbove" />
 		<property name="description" value="Games Drawn Away vs teams Above" />
-		<property name="shortDescription" value="PDAA" />
+		<property name="shortDescription" value="PAD+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesDrawnAwayVsTeamsAboveCalculation" />
-		<property name="sequence" value="160" />
+		<property name="sequence" value="75" />
 	</bean>
 
 	<bean id="gamesDrawnAwayVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesDrawnAwayVsBelow" />
 		<property name="description" value="Games Drawn Away vs teams Below" />
-		<property name="shortDescription" value="PDAB" />
+		<property name="shortDescription" value="PAD-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesDrawnAwayVsTeamsBelowCalculation" />
-		<property name="sequence" value="170" />
+		<property name="sequence" value="85" />
 	</bean>
 
 	<bean id="gamesLostAtHomeVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesLostAtHomeVsAbove" />
 		<property name="description" value="Games Lost at Home vs teams Above" />
-		<property name="shortDescription" value="PLHA" />
+		<property name="shortDescription" value="PHL+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesLostAtHomeVsTeamsAboveCalculation" />
-		<property name="sequence" value="180" />
+		<property name="sequence" value="77" />
 	</bean>
 
 	<bean id="gamesLostAtHomeVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesLostAtHomeVsBelow" />
 		<property name="description" value="Games Lost at Home vs teams Below" />
-		<property name="shortDescription" value="PLHB" />
+		<property name="shortDescription" value="PHL-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesLostAtHomeVsTeamsBelowCalculation" />
-		<property name="sequence" value="190" />
+		<property name="sequence" value="87" />
 	</bean>
 
 	<bean id="gamesLostAwayVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesLostAwayVsAbove" />
 		<property name="description" value="Games Lost Away vs teams Above" />
-		<property name="shortDescription" value="PLAA" />
+		<property name="shortDescription" value="PAL+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesLostAwayVsTeamsAboveCalculation" />
-		<property name="sequence" value="200" />
+		<property name="sequence" value="78" />
 	</bean>
 
 	<bean id="gamesLostAwayVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesLostAwayVsBelow" />
 		<property name="description" value="Games Lost Away vs teams Below" />
-		<property name="shortDescription" value="PLAB" />
+		<property name="shortDescription" value="PAL-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GamesLostAwayVsTeamsBelowCalculation" />
-		<property name="sequence" value="210" />
+		<property name="sequence" value="88" />
 	</bean>
 
 	<bean id="goalsScoredInWinsAtHomeVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInWinsAtHomeVsAbove" />
 		<property name="description" value="Goals Scored in Wins at Home vs teams Above" />
-		<property name="shortDescription" value="SWHA" />
+		<property name="shortDescription" value="PHW+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredInWinsAtHomeVsTeamsAboveCalculation" />
-		<property name="sequence" value="300" />
+		<property name="sequence" value="91" />
 	</bean>
 
 	<bean id="goalsScoredInWinsAtHomeVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInWinsAtHomeVsBelow" />
 		<property name="description" value="Goals Scored in Wins at Home vs teams Below" />
-		<property name="shortDescription" value="SWHB" />
+		<property name="shortDescription" value="SHW-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredInWinsAtHomeVsTeamsBelowCalculation" />
-		<property name="sequence" value="310" />
+		<property name="sequence" value="101" />
 	</bean>
 
 	<bean id="goalsScoredInWinsAwayVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInWinsAwayVsAbove" />
 		<property name="description" value="Goals Scored in Wins Away vs teams Above" />
-		<property name="shortDescription" value="SWAA" />
+		<property name="shortDescription" value="SAW+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredInWinsAwayVsTeamsAboveCalculation" />
-		<property name="sequence" value="320" />
+		<property name="sequence" value="92" />
 	</bean>
 
 	<bean id="goalsScoredInWinsAwayVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInWinsAwayVsBelow" />
 		<property name="description" value="Goals Scored in Wins Away vs teams Below" />
-		<property name="shortDescription" value="SWAB" />
+		<property name="shortDescription" value="SAW-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredInWinsAwayVsTeamsBelowCalculation" />
-		<property name="sequence" value="330" />
+		<property name="sequence" value="102" />
 	</bean>
 
 	<bean id="goalsScoredInDrawsAtHomeVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDrawsAtHomeVsAbove" />
 		<property name="description" value="Goals Scored in Draws at Home vs teams Above" />
-		<property name="shortDescription" value="SDHA" />
+		<property name="shortDescription" value="SHD+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredInDrawsAtHomeVsTeamsAboveCalculation" />
-		<property name="sequence" value="340" />
+		<property name="sequence" value="94" />
 	</bean>
 
 	<bean id="goalsScoredInDrawsAtHomeVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDrawsAtHomeVsBelow" />
 		<property name="description" value="Goals Scored in Draws at Home vs teams Below" />
-		<property name="shortDescription" value="SDHB" />
+		<property name="shortDescription" value="SHD-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredInDrawsAtHomeVsTeamsBelowCalculation" />
-		<property name="sequence" value="350" />
+		<property name="sequence" value="104" />
 	</bean>
 
 	<bean id="goalsScoredInDrawsAwayVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDrawsAwayVsAbove" />
 		<property name="description" value="Goals Scored in Draws Away vs teams Above" />
-		<property name="shortDescription" value="SDAA" />
+		<property name="shortDescription" value="SAD+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredInDrawsAwayVsTeamsAboveCalculation" />
-		<property name="sequence" value="360" />
+		<property name="sequence" value="95" />
 	</bean>
 
 	<bean id="goalsScoredInDrawsAwayVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDrawsAwayVsBelow" />
 		<property name="description" value="Goals Scored in Draws Away vs teams Below" />
-		<property name="shortDescription" value="SDAB" />
+		<property name="shortDescription" value="SAD-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredInDrawsAwayVsTeamsBelowCalculation" />
-		<property name="sequence" value="370" />
+		<property name="sequence" value="105" />
 	</bean>
 
 	<bean id="goalsScoredInDefeatsAtHomeVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDefeatsAtHomeVsAbove" />
 		<property name="description" value="Goals Scored in Defeats at Home vs teams Above" />
-		<property name="shortDescription" value="SLHA" />
+		<property name="shortDescription" value="SHL+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredInDefeatsAtHomeVsTeamsAboveCalculation" />
-		<property name="sequence" value="380" />
+		<property name="sequence" value="97" />
 	</bean>
 
 	<bean id="goalsScoredInDefeatsAtHomeVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDefeatsAtHomeVsBelow" />
 		<property name="description" value="Goals Scored in Defeats at Home vs teams Below" />
-		<property name="shortDescription" value="SLHB" />
+		<property name="shortDescription" value="SHL-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredInDefeatsAtHomeVsTeamsBelowCalculation" />
-		<property name="sequence" value="390" />
+		<property name="sequence" value="107" />
 	</bean>
 
 	<bean id="goalsScoredInDefeatsAwayVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDefeatsAwayVsAbove" />
 		<property name="description" value="Goals Scored in Defeats Away vs teams Above" />
-		<property name="shortDescription" value="SLAA" />
+		<property name="shortDescription" value="SAL+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredInDefeatsAwayVsTeamsAboveCalculation" />
-		<property name="sequence" value="300" />
+		<property name="sequence" value="98" />
 	</bean>
 
 	<bean id="goalsScoredInDefeatsAwayVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDefeatsAwayVsBelow" />
 		<property name="description" value="Goals Scored in Defeats Away vs teams Below" />
-		<property name="shortDescription" value="SLAB" />
+		<property name="shortDescription" value="SAL-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsScoredInDefeatsAwayVsTeamsBelowCalculation" />
-		<property name="sequence" value="310" />
+		<property name="sequence" value="108" />
 	</bean>
 
 	<bean id="goalsConcededInWinsAtHomeVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInWinsAtHomeVsAbove" />
 		<property name="description" value="Goals Conceded in Wins at Home vs teams Above" />
-		<property name="shortDescription" value="CWHA" />
+		<property name="shortDescription" value="CHW+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededInWinsAtHomeVsTeamsAboveCalculation" />
-		<property name="sequence" value="500" />
+		<property name="sequence" value="111" />
 	</bean>
 
 	<bean id="goalsConcededInWinsAtHomeVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInWinsAtHomeVsBelow" />
 		<property name="description" value="Goals Conceded in Wins at Home vs teams Below" />
-		<property name="shortDescription" value="CWHB" />
+		<property name="shortDescription" value="CHW-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededInWinsAtHomeVsTeamsBelowCalculation" />
-		<property name="sequence" value="510" />
+		<property name="sequence" value="121" />
 	</bean>
 
 	<bean id="goalsConcededInWinsAwayVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInWinsAwayVsAbove" />
 		<property name="description" value="Goals Conceded in Wins Away vs teams Above" />
-		<property name="shortDescription" value="CWAA" />
+		<property name="shortDescription" value="CAW+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededInWinsAwayVsTeamsAboveCalculation" />
-		<property name="sequence" value="520" />
+		<property name="sequence" value="112" />
 	</bean>
 
 	<bean id="goalsConcededInWinsAwayVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInWinsAwayVsBelow" />
 		<property name="description" value="Goals Conceded in Wins Away vs teams Below" />
-		<property name="shortDescription" value="CWAB" />
+		<property name="shortDescription" value="CAW-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededInWinsAwayVsTeamsBelowCalculation" />
-		<property name="sequence" value="530" />
+		<property name="sequence" value="122" />
 	</bean>
 
 	<bean id="goalsConcededInDrawsAtHomeVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDrawsAtHomeVsAbove" />
 		<property name="description" value="Goals Conceded in Draws at Home vs teams Above" />
-		<property name="shortDescription" value="CDHA" />
+		<property name="shortDescription" value="CHD+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededInDrawsAtHomeVsTeamsAboveCalculation" />
-		<property name="sequence" value="540" />
+		<property name="sequence" value="114" />
 	</bean>
 
 	<bean id="goalsConcededInDrawsAtHomeVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDrawsAtHomeVsBelow" />
 		<property name="description" value="Goals Conceded in Draws at Home vs teams Below" />
-		<property name="shortDescription" value="CDHB" />
+		<property name="shortDescription" value="CHD-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededInDrawsAtHomeVsTeamsBelowCalculation" />
-		<property name="sequence" value="550" />
+		<property name="sequence" value="124" />
 	</bean>
 
 	<bean id="goalsConcededInDrawsAwayVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDrawsAwayVsAbove" />
 		<property name="description" value="Goals Conceded in Draws Away vs teams Above" />
-		<property name="shortDescription" value="CDAA" />
+		<property name="shortDescription" value="CAD+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededInDrawsAwayVsTeamsAboveCalculation" />
-		<property name="sequence" value="560" />
+		<property name="sequence" value="115" />
 	</bean>
 
 	<bean id="goalsConcededInDrawsAwayVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDrawsAwayVsBelow" />
 		<property name="description" value="Goals Conceded in Draws Away vs teams Below" />
-		<property name="shortDescription" value="CDAB" />
+		<property name="shortDescription" value="CAD-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededInDrawsAwayVsTeamsBelowCalculation" />
-		<property name="sequence" value="570" />
+		<property name="sequence" value="125" />
 	</bean>
 
 	<bean id="goalsConcededInDefeatsAtHomeVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDefeatsAtHomeVsAbove" />
 		<property name="description" value="Goals Conceded in Defeats at Home vs teams Above" />
-		<property name="shortDescription" value="CLHA" />
+		<property name="shortDescription" value="CHL+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededInDefeatsAtHomeVsTeamsAboveCalculation" />
-		<property name="sequence" value="580" />
+		<property name="sequence" value="117" />
 	</bean>
 
 	<bean id="goalsConcededInDefeatsAtHomeVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDefeatsAtHomeVsBelow" />
 		<property name="description" value="Goals Conceded in Defeats at Home vs teams Below" />
-		<property name="shortDescription" value="CLHB" />
+		<property name="shortDescription" value="CHL-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededInDefeatsAtHomeVsTeamsBelowCalculation" />
-		<property name="sequence" value="590" />
+		<property name="sequence" value="127" />
 	</bean>
 
 	<bean id="goalsConcededInDefeatsAwayVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDefeatsAwayVsAbove" />
 		<property name="description" value="Goals Conceded in Defeats Away vs teams Above" />
-		<property name="shortDescription" value="CLAA" />
+		<property name="shortDescription" value="CAL+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededInDefeatsAwayVsTeamsAboveCalculation" />
-		<property name="sequence" value="600" />
+		<property name="sequence" value="118" />
 	</bean>
 
 	<bean id="goalsConcededInDefeatsAwayVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDefeatsAwayVsBelow" />
 		<property name="description" value="Goals Conceded in Defeats Away vs teams Below" />
-		<property name="shortDescription" value="CLAB" />
+		<property name="shortDescription" value="CAL-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.GoalsConcededInDefeatsAwayVsTeamsBelowCalculation" />
-		<property name="sequence" value="610" />
+		<property name="sequence" value="128" />
 	</bean>
 
 	<!-- DERIVED CALCULATIONS -->
+
+	<bean id="gamesPlayedDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="gamesPlayed" />
+		<property name="description" value="Games Played" />
+		<property name="shortDescription" value="P***" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
+		<property name="dynamicCalculation" value="{gamesWon}+{gamesDrawn}+{gamesLost}"/>
+		<property name="sequence" value="1" />
+	</bean>
+
+	<bean id="gamesPlayedAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="gamesPlayedAtHome" />
+		<property name="description" value="Games Played At Home" />
+		<property name="shortDescription" value="PH**" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
+		<property name="dynamicCalculation" value="{gamesWonAtHome}+{gamesDrawnAtHome}+{gamesLostAtHome}"/>
+		<property name="sequence" value="2" />
+	</bean>
+
+	<bean id="gamesPlayedAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="gamesPlayedAway" />
+		<property name="description" value="Games Played Away" />
+		<property name="shortDescription" value="PA**" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
+		<property name="dynamicCalculation" value="{gamesWonAway}+{gamesDrawnAway}+{gamesLostAway}"/>
+		<property name="sequence" value="6" />
+	</bean>
+
+	<bean id="goalsScoredAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsScoredAtHome" />
+		<property name="description" value="Goals Scored At Home" />
+		<property name="shortDescription" value="SH**" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
+		<property name="dynamicCalculation" value="{goalsScoredInWinsAtHome}+{goalsScoredInDrawsAtHome}+{goalsScoredInDefeatsAtHome}"/>
+		<property name="sequence" value="21" />
+	</bean>
+
+	<bean id="goalsScoredAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsScoredAway" />
+		<property name="description" value="Goals Scored Away" />
+		<property name="shortDescription" value="SA**" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
+		<property name="dynamicCalculation" value="{goalsScoredInWinsAway}+{goalsScoredInDrawsAway}+{goalsScoredInDefeatsAway}"/>
+		<property name="sequence" value="25" />
+	</bean>
+
+	<bean id="goalsConcededAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsConcededAtHome" />
+		<property name="description" value="Goals Conceded At Home" />
+		<property name="shortDescription" value="CH**" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
+		<property name="dynamicCalculation" value="{goalsConcededInWinsAtHome}+{goalsConcededInDrawsAtHome}+{goalsConcededInDefeatsAtHome}"/>
+		<property name="sequence" value="41" />
+	</bean>
+
+	<bean id="goalsConcededAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="goalsConcededAway" />
+		<property name="description" value="Goals Conceded Away" />
+		<property name="shortDescription" value="CA**" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
+		<property name="dynamicCalculation" value="{goalsConcededInWinsAway}+{goalsConcededInDrawsAway}+{goalsConcededInDefeatsAway}"/>
+		<property name="sequence" value="45" />
+	</bean>
 	
 	<bean id="gamesWonAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesWonAtHome" />
 		<property name="description" value="Games Won At Home" />
-		<property name="shortDescription" value="PWH" />
+		<property name="shortDescription" value="PHW*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesWonAtHomeVsAbove}+{gamesWonAtHomeVsBelow}"/>
-		<property name="sequence" value="80" />
+		<property name="sequence" value="3" />
 	</bean>
 
 	<bean id="gamesWonAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesWonAway" />
 		<property name="description" value="Games Won Away" />
-		<property name="shortDescription" value="PWA" />
+		<property name="shortDescription" value="PAW*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesWonAwayVsAbove}+{gamesWonAwayVsBelow}"/>
-		<property name="sequence" value="81" />
+		<property name="sequence" value="7" />
 	</bean>
 
 	<bean id="gamesDrawnAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesDrawnAtHome" />
 		<property name="description" value="Games Drawn At Home" />
-		<property name="shortDescription" value="PDH" />
+		<property name="shortDescription" value="PHD*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesDrawnAtHomeVsAbove}+{gamesDrawnAtHomeVsBelow}"/>
-		<property name="sequence" value="82" />
+		<property name="sequence" value="4" />
 	</bean>
 
 	<bean id="gamesDrawnAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesDrawnAway" />
 		<property name="description" value="Games Drawn Away" />
-		<property name="shortDescription" value="PDA" />
+		<property name="shortDescription" value="PAD*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesDrawnAwayVsAbove}+{gamesDrawnAwayVsBelow}"/>
-		<property name="sequence" value="83" />
+		<property name="sequence" value="8" />
 	</bean>
 
 	<bean id="gamesLostAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesLostAtHome" />
 		<property name="description" value="Games Lost At Home" />
-		<property name="shortDescription" value="PLH" />
+		<property name="shortDescription" value="PHL*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesLostAtHomeVsAbove}+{gamesLostAtHomeVsBelow}"/>
-		<property name="sequence" value="84" />
+		<property name="sequence" value="5" />
 	</bean>
 
 	<bean id="gamesLostAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesLostAway" />
 		<property name="description" value="Games Lost Away" />
-		<property name="shortDescription" value="PLA" />
+		<property name="shortDescription" value="PAL*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesLostAwayVsAbove}+{gamesLostAwayVsBelow}"/>
-		<property name="sequence" value="85" />
+		<property name="sequence" value="9" />
 	</bean>
 
 	<bean id="gamesWonVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesWonVsAbove" />
 		<property name="description" value="Games Won vs Teams Above" />
-		<property name="shortDescription" value="PWvA" />
+		<property name="shortDescription" value="P*W+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesWonAtHomeVsAbove}+{gamesWonAwayVsAbove}"/>
-		<property name="sequence" value="86" />
+		<property name="sequence" value="70" />
 	</bean>
 
 	<bean id="gamesWonVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesWonVsBelow" />
 		<property name="description" value="Games Won vs Teams Below" />
-		<property name="shortDescription" value="PWvB" />
+		<property name="shortDescription" value="P*W-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesWonAtHomeVsBelow}+{gamesWonAwayVsBelow}"/>
-		<property name="sequence" value="87" />
+		<property name="sequence" value="80" />
 	</bean>
 
 	<bean id="gamesDrawnVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesDrawnVsAbove" />
 		<property name="description" value="Games Drawn vs Teams Above" />
-		<property name="shortDescription" value="PDvA" />
+		<property name="shortDescription" value="P*D+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesDrawnAtHomeVsAbove}+{gamesDrawnAwayVsAbove}"/>
 		<property name="sequence" value="86" />
@@ -450,162 +513,151 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<bean id="gamesDrawnVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesDrawnVsBelow" />
 		<property name="description" value="Games Drawn vs Teams Below" />
-		<property name="shortDescription" value="PDvB" />
+		<property name="shortDescription" value="P*D-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesDrawnAtHomeVsBelow}+{gamesDrawnAwayVsBelow}"/>
-		<property name="sequence" value="87" />
+		<property name="sequence" value="83" />
 	</bean>
 
 	<bean id="gamesLostVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesLostVsAbove" />
 		<property name="description" value="Games Lost vs Teams Above" />
-		<property name="shortDescription" value="PLvA" />
+		<property name="shortDescription" value="P*L+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesLostAtHomeVsAbove}+{gamesLostAwayVsAbove}"/>
-		<property name="sequence" value="86" />
+		<property name="sequence" value="76" />
 	</bean>
 
 	<bean id="gamesLostVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesLostVsBelow" />
 		<property name="description" value="Games Lost vs Teams Below" />
-		<property name="shortDescription" value="PLvB" />
+		<property name="shortDescription" value="P*L-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesLostAtHomeVsBelow}+{gamesLostAwayVsBelow}"/>
-		<property name="sequence" value="87" />
+		<property name="sequence" value="86" />
 	</bean>
 
 	<bean id="gamesWonDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesWon" />
 		<property name="description" value="Games Won" />
-		<property name="shortDescription" value="PW" />
+		<property name="shortDescription" value="P*W*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesWonAtHome}+{gamesWonAway}"/>
-		<property name="sequence" value="90" />
+		<property name="sequence" value="10" />
 	</bean>
 
 	<bean id="gamesDrawnDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesDrawn" />
 		<property name="description" value="Games Drawn" />
-		<property name="shortDescription" value="PD" />
+		<property name="shortDescription" value="P*D*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesDrawnAtHome}+{gamesDrawnAway}"/>
-		<property name="sequence" value="91" />
+		<property name="sequence" value="11" />
 	</bean>
 
 	<bean id="gamesLostDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesLost" />
 		<property name="description" value="Games Lost" />
-		<property name="shortDescription" value="PL" />
+		<property name="shortDescription" value="P*L*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{gamesLostAtHome}+{gamesLostAway}"/>
-		<property name="sequence" value="92" />
+		<property name="sequence" value="12" />
 	</bean>
-
-	<bean id="gamesPlayedDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
-		<property name="attributeId" value="gamesPlayed" />
-		<property name="description" value="Games Played" />
-		<property name="shortDescription" value="P" />
-		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
-		<property name="dynamicCalculation" value="{gamesWon}+{gamesDrawn}+{gamesLost}"/>
-		<property name="sequence" value="1" />
-	</bean>
-
-
 
 	<bean id="goalsScoredInWinsAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInWinsAtHome" />
 		<property name="description" value="Goals Scored in Wins At Home" />
-		<property name="shortDescription" value="SWH" />
+		<property name="shortDescription" value="SHW*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInWinsAtHomeVsAbove}+{goalsScoredInWinsAtHomeVsBelow}"/>
-		<property name="sequence" value="80" />
+		<property name="sequence" value="22" />
 	</bean>
 
 	<bean id="goalsScoredInWinsAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInWinsAway" />
 		<property name="description" value="Goals Scored in Wins Away" />
-		<property name="shortDescription" value="SWA" />
+		<property name="shortDescription" value="SAW*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInWinsAwayVsAbove}+{goalsScoredInWinsAwayVsBelow}"/>
-		<property name="sequence" value="81" />
+		<property name="sequence" value="26" />
 	</bean>
 
 	<bean id="goalsScoredInDrawsAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDrawsAtHome" />
 		<property name="description" value="Goals Scored in Draws At Home" />
-		<property name="shortDescription" value="SDH" />
+		<property name="shortDescription" value="SHD*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInDrawsAtHomeVsAbove}+{goalsScoredInDrawsAtHomeVsBelow}"/>
-		<property name="sequence" value="82" />
+		<property name="sequence" value="23" />
 	</bean>
 
 	<bean id="goalsScoredInDrawsAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDrawsAway" />
 		<property name="description" value="Goals Scored in Draws Away" />
-		<property name="shortDescription" value="SDA" />
+		<property name="shortDescription" value="SAD*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInDrawsAwayVsAbove}+{goalsScoredInDrawsAwayVsBelow}"/>
-		<property name="sequence" value="83" />
+		<property name="sequence" value="27" />
 	</bean>
 
 	<bean id="goalsScoredInDefeatsAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDefeatsAtHome" />
 		<property name="description" value="Goals Scored in Defeats At Home" />
-		<property name="shortDescription" value="SLH" />
+		<property name="shortDescription" value="SHL*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInDefeatsAtHomeVsAbove}+{goalsScoredInDefeatsAtHomeVsBelow}"/>
-		<property name="sequence" value="84" />
+		<property name="sequence" value="24" />
 	</bean>
 
 	<bean id="goalsScoredInDefeatsAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDefeatsAway" />
 		<property name="description" value="Goals Scored in Defeats Away" />
-		<property name="shortDescription" value="SLA" />
+		<property name="shortDescription" value="SAL*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInDefeatsAwayVsAbove}+{goalsScoredInDefeatsAwayVsBelow}"/>
-		<property name="sequence" value="85" />
+		<property name="sequence" value="28" />
 	</bean>
 
 	<bean id="goalsScoredInWinsVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInWinsVsAbove" />
 		<property name="description" value="Goals Scored in Wins vs Teams Above" />
-		<property name="shortDescription" value="SWvA" />
+		<property name="shortDescription" value="S*W+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInWinsAtHomeVsAbove}+{goalsScoredInWinsAwayVsAbove}"/>
-		<property name="sequence" value="86" />
+		<property name="sequence" value="90" />
 	</bean>
 
 	<bean id="goalsScoredInWinsVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInWinsVsBelow" />
 		<property name="description" value="Goals Scored in Wins vs Teams Below" />
-		<property name="shortDescription" value="SWvB" />
+		<property name="shortDescription" value="S*W-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInWinsAtHomeVsBelow}+{goalsScoredInWinsAwayVsBelow}"/>
-		<property name="sequence" value="87" />
+		<property name="sequence" value="100" />
 	</bean>
 
 	<bean id="goalsScoredInDrawsVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDrawsVsAbove" />
 		<property name="description" value="Goals Scored in Draws vs Teams Above" />
-		<property name="shortDescription" value="SDvA" />
+		<property name="shortDescription" value="S*D+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInDrawsAtHomeVsAbove}+{goalsScoredInDrawsAwayVsAbove}"/>
-		<property name="sequence" value="86" />
+		<property name="sequence" value="93" />
 	</bean>
 
 	<bean id="goalsScoredInDrawsVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDrawsVsBelow" />
 		<property name="description" value="Goals Scored in Draws vs Teams Below" />
-		<property name="shortDescription" value="SDvB" />
+		<property name="shortDescription" value="S*D-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInDrawsAtHomeVsBelow}+{goalsScoredInDrawsAwayVsBelow}"/>
-		<property name="sequence" value="87" />
+		<property name="sequence" value="103" />
 	</bean>
 
 	<bean id="goalsScoredInDefeatsVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDefeatsVsAbove" />
 		<property name="description" value="Goals Scored in Defeats vs Teams Above" />
-		<property name="shortDescription" value="SLvA" />
+		<property name="shortDescription" value="S*L+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInDefeatsAtHomeVsAbove}+{goalsScoredInDefeatsAwayVsAbove}"/>
 		<property name="sequence" value="86" />
@@ -614,46 +666,46 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<bean id="goalsScoredInDefeatsVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDefeatsVsBelow" />
 		<property name="description" value="Goals Scored in Defeats vs Teams Below" />
-		<property name="shortDescription" value="SLvB" />
+		<property name="shortDescription" value="S*L-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInDefeatsAtHomeVsBelow}+{goalsScoredInDefeatsAwayVsBelow}"/>
-		<property name="sequence" value="87" />
+		<property name="sequence" value="106" />
 	</bean>
 
 	<bean id="goalsScoredInWinsDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInWins" />
 		<property name="description" value="Goals Scored in Wins" />
-		<property name="shortDescription" value="SW" />
+		<property name="shortDescription" value="S*W*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInWinsAtHome}+{goalsScoredInWinsAway}"/>
-		<property name="sequence" value="90" />
+		<property name="sequence" value="29" />
 	</bean>
 
 	<bean id="goalsScoredInDrawsDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDraws" />
 		<property name="description" value="Goals Scored in Draws" />
-		<property name="shortDescription" value="SD" />
+		<property name="shortDescription" value="S*D*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInDrawsAtHome}+{goalsScoredInDrawsAway}"/>
-		<property name="sequence" value="91" />
+		<property name="sequence" value="30" />
 	</bean>
 
 	<bean id="goalsScoredInDefeatsDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScoredInDefeats" />
 		<property name="description" value="Goals Scored in Defeats" />
-		<property name="shortDescription" value="SL" />
+		<property name="shortDescription" value="S*L*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInDefeatsAtHome}+{goalsScoredInDefeatsAway}"/>
-		<property name="sequence" value="92" />
+		<property name="sequence" value="31" />
 	</bean>
 
 	<bean id="goalsScoredDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsScored" />
 		<property name="description" value="Goals Scored" />
-		<property name="shortDescription" value="F" />
+		<property name="shortDescription" value="S***" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScoredInWins}+{goalsScoredInDraws}+{goalsScoredInDefeats}"/>
-		<property name="sequence" value="1000" />
+		<property name="sequence" value="20" />
 	</bean>
 
 
@@ -661,145 +713,145 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<bean id="goalsConcededInWinsAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInWinsAtHome" />
 		<property name="description" value="Goals Conceded in Wins At Home" />
-		<property name="shortDescription" value="CWH" />
+		<property name="shortDescription" value="CHW*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInWinsAtHomeVsAbove}+{goalsConcededInWinsAtHomeVsBelow}"/>
-		<property name="sequence" value="80" />
+		<property name="sequence" value="42" />
 	</bean>
 
 	<bean id="goalsConcededInWinsAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInWinsAway" />
 		<property name="description" value="Goals Conceded in Wins Away" />
-		<property name="shortDescription" value="CWA" />
+		<property name="shortDescription" value="CAW*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInWinsAwayVsAbove}+{goalsConcededInWinsAwayVsBelow}"/>
-		<property name="sequence" value="81" />
+		<property name="sequence" value="46" />
 	</bean>
 
 	<bean id="goalsConcededInDrawsAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDrawsAtHome" />
 		<property name="description" value="Goals Conceded in Draws At Home" />
-		<property name="shortDescription" value="CDH" />
+		<property name="shortDescription" value="CHD*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInDrawsAtHomeVsAbove}+{goalsConcededInDrawsAtHomeVsBelow}"/>
-		<property name="sequence" value="82" />
+		<property name="sequence" value="43" />
 	</bean>
 
 	<bean id="goalsConcededInDrawsAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDrawsAway" />
 		<property name="description" value="Goals Conceded in Draws Away" />
-		<property name="shortDescription" value="CDA" />
+		<property name="shortDescription" value="CAD*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInDrawsAwayVsAbove}+{goalsConcededInDrawsAwayVsBelow}"/>
-		<property name="sequence" value="83" />
+		<property name="sequence" value="47" />
 	</bean>
 
 	<bean id="goalsConcededInDefeatsAtHomeDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDefeatsAtHome" />
 		<property name="description" value="Goals Conceded in Defeats At Home" />
-		<property name="shortDescription" value="CLH" />
+		<property name="shortDescription" value="CHL*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInDefeatsAtHomeVsAbove}+{goalsConcededInDefeatsAtHomeVsBelow}"/>
-		<property name="sequence" value="84" />
+		<property name="sequence" value="44" />
 	</bean>
 
 	<bean id="goalsConcededInDefeatsAwayDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDefeatsAway" />
 		<property name="description" value="Goals Conceded in Defeats Away" />
-		<property name="shortDescription" value="CLA" />
+		<property name="shortDescription" value="CAL*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInDefeatsAwayVsAbove}+{goalsConcededInDefeatsAwayVsBelow}"/>
-		<property name="sequence" value="85" />
+		<property name="sequence" value="48" />
 	</bean>
 
 	<bean id="goalsConcededInWinsVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInWinsVsAbove" />
 		<property name="description" value="Goals Conceded in Wins vs Teams Above" />
-		<property name="shortDescription" value="CWvA" />
+		<property name="shortDescription" value="C*W+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInWinsAtHomeVsAbove}+{goalsConcededInWinsAwayVsAbove}"/>
-		<property name="sequence" value="86" />
+		<property name="sequence" value="110" />
 	</bean>
 
 	<bean id="goalsConcededInWinsVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInWinsVsBelow" />
 		<property name="description" value="Goals Conceded in Wins vs Teams Below" />
-		<property name="shortDescription" value="CWvB" />
+		<property name="shortDescription" value="C*W-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInWinsAtHomeVsBelow}+{goalsConcededInWinsAwayVsBelow}"/>
-		<property name="sequence" value="87" />
+		<property name="sequence" value="120" />
 	</bean>
 
 	<bean id="goalsConcededInDrawsVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDrawsVsAbove" />
 		<property name="description" value="Goals Conceded in Draws vs Teams Above" />
-		<property name="shortDescription" value="CDvA" />
+		<property name="shortDescription" value="C*D+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInDrawsAtHomeVsAbove}+{goalsConcededInDrawsAwayVsAbove}"/>
-		<property name="sequence" value="86" />
+		<property name="sequence" value="113" />
 	</bean>
 
 	<bean id="goalsConcededInDrawsVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDrawsVsBelow" />
 		<property name="description" value="Goals Conceded in Draws vs Teams Below" />
-		<property name="shortDescription" value="CDvB" />
+		<property name="shortDescription" value="C*D-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInDrawsAtHomeVsBelow}+{goalsConcededInDrawsAwayVsBelow}"/>
-		<property name="sequence" value="87" />
+		<property name="sequence" value="123" />
 	</bean>
 
 	<bean id="goalsConcededInDefeatsVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDefeatsVsAbove" />
 		<property name="description" value="Goals Conceded in Defeats vs Teams Above" />
-		<property name="shortDescription" value="CLvA" />
+		<property name="shortDescription" value="C*L+" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInDefeatsAtHomeVsAbove}+{goalsConcededInDefeatsAwayVsAbove}"/>
-		<property name="sequence" value="86" />
+		<property name="sequence" value="116" />
 	</bean>
 
 	<bean id="goalsConcededInDefeatsVsBelowDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDefeatsVsBelow" />
 		<property name="description" value="Goals Conceded in Defeats vs Teams Below" />
-		<property name="shortDescription" value="CLvB" />
+		<property name="shortDescription" value="C*L-" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInDefeatsAtHomeVsBelow}+{goalsConcededInDefeatsAwayVsBelow}"/>
-		<property name="sequence" value="87" />
+		<property name="sequence" value="126" />
 	</bean>
 
 	<bean id="goalsConcededInWinsDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInWins" />
 		<property name="description" value="Goals Conceded in Wins" />
-		<property name="shortDescription" value="CW" />
+		<property name="shortDescription" value="C*W*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInWinsAtHome}+{goalsConcededInWinsAway}"/>
-		<property name="sequence" value="90" />
+		<property name="sequence" value="49" />
 	</bean>
 
 	<bean id="goalsConcededInDrawsDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDraws" />
 		<property name="description" value="Goals Conceded in Draws" />
-		<property name="shortDescription" value="CD" />
+		<property name="shortDescription" value="C*D*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInDrawsAtHome}+{goalsConcededInDrawsAway}"/>
-		<property name="sequence" value="91" />
+		<property name="sequence" value="50" />
 	</bean>
 
 	<bean id="goalsConcededInDefeatsDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInDefeats" />
 		<property name="description" value="Goals Conceded in Defeats" />
-		<property name="shortDescription" value="CL" />
+		<property name="shortDescription" value="C*L*" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInDefeatsAtHome}+{goalsConcededInDefeatsAway}"/>
-		<property name="sequence" value="92" />
+		<property name="sequence" value="51" />
 	</bean>
 
 	<bean id="goalsConcededDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConceded" />
 		<property name="description" value="Goals Conceded" />
-		<property name="shortDescription" value="A" />
+		<property name="shortDescription" value="C***" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsConcededInWins}+{goalsConcededInDraws}+{goalsConcededInDefeats}"/>
-		<property name="sequence" value="1" />
+		<property name="sequence" value="40" />
 	</bean>
 
 	<bean id="goalDifferenceDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
@@ -808,7 +860,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="shortDescription" value="GD" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.DynamicCalculation" />
 		<property name="dynamicCalculation" value="{goalsScored}-{goalsConceded}"/>
-		<property name="sequence" value="10" />
+		<property name="sequence" value="60" />
 	</bean>
 
 	<bean id="pointsDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
@@ -816,7 +868,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="description" value="Points" />
 		<property name="shortDescription" value="Pts" />
 		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.PointsCalculation" />
-		<property name="sequence" value="11" />
+		<property name="sequence" value="61" />
 	</bean>
 
 	<bean id="calculationMapFactory" class="uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory">
@@ -912,6 +964,12 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 				<ref bean="goalsConcededDefinition" />
 				<ref bean="gamesPlayedDefinition" />
 				<ref bean="goalDifferenceDefinition" />
+				<ref bean="gamesPlayedAtHomeDefinition" />
+				<ref bean="gamesPlayedAwayDefinition" />
+				<ref bean="goalsScoredAtHomeDefinition" />
+				<ref bean="goalsScoredAwayDefinition" />
+				<ref bean="goalsConcededAtHomeDefinition" />
+				<ref bean="goalsConcededAwayDefinition" />				
 			</list>
 		</property>
 	</bean>

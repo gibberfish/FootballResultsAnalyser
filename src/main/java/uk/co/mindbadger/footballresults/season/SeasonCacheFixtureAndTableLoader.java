@@ -28,7 +28,7 @@ public class SeasonCacheFixtureAndTableLoader {
 		if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
 			logger.info("Load Fixture and Table Cache for " + fixture.toString());
 			tableForDate.addRow(createTableRow(fixture.getHomeTeam(), tableForDate, fixture, fixtureTeamContext, oppositionTeamContext));
-			tableForDate.addRow(createTableRow(fixture.getAwayTeam(), tableForDate, fixture, fixtureTeamContext, oppositionTeamContext));
+			tableForDate.addRow(createTableRow(fixture.getAwayTeam(), tableForDate, fixture, oppositionTeamContext, fixtureTeamContext));
 		} else {
 			logger.info("Not loading Table Cache - unplayed " + fixture.toString());
 		}

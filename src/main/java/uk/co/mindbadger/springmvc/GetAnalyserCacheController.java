@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import uk.co.mindbadger.footballresults.season.AnalyserCache;
+import uk.co.mindbadger.footballresults.table.TableShapes;
 import uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory;
 
 @Controller
@@ -19,6 +20,9 @@ public class GetAnalyserCacheController {
 	@Autowired
 	CalculationMapFactory<String, String, String> calculationMapFactory;
 	
+	@Autowired
+	TableShapes tableShapes;
+	
 	@RequestMapping("/getAnalyserCacheController.html")
 	public ModelAndView getAnalyserCache() {
 		logger.debug("CONTROLLER: get analyser cache");
@@ -26,6 +30,7 @@ public class GetAnalyserCacheController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("analyserCache", analyserCache);
 		mav.addObject("calculationMapFactory", calculationMapFactory);
+		mav.addObject("tableShapes", tableShapes);
 		
 		mav.setViewName("analyserCacheController");
 

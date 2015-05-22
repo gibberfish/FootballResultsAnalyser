@@ -973,7 +973,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="teamFixtureContextFactory" class="uk.co.mindbadger.footballresults.season.TeamFixtureContextFactory">
 	</bean>
 	
@@ -1000,6 +1000,26 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="dao" ref="dao"/>
 		<property name="analyserCache" ref="analyserCache"/>
 		<property name="seasonCacheDivisionLoader" ref="seasonCacheDivisionLoader"/>
+	</bean>
+
+	<bean id="tableShapes" class="uk.co.mindbadger.footballresults.table.TableShapes">
+		<property name="shortTable">
+			<list>
+				<ref bean="gamesPlayedDefinition" />
+				<ref bean="gamesWonDefinition" />
+				<ref bean="gamesDrawnDefinition" />
+				<ref bean="gamesLostDefinition" />
+				<ref bean="goalsScoredDefinition" />
+				<ref bean="goalsConcededDefinition" />
+				<ref bean="goalDifferenceDefinition" />
+				<ref bean="pointsDefinition" />
+			</list>
+		</property>
+		<property name="homeAwayTable">
+			<list>
+				<ref bean="gamesWonAtHomeVsAboveDefinition" />
+			</list>
+		</property>	
 	</bean>
 	
 </beans>

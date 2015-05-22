@@ -68,7 +68,7 @@
 				<tr>
 					<th>Pos</th>
 					<th>Team</th>
-					<c:forEach var="attributeDefinition" items="${calculationMapFactory.attributeDefinitionList}">
+					<c:forEach var="attributeDefinition" items="${tableShapes.shortTable}">
 						<th><c:out value="${attributeDefinition.shortDescription}"/></th>
 					</c:forEach>					
 				</tr>				
@@ -77,7 +77,7 @@
 				<tr>
 					<td><c:out value="${loop.index+1}"/></td>
 					<td><c:out value="${tableRowEntry.team.teamName}"/></td>
-					<c:forEach var="attributeDefinition" items="${calculationMapFactory.attributeDefinitionList}">
+					<c:forEach var="attributeDefinition" items="${tableShapes.shortTable}">
 						<td><c:out value="${tableRowEntry.getAttribute(attributeDefinition.attributeId)}"/></td>
 					</c:forEach>					
 				</tr>					

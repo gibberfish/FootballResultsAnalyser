@@ -1,5 +1,6 @@
 package uk.co.mindbadger.footballresults.table.calculation;
 
+import static uk.co.mindbadger.footballresults.table.AttributeIds.*;
 import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
 import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
@@ -19,7 +20,7 @@ public class GoalsConcededInDrawsAtHomeVsTeamsAboveCalculation extends Calculati
 		boolean drawn = goalsFor == goalsAgainst;
 		
 		return ((drawn && fixtureTeamContext.isAtHome() && fixtureTeamContext.isPlayingTeamAbove()) ?
-				previousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DRAWS_AT_HOME_VS_ABOVE) + goalsAgainst : previousTableRow.getAttribute(TableRow.GOALS_CONCEDED_IN_DRAWS_AT_HOME_VS_ABOVE));
+				previousTableRow.getAttribute(GOALS_CONCEDED_IN_DRAWS_AT_HOME_VS_ABOVE) + goalsAgainst : previousTableRow.getAttribute(GOALS_CONCEDED_IN_DRAWS_AT_HOME_VS_ABOVE));
 	}
 
 }

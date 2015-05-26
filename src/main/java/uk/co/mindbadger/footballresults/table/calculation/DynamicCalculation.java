@@ -6,8 +6,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import uk.co.mindbadger.footballresults.table.TableRowAfterResult;
-
 public class DynamicCalculation extends Calculation {
 	Logger logger = Logger.getLogger(DynamicCalculation.class);
 	

@@ -1,5 +1,6 @@
 package uk.co.mindbadger.footballresults.table.calculation;
 
+import static uk.co.mindbadger.footballresults.table.AttributeIds.*;
 import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
 import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
@@ -19,7 +20,7 @@ public class GamesLostAwayVsTeamsAboveCalculation extends CalculationForFixture<
 		boolean lost = goalsFor < goalsAgainst;
 		
 		return ((lost && !fixtureTeamContext.isAtHome() && fixtureTeamContext.isPlayingTeamAbove()) ?
-				previousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE) + 1 : previousTableRow.getAttribute(TableRow.GAMES_LOST_AWAY_VS_ABOVE));
+				previousTableRow.getAttribute(GAMES_LOST_AWAY_VS_ABOVE) + 1 : previousTableRow.getAttribute(GAMES_LOST_AWAY_VS_ABOVE));
 	}
 
 }

@@ -1,5 +1,6 @@
 package uk.co.mindbadger.footballresults.table;
 
+import static uk.co.mindbadger.footballresults.table.AttributeIds.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.times;
@@ -82,14 +83,14 @@ public class TableRowAfterResultTest {
 		when (mockTeam1.getTeamId()).thenReturn(TEAM_ID);
 		when (mockTeam1.getTeamName()).thenReturn(TEAM_NAME);
 		
-		calculations.put(TableRow.GAMES_PLAYED, mockGamesPlayedCalculation);
-		calculations.put(TableRow.GAMES_WON, mockGamesWonCalculation);
-		calculations.put(TableRow.GAMES_DRAWN, mockGamesDrawnCalculation);
-		calculations.put(TableRow.GAMES_LOST, mockGamesLostCalculation);
-		calculations.put(TableRow.GOALS_SCORED, mockGoalsScoredCalculation);
-		calculations.put(TableRow.GOALS_CONCEDED, mockGoalsConcededCalculation);
-		calculations.put(TableRow.GOAL_DIFFERENCE, mockGoalDifferenceCalculation);
-		calculations.put(TableRow.POINTS, mockPointsCalculation);
+		calculations.put(GAMES_PLAYED, mockGamesPlayedCalculation);
+		calculations.put(GAMES_WON, mockGamesWonCalculation);
+		calculations.put(GAMES_DRAWN, mockGamesDrawnCalculation);
+		calculations.put(GAMES_LOST, mockGamesLostCalculation);
+		calculations.put(GOALS_SCORED, mockGoalsScoredCalculation);
+		calculations.put(GOALS_CONCEDED, mockGoalsConcededCalculation);
+		calculations.put(GOAL_DIFFERENCE, mockGoalDifferenceCalculation);
+		calculations.put(POINTS, mockPointsCalculation);
 		
 		when(mockCalculationMapFactory.createCalculations(mockTeam1, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow)).thenReturn(calculations);
 	}
@@ -191,7 +192,7 @@ public class TableRowAfterResultTest {
 		when(mockGamesWonCalculation.calculate()).thenReturn(10);
 		
 		// When
-		int gamesWon = objectUnderTest.getAttribute(TableRowAfterResult.GAMES_WON);
+		int gamesWon = objectUnderTest.getAttribute(GAMES_WON);
 
 		// Then
 		assertEquals (10, gamesWon);

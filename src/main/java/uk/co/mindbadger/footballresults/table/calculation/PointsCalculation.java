@@ -1,5 +1,6 @@
 package uk.co.mindbadger.footballresults.table.calculation;
 
+import static uk.co.mindbadger.footballresults.table.AttributeIds.*;
 import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
 import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
@@ -23,7 +24,7 @@ public class PointsCalculation extends CalculationForFixture<String, String, Str
 
 		int previousPoints = 0;
 		if (previousTableRow != null) {
-			previousPoints = previousTableRow.getAttribute(TableRow.POINTS);
+			previousPoints = previousTableRow.getAttribute(POINTS);
 		}
 
 		return (previousPoints + newPoints);

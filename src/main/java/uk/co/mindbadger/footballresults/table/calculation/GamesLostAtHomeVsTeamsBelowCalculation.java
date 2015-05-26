@@ -1,7 +1,7 @@
 package uk.co.mindbadger.footballresults.table.calculation;
 
+import static uk.co.mindbadger.footballresults.table.AttributeIds.GAMES_LOST_AT_HOME_VS_BELOW;
 import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
-import uk.co.mindbadger.footballresults.table.Table;
 import uk.co.mindbadger.footballresults.table.TableRow;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
@@ -19,7 +19,7 @@ public class GamesLostAtHomeVsTeamsBelowCalculation extends CalculationForFixtur
 		boolean lost = goalsFor < goalsAgainst;
 		
 		return ((lost && fixtureTeamContext.isAtHome() && !fixtureTeamContext.isPlayingTeamAbove()) ?
-				previousTableRow.getAttribute(TableRow.GAMES_LOST_AT_HOME_VS_BELOW) + 1 : previousTableRow.getAttribute(TableRow.GAMES_LOST_AT_HOME_VS_BELOW));
+				previousTableRow.getAttribute(GAMES_LOST_AT_HOME_VS_BELOW) + 1 : previousTableRow.getAttribute(GAMES_LOST_AT_HOME_VS_BELOW));
 	}
 
 }

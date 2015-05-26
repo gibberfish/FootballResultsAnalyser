@@ -1,5 +1,6 @@
 package uk.co.mindbadger.footballresults.table.calculation;
 
+import static uk.co.mindbadger.footballresults.table.AttributeIds.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -139,7 +140,7 @@ public class PointsCalculationTest {
 		when (mockFixtureTeamContext.isAtHome()).thenReturn(true);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.POINTS)).thenReturn(10);
+		when (mockPreviousTableRow.getAttribute(POINTS)).thenReturn(10);
 		
 		objectUnderTest = new PointsCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
@@ -156,7 +157,7 @@ public class PointsCalculationTest {
 		when (mockFixtureTeamContext.isAtHome()).thenReturn(true);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.POINTS)).thenReturn(10);
+		when (mockPreviousTableRow.getAttribute(POINTS)).thenReturn(10);
 		
 		objectUnderTest = new PointsCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
@@ -173,7 +174,7 @@ public class PointsCalculationTest {
 		when (mockFixtureTeamContext.isAtHome()).thenReturn(true);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(3);
-		when (mockPreviousTableRow.getAttribute(TableRow.POINTS)).thenReturn(10);
+		when (mockPreviousTableRow.getAttribute(POINTS)).thenReturn(10);
 		
 		objectUnderTest = new PointsCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
@@ -190,7 +191,7 @@ public class PointsCalculationTest {
 		when (mockFixtureTeamContext.isAtHome()).thenReturn(false);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(3);
-		when (mockPreviousTableRow.getAttribute(TableRow.POINTS)).thenReturn(10);
+		when (mockPreviousTableRow.getAttribute(POINTS)).thenReturn(10);
 		
 		objectUnderTest = new PointsCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
@@ -207,7 +208,7 @@ public class PointsCalculationTest {
 		when (mockFixtureTeamContext.isAtHome()).thenReturn(false);
 		when (mockFixture.getHomeGoals()).thenReturn(1);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.POINTS)).thenReturn(10);
+		when (mockPreviousTableRow.getAttribute(POINTS)).thenReturn(10);
 		
 		objectUnderTest = new PointsCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		
@@ -224,7 +225,7 @@ public class PointsCalculationTest {
 		when (mockFixtureTeamContext.isAtHome()).thenReturn(false);
 		when (mockFixture.getHomeGoals()).thenReturn(3);
 		when (mockFixture.getAwayGoals()).thenReturn(1);
-		when (mockPreviousTableRow.getAttribute(TableRow.POINTS)).thenReturn(10);
+		when (mockPreviousTableRow.getAttribute(POINTS)).thenReturn(10);
 		
 		objectUnderTest = new PointsCalculation(mockTeamForCalculation, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext, mockPreviousTableRow);
 		

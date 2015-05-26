@@ -1,5 +1,6 @@
 package uk.co.mindbadger.footballresults.table;
 
+import static uk.co.mindbadger.footballresults.table.AttributeIds.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -40,13 +41,13 @@ public class InitialTableRowTest {
 		// Then
 		assertEquals (TEAM_ID, objectUnderTest.getTeam().getTeamId());
 		assertEquals (TEAM_NAME, objectUnderTest.getTeam().getTeamName());
-		assertEquals (0, objectUnderTest.getAttribute(TableRow.GAMES_PLAYED));
-		assertEquals (0, objectUnderTest.getAttribute(TableRow.GAMES_WON));
-		assertEquals (0, objectUnderTest.getAttribute(TableRow.GAMES_DRAWN));
-		assertEquals (0, objectUnderTest.getAttribute(TableRow.GAMES_LOST));
-		assertEquals (0, objectUnderTest.getAttribute(TableRow.GOALS_SCORED));
-		assertEquals (0, objectUnderTest.getAttribute(TableRow.GOALS_CONCEDED));
-		assertEquals (0, objectUnderTest.getAttribute(TableRow.GOAL_DIFFERENCE));
-		assertEquals (0, objectUnderTest.getAttribute(TableRowAfterResult.POINTS));
+		assertEquals (0, objectUnderTest.getAttribute(GAMES_PLAYED));
+		assertEquals (0, objectUnderTest.getAttribute(GAMES_WON));
+		assertEquals (0, objectUnderTest.getAttribute(GAMES_DRAWN));
+		assertEquals (0, objectUnderTest.getAttribute(GAMES_LOST));
+		assertEquals (0, objectUnderTest.getAttribute(GOALS_SCORED));
+		assertEquals (0, objectUnderTest.getAttribute(GOALS_CONCEDED));
+		assertEquals (0, objectUnderTest.getAttribute(GOAL_DIFFERENCE));
+		assertEquals (0, objectUnderTest.getAttribute(POINTS));
 	}	
 }

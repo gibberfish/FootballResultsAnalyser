@@ -1,7 +1,6 @@
 package uk.co.mindbadger.footballresults.table.calculation;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

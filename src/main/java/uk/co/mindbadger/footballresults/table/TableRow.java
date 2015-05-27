@@ -5,7 +5,6 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	protected Team<K> team;
-	//TODO Remove parent table from the table row - it's never used
 	protected Table<K,L,M> parentTable;
 	
 	public TableRow (Team<K> team) {

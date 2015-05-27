@@ -4,8 +4,8 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class InitialTableRow<K,L,M> extends TableRow<K,L,M> {
 
-	public InitialTableRow(Team<K> team, Table<K,L,M> parentTable) {
-		super(team, parentTable);
+	public InitialTableRow(Team<K> team) {
+		super(team);
 	}
 
 	@Override

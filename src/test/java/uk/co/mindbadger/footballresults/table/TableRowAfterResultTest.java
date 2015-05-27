@@ -41,9 +41,6 @@ public class TableRowAfterResultTest {
 	private Team<String> mockTeam2;
 
 	@Mock
-	private Table<String,String,String> mockParentTable;
-	
-	@Mock
 	private TeamFixtureContext mockFixtureTeamContext;
 	
 	@Mock
@@ -100,7 +97,7 @@ public class TableRowAfterResultTest {
 	public void shouldThrowAnExceptionWhenTryingToAccessDataBeforeTheCalculationsHaveBeenInitialised () {
 		// Given
 		//TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1, mockParentTable);
-		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
+		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 		
 		// When
 		try {
@@ -115,11 +112,11 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldThrowExceptionIfTeamNotSupplied () {
 		// Given
-		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1, mockParentTable);
+		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
 		
 		// When
 		try {
-			objectUnderTest = new TableRowAfterResult<String,String,String> (null, mockParentTable, previousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
+			objectUnderTest = new TableRowAfterResult<String,String,String> (null, previousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 			fail("Should throw an illegal argument exception");
 		} catch (IllegalArgumentException e) {
 			// Then
@@ -133,7 +130,7 @@ public class TableRowAfterResultTest {
 		
 		// When
 		try {
-			objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, mockParentTable, null, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
+			objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, null, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 			fail("Should throw an illegal argument exception");
 		} catch (IllegalArgumentException e) {
 			// Then
@@ -144,11 +141,11 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldThrowExceptionIfFixtureNotSupplied () {
 		// Given
-		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1, mockParentTable);
+		TableRow<String,String,String> previousTableRow = new InitialTableRow<String,String,String> (mockTeam1);
 		
 		// When
 		try {
-			objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, mockParentTable, previousTableRow, null, mockFixtureTeamContext, mockOppositionTeamContext);
+			objectUnderTest = new TableRowAfterResult<String,String,String> (mockTeam1, previousTableRow, null, mockFixtureTeamContext, mockOppositionTeamContext);
 			fail("Should throw an illegal argument exception");
 		} catch (IllegalArgumentException e) {
 			// Then
@@ -159,7 +156,7 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldInitialiseTheCalculationsOnFirstInvokationOfGet () {
 		// Given
-		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
+		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
 		
 		// When
@@ -172,7 +169,7 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldNotReInitialiseTheCalculationsOnSubsequentInvokationsOfGet () {
 		// Given
-		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
+		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
 		
 		// When
@@ -186,7 +183,7 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldGetData () {
 		// Given
-		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
+		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
 		
 		when(mockGamesWonCalculation.calculate()).thenReturn(10);
@@ -201,7 +198,7 @@ public class TableRowAfterResultTest {
 	@Test
 	public void shouldThrowExceptionWhenInvalidAttributeRequested () {
 		// Given
-		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
+		objectUnderTest = new TableRowAfterResult<>(mockTeam1, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 		objectUnderTest.setCalculationMapFactory(mockCalculationMapFactory);
 		
 		// When

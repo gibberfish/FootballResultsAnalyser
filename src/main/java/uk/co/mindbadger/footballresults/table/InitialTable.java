@@ -20,7 +20,7 @@ public class InitialTable<K,L,M> extends Table<K,L,M> {
 		logger.info("Creating initial table for season " + seasonDivision.getSeason().getSeasonNumber() + " / " + seasonDivision.getDivision().getDivisionId());
 		
 		for (SeasonDivisionTeam<K,L,M> seasonDivisionTeam : seasonDivisionTeams) {
-			TableRow<K,L,M> newRow = new InitialTableRow<K,L,M>(seasonDivisionTeam.getTeam(), this);
+			TableRow<K,L,M> newRow = new InitialTableRow<K,L,M>(seasonDivisionTeam.getTeam());
 			addRow(newRow);
 		}
 		

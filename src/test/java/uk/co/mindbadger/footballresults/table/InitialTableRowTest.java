@@ -20,9 +20,6 @@ public class InitialTableRowTest {
 	@Mock
 	private Team<String> mockTeam1;
 	
-	@Mock
-	Table<String,String,String> mockParentTable;
-
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
@@ -34,7 +31,7 @@ public class InitialTableRowTest {
 	@Test
 	public void shouldCreateAnInitialTableRow () {
 		// Given
-		objectUnderTest = new InitialTableRow<String,String,String> (mockTeam1, mockParentTable);
+		objectUnderTest = new InitialTableRow<String,String,String> (mockTeam1);
 
 		// When
 

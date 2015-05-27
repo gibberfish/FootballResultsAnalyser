@@ -16,9 +16,10 @@ public class TableRowFactory<K,L,M> {
 		this.calculationMapFactory = calculationMapFactory;
 	}
 	
+	//TODO Remove the argument for parentTable
 	public TableRow<K,L,M> createTableRowFromFixture (Team<K> team, Table<K,L,M> parentTable, TableRow<K,L,M> previousTableRow, Fixture<K> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext) {
 		logger.info("Create table row from fixture, team="+team.getTeamName() + ", fixture=" + fixture.toString());
-		TableRowAfterResult<K,L,M> tableRow = new TableRowAfterResult<>(team, parentTable, previousTableRow, fixture, fixtureTeamContext, oppositionTeamContext);
+		TableRowAfterResult<K,L,M> tableRow = new TableRowAfterResult<>(team, previousTableRow, fixture, fixtureTeamContext, oppositionTeamContext);
 		tableRow.setCalculationMapFactory(calculationMapFactory);
 		return tableRow;
 	}

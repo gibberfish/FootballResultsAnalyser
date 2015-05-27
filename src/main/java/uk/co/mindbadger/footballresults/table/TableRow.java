@@ -7,9 +7,8 @@ public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	protected Team<K> team;
 	protected Table<K,L,M> parentTable;
 	
-	public TableRow (Team<K> team, Table<K,L,M> parentTable) {
+	public TableRow (Team<K> team) {
 		this.team = team;
-		this.parentTable = parentTable;
 	}
 	
 	public Team<K> getTeam () {

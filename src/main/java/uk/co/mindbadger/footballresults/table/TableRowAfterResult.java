@@ -20,14 +20,14 @@ public class TableRowAfterResult<K,L,M> extends TableRow<K,L,M> {
 	private TeamFixtureContext fixtureTeamContext;
 	private TeamFixtureContext oppositionTeamContext;
 	
-	public TableRowAfterResult (Team<K> team, Table<K,L,M> parentTable) {
-		super(team, parentTable);
+	public TableRowAfterResult (Team<K> team) {
+		super(team);
 	}
 	
-	public TableRowAfterResult (Team<K> team, Table<K,L,M> parentTable, TableRow<K,L,M> previousTableRow, Fixture<K> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext) {
-		super(team, parentTable);
+	public TableRowAfterResult (Team<K> team, TableRow<K,L,M> previousTableRow, Fixture<K> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext) {
+		super(team);
 		
-		if (team == null || parentTable == null || previousTableRow == null || fixture == null) {
+		if (team == null || previousTableRow == null || fixture == null) {
 			throw new IllegalArgumentException("Please supply a Team, a parent table, a previous TableRow and a Fixture");
 		}
 		

@@ -108,27 +108,6 @@
 		</c:forEach>
 	</c:forEach>
 	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	 
-
-
-
-
-
-
-
-
-
 		</div>	  
     </div><!-- /.container -->
 

@@ -58,7 +58,7 @@ public class SeasonCacheFixtureAndTableLoader {
 	
 	private TableRow<String, String, String> createTableRow (Team<String> team, Table<String,String,String> parentTable, Fixture<String> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext) {
 		TableRow<String, String, String> previousTableRow = parentTable.getTableRowForTeam(team.getTeamId());
-		return  tableRowFactory.createTableRowFromFixture(team, parentTable, previousTableRow , fixture, fixtureTeamContext, oppositionTeamContext);
+		return  tableRowFactory.createTableRowFromFixture(team, previousTableRow , fixture, fixtureTeamContext, oppositionTeamContext);
 	}
 
 	public TableFactory getTableFactory() {

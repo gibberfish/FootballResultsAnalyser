@@ -32,9 +32,6 @@ public class TableRowFactoryTest {
 	private Team<String> mockTeam1;
 
 	@Mock
-	private Table<String,String,String> mockParentTable;
-
-	@Mock
 	private TeamFixtureContext mockFixtureTeamContext;
 	
 	@Mock
@@ -60,7 +57,7 @@ public class TableRowFactoryTest {
 		objectUnderTest = new TableRowFactory<>(mockCalculationMapFactory);
 		
 		// When
-		TableRow<String, String, String> tableRow = objectUnderTest.createTableRowFromFixture(mockTeam1, mockParentTable, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
+		TableRow<String, String, String> tableRow = objectUnderTest.createTableRowFromFixture(mockTeam1, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 		tableRow.getAttribute("test");
 		
 		// Then

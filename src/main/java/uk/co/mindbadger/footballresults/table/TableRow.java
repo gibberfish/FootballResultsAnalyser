@@ -1,11 +1,12 @@
 package uk.co.mindbadger.footballresults.table;
 
 import static uk.co.mindbadger.footballresults.table.AttributeIds.*;
+import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
+import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	protected Team<K> team;
-	//TODO Remove parent table from the table row - it's never used
 	protected Table<K,L,M> parentTable;
 	
 	public TableRow (Team<K> team) {
@@ -17,6 +18,10 @@ public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
 	}
 	
 	public abstract int getAttribute(String attributeId);
+	public abstract TableRow<K, L, M> getPreviousTableRow();
+	public abstract Fixture<K> getFixture();
+	public abstract TeamFixtureContext getFixtureTeamContext();
+	public abstract TeamFixtureContext getOppositionTeamContext();
 	
 	@Override
 	public int compareTo (TableRow<K,L,M> otherRow) {

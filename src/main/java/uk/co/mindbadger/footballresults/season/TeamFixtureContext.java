@@ -7,6 +7,8 @@ public class TeamFixtureContext {
 	private int leaguePosition;
 	private boolean isAtHome;
 	private boolean isPlayingTeamAbove;
+	private int goalsScored;
+	private int goalsConceded;
 	public Team<String> getTeam() {
 		return team;
 	}
@@ -30,5 +32,17 @@ public class TeamFixtureContext {
 	}
 	public void setPlayingTeamAbove(boolean isPlayingTeamAbove) {
 		this.isPlayingTeamAbove = isPlayingTeamAbove;
+	}
+	public int getGoalsScored() {
+		return goalsScored;
+	}
+	public void setGoalsScored(int goalsScored) {
+		this.goalsScored = goalsScored;
+	}
+	public int getGoalsConceded() {
+		return goalsConceded;
+	}
+	public void setGoalsConceded(int goalsConceded) {
+		this.goalsConceded = goalsConceded;
 	}
 }

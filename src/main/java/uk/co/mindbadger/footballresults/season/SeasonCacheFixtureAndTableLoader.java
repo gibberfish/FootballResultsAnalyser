@@ -51,6 +51,9 @@ public class SeasonCacheFixtureAndTableLoader {
 			context.setPlayingTeamAbove(homeIsAbove);
 		}
 		
+		context.setGoalsScored(homeTeam ? fixture.getHomeGoals() : fixture.getAwayGoals());
+		context.setGoalsConceded(homeTeam ? fixture.getAwayGoals() : fixture.getHomeGoals());
+		
 		divisionCache.addTeamFixtureContextOnDate(currentDate, (homeTeam ? fixture.getHomeTeam() : fixture.getAwayTeam()), context);
 		
 		return context;

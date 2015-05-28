@@ -58,4 +58,24 @@ public class TableRowAfterResult<K,L,M> extends TableRow<K,L,M> {
 	public void setCalculationMapFactory(CalculationMapFactory<K, L, M> calculationMapFactory) {
 		this.calculationMapFactory = calculationMapFactory;
 	}
+
+	@Override
+	public TableRow<K, L, M> getPreviousTableRow() {
+		return previousTableRow;
+	}
+
+	@Override
+	public Fixture<K> getFixture() {
+		return fixture;
+	}
+
+	@Override
+	public TeamFixtureContext getFixtureTeamContext() {
+		return fixtureTeamContext;
+	}
+
+	@Override
+	public TeamFixtureContext getOppositionTeamContext() {
+		return oppositionTeamContext;
+	}
 }

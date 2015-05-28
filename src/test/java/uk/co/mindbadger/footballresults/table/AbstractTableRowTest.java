@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
+import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class AbstractTableRowTest {
@@ -20,6 +22,18 @@ public class AbstractTableRowTest {
 	@Mock
 	Team<String> mockTeam2;
 
+	@Mock
+	private TableRow<String, String, String> mockPreviousTableRow;
+	
+	@Mock
+	private Fixture<String> mockFixture;
+	
+	@Mock
+	private TeamFixtureContext mockFixtureTeamContext;
+	
+	@Mock
+	private TeamFixtureContext mockOppositionTeamContext;
+
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
@@ -29,6 +43,7 @@ public class AbstractTableRowTest {
 	public void shouldCorrectlyCompareRowsWhereThePointsAreDifferent () {
 		// Given
 		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1) {
+
 			@Override
 			public int getAttribute(String attributeId) {
 				if (GAMES_PLAYED.equals(attributeId)) {
@@ -51,7 +66,26 @@ public class AbstractTableRowTest {
 					return 0;
 				}
 			}
-			
+
+			@Override
+			public TableRow<String, String, String> getPreviousTableRow() {
+				return mockPreviousTableRow;
+			}
+
+			@Override
+			public Fixture<String> getFixture() {
+				return mockFixture;
+			}
+
+			@Override
+			public TeamFixtureContext getFixtureTeamContext() {
+				return mockFixtureTeamContext;
+			}
+
+			@Override
+			public TeamFixtureContext getOppositionTeamContext() {
+				return mockOppositionTeamContext;
+			}
 		};
 		
 		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam1) {
@@ -75,6 +109,27 @@ public class AbstractTableRowTest {
 				} else {
 					return 0;
 				}
+			}
+			
+
+			@Override
+			public TableRow<String, String, String> getPreviousTableRow() {
+				return mockPreviousTableRow;
+			}
+
+			@Override
+			public Fixture<String> getFixture() {
+				return mockFixture;
+			}
+
+			@Override
+			public TeamFixtureContext getFixtureTeamContext() {
+				return mockFixtureTeamContext;
+			}
+
+			@Override
+			public TeamFixtureContext getOppositionTeamContext() {
+				return mockOppositionTeamContext;
 			}
 		};
 
@@ -116,6 +171,26 @@ public class AbstractTableRowTest {
 					return 0;
 				}
 			}
+
+			@Override
+			public TableRow<String, String, String> getPreviousTableRow() {
+				return mockPreviousTableRow;
+			}
+
+			@Override
+			public Fixture<String> getFixture() {
+				return mockFixture;
+			}
+
+			@Override
+			public TeamFixtureContext getFixtureTeamContext() {
+				return mockFixtureTeamContext;
+			}
+
+			@Override
+			public TeamFixtureContext getOppositionTeamContext() {
+				return mockOppositionTeamContext;
+			}
 		};
 		
 		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam1) {
@@ -139,6 +214,27 @@ public class AbstractTableRowTest {
 				} else {
 					return 0;
 				}
+			}
+			
+
+			@Override
+			public TableRow<String, String, String> getPreviousTableRow() {
+				return mockPreviousTableRow;
+			}
+
+			@Override
+			public Fixture<String> getFixture() {
+				return mockFixture;
+			}
+
+			@Override
+			public TeamFixtureContext getFixtureTeamContext() {
+				return mockFixtureTeamContext;
+			}
+
+			@Override
+			public TeamFixtureContext getOppositionTeamContext() {
+				return mockOppositionTeamContext;
 			}
 		};
 
@@ -180,6 +276,26 @@ public class AbstractTableRowTest {
 					return 0;
 				}
 			}
+
+			@Override
+			public TableRow<String, String, String> getPreviousTableRow() {
+				return mockPreviousTableRow;
+			}
+
+			@Override
+			public Fixture<String> getFixture() {
+				return mockFixture;
+			}
+
+			@Override
+			public TeamFixtureContext getFixtureTeamContext() {
+				return mockFixtureTeamContext;
+			}
+
+			@Override
+			public TeamFixtureContext getOppositionTeamContext() {
+				return mockOppositionTeamContext;
+			}
 		};
 		
 		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam1) {
@@ -203,6 +319,27 @@ public class AbstractTableRowTest {
 				} else {
 					return 0;
 				}
+			}
+			
+
+			@Override
+			public TableRow<String, String, String> getPreviousTableRow() {
+				return mockPreviousTableRow;
+			}
+
+			@Override
+			public Fixture<String> getFixture() {
+				return mockFixture;
+			}
+
+			@Override
+			public TeamFixtureContext getFixtureTeamContext() {
+				return mockFixtureTeamContext;
+			}
+
+			@Override
+			public TeamFixtureContext getOppositionTeamContext() {
+				return mockOppositionTeamContext;
 			}
 		};
 
@@ -247,6 +384,27 @@ public class AbstractTableRowTest {
 					return 0;
 				}
 			}
+			
+
+			@Override
+			public TableRow<String, String, String> getPreviousTableRow() {
+				return mockPreviousTableRow;
+			}
+
+			@Override
+			public Fixture<String> getFixture() {
+				return mockFixture;
+			}
+
+			@Override
+			public TeamFixtureContext getFixtureTeamContext() {
+				return mockFixtureTeamContext;
+			}
+
+			@Override
+			public TeamFixtureContext getOppositionTeamContext() {
+				return mockOppositionTeamContext;
+			}
 		};
 		
 		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam2) {
@@ -270,6 +428,27 @@ public class AbstractTableRowTest {
 				} else {
 					return 0;
 				}
+			}
+			
+
+			@Override
+			public TableRow<String, String, String> getPreviousTableRow() {
+				return mockPreviousTableRow;
+			}
+
+			@Override
+			public Fixture<String> getFixture() {
+				return mockFixture;
+			}
+
+			@Override
+			public TeamFixtureContext getFixtureTeamContext() {
+				return mockFixtureTeamContext;
+			}
+
+			@Override
+			public TeamFixtureContext getOppositionTeamContext() {
+				return mockOppositionTeamContext;
 			}
 		};
 
@@ -313,6 +492,27 @@ public class AbstractTableRowTest {
 					return 0;
 				}
 			}
+			
+
+			@Override
+			public TableRow<String, String, String> getPreviousTableRow() {
+				return mockPreviousTableRow;
+			}
+
+			@Override
+			public Fixture<String> getFixture() {
+				return mockFixture;
+			}
+
+			@Override
+			public TeamFixtureContext getFixtureTeamContext() {
+				return mockFixtureTeamContext;
+			}
+
+			@Override
+			public TeamFixtureContext getOppositionTeamContext() {
+				return mockOppositionTeamContext;
+			}
 		};
 
 		// When
@@ -348,6 +548,27 @@ public class AbstractTableRowTest {
 				} else {
 					return 0;
 				}
+			}
+			
+
+			@Override
+			public TableRow<String, String, String> getPreviousTableRow() {
+				return mockPreviousTableRow;
+			}
+
+			@Override
+			public Fixture<String> getFixture() {
+				return mockFixture;
+			}
+
+			@Override
+			public TeamFixtureContext getFixtureTeamContext() {
+				return mockFixtureTeamContext;
+			}
+
+			@Override
+			public TeamFixtureContext getOppositionTeamContext() {
+				return mockOppositionTeamContext;
 			}
 		};
 

@@ -237,6 +237,8 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		
 		when(mockFixture1.getHomeTeam()).thenReturn(mockHomeTeam);
 		when(mockFixture1.getAwayTeam()).thenReturn(mockAwayTeam);
+		when(mockFixture1.getHomeGoals()).thenReturn(3);
+		when(mockFixture1.getAwayGoals()).thenReturn(2);
 
 		when(mockHomeTeam.getTeamId()).thenReturn("HomeId");
 		when(mockAwayTeam.getTeamId()).thenReturn("AwayId");
@@ -259,6 +261,8 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		verify(mockHomeTeamFixtureContext,times(1)).setLeaguePosition(5);
 		verify(mockHomeTeamFixtureContext,times(1)).setPlayingTeamAbove(false);
 		verify(mockHomeTeamFixtureContext,times(1)).setTeam(mockHomeTeam);
+		verify(mockHomeTeamFixtureContext,times(1)).setGoalsScored(3);
+		verify(mockHomeTeamFixtureContext,times(1)).setGoalsConceded(2);
 
 		verify(mockDivisionCache1,times(1)).addTeamFixtureContextOnDate(fixtureDate1, mockHomeTeam, mockHomeTeamFixtureContext);
 	}
@@ -271,6 +275,8 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		
 		when(mockFixture1.getHomeTeam()).thenReturn(mockHomeTeam);
 		when(mockFixture1.getAwayTeam()).thenReturn(mockAwayTeam);
+		when(mockFixture1.getHomeGoals()).thenReturn(3);
+		when(mockFixture1.getAwayGoals()).thenReturn(2);
 
 		when(mockHomeTeam.getTeamId()).thenReturn("HomeId");
 		when(mockAwayTeam.getTeamId()).thenReturn("AwayId");
@@ -293,6 +299,8 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		verify(mockHomeTeamFixtureContext,times(1)).setLeaguePosition(10);
 		verify(mockHomeTeamFixtureContext,times(1)).setPlayingTeamAbove(true);
 		verify(mockHomeTeamFixtureContext,times(1)).setTeam(mockHomeTeam);
+		verify(mockHomeTeamFixtureContext,times(1)).setGoalsScored(3);
+		verify(mockHomeTeamFixtureContext,times(1)).setGoalsConceded(2);
 
 		verify(mockDivisionCache1,times(1)).addTeamFixtureContextOnDate(fixtureDate1, mockHomeTeam, mockHomeTeamFixtureContext);
 	}
@@ -305,7 +313,9 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		
 		when(mockFixture1.getHomeTeam()).thenReturn(mockHomeTeam);
 		when(mockFixture1.getAwayTeam()).thenReturn(mockAwayTeam);
-
+		when(mockFixture1.getHomeGoals()).thenReturn(3);
+		when(mockFixture1.getAwayGoals()).thenReturn(2);
+		
 		when(mockHomeTeam.getTeamId()).thenReturn("HomeId");
 		when(mockAwayTeam.getTeamId()).thenReturn("AwayId");
 		
@@ -327,6 +337,8 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		verify(mockAwayTeamFixtureContext,times(1)).setLeaguePosition(5);
 		verify(mockAwayTeamFixtureContext,times(1)).setPlayingTeamAbove(false);
 		verify(mockAwayTeamFixtureContext,times(1)).setTeam(mockAwayTeam);
+		verify(mockAwayTeamFixtureContext,times(1)).setGoalsScored(2);
+		verify(mockAwayTeamFixtureContext,times(1)).setGoalsConceded(3);
 
 		verify(mockDivisionCache1,times(1)).addTeamFixtureContextOnDate(fixtureDate1, mockAwayTeam, mockAwayTeamFixtureContext);
 	}
@@ -339,6 +351,8 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		
 		when(mockFixture1.getHomeTeam()).thenReturn(mockHomeTeam);
 		when(mockFixture1.getAwayTeam()).thenReturn(mockAwayTeam);
+		when(mockFixture1.getHomeGoals()).thenReturn(3);
+		when(mockFixture1.getAwayGoals()).thenReturn(2);
 
 		when(mockHomeTeam.getTeamId()).thenReturn("HomeId");
 		when(mockAwayTeam.getTeamId()).thenReturn("AwayId");
@@ -361,6 +375,8 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 		verify(mockAwayTeamFixtureContext,times(1)).setLeaguePosition(10);
 		verify(mockAwayTeamFixtureContext,times(1)).setPlayingTeamAbove(true);
 		verify(mockAwayTeamFixtureContext,times(1)).setTeam(mockAwayTeam);
+		verify(mockAwayTeamFixtureContext,times(1)).setGoalsScored(2);
+		verify(mockAwayTeamFixtureContext,times(1)).setGoalsConceded(3);
 
 		verify(mockDivisionCache1,times(1)).addTeamFixtureContextOnDate(fixtureDate1, mockAwayTeam, mockAwayTeamFixtureContext);
 	}

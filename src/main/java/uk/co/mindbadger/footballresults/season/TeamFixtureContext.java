@@ -9,6 +9,7 @@ public class TeamFixtureContext {
 	private boolean isPlayingTeamAbove;
 	private int goalsScored;
 	private int goalsConceded;
+	private int points;
 	public Team<String> getTeam() {
 		return team;
 	}
@@ -44,5 +45,11 @@ public class TeamFixtureContext {
 	}
 	public void setGoalsConceded(int goalsConceded) {
 		this.goalsConceded = goalsConceded;
+	}
+	public int getPoints() {
+		return points;
+	}
+	public void setPoints(int points) {
+		this.points = points;
 	}
 }

@@ -21,13 +21,7 @@ public class PointsInLastThreeCalculation extends CalculationForFixture<String, 
 
 	private int pointsForTableRow (TableRow<String,String,String> tableRow) {
 		if (tableRow != null && tableRow.getFixtureTeamContext() != null) {
-			if (tableRow.getFixtureTeamContext().getGoalsScored() > tableRow.getFixtureTeamContext().getGoalsConceded()) {
-				return 3;
-			} else if (tableRow.getFixtureTeamContext().getGoalsScored() == tableRow.getFixtureTeamContext().getGoalsConceded()) {
-				return 1;
-			} else {
-				return 0;
-			}
+			return tableRow.getFixtureTeamContext().getPoints();
 		} else {
 			return 0;
 		}

@@ -53,16 +53,18 @@ public class SeasonCacheFixtureAndTableLoader {
 		
 		Integer goalsScored = homeTeam ? fixture.getHomeGoals() : fixture.getAwayGoals();
 		Integer goalsConceded = homeTeam ? fixture.getAwayGoals() : fixture.getHomeGoals();
+
+		if (goalsScored != null) {
+			context.setGoalsScored(goalsScored);
+			context.setGoalsConceded(goalsConceded);
 		
-		context.setGoalsScored(goalsScored);
-		context.setGoalsConceded(goalsConceded);
-		
-		if (goalsScored > goalsConceded) {
-			context.setPoints(3);
-		} else if (goalsScored == goalsConceded) {
-			context.setPoints(1);
-		} else {
-			context.setPoints(0);
+			if (goalsScored > goalsConceded) {
+				context.setPoints(3);
+			} else if (goalsScored == goalsConceded) {
+				context.setPoints(1);
+			} else {
+				context.setPoints(0);
+			}
 		}
 		
 		divisionCache.addTeamFixtureContextOnDate(currentDate, (homeTeam ? fixture.getHomeTeam() : fixture.getAwayTeam()), context);

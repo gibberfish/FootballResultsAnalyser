@@ -871,6 +871,15 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="sequence" value="61" />
 	</bean>
 
+	<bean id="pointsL3Definition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">
+		<property name="attributeId" value="pointsL3" />
+		<property name="description" value="Points in last 3" />
+		<property name="shortDescription" value="PtsL3" />
+		<property name="calculationClass" value="uk.co.mindbadger.footballresults.table.calculation.PointsInLastThreeCalculation" />
+		<property name="sequence" value="1000" />
+	</bean>
+
+
 	<bean id="calculationMapFactory" class="uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory">
 		<property name="rawAttributes">
 			<list>
@@ -911,6 +920,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 				<ref bean="goalsConcededInDefeatsAwayVsAboveDefinition" />
 				<ref bean="goalsConcededInDefeatsAwayVsBelowDefinition" />
 				<ref bean="pointsDefinition" />
+				<ref bean="pointsL3Definition" />
 			</list>
 		</property>
 		<property name="derivedAttributes">
@@ -1013,6 +1023,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 				<ref bean="goalsConcededDefinition" />
 				<ref bean="goalDifferenceDefinition" />
 				<ref bean="pointsDefinition" />
+				<ref bean="pointsL3Definition" />
 			</list>
 		</property>
 		<property name="homeAwayTable">
@@ -1029,7 +1040,8 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 				<ref bean="goalsScoredAwayDefinition" />
 				<ref bean="goalsConcededAwayDefinition" />
 				<ref bean="goalDifferenceDefinition" />
-				<ref bean="pointsDefinition" />				
+				<ref bean="pointsDefinition" />
+				<ref bean="pointsL3Definition" />			
 			</list>
 		</property>	
 	</bean>

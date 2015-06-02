@@ -90,19 +90,33 @@
 				</tbody>
 				</table>
 
+				<table class="table table-striped">
+				<thead>
+				<tr>
+					<th>Pos</th>
+					<th>Above?</th>
+					<th>Home</th>
+					<th>Score</th>
+					<th>Away</th>
+					<th>Above?</th>
+					<th>Pos</th>
+				</tr>
+				</thead>				
+
+				<tbody>
 				<c:forEach var="fixture" items="${seasonDivisionCache.fixturesForDivision[fixtureDate]}">
-					<br>  <c:out value="${fixture}"/>
-					<br>(
-					Home Team: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.homeTeam].team.teamName}"/>,  
-					Pos: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.homeTeam].leaguePosition}"/>,
-					Home?: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.homeTeam].atHome}"/>,
-					vs Above?: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.homeTeam].playingTeamAbove}"/>)
-					<br>(
-					Away Team: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.awayTeam].team.teamName}"/>,  
-					Pos: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.awayTeam].leaguePosition}"/>,
-					Home?: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.awayTeam].atHome}"/>,
-					vs Above?: <c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.awayTeam].playingTeamAbove}"/>)
+					<tr>				
+						<td><c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.homeTeam].leaguePosition}"/></td>
+						<td><c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.homeTeam].playingTeamAbove}"/></td>
+						<td><c:out value="${fixture.homeTeam.teamName}"/></td>
+						<td><c:out value="${fixture.homeGoals}"/>-<c:out value="${fixture.awayGoals}"/></td>
+						<td><c:out value="${fixture.awayTeam.teamName}"/></td>
+						<td><c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.awayTeam].playingTeamAbove}"/></td>
+						<td><c:out value="${seasonDivisionCache.teamFixtureContexts[fixtureDate][fixture.awayTeam].leaguePosition}"/></td>
+					</tr>
 				</c:forEach>	
+				</tbody>
+				</table>
 
 			</c:forEach>
 		</c:forEach>

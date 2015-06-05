@@ -11,8 +11,8 @@ import uk.co.mindbadger.footballresults.table.TableShapes;
 import uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory;
 
 @Controller
-public class GetAnalyserCacheController {
-	Logger logger = Logger.getLogger(GetAnalyserCacheController.class);
+public class GetEntryViewController {
+	Logger logger = Logger.getLogger(GetEntryViewController.class);
 
 	@Autowired
 	AnalyserCache analyserCache;
@@ -23,16 +23,13 @@ public class GetAnalyserCacheController {
 	@Autowired
 	TableShapes tableShapes;
 	
-	@RequestMapping("/getAnalyserCacheController.html")
+	@RequestMapping("/FootballResultsAnalyser.html")
 	public ModelAndView getAnalyserCache() {
-		logger.debug("CONTROLLER: get analyser cache");
+		logger.debug("CONTROLLER: FootballResultsAnalyser");
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("analyserCache", analyserCache);
-		mav.addObject("calculationMapFactory", calculationMapFactory);
-		mav.addObject("tableShapes", tableShapes);
 		
-		mav.setViewName("analyserCacheView");
+		mav.setViewName("entryView");
 
 		return mav;
 	}

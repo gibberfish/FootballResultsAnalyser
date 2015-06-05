@@ -1,5 +1,6 @@
 package uk.co.mindbadger.springmvc;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -22,32 +23,18 @@ public class GetDivisionsForSeasonController {
 	@Autowired
 	FootballResultsAnalyserDAO<String,String,String> dao;
 	
-	@RequestMapping(value = "/getDivisionsForSeason.html", method = RequestMethod.GET)
-	public @ResponseBody String getDivisionsForSeason(@RequestParam("ssn") int seasonNumber) {
-	//public @ResponseBody Division[] getDivisionsForSeason(@RequestParam("ssn") int seasonNumber) {
-		logger.debug("CONTROLLER: getDivisionsForSeason: " + seasonNumber);
+	@RequestMapping(value = "/getDivisionsForSeason2.html", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody Set<SeasonDivision<String,String>> getDivisionsForSeason(@RequestParam("ssn") int seasonNumber) {
+		logger.debug("CONTROLLER: getDivisionsForSeason2: " + seasonNumber);
 
+		Set<SeasonDivision<String,String>> seasonDivisions = null;
 		Season<String> season = dao.getSeason(seasonNumber);
-		Set<SeasonDivision<String,String>> seasonDivisions = dao.getDivisionsForSeason(season);
-		
-//		Division<String>[] divisions = new Division[seasonDivisions.size()];
-//		for (SeasonDivision<String,String> seasonDivision : seasonDivisions) {
-//		    divisions[seasonDivision.getDivisionPosition()-1] = seasonDivision.getDivision();
-//		}
-
-		// CLUNKY APPROACH - need to get Jackson working properly
-		String output = "{\"divisions\": [";
-//		for (Division<String> division : divisions) {
-		for (SeasonDivision<String,String> seasonDivision : seasonDivisions) {
-		    output+="{\"id\": \""+seasonDivision.getDivision().getDivisionId()+"\", \"name\":\""+seasonDivision.getDivision().getDivisionName()+"\"},";
+		if (season != null) {
+			seasonDivisions = dao.getDivisionsForSeason(season);
+		} else {
+			seasonDivisions = new HashSet<SeasonDivision<String,String>> ();
 		}
-		if (output.length() > 1) {
-		    output = output.substring(0, output.length() - 1);
-		}
-		output+="]}";
-		
-		logger.debug("++++++ divisions: " + output);
-		
-		return output;
+			
+		return seasonDivisions;
 	}
 }

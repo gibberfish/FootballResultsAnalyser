@@ -1,5 +1,6 @@
 package uk.co.mindbadger.springmvc;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -23,28 +24,24 @@ public class GetTeamsForDivisionInSeasonController {
 	@Autowired
 	FootballResultsAnalyserDAO<String,String,String> dao;
 	
-	@RequestMapping(value = "/getTeamsForDivision.html", method = RequestMethod.GET)
-	public @ResponseBody String getTeamsForDivision(@RequestParam("ssn") int seasonNumber, @RequestParam("div") String divisionId) {
+	@RequestMapping(value = "/getTeamsForDivision.html", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody Set<SeasonDivisionTeam<String,String,String>> getTeamsForDivision(@RequestParam("ssn") int seasonNumber, @RequestParam("div") String divisionId) {
 		logger.debug("CONTROLLER: getTeamsForDivision: " + seasonNumber + ", " + divisionId);
 
 		Season<String> season = dao.getSeason(seasonNumber);
 		Division<String> division = dao.getDivision(divisionId);
-		SeasonDivision<String,String> seasonDivision = dao.getSeasonDivision(season, division);
-		
-		Set<SeasonDivisionTeam<String,String,String>> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
-		
-		//CLUNKY APPROACH - need to get Jackson working properly
-		String output = "{\"teams\": [";
-		for (SeasonDivisionTeam<String,String,String> seasonDivisionTeam : seasonDivisionTeams) {
-		    output+="{\"id\": \""+ seasonDivisionTeam.getTeam().getTeamId()+"\", \"name\":\""+seasonDivisionTeam.getTeam().getTeamName()+"\"},";
+		SeasonDivision<String,String> seasonDivision = null;
+		if (season != null && division != null) {
+			seasonDivision = dao.getSeasonDivision(season, division);
 		}
-		if (output.length() > 1) {
-		    output = output.substring(0, output.length() - 1);
+		
+		Set<SeasonDivisionTeam<String,String,String>> seasonDivisionTeams = null;
+		if (seasonDivision != null) {
+			seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
+		} else {
+			seasonDivisionTeams = new HashSet<SeasonDivisionTeam<String,String,String>> ();
 		}
-		output+="]}";
 		
-		logger.debug("++++++ teams: " + output);
-		
-		return output;
+		return seasonDivisionTeams;
 	}
 }

@@ -4,9 +4,9 @@ import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-public class InitialTableRow<K,L,M> extends TableRow<K,L,M> {
+public class InitialTableRow extends TableRow {
 
-	public InitialTableRow(Team<K> team) {
+	public InitialTableRow(Team team) {
 		super(team);
 	}
 
@@ -16,12 +16,12 @@ public class InitialTableRow<K,L,M> extends TableRow<K,L,M> {
 	}
 
 	@Override
-	public TableRow<K, L, M> getPreviousTableRow() {
+	public TableRow getPreviousTableRow() {
 		return null;
 	}
 
 	@Override
-	public Fixture<K> getFixture() {
+	public Fixture getFixture() {
 		return null;
 	}
 

@@ -19,13 +19,13 @@ public class GoalsScoredInDefeatsAtHomeVsTeamsBelowCalculationTest {
 	private GoalsScoredInDefeatsAtHomeVsTeamsBelowCalculation objectUnderTest;
 	
 	@Mock
-	private TableRowAfterResult<String,String,String> mockPreviousTableRow;
+	private TableRowAfterResult mockPreviousTableRow;
 
 	@Mock
-	private Fixture<String> mockFixture;
+	private Fixture mockFixture;
 	
 	@Mock
-	private Team<String> mockTeamForCalculation;
+	private Team mockTeamForCalculation;
 
 	@Mock
 	private TeamFixtureContext mockFixtureTeamContext;

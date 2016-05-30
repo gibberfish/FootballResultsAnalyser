@@ -15,16 +15,16 @@ public class SeasonCacheFixtureAndTableLoader {
 	Logger logger = Logger.getLogger(SeasonCacheFixtureAndTableLoader.class);
 	
 	private TableFactory tableFactory;
-	private TableRowFactory<String,String,String> tableRowFactory;
+	private TableRowFactory tableRowFactory;
 	private TeamFixtureContextFactory teamFixtureContextFactory;
 	
-	public void loadFixture (Fixture<String> fixture, Calendar currentDate, DivisionCache divisionCache) {
+	public void loadFixture (Fixture fixture, Calendar currentDate, DivisionCache divisionCache) {
 		logger.info("Load Fixture for " + fixture.toString());
 		
 		divisionCache.addFixtureOnDate(currentDate, fixture);
 	}
 	
-	public void loadFixtureIntoTable (Fixture<String> fixture, Table<String,String,String> tableForDate, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext) {
+	public void loadFixtureIntoTable (Fixture fixture, Table tableForDate, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext) {
 		if (fixture.getHomeGoals() != null && fixture.getAwayGoals() != null) {
 			logger.info("Load Fixture and Table Cache for " + fixture.toString());
 			tableForDate.addRow(createTableRow(fixture.getHomeTeam(), tableForDate, fixture, fixtureTeamContext, oppositionTeamContext));
@@ -34,7 +34,7 @@ public class SeasonCacheFixtureAndTableLoader {
 		}
 	}
 	
-	public TeamFixtureContext loadTeamFixtureContextsForTeam (boolean homeTeam, Fixture<String> fixture, Calendar currentDate, DivisionCache divisionCache, Table<String,String,String> tableForDate) {
+	public TeamFixtureContext loadTeamFixtureContextsForTeam (boolean homeTeam, Fixture fixture, Calendar currentDate, DivisionCache divisionCache, Table tableForDate) {
 		int homeLeaguePosition = tableForDate.getLeaguePositionForTeamWithId(fixture.getHomeTeam().getTeamId());
 		int awayLeaguePosition = tableForDate.getLeaguePositionForTeamWithId(fixture.getAwayTeam().getTeamId());
 		
@@ -72,8 +72,8 @@ public class SeasonCacheFixtureAndTableLoader {
 		return context;
 	}
 	
-	private TableRow<String, String, String> createTableRow (Team<String> team, Table<String,String,String> parentTable, Fixture<String> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext) {
-		TableRow<String, String, String> previousTableRow = parentTable.getTableRowForTeam(team.getTeamId());
+	private TableRow createTableRow (Team team, Table parentTable, Fixture fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext) {
+		TableRow previousTableRow = parentTable.getTableRowForTeam(team.getTeamId());
 		return  tableRowFactory.createTableRowFromFixture(team, previousTableRow , fixture, fixtureTeamContext, oppositionTeamContext);
 	}
 
@@ -85,11 +85,11 @@ public class SeasonCacheFixtureAndTableLoader {
 		this.tableFactory = tableFactory;
 	}
 	
-	public TableRowFactory<String,String,String> getTableRowFactory() {
+	public TableRowFactory getTableRowFactory() {
 		return tableRowFactory;
 	}
 
-	public void setTableRowFactory(TableRowFactory<String,String,String> tableRowFactory) {
+	public void setTableRowFactory(TableRowFactory tableRowFactory) {
 		this.tableRowFactory = tableRowFactory;
 	}
 

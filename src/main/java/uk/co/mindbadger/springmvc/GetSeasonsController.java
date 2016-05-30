@@ -17,12 +17,12 @@ public class GetSeasonsController {
 	Logger logger = Logger.getLogger(GetSeasonsController.class);
 
 	@Autowired
-	FootballResultsAnalyserDAO<String,String,String> dao;
+	FootballResultsAnalyserDAO dao;
 	
 	@RequestMapping(value = "/getSeasons.html", method = RequestMethod.GET)
-	public @ResponseBody List<Season<String>> getSeasons() {
+	public @ResponseBody List<Season> getSeasons() {
 		logger.debug("CONTROLLER: getSeasons");
-		List<Season<String>> seasons = dao.getSeasons();
+		List<Season> seasons = dao.getSeasons();
 		return seasons;
 	}
 }

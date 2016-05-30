@@ -10,21 +10,21 @@ import uk.co.mindbadger.footballresults.table.calculation.CalculationMapFactory;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-public class TableRowAfterResult<K,L,M> extends TableRow<K,L,M> {
+public class TableRowAfterResult extends TableRow {
 	Logger logger = Logger.getLogger(TableRowAfterResult.class);
 	
-	private TableRow<K,L,M> previousTableRow;
-	private Fixture<K> fixture;
+	private TableRow previousTableRow;
+	private Fixture fixture;
 	private Map<String, Calculation> calculations;
-	private CalculationMapFactory<K, L, M> calculationMapFactory;
+	private CalculationMapFactory calculationMapFactory;
 	private TeamFixtureContext fixtureTeamContext;
 	private TeamFixtureContext oppositionTeamContext;
 	
-	public TableRowAfterResult (Team<K> team) {
+	public TableRowAfterResult (Team team) {
 		super(team);
 	}
 	
-	public TableRowAfterResult (Team<K> team, TableRow<K,L,M> previousTableRow, Fixture<K> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext) {
+	public TableRowAfterResult (Team team, TableRow previousTableRow, Fixture fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext) {
 		super(team);
 		
 		if (team == null || previousTableRow == null || fixture == null) {
@@ -55,17 +55,17 @@ public class TableRowAfterResult<K,L,M> extends TableRow<K,L,M> {
 		return calculation.calculate();
 	}
 
-	public void setCalculationMapFactory(CalculationMapFactory<K, L, M> calculationMapFactory) {
+	public void setCalculationMapFactory(CalculationMapFactory calculationMapFactory) {
 		this.calculationMapFactory = calculationMapFactory;
 	}
 
 	@Override
-	public TableRow<K, L, M> getPreviousTableRow() {
+	public TableRow getPreviousTableRow() {
 		return previousTableRow;
 	}
 
 	@Override
-	public Fixture<K> getFixture() {
+	public Fixture getFixture() {
 		return fixture;
 	}
 

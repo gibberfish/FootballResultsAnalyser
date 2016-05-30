@@ -7,9 +7,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +31,7 @@ public class SeasonCacheDivisionLoaderTest {
 	private SeasonCacheFixtureAndTableLoader mockSeasonCacheFixtureAndTableLoader;
 	
 	@Mock
-	private FootballResultsAnalyserDAO<String,String,String> mockDao;
+	private FootballResultsAnalyserDAO mockDao;
 
 	@Mock
 	private TableFactory mockTableFactory;
@@ -42,55 +40,55 @@ public class SeasonCacheDivisionLoaderTest {
 	private SeasonCache mockSeasonCache2015;
 	
 	@Mock
-	private SeasonDivision<String, String> mockSeasonDivision1;
+	private SeasonDivision mockSeasonDivision1;
 	
 	@Mock
 	private DivisionCache mockDivisionCache1;
 	
 	@Mock
-	private SeasonDivisionTeam<String, String, String> mockDiv1TeamA;
+	private SeasonDivisionTeam mockDiv1TeamA;
 
 	@Mock
-	private SeasonDivisionTeam<String, String, String> mockDiv1TeamB;
+	private SeasonDivisionTeam mockDiv1TeamB;
 
 	@Mock
-	private SeasonDivisionTeam<String, String, String> mockDiv1TeamC;
+	private SeasonDivisionTeam mockDiv1TeamC;
 
 	@Mock
-	private Table<String, String, String> mockInitialTableDiv1;
+	private Table mockInitialTableDiv1;
 
 	@Mock
-	private Fixture<String> mockFixture1;
+	private Fixture mockFixture1;
 
 	@Mock
-	private Fixture<String> mockFixture2;
+	private Fixture mockFixture2;
 
 	@Mock
-	private Fixture<String> mockFixture3;
+	private Fixture mockFixture3;
 
 	@Mock
-	private Fixture<String> mockFixture4;
+	private Fixture mockFixture4;
 	
 	@Mock
-	private Division<String> mockDivision1;
+	private Division mockDivision1;
 
 	@Mock
-	private Season<String> mockSeason2015;
+	private Season mockSeason2015;
 
 	@Mock
-	private Table<String, String, String> mockTableDate1;
+	private Table mockTableDate1;
 
 	@Mock
-	private Table<String, String, String> mockTableDate2;
+	private Table mockTableDate2;
 
 	@Mock
-	private Table<String, String, String> mockTableDate3;
+	private Table mockTableDate3;
 
 	@Mock
-	private Table<String, String, String> mockTableDate4;
+	private Table mockTableDate4;
 
 	@Mock
-	private Table<String, String, String> mockTableDate5;
+	private Table mockTableDate5;
 
 	@Mock
 	private TeamFixtureContext mockFixture1HomeTeamContext;
@@ -164,7 +162,7 @@ public class SeasonCacheDivisionLoaderTest {
 		when(mockFixture4.getAwayGoals()).thenReturn(null);
 
 		// DAO TO RETURN THE ABOVE FIXTURES
-		List<Fixture<String>> fixturesForDivision1 = new ArrayList<Fixture<String>> ();
+		List<Fixture> fixturesForDivision1 = new ArrayList<Fixture> ();
 		fixturesForDivision1.add(mockFixture1);
 		fixturesForDivision1.add(mockFixture2);
 		fixturesForDivision1.add(mockFixture3);
@@ -172,7 +170,7 @@ public class SeasonCacheDivisionLoaderTest {
 		when (mockDao.getFixturesForDivisionInSeason(mockSeasonDivision1)).thenReturn(fixturesForDivision1);
 
 		// DAO TO RETURN TEAMS IN DIVISION
-		Set<SeasonDivisionTeam<String,String,String>> teamsForDivision1 = new HashSet<SeasonDivisionTeam<String, String, String>> ();
+		List<SeasonDivisionTeam> teamsForDivision1 = new ArrayList<SeasonDivisionTeam> ();
 		teamsForDivision1.add(mockDiv1TeamA);
 		teamsForDivision1.add(mockDiv1TeamB);
 		teamsForDivision1.add(mockDiv1TeamC);

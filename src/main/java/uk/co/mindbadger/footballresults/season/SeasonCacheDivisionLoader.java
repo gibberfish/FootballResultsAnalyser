@@ -21,21 +21,21 @@ public class SeasonCacheDivisionLoader {
 	
 	private SeasonCacheFixtureAndTableLoader seasonCacheFixtureAndTableLoader;
 	private TableFactory tableFactory;
-	private FootballResultsAnalyserDAO<String,String,String> dao;
+	private FootballResultsAnalyserDAO dao;
 	
-	public void loadDivision (SeasonDivision<String, String> seasonDivision, SeasonCache seasonCache) {
+	public void loadDivision (SeasonDivision seasonDivision, SeasonCache seasonCache) {
 		logger.info("Load Division Cache for " + seasonDivision.getDivision().getDivisionName());
 		
 		DivisionCache divisionCache = seasonCache.getCacheForDivision(seasonDivision);
 		
 		// Assumes fixtures come back in ascending date order
-		List<Fixture<String>> fixtures = dao.getFixturesForDivisionInSeason(seasonDivision);
+		List<Fixture> fixtures = dao.getFixturesForDivisionInSeason(seasonDivision);
 		
 		Calendar currentDate = createInitialTableDate(seasonDivision.getSeason().getSeasonNumber());
-		Table<String,String,String> tableForPreviousDate = null;
-		Table<String,String,String> tableForCurrentDate = createInitialTable(seasonDivision);
+		Table tableForPreviousDate = null;
+		Table tableForCurrentDate = createInitialTable(seasonDivision);
 		
-		for (Fixture<String> fixture : fixtures) {
+		for (Fixture fixture : fixtures) {
 			logger.info("About to process fixture: " + fixture);
 			
 			Calendar fixtureDate = fixture.getFixtureDate();
@@ -68,9 +68,9 @@ public class SeasonCacheDivisionLoader {
 		}
 	}
 	
-	private Table<String, String, String> createInitialTable(SeasonDivision<String, String> seasonDivision) {
-		Set<SeasonDivisionTeam<String, String, String>> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
-		Table<String,String,String> initialTable = tableFactory.createInitialTable(seasonDivision, seasonDivisionTeams);
+	private Table createInitialTable(SeasonDivision seasonDivision) {
+		List<SeasonDivisionTeam> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
+		Table initialTable = tableFactory.createInitialTable(seasonDivision, seasonDivisionTeams);
 		return initialTable;
 	}
 
@@ -91,11 +91,11 @@ public class SeasonCacheDivisionLoader {
 		this.tableFactory = tableFactory;
 	}
 	
-	public FootballResultsAnalyserDAO<String, String, String> getDao() {
+	public FootballResultsAnalyserDAO getDao() {
 		return dao;
 	}
 
-	public void setDao(FootballResultsAnalyserDAO<String, String, String> dao) {
+	public void setDao(FootballResultsAnalyserDAO dao) {
 		this.dao = dao;
 	}
 }

@@ -19,43 +19,43 @@ import uk.co.mindbadger.utils.FixtureDateFormatter;
 public class DivisionCache {
 	Logger logger = Logger.getLogger(DivisionCache.class);
 	
-	private Map<Calendar, List<Fixture<String>>> fixtures = new TreeMap<Calendar, List<Fixture<String>>> ();
-	private Map<Calendar, Table<String,String,String>> tables = new TreeMap<Calendar, Table<String,String,String>> ();
-	private Map<Calendar, Map<Team<String>, TeamFixtureContext>> teamFixtureContexts = new HashMap<Calendar, Map<Team<String>, TeamFixtureContext>> ();
+	private Map<Calendar, List<Fixture>> fixtures = new TreeMap<Calendar, List<Fixture>> ();
+	private Map<Calendar, Table> tables = new TreeMap<Calendar, Table> ();
+	private Map<Calendar, Map<Team, TeamFixtureContext>> teamFixtureContexts = new HashMap<Calendar, Map<Team, TeamFixtureContext>> ();
 
-	public void addFixtureOnDate (Calendar date, Fixture<String> fixture) {
-		List<Fixture<String>> fixturesForDate = fixtures.get(date);
+	public void addFixtureOnDate (Calendar date, Fixture fixture) {
+		List<Fixture> fixturesForDate = fixtures.get(date);
 		if (fixturesForDate == null) {
 			logger.info("Creating new fixture list in division cache for date " + FixtureDateFormatter.format(date));
-			fixturesForDate = new ArrayList<Fixture<String>> ();
+			fixturesForDate = new ArrayList<Fixture> ();
 			fixtures.put(date, fixturesForDate);
 		}
 		fixturesForDate.add(fixture);
 	}
 
-	public void addTableOnDate (Calendar date, Table<String,String,String> table) {
+	public void addTableOnDate (Calendar date, Table table) {
 		tables.put(date, table);
 	}
 
-	public void addTeamFixtureContextOnDate (Calendar date, Team<String> team, TeamFixtureContext teamFixtureContext) {
-		Map<Team<String>, TeamFixtureContext> teams = teamFixtureContexts.get(date);
+	public void addTeamFixtureContextOnDate (Calendar date, Team team, TeamFixtureContext teamFixtureContext) {
+		Map<Team, TeamFixtureContext> teams = teamFixtureContexts.get(date);
 		if (teams == null) {
-			teams = new HashMap<Team<String>, TeamFixtureContext> ();
+			teams = new HashMap<Team, TeamFixtureContext> ();
 			teamFixtureContexts.put(date, teams);
 		}
 		
 		teams.put(team, teamFixtureContext);
 	}
 	
-	public Map<Calendar, List<Fixture<String>>> getFixturesForDivision() {
+	public Map<Calendar, List<Fixture>> getFixturesForDivision() {
 		return fixtures;
 	}
 
-	public Map<Calendar, Table<String, String, String>> getTablesForDivision() {
+	public Map<Calendar, Table> getTablesForDivision() {
 		return tables;
 	}
 
-	public Map<Calendar, Map<Team<String>, TeamFixtureContext>> getTeamFixtureContexts() {
+	public Map<Calendar, Map<Team, TeamFixtureContext>> getTeamFixtureContexts() {
 		return teamFixtureContexts;
 	}
 

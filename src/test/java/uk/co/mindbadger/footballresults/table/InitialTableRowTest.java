@@ -15,10 +15,10 @@ public class InitialTableRowTest {
 	private final String TEAM_ID = "123";
 	private final String TEAM_NAME = "Portsmouth";
 	
-	private InitialTableRow<String,String,String> objectUnderTest;
+	private InitialTableRow objectUnderTest;
 	
 	@Mock
-	private Team<String> mockTeam1;
+	private Team mockTeam1;
 	
 	@Before
 	public void setup() {
@@ -31,7 +31,7 @@ public class InitialTableRowTest {
 	@Test
 	public void shouldCreateAnInitialTableRow () {
 		// Given
-		objectUnderTest = new InitialTableRow<String,String,String> (mockTeam1);
+		objectUnderTest = new InitialTableRow (mockTeam1);
 
 		// When
 

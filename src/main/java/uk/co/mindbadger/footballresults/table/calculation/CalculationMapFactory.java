@@ -23,8 +23,8 @@ public class CalculationMapFactory<K,L,M> {
 	
 	
 	
-	public Map<String, Calculation> createCalculations (Team<K> team, Fixture<K> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext, TableRow<K,L,M> previousTableRow)  {
-	//public Map<String, Calculation> createCalculations (Team<K> team, TableRow<K,L,M> previousTableRow, Fixture<K> fixture)  {
+	public Map<String, Calculation> createCalculations (Team team, Fixture fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext, TableRow previousTableRow)  {
+	//public Map<String, Calculation> createCalculations (Team team, TableRow<K,L,M> previousTableRow, Fixture fixture)  {
 		Map<String, Calculation> calculationMap = new HashMap<String, Calculation> ();
 		
 		logger.debug("createCalculations for team " + team.getTeamId() + " and fixture " + fixture.toString());

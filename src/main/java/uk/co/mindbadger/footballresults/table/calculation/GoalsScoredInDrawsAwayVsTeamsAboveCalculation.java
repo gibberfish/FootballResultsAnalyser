@@ -7,7 +7,7 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class GoalsScoredInDrawsAwayVsTeamsAboveCalculation extends CalculationForFixture<String, String, String> {
-	public GoalsScoredInDrawsAwayVsTeamsAboveCalculation(Team<String> team, Fixture<String> fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext, TableRow<String,String,String> previousTableRow) {
+	public GoalsScoredInDrawsAwayVsTeamsAboveCalculation(Team team, Fixture fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext, TableRow previousTableRow) {
 		super(team, fixture, fixtureTeamContext, oppositionTeamContext, previousTableRow);
 	}
 

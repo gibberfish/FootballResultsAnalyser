@@ -20,34 +20,34 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class TableTest {
 	
-	private Table<String,String,String> objectUnderTest;
+	private Table objectUnderTest;
 
 	@Mock
-	private Table<String,String,String> mockPreviousTable;
+	private Table mockPreviousTable;
 
 	@Mock
-	private TableRow<String, String, String> mockTableRow1;
+	private TableRow mockTableRow1;
 
 	@Mock
-	private TableRow<String, String, String> mockTableRow2;
+	private TableRow mockTableRow2;
 
 	@Mock
-	private TableRow<String, String, String> mockTableRow3;
+	private TableRow mockTableRow3;
 
 	@Mock
-	private TableRow<String, String, String> mockTableRow4;
+	private TableRow mockTableRow4;
 
 	@Mock
-	private Team<String> mockTeam1;
+	private Team mockTeam1;
 
 	@Mock
-	private Team<String> mockTeam2;
+	private Team mockTeam2;
 
 	@Mock
-	private Team<String> mockTeam3;
+	private Team mockTeam3;
 
 	@Mock
-	private Team<String> mockTeam4;
+	private Team mockTeam4;
 
 	@Before
 	public void setup() {
@@ -77,7 +77,7 @@ public class TableTest {
 		// Given
 		
 		// When
-		objectUnderTest = new Table<String,String,String> (null);
+		objectUnderTest = new Table (null);
 		
 		// Then
 		assertEquals (0, objectUnderTest.getSortedTable().size());
@@ -86,13 +86,13 @@ public class TableTest {
 	@Test
 	public void shouldInitialiseWithRowsFromPreviousTable () {
 		// Given
-		List <TableRow<String, String, String>> list = new ArrayList<TableRow<String, String, String>> ();
+		List <TableRow> list = new ArrayList<TableRow> ();
 		list.add(mockTableRow1);
 		list.add(mockTableRow2);
 		when (mockPreviousTable.getSortedTable()).thenReturn(list);
 		
 		// When
-		objectUnderTest = new Table<String,String,String> (mockPreviousTable);
+		objectUnderTest = new Table (mockPreviousTable);
 		
 		// Then
 		assertEquals (2, objectUnderTest.getSortedTable().size());
@@ -103,7 +103,7 @@ public class TableTest {
 	@Test
 	public void shouldBeAbleToAddRow () {
 		// Given
-		objectUnderTest = new Table<String,String,String> (null);
+		objectUnderTest = new Table (null);
 		
 		// When
 		objectUnderTest.addRow(mockTableRow1);
@@ -116,14 +116,14 @@ public class TableTest {
 	@Test
 	public void shouldGetTableRowForTeam () {
 		// Given
-		List <TableRow<String, String, String>> list = new ArrayList<TableRow<String, String, String>> ();
+		List <TableRow> list = new ArrayList<TableRow> ();
 		list.add(mockTableRow1);
 		list.add(mockTableRow2);
 		when (mockPreviousTable.getSortedTable()).thenReturn(list);
-		objectUnderTest = new Table<String,String,String> (mockPreviousTable);
+		objectUnderTest = new Table (mockPreviousTable);
 		
 		// When
-		TableRow<String,String,String> row = objectUnderTest.getTableRowForTeam("123");
+		TableRow row = objectUnderTest.getTableRowForTeam("123");
 
 		// Then
 		assertEquals (mockTableRow1, row);

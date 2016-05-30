@@ -1,7 +1,6 @@
 package uk.co.mindbadger.footballresults.season;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -14,17 +13,17 @@ import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 public class SeasonCacheLoader {
 	Logger logger = Logger.getLogger(SeasonCacheLoader.class);
 	
-	private FootballResultsAnalyserDAO<String,String,String> dao;
+	private FootballResultsAnalyserDAO dao;
 	private AnalyserCache analyserCache;
 	private SeasonCacheDivisionLoader seasonCacheDivisionLoader;
 	
-	public void loadSeason(Season<String> season) {
+	public void loadSeason(Season season) {
 		logger.info("Load Season Cache for " + season.getSeasonNumber());
 		SeasonCache seasonCache = analyserCache.getCacheForSeason(season.getSeasonNumber());
 		
-		Set<SeasonDivision<String, String>> seasonDivisions = dao.getDivisionsForSeason(season);
+		List<SeasonDivision> seasonDivisions = dao.getDivisionsForSeason(season);
 		
-		for (SeasonDivision<String, String> seasonDivision : seasonDivisions) {
+		for (SeasonDivision seasonDivision : seasonDivisions) {
 			seasonCacheDivisionLoader.loadDivision(seasonDivision, seasonCache);
 		}
 	}
@@ -33,18 +32,18 @@ public class SeasonCacheLoader {
 	public void loadCurrentSeason() {
 		logger.info("Request to Load Season Cache for current season");
 		
-		List<Season<String>> seasons = dao.getSeasons();
+		List<Season> seasons = dao.getSeasons();
 		logger.debug("...Found " + seasons.size() + " seasons");
 		
 		// Assumes the seasons are sorted in descending order
 		loadSeason(seasons.get(0));
 	}
 	
-	public FootballResultsAnalyserDAO<String, String, String> getDao() {
+	public FootballResultsAnalyserDAO getDao() {
 		return dao;
 	}
 	
-	public void setDao(FootballResultsAnalyserDAO<String, String, String> dao) {
+	public void setDao(FootballResultsAnalyserDAO dao) {
 		this.dao = dao;
 	}
 	

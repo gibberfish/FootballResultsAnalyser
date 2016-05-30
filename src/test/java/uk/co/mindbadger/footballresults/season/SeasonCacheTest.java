@@ -29,16 +29,16 @@ public class SeasonCacheTest {
 	private DivisionCache mockDivisionCache2;
 
 	@Mock
-	private Season<String> mockSeason;
+	private Season mockSeason;
 	
 	@Mock
-	private Division<String> mockDivision1;
+	private Division mockDivision1;
 
 	@Mock
-	private Division<String> mockDivision2;
+	private Division mockDivision2;
 
 	@Mock
-	private Division<String> mockDivision3;
+	private Division mockDivision3;
 
 	@Before
 	public void setup() {
@@ -57,7 +57,7 @@ public class SeasonCacheTest {
 		// Given
 		
 		// When
-		Map<SeasonDivision<String,String>, DivisionCache> divisionCaches = objectUnderTest.getDivisionCaches();
+		Map<SeasonDivision, DivisionCache> divisionCaches = objectUnderTest.getDivisionCaches();
 		
 		// Then
 		assertEquals (0, divisionCaches.size());
@@ -80,7 +80,7 @@ public class SeasonCacheTest {
 		DivisionCache divisionCache1 = objectUnderTest.getCacheForDivision(seasonDivision1);
 
 		// Then
-		Map<SeasonDivision<String,String>, DivisionCache> divisionCaches = objectUnderTest.getDivisionCaches();
+		Map<SeasonDivision, DivisionCache> divisionCaches = objectUnderTest.getDivisionCaches();
 		assertEquals (1, divisionCaches.size());
 		assertEquals (divisionCache1, divisionCaches.get(seasonDivision1));
 		
@@ -106,7 +106,7 @@ public class SeasonCacheTest {
 		DivisionCache divisionCache2 = objectUnderTest.getCacheForDivision(seasonDivision1);
 		
 		// Then
-		Map<SeasonDivision<String,String>, DivisionCache> divisionCaches = objectUnderTest.getDivisionCaches();
+		Map<SeasonDivision, DivisionCache> divisionCaches = objectUnderTest.getDivisionCaches();
 		assertEquals (1, divisionCaches.size());
 		assertEquals (divisionCache1, divisionCaches.get(seasonDivision1));
 		assertEquals (divisionCache1, divisionCache2);
@@ -135,7 +135,7 @@ public class SeasonCacheTest {
 		DivisionCache divisionCache3 = objectUnderTest.getCacheForDivision(seasonDivision3);
 		
 		// When
-		List<SeasonDivision<String,String>> seasonDivisions = objectUnderTest.getSeasonDivisionsInCache ();
+		List<SeasonDivision> seasonDivisions = objectUnderTest.getSeasonDivisionsInCache ();
 		
 		// Then
 		assertEquals(seasonDivision3, seasonDivisions.get(0));

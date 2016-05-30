@@ -3,17 +3,17 @@ package uk.co.mindbadger.footballresults.season;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 public class TeamFixtureContext {
-	private Team<String> team;
+	private Team team;
 	private int leaguePosition;
 	private boolean isAtHome;
 	private boolean isPlayingTeamAbove;
 	private int goalsScored;
 	private int goalsConceded;
 	private int points;
-	public Team<String> getTeam() {
+	public Team getTeam() {
 		return team;
 	}
-	public void setTeam(Team<String> team) {
+	public void setTeam(Team team) {
 		this.team = team;
 	}
 	public int getLeaguePosition() {

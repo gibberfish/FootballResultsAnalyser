@@ -17,16 +17,16 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 public class AbstractTableRowTest {
 	
 	@Mock
-	Team<String> mockTeam1;
+	Team mockTeam1;
 
 	@Mock
-	Team<String> mockTeam2;
+	Team mockTeam2;
 
 	@Mock
-	private TableRow<String, String, String> mockPreviousTableRow;
+	private TableRow mockPreviousTableRow;
 	
 	@Mock
-	private Fixture<String> mockFixture;
+	private Fixture mockFixture;
 	
 	@Mock
 	private TeamFixtureContext mockFixtureTeamContext;
@@ -42,7 +42,7 @@ public class AbstractTableRowTest {
 	@Test
 	public void shouldCorrectlyCompareRowsWhereThePointsAreDifferent () {
 		// Given
-		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1) {
+		TableRow row1 = new TableRow (mockTeam1) {
 
 			@Override
 			public int getAttribute(String attributeId) {
@@ -68,12 +68,12 @@ public class AbstractTableRowTest {
 			}
 
 			@Override
-			public TableRow<String, String, String> getPreviousTableRow() {
+			public TableRow getPreviousTableRow() {
 				return mockPreviousTableRow;
 			}
 
 			@Override
-			public Fixture<String> getFixture() {
+			public Fixture getFixture() {
 				return mockFixture;
 			}
 
@@ -88,7 +88,7 @@ public class AbstractTableRowTest {
 			}
 		};
 		
-		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam1) {
+		TableRow row2 = new TableRow (mockTeam1) {
 			public int getAttribute(String attributeId) {
 				if (GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -113,12 +113,12 @@ public class AbstractTableRowTest {
 			
 
 			@Override
-			public TableRow<String, String, String> getPreviousTableRow() {
+			public TableRow getPreviousTableRow() {
 				return mockPreviousTableRow;
 			}
 
 			@Override
-			public Fixture<String> getFixture() {
+			public Fixture getFixture() {
 				return mockFixture;
 			}
 
@@ -149,7 +149,7 @@ public class AbstractTableRowTest {
 	@Test
 	public void shouldCorrectlyCompareRowsWhereThePointsAreTheSameButGoalDifferenceIsDifferent () {
 		// Given
-		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1) {
+		TableRow row1 = new TableRow (mockTeam1) {
 			public int getAttribute(String attributeId) {
 				if (GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -173,12 +173,12 @@ public class AbstractTableRowTest {
 			}
 
 			@Override
-			public TableRow<String, String, String> getPreviousTableRow() {
+			public TableRow getPreviousTableRow() {
 				return mockPreviousTableRow;
 			}
 
 			@Override
-			public Fixture<String> getFixture() {
+			public Fixture getFixture() {
 				return mockFixture;
 			}
 
@@ -193,7 +193,7 @@ public class AbstractTableRowTest {
 			}
 		};
 		
-		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam1) {
+		TableRow row2 = new TableRow (mockTeam1) {
 			public int getAttribute(String attributeId) {
 				if (GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -218,12 +218,12 @@ public class AbstractTableRowTest {
 			
 
 			@Override
-			public TableRow<String, String, String> getPreviousTableRow() {
+			public TableRow getPreviousTableRow() {
 				return mockPreviousTableRow;
 			}
 
 			@Override
-			public Fixture<String> getFixture() {
+			public Fixture getFixture() {
 				return mockFixture;
 			}
 
@@ -254,7 +254,7 @@ public class AbstractTableRowTest {
 	@Test
 	public void shouldCorrectlyCompareRowsWhereThePointsAreTheSameAndTheGoalDifferenceIsTheSameButTheGoalsScoredIsDifferent () {
 		// Given
-		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1) {
+		TableRow row1 = new TableRow (mockTeam1) {
 			public int getAttribute(String attributeId) {
 				if (GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -278,12 +278,12 @@ public class AbstractTableRowTest {
 			}
 
 			@Override
-			public TableRow<String, String, String> getPreviousTableRow() {
+			public TableRow getPreviousTableRow() {
 				return mockPreviousTableRow;
 			}
 
 			@Override
-			public Fixture<String> getFixture() {
+			public Fixture getFixture() {
 				return mockFixture;
 			}
 
@@ -298,7 +298,7 @@ public class AbstractTableRowTest {
 			}
 		};
 		
-		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam1) {
+		TableRow row2 = new TableRow (mockTeam1) {
 			public int getAttribute(String attributeId) {
 				if (GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -323,12 +323,12 @@ public class AbstractTableRowTest {
 			
 
 			@Override
-			public TableRow<String, String, String> getPreviousTableRow() {
+			public TableRow getPreviousTableRow() {
 				return mockPreviousTableRow;
 			}
 
 			@Override
-			public Fixture<String> getFixture() {
+			public Fixture getFixture() {
 				return mockFixture;
 			}
 
@@ -362,7 +362,7 @@ public class AbstractTableRowTest {
 		when(mockTeam1.getTeamName()).thenReturn("Portsmouth");
 		when(mockTeam2.getTeamName()).thenReturn("Southampton");
 		
-		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1) {
+		TableRow row1 = new TableRow (mockTeam1) {
 			public int getAttribute(String attributeId) {
 				if (GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -387,12 +387,12 @@ public class AbstractTableRowTest {
 			
 
 			@Override
-			public TableRow<String, String, String> getPreviousTableRow() {
+			public TableRow getPreviousTableRow() {
 				return mockPreviousTableRow;
 			}
 
 			@Override
-			public Fixture<String> getFixture() {
+			public Fixture getFixture() {
 				return mockFixture;
 			}
 
@@ -407,7 +407,7 @@ public class AbstractTableRowTest {
 			}
 		};
 		
-		TableRow<String,String,String> row2 = new TableRow<String,String,String> (mockTeam2) {
+		TableRow row2 = new TableRow (mockTeam2) {
 			public int getAttribute(String attributeId) {
 				if (GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -432,12 +432,12 @@ public class AbstractTableRowTest {
 			
 
 			@Override
-			public TableRow<String, String, String> getPreviousTableRow() {
+			public TableRow getPreviousTableRow() {
 				return mockPreviousTableRow;
 			}
 
 			@Override
-			public Fixture<String> getFixture() {
+			public Fixture getFixture() {
 				return mockFixture;
 			}
 
@@ -470,7 +470,7 @@ public class AbstractTableRowTest {
 		// Given
 		when(mockTeam1.getTeamName()).thenReturn("Portsmouth");
 		
-		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1) {
+		TableRow row1 = new TableRow (mockTeam1) {
 			public int getAttribute(String attributeId) {
 				if (GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -495,12 +495,12 @@ public class AbstractTableRowTest {
 			
 
 			@Override
-			public TableRow<String, String, String> getPreviousTableRow() {
+			public TableRow getPreviousTableRow() {
 				return mockPreviousTableRow;
 			}
 
 			@Override
-			public Fixture<String> getFixture() {
+			public Fixture getFixture() {
 				return mockFixture;
 			}
 
@@ -516,7 +516,7 @@ public class AbstractTableRowTest {
 		};
 
 		// When
-		Team<String> team = row1.getTeam();
+		Team team = row1.getTeam();
 		
 		// Then
 		assertEquals (mockTeam1, team);
@@ -527,7 +527,7 @@ public class AbstractTableRowTest {
 		// Given
 		when(mockTeam1.getTeamName()).thenReturn("Portsmouth");
 		
-		TableRow<String,String,String> row1 = new TableRow<String,String,String> (mockTeam1) {
+		TableRow row1 = new TableRow (mockTeam1) {
 			public int getAttribute(String attributeId) {
 				if (GAMES_PLAYED.equals(attributeId)) {
 					return 18;
@@ -552,12 +552,12 @@ public class AbstractTableRowTest {
 			
 
 			@Override
-			public TableRow<String, String, String> getPreviousTableRow() {
+			public TableRow getPreviousTableRow() {
 				return mockPreviousTableRow;
 			}
 
 			@Override
-			public Fixture<String> getFixture() {
+			public Fixture getFixture() {
 				return mockFixture;
 			}
 

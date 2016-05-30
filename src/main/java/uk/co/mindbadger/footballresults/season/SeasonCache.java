@@ -14,9 +14,9 @@ import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 public class SeasonCache {
 	Logger logger = Logger.getLogger(SeasonCache.class);
 	
-	private Map<SeasonDivision<String,String>, DivisionCache> divisions = new HashMap<SeasonDivision<String,String>, DivisionCache> ();
+	private Map<SeasonDivision, DivisionCache> divisions = new HashMap<SeasonDivision, DivisionCache> ();
 	
-	public DivisionCache getCacheForDivision (SeasonDivision<String,String> division) {
+	public DivisionCache getCacheForDivision (SeasonDivision division) {
 		DivisionCache existing = divisions.get(division);
 		if (existing != null) {
 			logger.info("Getting existing cache for division " + division.getDivision().getDivisionName());
@@ -29,14 +29,14 @@ public class SeasonCache {
 		}
 	}
 		
-	public Map<SeasonDivision<String,String>, DivisionCache> getDivisionCaches () {
+	public Map<SeasonDivision, DivisionCache> getDivisionCaches () {
 		return divisions;
 	}
 
-	public List<SeasonDivision<String,String>> getSeasonDivisionsInCache() {
-		Set<SeasonDivision<String,String>> keySet = divisions.keySet();
+	public List<SeasonDivision> getSeasonDivisionsInCache() {
+		Set<SeasonDivision> keySet = divisions.keySet();
 		
-		List<SeasonDivision<String,String>> seasonDivisionList = new ArrayList<SeasonDivision<String,String>> (keySet);
+		List<SeasonDivision> seasonDivisionList = new ArrayList<SeasonDivision> (keySet);
 		
 		Collections.sort(seasonDivisionList);
 		

@@ -24,34 +24,34 @@ public class DivisionCacheTest {
 	private Calendar date3;
 	
 	@Mock
-	private Fixture<String> mockFixture1;
+	private Fixture mockFixture1;
 
 	@Mock
-	private Fixture<String> mockFixture2;
+	private Fixture mockFixture2;
 
 	@Mock
-	private Fixture<String> mockFixture3;
+	private Fixture mockFixture3;
 
 	@Mock
-	private Table<String,String,String> mockTable1;
+	private Table mockTable1;
 
 	@Mock
-	private Table<String,String,String> mockTable2;
+	private Table mockTable2;
 
 	@Mock
-	private Table<String,String,String> mockTable3;
+	private Table mockTable3;
 
 	@Mock
-	private Team<String> mockTeam1;
+	private Team mockTeam1;
 
 	@Mock
-	private Team<String> mockTeam2;
+	private Team mockTeam2;
 
 	@Mock
-	private Team<String> mockTeam3;
+	private Team mockTeam3;
 
 	@Mock
-	private Team<String> mockTeam4;
+	private Team mockTeam4;
 
 	@Mock
 	private TeamFixtureContext mockTeamFixtureContent1;
@@ -86,8 +86,8 @@ public class DivisionCacheTest {
 		// Given
 		
 		// When
-		Map<Calendar, List<Fixture<String>>> fixtures = objectUnderTest.getFixturesForDivision();
-		Map<Calendar, Table<String,String,String>> tables = objectUnderTest.getTablesForDivision();
+		Map<Calendar, List<Fixture>> fixtures = objectUnderTest.getFixturesForDivision();
+		Map<Calendar, Table> tables = objectUnderTest.getTablesForDivision();
 		
 		// Then
 		assertEquals (0, fixtures.size());
@@ -102,17 +102,17 @@ public class DivisionCacheTest {
 		objectUnderTest.addFixtureOnDate(date2, mockFixture3);
 		
 		// When
-		Map<Calendar, List<Fixture<String>>> fixtures = objectUnderTest.getFixturesForDivision();
+		Map<Calendar, List<Fixture>> fixtures = objectUnderTest.getFixturesForDivision();
 		
 		// Then
 		assertEquals (2, fixtures.size());
 		
-		List<Fixture<String>> fixturesForDate1 = fixtures.get(date1);
+		List<Fixture> fixturesForDate1 = fixtures.get(date1);
 		assertEquals (2, fixturesForDate1.size());
 		assertEquals (mockFixture1, fixturesForDate1.get(0));
 		assertEquals (mockFixture2, fixturesForDate1.get(1));
 		
-		List<Fixture<String>> fixturesForDate2 = fixtures.get(date2);
+		List<Fixture> fixturesForDate2 = fixtures.get(date2);
 		assertEquals (1, fixturesForDate2.size());
 		assertEquals (mockFixture3, fixturesForDate2.get(0));
 	}
@@ -127,7 +127,7 @@ public class DivisionCacheTest {
 		objectUnderTest.addTableOnDate(date3, mockTable3);
 		
 		// Then
-		Map<Calendar, Table<String,String,String>> tables = objectUnderTest.getTablesForDivision();
+		Map<Calendar, Table> tables = objectUnderTest.getTablesForDivision();
 		
 		assertEquals (3, tables.size());
 		assertEquals (mockTable1, tables.get(date1));
@@ -163,13 +163,13 @@ public class DivisionCacheTest {
 		objectUnderTest.addTeamFixtureContextOnDate(date2, mockTeam4, mockTeamFixtureContent4);
 		
 		// Then
-		Map<Calendar, Map<Team<String>, TeamFixtureContext>> contexts = objectUnderTest.getTeamFixtureContexts();
+		Map<Calendar, Map<Team, TeamFixtureContext>> contexts = objectUnderTest.getTeamFixtureContexts();
 		assertEquals (2, contexts.size());
 		
-		Map<Team<String>, TeamFixtureContext> teamsForDate1 = contexts.get(date1);
+		Map<Team, TeamFixtureContext> teamsForDate1 = contexts.get(date1);
 		assertEquals (1, teamsForDate1.size());
 		
-		Map<Team<String>, TeamFixtureContext> teamsForDate2 = contexts.get(date2);
+		Map<Team, TeamFixtureContext> teamsForDate2 = contexts.get(date2);
 		assertEquals (3, teamsForDate2.size());
 	}
 }

@@ -28,37 +28,37 @@ public class SeasonCacheFixtureAndTableLoaderTest {
 	private TableFactory mockTableFactory;
 	
 	@Mock
-	private TableRowFactory<String,String,String> mockTableRowFactory;
+	private TableRowFactory mockTableRowFactory;
 	
 	@Mock
 	private TeamFixtureContextFactory mockTeamFixtureContextFactory;
 	
 	@Mock
-	private Fixture<String> mockFixture1;
+	private Fixture mockFixture1;
 
 	@Mock
 	private DivisionCache mockDivisionCache1;
 
 	@Mock
-	private Table<String, String, String> mockTableDate1;
+	private Table mockTableDate1;
 
 	@Mock
-	private Table<String, String, String> mockTableDate2;
+	private Table mockTableDate2;
 
 	@Mock
-	private Team<String> mockHomeTeam;
+	private Team mockHomeTeam;
 
 	@Mock
-	private Team<String> mockAwayTeam;
+	private Team mockAwayTeam;
 
 	@Mock
-	private TableRow<String, String, String> mockTable1;
+	private TableRow mockTable1;
 
 	@Mock
-	private TableRow<String, String, String> mockHomeTableRow;
+	private TableRow mockHomeTableRow;
 
 	@Mock
-	private TableRow<String, String, String> mockAwayTableRow;
+	private TableRow mockAwayTableRow;
 	
 	@Mock
 	private TeamFixtureContext mockHomeTeamFixtureContext;

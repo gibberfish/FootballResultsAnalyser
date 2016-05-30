@@ -25,16 +25,16 @@ public class CalculationMapFactoryTest {
 	private List<AttributeDefinition> derivedAttributes = new ArrayList<AttributeDefinition> ();
 	
 	@Mock
-	private TableRowAfterResult<String,String,String> mockPreviousTableRow;
+	private TableRowAfterResult mockPreviousTableRow;
 	
 	@Mock
-	private Fixture<String> mockFixture;
+	private Fixture mockFixture;
 	
 	@Mock
-	private Team<String> mockTeam1;
+	private Team mockTeam1;
 
 	@Mock
-	private Team<String> mockTeam2;
+	private Team mockTeam2;
 
 	@Before
 	public void setup() {

@@ -21,7 +21,7 @@ public class SeasonCacheLoaderTest {
 	private SeasonCacheLoader objectUnderTest;
 	
 	@Mock
-	private FootballResultsAnalyserDAO<String,String,String> mockDao;
+	private FootballResultsAnalyserDAO mockDao;
 
 	@Mock
 	private SeasonCacheDivisionLoader mockSeasonCacheDivisionLoader;
@@ -33,19 +33,19 @@ public class SeasonCacheLoaderTest {
 	private SeasonCache mockSeasonCache2015;
 
 	@Mock
-	private SeasonDivision<String, String> mockSeasonDivision1;
+	private SeasonDivision mockSeasonDivision1;
 	
 	@Mock
-	private SeasonDivision<String, String> mockSeasonDivision2;
+	private SeasonDivision mockSeasonDivision2;
 
 	@Mock
-	private Season<String> mockSeason2015;
+	private Season mockSeason2015;
 
 	@Mock
-	private Season<String> mockSeason2014;
+	private Season mockSeason2014;
 
 	@Mock
-	private Season<String> mockSeason2013;
+	private Season mockSeason2013;
 
 	@Before
 	public void setup() {
@@ -65,7 +65,7 @@ public class SeasonCacheLoaderTest {
 	@Test
 	public void shouldLoadSeasonFromDataInDao () {
 		// Given
-		Set<SeasonDivision<String, String>> seasonDivisions = new HashSet<SeasonDivision<String, String>> ();
+		List<SeasonDivision> seasonDivisions = new ArrayList<SeasonDivision> ();
 		seasonDivisions.add(mockSeasonDivision1);
 		seasonDivisions.add(mockSeasonDivision2);
 		when(mockDao.getDivisionsForSeason(mockSeason2015)).thenReturn(seasonDivisions);
@@ -83,7 +83,7 @@ public class SeasonCacheLoaderTest {
 	@Test
 	public void shouldGetCurrentSeason () {
 		// Given
-		List<Season<String>> seasons = new ArrayList<Season<String>> ();
+		List<Season> seasons = new ArrayList<Season> ();
 		seasons.add(mockSeason2015);
 		seasons.add(mockSeason2014);
 		seasons.add(mockSeason2013);

@@ -5,26 +5,26 @@ import uk.co.mindbadger.footballresults.season.TeamFixtureContext;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
-public abstract class TableRow<K,L,M> implements Comparable<TableRow<K,L,M>> {
-	protected Team<K> team;
-	protected Table<K,L,M> parentTable;
+public abstract class TableRow implements Comparable<TableRow> {
+	protected Team team;
+	protected Table parentTable;
 	
-	public TableRow (Team<K> team) {
+	public TableRow (Team team) {
 		this.team = team;
 	}
 	
-	public Team<K> getTeam () {
+	public Team getTeam () {
 		return team;
 	}
 	
 	public abstract int getAttribute(String attributeId);
-	public abstract TableRow<K, L, M> getPreviousTableRow();
-	public abstract Fixture<K> getFixture();
+	public abstract TableRow getPreviousTableRow();
+	public abstract Fixture getFixture();
 	public abstract TeamFixtureContext getFixtureTeamContext();
 	public abstract TeamFixtureContext getOppositionTeamContext();
 	
 	@Override
-	public int compareTo (TableRow<K,L,M> otherRow) {
+	public int compareTo (TableRow otherRow) {
 		if (otherRow.getAttribute(POINTS) != getAttribute(POINTS)) {
 			return (otherRow.getAttribute(POINTS) < getAttribute(POINTS)) ? -1 : 1;
 		} else if (otherRow.getAttribute(GOAL_DIFFERENCE) != getAttribute(GOAL_DIFFERENCE)) {

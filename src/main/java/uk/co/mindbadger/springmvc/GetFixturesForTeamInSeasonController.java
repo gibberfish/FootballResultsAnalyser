@@ -15,6 +15,7 @@ import uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
 import uk.co.mindbadger.footballresultsanalyser.domain.Division;
 import uk.co.mindbadger.footballresultsanalyser.domain.Fixture;
 import uk.co.mindbadger.footballresultsanalyser.domain.Season;
+import uk.co.mindbadger.footballresultsanalyser.domain.SeasonDivision;
 import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 
 @Controller
@@ -22,23 +23,24 @@ public class GetFixturesForTeamInSeasonController {
 	Logger logger = Logger.getLogger(GetFixturesForTeamInSeasonController.class);
 
 	@Autowired
-	FootballResultsAnalyserDAO<String,String,String> dao;
+	FootballResultsAnalyserDAO dao;
 	
 	@RequestMapping(value = "/getFixturesForTeamInSeason.html", method = RequestMethod.GET)
 	public @ResponseBody String getTeamsForDivision(@RequestParam("ssn") int seasonNumber, @RequestParam("div") String divisionId, @RequestParam("team") String teamId) {
 		logger.debug("CONTROLLER: getFixturesForTeamInSeason: " + seasonNumber + ", " + divisionId + ", " + teamId);
 
-		Season<String> season = dao.getSeason(seasonNumber);
-		Division<String> division = dao.getDivision(divisionId);
-		Team<String> team = dao.getTeam(teamId);
+		Season season = dao.getSeason(seasonNumber);
+		Division division = dao.getDivision(divisionId);
+		Team team = dao.getTeam(teamId);
 		
-		List<Fixture<String>> fixtures = dao.getFixturesForTeamInDivisionInSeason(season, division, team);
+		SeasonDivision seasonDivision = dao.getSeasonDivision(season, division);
+		List<Fixture> fixtures = dao.getFixturesForTeamInDivisionInSeason(seasonDivision, team);
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		
 		//CLUNKY APPROACH - need to get Jackson working properly
 		String output = "{\"fixtures\": [";
-		for (Fixture<String> fixture : fixtures) {
+		for (Fixture fixture : fixtures) {
 		    String fixtureDate = dateFormat.format(fixture.getFixtureDate().getTime());
 		    Integer homeGoals = fixture.getHomeGoals();
 		    Integer awayGoals = fixture.getAwayGoals();

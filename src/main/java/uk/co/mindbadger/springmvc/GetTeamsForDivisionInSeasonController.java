@@ -1,7 +1,8 @@
 package uk.co.mindbadger.springmvc;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,24 +23,24 @@ public class GetTeamsForDivisionInSeasonController {
 	Logger logger = Logger.getLogger(GetTeamsForDivisionInSeasonController.class);
 
 	@Autowired
-	FootballResultsAnalyserDAO<String,String,String> dao;
+	FootballResultsAnalyserDAO dao;
 	
 	@RequestMapping(value = "/getTeamsForDivision.html", method = RequestMethod.GET, produces="application/json")
-	public @ResponseBody Set<SeasonDivisionTeam<String,String,String>> getTeamsForDivision(@RequestParam("ssn") int seasonNumber, @RequestParam("div") String divisionId) {
+	public @ResponseBody List<SeasonDivisionTeam> getTeamsForDivision(@RequestParam("ssn") int seasonNumber, @RequestParam("div") String divisionId) {
 		logger.debug("CONTROLLER: getTeamsForDivision: " + seasonNumber + ", " + divisionId);
 
-		Season<String> season = dao.getSeason(seasonNumber);
-		Division<String> division = dao.getDivision(divisionId);
-		SeasonDivision<String,String> seasonDivision = null;
+		Season season = dao.getSeason(seasonNumber);
+		Division division = dao.getDivision(divisionId);
+		SeasonDivision seasonDivision = null;
 		if (season != null && division != null) {
 			seasonDivision = dao.getSeasonDivision(season, division);
 		}
 		
-		Set<SeasonDivisionTeam<String,String,String>> seasonDivisionTeams = null;
+		List<SeasonDivisionTeam> seasonDivisionTeams = null;
 		if (seasonDivision != null) {
 			seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
 		} else {
-			seasonDivisionTeams = new HashSet<SeasonDivisionTeam<String,String,String>> ();
+			seasonDivisionTeams = new ArrayList<SeasonDivisionTeam> ();
 		}
 		
 		return seasonDivisionTeams;

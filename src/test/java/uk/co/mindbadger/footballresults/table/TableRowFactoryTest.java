@@ -20,16 +20,16 @@ import uk.co.mindbadger.footballresultsanalyser.domain.Team;
 public class TableRowFactoryTest {	
 	private Map<String,Calculation> calculations = new HashMap<String,Calculation> ();
 	
-	private TableRowFactory<String,String,String> objectUnderTest;
+	private TableRowFactory objectUnderTest;
 	
 	@Mock
-	private TableRowAfterResult<String,String,String> mockPreviousTableRow;
+	private TableRowAfterResult mockPreviousTableRow;
 	
 	@Mock
-	private Fixture<String> mockFixture;
+	private Fixture mockFixture;
 	
 	@Mock
-	private Team<String> mockTeam1;
+	private Team mockTeam1;
 
 	@Mock
 	private TeamFixtureContext mockFixtureTeamContext;
@@ -54,10 +54,10 @@ public class TableRowFactoryTest {
 	@Test
 	public void shouldCreateATableRow () {
 		// Given
-		objectUnderTest = new TableRowFactory<>(mockCalculationMapFactory);
+		objectUnderTest = new TableRowFactory(mockCalculationMapFactory);
 		
 		// When
-		TableRow<String, String, String> tableRow = objectUnderTest.createTableRowFromFixture(mockTeam1, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
+		TableRow tableRow = objectUnderTest.createTableRowFromFixture(mockTeam1, mockPreviousTableRow, mockFixture, mockFixtureTeamContext, mockOppositionTeamContext);
 		tableRow.getAttribute("test");
 		
 		// Then

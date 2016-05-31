@@ -3,6 +3,7 @@ package uk.co.mindbadger.footballresults.season;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import org.apache.log4j.Logger;
 
@@ -32,11 +33,19 @@ public class SeasonCacheLoader {
 	public void loadCurrentSeason() {
 		logger.info("Request to Load Season Cache for current season");
 		
+		dao.startSession();
 		List<Season> seasons = dao.getSeasons();
 		logger.debug("...Found " + seasons.size() + " seasons");
 		
-		// Assumes the seasons are sorted in descending order
-		loadSeason(seasons.get(0));
+		// Assumes the seasons are sorted in ascending order
+		loadSeason(seasons.get(seasons.size()-1));
+	}
+	
+	@PreDestroy
+	public void closeDatabaseConnection () {
+		if (dao != null) {
+			dao.closeSession();
+		}
 	}
 	
 	public FootballResultsAnalyserDAO getDao() {

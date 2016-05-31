@@ -84,9 +84,9 @@ public class SeasonCacheLoaderTest {
 	public void shouldGetCurrentSeason () {
 		// Given
 		List<Season> seasons = new ArrayList<Season> ();
-		seasons.add(mockSeason2015);
-		seasons.add(mockSeason2014);
 		seasons.add(mockSeason2013);
+		seasons.add(mockSeason2014);
+		seasons.add(mockSeason2015);
 		when (mockDao.getSeasons()).thenReturn(seasons);
 		
 		// When

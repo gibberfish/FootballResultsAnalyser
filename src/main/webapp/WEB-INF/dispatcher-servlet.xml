@@ -50,30 +50,13 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<bean id="domainObjectFactory" class="uk.co.mindbadger.footballresultsanalyser.domain.DomainObjectFactoryImpl">
 	</bean>
 
-	<bean id="mongoClient" class="com.mongodb.MongoClient">
-		<constructor-arg type="java.lang.String">
-			<value>${mongoHost}</value>
-		</constructor-arg>
-	</bean>
-	
-	<bean id="mongoMapper" class="uk.co.mindbadger.footballresultsanalyser.dao.MongoMapper">
-		<property name="domainObjectFactory" ref="domainObjectFactory"/>
-		<property name="dao" ref="dao"/>
-	</bean>
-
-	<bean id="dao" class="uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserMongoDAO">
+    <bean id="dao" class="uk.co.mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserCouchbaseDAO">
+      <property name="bucketName" value="football"/>
       <property name="domainObjectFactory" ref="domainObjectFactory"/>
-      <property name="mongoClient" ref="mongoClient" />
-      <property name="dbName" value="${mongoDb}" />
-      <property name="mongoMapper" ref="mongoMapper"/>
-	</bean>
+    </bean>
   
 	<bean id="analyserCache" class="uk.co.mindbadger.footballresults.season.AnalyserCache">
 	</bean>
-
-
-
-
 
 	<!-- RAW CALCULATIONS -->
 	<bean id="gamesWonAtHomeVsAboveDefinition" class="uk.co.mindbadger.footballresults.table.calculation.AttributeDefinition">

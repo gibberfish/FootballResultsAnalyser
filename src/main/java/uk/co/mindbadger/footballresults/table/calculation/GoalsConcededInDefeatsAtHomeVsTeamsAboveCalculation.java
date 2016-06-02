@@ -20,7 +20,7 @@ public class GoalsConcededInDefeatsAtHomeVsTeamsAboveCalculation extends Calcula
 		boolean lost = goalsFor < goalsAgainst;
 		
 		return ((lost && fixtureTeamContext.isAtHome() && fixtureTeamContext.isPlayingTeamAbove()) ?
-				previousTableRow.getAttribute(GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE) + goalsAgainst : previousTableRow.getAttribute(GOALS_CONCEDED_IN_DEFEATS_AWAY_VS_ABOVE));
+				previousTableRow.getAttribute(GOALS_CONCEDED_IN_DEFEATS_AT_HOME_VS_ABOVE) + goalsAgainst : previousTableRow.getAttribute(GOALS_CONCEDED_IN_DEFEATS_AT_HOME_VS_ABOVE));
 	}
 
 }

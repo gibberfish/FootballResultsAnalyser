@@ -3,6 +3,8 @@ package uk.co.mindbadger.footballresults.season;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -28,8 +30,16 @@ public class SeasonCacheDivisionLoader {
 		
 		DivisionCache divisionCache = seasonCache.getCacheForDivision(seasonDivision);
 		
-		// Assumes fixtures come back in ascending date order
 		List<Fixture> fixtures = dao.getFixturesForDivisionInSeason(seasonDivision);
+		
+		// Sort the list in ascending date order
+		Collections.sort(fixtures, new Comparator<Fixture>(){
+		     public int compare(Fixture o1, Fixture o2){
+		         if(o1.getFixtureDate() == o2.getFixtureDate())
+		             return 0;
+		         return o1.getFixtureDate().before(o2.getFixtureDate()) ? -1 : 1;
+		     }
+		});
 		
 		Calendar currentDate = createInitialTableDate(seasonDivision.getSeason().getSeasonNumber());
 		Table tableForPreviousDate = null;

@@ -13,6 +13,7 @@ public class GoalsScoredInDefeatsAtHomeVsTeamsBelowCalculation extends Calculati
 
 	@Override
 	public int calculate(boolean reCalculate) {
+		
 		int goalsFor = (fixtureTeamContext.isAtHome() ? fixture.getHomeGoals() : fixture.getAwayGoals());
 		int goalsAgainst = (fixtureTeamContext.isAtHome() ? fixture.getAwayGoals() : fixture.getHomeGoals());
 		

@@ -1,142 +1,60 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>uk.co.mindbadger.football-results-analyser</groupId>
-  <artifactId>football-results-analyser</artifactId>
-  <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>football-results-analyser Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.8.1</version>
-      <scope>test</scope>
-    </dependency>
-
-	<dependency>
-	<groupId>org.mockito</groupId>
-	<artifactId>mockito-all</artifactId>
-	<version>1.8.4</version>
-	<scope>test</scope>
-    </dependency>
-
-	<dependency>
-	<groupId>log4j</groupId>
-	<artifactId>log4j</artifactId>
-	<version>1.2.17</version>
-	</dependency>
-
-	<dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>javax.servlet-api</artifactId>
-        <version>3.0.1</version>
-    </dependency>
-
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-core</artifactId>
-		<version>${spring.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-jdbc</artifactId>
-		<version>${spring.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-orm</artifactId>
-		<version>${spring.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-aop</artifactId>
-		<version>${spring.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-webmvc</artifactId>
-		<version>${spring.version}</version>
-	</dependency>
-	
-	
-	
-<!-- 	
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.10</version>
-    </dependency>
- 
-    <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-core</artifactId>
-        <version>4.1.9.Final</version>
-    </dependency>
-	
-    <dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-c3p0</artifactId>
-		<version>4.1.4.Final</version>
-	</dependency>
--->
-    
-	<dependency>
-	<groupId>jstl</groupId>
-	<artifactId>jstl</artifactId>
-	<version>1.2</version>
-	</dependency>	
-	
-    <dependency>
-      <groupId>uk.co.mindbadger.football-results-dao</groupId>
-      <artifactId>football-results-dao</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>uk.co.mindbadger.football-results-couchbase-dao</groupId>
-      <artifactId>football-results-couchbase-dao</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-	
-<dependency>
-  <groupId> org.codehaus.jackson</groupId>
-  <artifactId>jackson-mapper-asl</artifactId>
-  <version>1.9.13</version>
-</dependency>
-
-  </dependencies>
-
-	<properties>
-		<log4j.version>1.2.16</log4j.version>
-		<spring.version>3.1.2.RELEASE</spring.version>
-		<jstl.version>1.1.2</jstl.version>
-		<commons.beanutils.version>1.7.0</commons.beanutils.version>
-		<commons.collections.version>3.2</commons.collections.version>
-		<commons.io.version>1.3.2</commons.io.version>
-		<commons.lang.version>2.3</commons.lang.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties> 
-
-  <build>
-    <finalName>football-results-analyser</finalName>
-	<plugins>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.3</version>
-      </plugin>
-	  
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.1</version>
-          <configuration>
-            <source>1.7</source>
-            <target>1.7</target>
-          </configuration>
-        </plugin>
-    </plugins>
-  </build>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>mindbadger</groupId>
+   <artifactId>football-results-analyser</artifactId>
+   <version>1.0-SNAPSHOT</version>
+   <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>1.3.5.RELEASE</version>
+   </parent>
+   <dependencies>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-jersey</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.8.1</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.mockito</groupId>
+         <artifactId>mockito-all</artifactId>
+         <version>1.8.4</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>log4j</groupId>
+         <artifactId>log4j</artifactId>
+         <version>1.2.17</version>
+      </dependency>
+      <dependency>
+         <groupId>uk.co.mindbadger.football-results-dao</groupId>
+         <artifactId>football-results-dao</artifactId>
+         <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+         <groupId>uk.co.mindbadger.football-results-couchbase-dao</groupId>
+         <artifactId>football-results-couchbase-dao</artifactId>
+         <version>1.0-SNAPSHOT</version>
+      </dependency>
+   </dependencies>
+   <properties>
+      <java.version>1.8</java.version>
+   </properties>
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+         </plugin>
+      </plugins>
+   </build>
 </project>

@@ -15,38 +15,6 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
   
   <mvc:annotation-driven />
   
-  <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-	  <property name="mediaTypes">
-	    <map>
-	      <entry key="html" value="text/html"/>
-	      <entry key="json" value="application/json"/>
-	    </map>
-	  </property>
-	  <property name="viewResolvers">
-	    <list>
-		  <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		    <property name="prefix">
-		      <value>/WEB-INF/views/</value>
-		    </property>
-		    <property name="suffix">
-		      <value>.jsp</value>
-		    </property>
-		  </bean>
-	    </list>
-	  </property>
-	  <property name="defaultViews">
-	    <list>
-	      <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
-	        <property name="prefixJson" value="true"/>
-	      </bean>
-	    </list>
-	  </property>
-	</bean>
-
-	<bean id="props" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
- 		<property name="locations" value="file:///C:/Mark/appConfig/mongo.properties"/>
-	</bean>
-  
 	<bean id="domainObjectFactory" class="uk.co.mindbadger.footballresultsanalyser.domain.DomainObjectFactoryImpl">
 	</bean>
 

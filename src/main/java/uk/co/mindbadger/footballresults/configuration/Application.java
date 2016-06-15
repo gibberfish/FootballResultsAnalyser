@@ -1,4 +1,4 @@
-package uk.co.mindbadger.hello;
+package uk.co.mindbadger.footballresults.configuration;
 
 import java.util.Arrays;
 
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"uk.co.mindbadger"})
-@ImportResource("classpath:dispatcher-servlet.xml")
+@ImportResource("classpath:spring-config.xml")
 public class Application {
     
     public static void main(String[] args) {

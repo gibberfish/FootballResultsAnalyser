@@ -1,4 +1,4 @@
-package uk.co.mindbadger.hello;
+package uk.co.mindbadger.footballresults.api;
 
 import java.util.List;
 

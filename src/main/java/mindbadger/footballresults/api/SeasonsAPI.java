@@ -15,9 +15,9 @@ import mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
 import mindbadger.footballresultsanalyser.domain.Season;
 
 @Component
-@Path("/getSeasons")
-public class GetSeasonsJaxRs {
-	Logger logger = Logger.getLogger(GetSeasonsJaxRs.class);
+@Path("/seasons")
+public class SeasonsAPI {
+	Logger logger = Logger.getLogger(SeasonsAPI.class);
 
 	@Autowired
 	FootballResultsAnalyserDAO dao;

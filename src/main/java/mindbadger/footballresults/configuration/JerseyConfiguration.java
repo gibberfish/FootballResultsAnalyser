@@ -2,7 +2,7 @@ package mindbadger.footballresults.configuration;
 
 import javax.ws.rs.ApplicationPath;
 
-import mindbadger.footballresults.api.GetSeasonsJaxRs;
+import mindbadger.footballresults.api.SeasonsAPI;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
@@ -12,6 +12,6 @@ import org.springframework.stereotype.Component;
 public class JerseyConfiguration extends ResourceConfig {
 
     public JerseyConfiguration() {
-        register(GetSeasonsJaxRs.class);
+        register(SeasonsAPI.class);
     }
 }

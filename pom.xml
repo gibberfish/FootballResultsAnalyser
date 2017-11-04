@@ -4,25 +4,7 @@
    <groupId>mindbadger</groupId>
    <artifactId>football-results-analyser</artifactId>
    <version>1.0-SNAPSHOT</version>
-   <parent>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-parent</artifactId>
-      <version>1.3.5.RELEASE</version>
-   </parent>
    <dependencies>
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-web</artifactId>
-      </dependency>
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-jersey</artifactId>
-      </dependency>
-		<dependency>
-		    <groupId>io.swagger</groupId>
-		    <artifactId>swagger-jaxrs</artifactId>
-		    <version>1.5.9</version>
-		</dependency>
       <dependency>
          <groupId>junit</groupId>
          <artifactId>junit</artifactId>
@@ -52,14 +34,12 @@
       </dependency>
    </dependencies>
    <properties>
+      <maven.compiler.source>1.8</maven.compiler.source>
+	  <maven.compiler.target>1.8</maven.compiler.target>
       <java.version>1.8</java.version>
    </properties>
    <build>
       <plugins>
-         <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-         </plugin>
       </plugins>
    </build>
 </project>

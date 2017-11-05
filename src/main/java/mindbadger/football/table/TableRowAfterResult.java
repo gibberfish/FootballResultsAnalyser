@@ -7,8 +7,8 @@ import mindbadger.football.table.calculation.CalculationMapFactory;
 
 import org.apache.log4j.Logger;
 
-import mindbadger.footballresultsanalyser.domain.Fixture;
-import mindbadger.footballresultsanalyser.domain.Team;
+import mindbadger.football.domain.Fixture;
+import mindbadger.football.domain.Team;
 
 public class TableRowAfterResult extends TableRow {
 	Logger logger = Logger.getLogger(TableRowAfterResult.class);

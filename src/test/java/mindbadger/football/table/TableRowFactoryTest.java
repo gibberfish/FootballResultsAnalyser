@@ -17,8 +17,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import mindbadger.footballresultsanalyser.domain.Fixture;
-import mindbadger.footballresultsanalyser.domain.Team;
+import mindbadger.football.domain.Fixture;
+import mindbadger.football.domain.Team;
 
 public class TableRowFactoryTest {	
 	private Map<String,Calculation> calculations = new HashMap<String,Calculation> ();

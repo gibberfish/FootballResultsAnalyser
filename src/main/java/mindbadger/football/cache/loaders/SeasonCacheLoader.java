@@ -1,22 +1,26 @@
 package mindbadger.football.cache.loaders;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import mindbadger.football.caches.AnalyserCache;
 import mindbadger.football.caches.SeasonCache;
-import mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
-import mindbadger.footballresultsanalyser.domain.Season;
-import mindbadger.footballresultsanalyser.domain.SeasonDivision;
+import mindbadger.football.domain.Season;
+import mindbadger.football.domain.SeasonDivision;
+import mindbadger.football.repository.SeasonRepository;
 
 public class SeasonCacheLoader {
 	Logger logger = Logger.getLogger(SeasonCacheLoader.class);
 	
-	private FootballResultsAnalyserDAO dao;
+	@Autowired
+	protected SeasonRepository seasonRepository;
+	
 	private AnalyserCache analyserCache;
 	private SeasonCacheDivisionLoader seasonCacheDivisionLoader;
 	
@@ -24,7 +28,7 @@ public class SeasonCacheLoader {
 		logger.info("Load Season Cache for " + season.getSeasonNumber());
 		SeasonCache seasonCache = analyserCache.getCacheForSeason(season.getSeasonNumber());
 		
-		List<SeasonDivision> seasonDivisions = dao.getDivisionsForSeason(season);
+		List<SeasonDivision> seasonDivisions = new ArrayList<SeasonDivision> (season.getSeasonDivisions());
 		
 		for (SeasonDivision seasonDivision : seasonDivisions) {
 			seasonCacheDivisionLoader.loadDivision(seasonDivision, seasonCache);
@@ -35,27 +39,16 @@ public class SeasonCacheLoader {
 	public void loadCurrentSeason() {
 		logger.info("Request to Load Season Cache for current season");
 		
-		dao.startSession();
-		List<Season> seasons = dao.getSeasons();
-		logger.debug("...Found " + seasons.size() + " seasons");
+		Season latestSeason = null;
+		for (Season season : seasonRepository.findAll()) {
+			if (latestSeason==null || season.getSeasonNumber() > latestSeason.getSeasonNumber()) {
+				latestSeason = season;
+			}
+		}
 		
 		// Assumes the seasons are sorted in ascending order
-		loadSeason(seasons.get(seasons.size()-1));
-	}
-	
-	@PreDestroy
-	public void closeDatabaseConnection () {
-		if (dao != null) {
-			dao.closeSession();
-		}
-	}
-	
-	public FootballResultsAnalyserDAO getDao() {
-		return dao;
-	}
-	
-	public void setDao(FootballResultsAnalyserDAO dao) {
-		this.dao = dao;
+		logger.info("...Loading season: " + latestSeason.getSeasonNumber());
+		loadSeason(latestSeason);
 	}
 	
 	public AnalyserCache getAnalyserCache() {

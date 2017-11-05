@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import mindbadger.footballresultsanalyser.domain.Team;
+import mindbadger.football.domain.Team;
 
 public class InitialTableRowTest {	
 	private final String TEAM_ID = "123";

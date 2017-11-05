@@ -1,7 +1,7 @@
 package mindbadger.football.table;
 
-import mindbadger.footballresultsanalyser.domain.Fixture;
-import mindbadger.footballresultsanalyser.domain.Team;
+import mindbadger.football.domain.Fixture;
+import mindbadger.football.domain.Team;
 
 public class InitialTableRow extends TableRow {
 

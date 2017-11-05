@@ -18,7 +18,7 @@ import java.util.Map;
 import org.junit.*;
 import org.mockito.MockitoAnnotations;
 
-import mindbadger.footballresultsanalyser.domain.Team;
+import mindbadger.football.domain.Team;
 
 public class TableTest {
 	

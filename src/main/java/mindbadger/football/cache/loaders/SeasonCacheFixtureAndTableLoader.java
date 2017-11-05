@@ -12,8 +12,8 @@ import mindbadger.football.table.TeamFixtureContextFactory;
 
 import org.apache.log4j.Logger;
 
-import mindbadger.footballresultsanalyser.domain.Fixture;
-import mindbadger.footballresultsanalyser.domain.Team;
+import mindbadger.football.domain.Fixture;
+import mindbadger.football.domain.Team;
 
 public class SeasonCacheFixtureAndTableLoader {
 	Logger logger = Logger.getLogger(SeasonCacheFixtureAndTableLoader.class);

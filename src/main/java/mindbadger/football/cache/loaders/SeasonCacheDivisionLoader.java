@@ -8,33 +8,35 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import mindbadger.football.caches.DivisionCache;
 import mindbadger.football.caches.SeasonCache;
+import mindbadger.football.domain.Fixture;
+import mindbadger.football.domain.SeasonDivision;
+import mindbadger.football.domain.SeasonDivisionTeam;
+import mindbadger.football.repository.FixtureRepository;
 import mindbadger.football.table.Table;
 import mindbadger.football.table.TableFactory;
 import mindbadger.football.table.TeamFixtureContext;
 import mindbadger.utils.FixtureDateFormatter;
-
-import org.apache.log4j.Logger;
-
-import mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
-import mindbadger.footballresultsanalyser.domain.Fixture;
-import mindbadger.footballresultsanalyser.domain.SeasonDivision;
-import mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
 
 public class SeasonCacheDivisionLoader {
 	Logger logger = Logger.getLogger(SeasonCacheDivisionLoader.class);
 	
 	private SeasonCacheFixtureAndTableLoader seasonCacheFixtureAndTableLoader;
 	private TableFactory tableFactory;
-	private FootballResultsAnalyserDAO dao;
 	
+	@Autowired
+	protected FixtureRepository fixtureRepository;
+
 	public void loadDivision (SeasonDivision seasonDivision, SeasonCache seasonCache) {
 		logger.info("Load Division Cache for " + seasonDivision.getDivision().getDivisionName());
 		
 		DivisionCache divisionCache = seasonCache.getCacheForDivision(seasonDivision);
 		
-		List<Fixture> fixtures = dao.getFixturesForDivisionInSeason(seasonDivision);
+		List<Fixture> fixtures = fixtureRepository.getFixturesForDivisionInSeason(seasonDivision);
 		
 		// Sort the list in ascending date order
 		Collections.sort(fixtures, new Comparator<Fixture>(){
@@ -83,7 +85,8 @@ public class SeasonCacheDivisionLoader {
 	}
 	
 	private Table createInitialTable(SeasonDivision seasonDivision) {
-		List<SeasonDivisionTeam> seasonDivisionTeams = dao.getTeamsForDivisionInSeason(seasonDivision);
+		
+		Set<SeasonDivisionTeam> seasonDivisionTeams = seasonDivision.getSeasonDivisionTeams();
 		Table initialTable = tableFactory.createInitialTable(seasonDivision, seasonDivisionTeams);
 		return initialTable;
 	}
@@ -103,13 +106,5 @@ public class SeasonCacheDivisionLoader {
 
 	public void setTableFactory(TableFactory tableFactory) {
 		this.tableFactory = tableFactory;
-	}
-	
-	public FootballResultsAnalyserDAO getDao() {
-		return dao;
-	}
-
-	public void setDao(FootballResultsAnalyserDAO dao) {
-		this.dao = dao;
-	}
+	}	
 }

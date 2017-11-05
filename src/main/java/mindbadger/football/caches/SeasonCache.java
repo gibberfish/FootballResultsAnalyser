@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import mindbadger.footballresultsanalyser.domain.SeasonDivision;
+import mindbadger.football.domain.SeasonDivision;
 
 public class SeasonCache {
 	Logger logger = Logger.getLogger(SeasonCache.class);

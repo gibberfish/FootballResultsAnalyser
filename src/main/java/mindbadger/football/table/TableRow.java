@@ -2,8 +2,8 @@ package mindbadger.football.table;
 
 import static mindbadger.football.table.AttributeIds.*;
 
-import mindbadger.footballresultsanalyser.domain.Fixture;
-import mindbadger.footballresultsanalyser.domain.Team;
+import mindbadger.football.domain.Fixture;
+import mindbadger.football.domain.Team;
 
 public abstract class TableRow implements Comparable<TableRow> {
 	protected Team team;

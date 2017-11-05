@@ -1,6 +1,6 @@
 package mindbadger.football.table;
 
-import mindbadger.footballresultsanalyser.domain.Team;
+import mindbadger.football.domain.Team;
 
 public class TeamFixtureContext {
 	private Team team;

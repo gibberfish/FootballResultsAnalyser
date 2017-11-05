@@ -1,15 +1,15 @@
 package mindbadger.football.table;
 
-import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import mindbadger.footballresultsanalyser.domain.SeasonDivision;
-import mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
+import mindbadger.football.domain.SeasonDivision;
+import mindbadger.football.domain.SeasonDivisionTeam;
 
 public class TableFactory {
 	Logger logger = Logger.getLogger(TableFactory.class);
-	public Table createInitialTable (SeasonDivision seasonDivision, List<SeasonDivisionTeam> seasonDivisionTeams) {
+	public Table createInitialTable (SeasonDivision seasonDivision, Set<SeasonDivisionTeam> seasonDivisionTeams) {
 		logger.debug("Creating an Initial Table for " + seasonDivision.getSeason().getSeasonNumber() + " / " + seasonDivision.getDivision().getDivisionId());
 		return new InitialTable(seasonDivision, seasonDivisionTeams);
 	}

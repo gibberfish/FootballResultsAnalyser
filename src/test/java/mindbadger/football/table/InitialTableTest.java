@@ -4,8 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import mindbadger.football.table.InitialTable;
 import mindbadger.football.table.InitialTableRow;
@@ -16,16 +17,16 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import mindbadger.footballresultsanalyser.domain.Division;
-import mindbadger.footballresultsanalyser.domain.Season;
-import mindbadger.footballresultsanalyser.domain.SeasonDivision;
-import mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
-import mindbadger.footballresultsanalyser.domain.Team;
+import mindbadger.football.domain.Division;
+import mindbadger.football.domain.Season;
+import mindbadger.football.domain.SeasonDivision;
+import mindbadger.football.domain.SeasonDivisionTeam;
+import mindbadger.football.domain.Team;
 
 public class InitialTableTest {
 	private InitialTable objectUnderTest;
 	
-	private List<SeasonDivisionTeam> seasonDivisionTeams;
+	private Set<SeasonDivisionTeam> seasonDivisionTeams;
 	
 	@Mock
 	private SeasonDivision mockSeasonDivision;
@@ -50,7 +51,7 @@ public class InitialTableTest {
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 
-		seasonDivisionTeams = new ArrayList <SeasonDivisionTeam> ();
+		seasonDivisionTeams = new HashSet <SeasonDivisionTeam> ();
 		seasonDivisionTeams.add(seasonDivisionTeam1);
 		seasonDivisionTeams.add(seasonDivisionTeam2);
 		seasonDivisionTeams.add(seasonDivisionTeam3);

@@ -7,7 +7,9 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import mindbadger.football.caches.DivisionCache;
 import mindbadger.football.caches.SeasonCache;
@@ -20,12 +22,12 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
-import mindbadger.footballresultsanalyser.domain.Division;
-import mindbadger.footballresultsanalyser.domain.Fixture;
-import mindbadger.footballresultsanalyser.domain.Season;
-import mindbadger.footballresultsanalyser.domain.SeasonDivision;
-import mindbadger.footballresultsanalyser.domain.SeasonDivisionTeam;
+import mindbadger.football.domain.Division;
+import mindbadger.football.domain.Fixture;
+import mindbadger.football.domain.Season;
+import mindbadger.football.domain.SeasonDivision;
+import mindbadger.football.domain.SeasonDivisionTeam;
+import mindbadger.football.repository.FixtureRepository;
 
 public class SeasonCacheDivisionLoaderTest {
 	
@@ -34,9 +36,6 @@ public class SeasonCacheDivisionLoaderTest {
 	@Mock
 	private SeasonCacheFixtureAndTableLoader mockSeasonCacheFixtureAndTableLoader;
 	
-	@Mock
-	private FootballResultsAnalyserDAO mockDao;
-
 	@Mock
 	private TableFactory mockTableFactory;
 
@@ -118,12 +117,15 @@ public class SeasonCacheDivisionLoaderTest {
 	@Mock
 	private TeamFixtureContext mockFixture4AwayTeamContext;
 
+	@Mock
+	private FixtureRepository mockFixtureRepository;
+	
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		
 		objectUnderTest = new SeasonCacheDivisionLoader();
-		objectUnderTest.setDao(mockDao);
+		objectUnderTest.fixtureRepository = mockFixtureRepository;
 		objectUnderTest.setSeasonCacheFixtureAndTableLoader(mockSeasonCacheFixtureAndTableLoader);
 		objectUnderTest.setTableFactory(mockTableFactory);
 	}
@@ -171,14 +173,16 @@ public class SeasonCacheDivisionLoaderTest {
 		fixturesForDivision1.add(mockFixture2);
 		fixturesForDivision1.add(mockFixture3);
 		fixturesForDivision1.add(mockFixture4);
-		when (mockDao.getFixturesForDivisionInSeason(mockSeasonDivision1)).thenReturn(fixturesForDivision1);
-
+		
+		when (mockFixtureRepository.getFixturesForDivisionInSeason(mockSeasonDivision1)).thenReturn(fixturesForDivision1);
+		
 		// DAO TO RETURN TEAMS IN DIVISION
-		List<SeasonDivisionTeam> teamsForDivision1 = new ArrayList<SeasonDivisionTeam> ();
+		Set<SeasonDivisionTeam> teamsForDivision1 = new HashSet<SeasonDivisionTeam> ();
 		teamsForDivision1.add(mockDiv1TeamA);
 		teamsForDivision1.add(mockDiv1TeamB);
 		teamsForDivision1.add(mockDiv1TeamC);
-		when(mockDao.getTeamsForDivisionInSeason(mockSeasonDivision1)).thenReturn(teamsForDivision1);
+		
+		when (mockSeasonDivision1.getSeasonDivisionTeams()).thenReturn(teamsForDivision1);
 		
 		// SEASON DIVISION RECORD
 		when(mockSeasonDivision1.getSeason()).thenReturn(mockSeason2015);
@@ -209,8 +213,7 @@ public class SeasonCacheDivisionLoaderTest {
 		
 		// Then
 		verify (mockSeasonCache2015,times(1)).getCacheForDivision(eq(mockSeasonDivision1));
-		verify (mockDao,times(1)).getFixturesForDivisionInSeason(eq(mockSeasonDivision1));
-		verify (mockDao,times(1)).getTeamsForDivisionInSeason(eq(mockSeasonDivision1));
+		verify (mockFixtureRepository, times(1)).getFixturesForDivisionInSeason(eq(mockSeasonDivision1));
 		verify (mockTableFactory,times(1)).createInitialTable(eq(mockSeasonDivision1), eq(teamsForDivision1));
 		
 		verify (mockDivisionCache1,times(1)).addTableOnDate(eq(initialDate), eq(mockInitialTableDiv1));

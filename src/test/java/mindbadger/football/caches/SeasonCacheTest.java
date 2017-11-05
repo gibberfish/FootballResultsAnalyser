@@ -12,10 +12,9 @@ import org.mockito.MockitoAnnotations;
 
 import mindbadger.football.caches.DivisionCache;
 import mindbadger.football.caches.SeasonCache;
-import mindbadger.footballresultsanalyser.domain.Division;
-import mindbadger.footballresultsanalyser.domain.Season;
-import mindbadger.footballresultsanalyser.domain.SeasonDivision;
-import mindbadger.footballresultsanalyser.domain.SeasonDivisionImpl;
+import mindbadger.football.domain.Division;
+import mindbadger.football.domain.Season;
+import mindbadger.football.domain.SeasonDivision;
 
 public class SeasonCacheTest {
 	
@@ -41,6 +40,15 @@ public class SeasonCacheTest {
 
 	@Mock
 	private Division mockDivision3;
+
+	@Mock
+	private SeasonDivision mockSeasonDivision1;
+
+	@Mock
+	private SeasonDivision mockSeasonDivision2;
+
+	@Mock
+	private SeasonDivision mockSeasonDivision3;
 
 	@Before
 	public void setup() {
@@ -68,80 +76,81 @@ public class SeasonCacheTest {
 	@Test
 	public void shouldAddNewDivisionCacheIfOneDoesntExist () {
 		// Given
-		SeasonDivision seasonDivision1 = new SeasonDivisionImpl ();
-		seasonDivision1.setDivision(mockDivision1);
-		seasonDivision1.setSeason(mockSeason);
-		seasonDivision1.setDivisionPosition(1);
+		when (mockSeasonDivision1.getDivision()).thenReturn(mockDivision1);
+		when (mockSeasonDivision1.getSeason()).thenReturn(mockSeason);
+		when (mockSeasonDivision1.getDivisionPosition()).thenReturn(1);
 
-		SeasonDivision seasonDivision2 = new SeasonDivisionImpl ();
-		seasonDivision2.setDivision(mockDivision2);
-		seasonDivision2.setSeason(mockSeason);
-		seasonDivision2.setDivisionPosition(2);
+		when (mockSeasonDivision2.getDivision()).thenReturn(mockDivision2);
+		when (mockSeasonDivision2.getSeason()).thenReturn(mockSeason);
+		when (mockSeasonDivision2.getDivisionPosition()).thenReturn(2);
 
 		// When
-		DivisionCache divisionCache1 = objectUnderTest.getCacheForDivision(seasonDivision1);
+		DivisionCache divisionCache1 = objectUnderTest.getCacheForDivision(mockSeasonDivision1);
 
 		// Then
 		Map<SeasonDivision, DivisionCache> divisionCaches = objectUnderTest.getDivisionCaches();
 		assertEquals (1, divisionCaches.size());
-		assertEquals (divisionCache1, divisionCaches.get(seasonDivision1));
+		assertEquals (divisionCache1, divisionCaches.get(mockSeasonDivision1));
 		
 		// When
-		DivisionCache divisionCache2 = objectUnderTest.getCacheForDivision(seasonDivision2);
+		DivisionCache divisionCache2 = objectUnderTest.getCacheForDivision(mockSeasonDivision2);
 		
 		// Then
 		divisionCaches = objectUnderTest.getDivisionCaches();
 		assertEquals (2, divisionCaches.size());
-		assertEquals (divisionCache2, divisionCaches.get(seasonDivision2));		
+		assertEquals (divisionCache2, divisionCaches.get(mockSeasonDivision2));		
 	}
 	@Test
 	public void shouldReturnExistingSeasonCacheIfItExists () {
 		// Given
-		SeasonDivision seasonDivision1 = new SeasonDivisionImpl ();
-		seasonDivision1.setDivision(mockDivision1);
-		seasonDivision1.setSeason(mockSeason);
-		seasonDivision1.setDivisionPosition(1);
+		when (mockSeasonDivision1.getDivision()).thenReturn(mockDivision1);
+		when (mockSeasonDivision1.getSeason()).thenReturn(mockSeason);
+		when (mockSeasonDivision1.getDivisionPosition()).thenReturn(1);
 
-		DivisionCache divisionCache1 = objectUnderTest.getCacheForDivision(seasonDivision1);
+		DivisionCache divisionCache1 = objectUnderTest.getCacheForDivision(mockSeasonDivision1);
 		
 		// When
-		DivisionCache divisionCache2 = objectUnderTest.getCacheForDivision(seasonDivision1);
+		DivisionCache divisionCache2 = objectUnderTest.getCacheForDivision(mockSeasonDivision1);
 		
 		// Then
 		Map<SeasonDivision, DivisionCache> divisionCaches = objectUnderTest.getDivisionCaches();
 		assertEquals (1, divisionCaches.size());
-		assertEquals (divisionCache1, divisionCaches.get(seasonDivision1));
+		assertEquals (divisionCache1, divisionCaches.get(mockSeasonDivision1));
 		assertEquals (divisionCache1, divisionCache2);
 	}
 	
 	@Test
 	public void shouldReturnSortedListOfDivisionsInCache () {
 		// Given
-		SeasonDivision seasonDivision1 = new SeasonDivisionImpl ();
-		seasonDivision1.setDivision(mockDivision1);
-		seasonDivision1.setSeason(mockSeason);
-		seasonDivision1.setDivisionPosition(2);
+		when (mockSeasonDivision1.getDivision()).thenReturn(mockDivision1);
+		when (mockSeasonDivision1.getSeason()).thenReturn(mockSeason);
+		when (mockSeasonDivision1.getDivisionPosition()).thenReturn(2);
+		when (mockSeasonDivision1.compareTo(mockSeasonDivision2)).thenReturn (-1);
+		when (mockSeasonDivision1.compareTo(mockSeasonDivision3)).thenReturn (1);
 
-		SeasonDivision seasonDivision2 = new SeasonDivisionImpl ();
-		seasonDivision2.setDivision(mockDivision2);
-		seasonDivision2.setSeason(mockSeason);
-		seasonDivision2.setDivisionPosition(3);
+		when (mockSeasonDivision2.getDivision()).thenReturn(mockDivision2);
+		when (mockSeasonDivision2.getSeason()).thenReturn(mockSeason);
+		when (mockSeasonDivision2.getDivisionPosition()).thenReturn(3);
+		when (mockSeasonDivision2.compareTo(mockSeasonDivision1)).thenReturn (1);
+		when (mockSeasonDivision2.compareTo(mockSeasonDivision3)).thenReturn (1);
 
-		SeasonDivision seasonDivision3 = new SeasonDivisionImpl ();
-		seasonDivision3.setDivision(mockDivision3);
-		seasonDivision3.setSeason(mockSeason);
-		seasonDivision3.setDivisionPosition(1);
+		when (mockSeasonDivision3.getDivision()).thenReturn(mockDivision3);
+		when (mockSeasonDivision3.getSeason()).thenReturn(mockSeason);
+		when (mockSeasonDivision3.getDivisionPosition()).thenReturn(1);
+		when (mockSeasonDivision3.compareTo(mockSeasonDivision1)).thenReturn (-1);
+		when (mockSeasonDivision3.compareTo(mockSeasonDivision2)).thenReturn (-1);
 		
-		DivisionCache divisionCache1 = objectUnderTest.getCacheForDivision(seasonDivision1);
-		DivisionCache divisionCache2 = objectUnderTest.getCacheForDivision(seasonDivision2);
-		DivisionCache divisionCache3 = objectUnderTest.getCacheForDivision(seasonDivision3);
+		// Ensure the caches are initialised
+		objectUnderTest.getCacheForDivision(mockSeasonDivision1);
+		objectUnderTest.getCacheForDivision(mockSeasonDivision2);
+		objectUnderTest.getCacheForDivision(mockSeasonDivision3);
 		
 		// When
 		List<SeasonDivision> seasonDivisions = objectUnderTest.getSeasonDivisionsInCache ();
 		
 		// Then
-		assertEquals(seasonDivision3, seasonDivisions.get(0));
-		assertEquals(seasonDivision1, seasonDivisions.get(1));
-		assertEquals(seasonDivision2, seasonDivisions.get(2));
+		assertEquals(mockSeasonDivision3, seasonDivisions.get(0));
+		assertEquals(mockSeasonDivision1, seasonDivisions.get(1));
+		assertEquals(mockSeasonDivision2, seasonDivisions.get(2));
 	}
 }

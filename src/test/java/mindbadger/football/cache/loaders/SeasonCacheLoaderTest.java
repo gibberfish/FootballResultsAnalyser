@@ -14,17 +14,14 @@ import org.mockito.MockitoAnnotations;
 
 import mindbadger.football.caches.AnalyserCache;
 import mindbadger.football.caches.SeasonCache;
-import mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserDAO;
-import mindbadger.footballresultsanalyser.domain.Season;
-import mindbadger.footballresultsanalyser.domain.SeasonDivision;
+import mindbadger.football.domain.Season;
+import mindbadger.football.domain.SeasonDivision;
+import mindbadger.football.repository.SeasonRepository;
 
 public class SeasonCacheLoaderTest {
 	
 	private SeasonCacheLoader objectUnderTest;
 	
-	@Mock
-	private FootballResultsAnalyserDAO mockDao;
-
 	@Mock
 	private SeasonCacheDivisionLoader mockSeasonCacheDivisionLoader;
 	
@@ -49,13 +46,16 @@ public class SeasonCacheLoaderTest {
 	@Mock
 	private Season mockSeason2013;
 
+	@Mock
+	private SeasonRepository mockSeasonRepository;
+	
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		
 		objectUnderTest = new SeasonCacheLoader();
 		objectUnderTest.setAnalyserCache(mockAnalyserCache);
-		objectUnderTest.setDao(mockDao);
+		objectUnderTest.seasonRepository = mockSeasonRepository;
 		objectUnderTest.setSeasonCacheDivisionLoader(mockSeasonCacheDivisionLoader);
 		
 		when (mockSeason2015.getSeasonNumber()).thenReturn(2015);
@@ -67,17 +67,17 @@ public class SeasonCacheLoaderTest {
 	@Test
 	public void shouldLoadSeasonFromDataInDao () {
 		// Given
-		List<SeasonDivision> seasonDivisions = new ArrayList<SeasonDivision> ();
+		Set<SeasonDivision> seasonDivisions = new HashSet<SeasonDivision> ();
 		seasonDivisions.add(mockSeasonDivision1);
 		seasonDivisions.add(mockSeasonDivision2);
-		when(mockDao.getDivisionsForSeason(mockSeason2015)).thenReturn(seasonDivisions);
-
+		when (mockSeason2015.getSeasonDivisions()).thenReturn(seasonDivisions);
+		
 		// When
 		objectUnderTest.loadSeason(mockSeason2015);
 		
 		// Then
 		verify(mockAnalyserCache, times(1)).getCacheForSeason(2015);
-		verify(mockDao, times(1)).getDivisionsForSeason(mockSeason2015);
+		verify(mockSeason2015, times(1)).getSeasonDivisions();
 		verify(mockSeasonCacheDivisionLoader,times(1)).loadDivision(mockSeasonDivision1, mockSeasonCache2015);
 		verify(mockSeasonCacheDivisionLoader,times(1)).loadDivision(mockSeasonDivision2, mockSeasonCache2015);
 	}
@@ -89,15 +89,15 @@ public class SeasonCacheLoaderTest {
 		seasons.add(mockSeason2013);
 		seasons.add(mockSeason2014);
 		seasons.add(mockSeason2015);
-		when (mockDao.getSeasons()).thenReturn(seasons);
+		when (mockSeasonRepository.findAll()).thenReturn(seasons);
 		
 		// When
 		objectUnderTest.loadCurrentSeason ();
 		
 		// Then
-		verify(mockDao).getSeasons();
+		verify(mockSeasonRepository,times(1)).findAll();
 		verify(mockAnalyserCache, times(1)).getCacheForSeason(2015);
-		verify(mockDao, times(1)).getDivisionsForSeason(mockSeason2015);
+		verify(mockSeason2015, times(1)).getSeasonDivisions();
 
 		verify(mockAnalyserCache, never()).getCacheForSeason(2014);
 		verify(mockAnalyserCache, never()).getCacheForSeason(2013);

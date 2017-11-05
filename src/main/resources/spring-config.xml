@@ -10,22 +10,7 @@ http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.0.xsd
 http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-    
-  <context:component-scan base-package="mindbadger"/>
   
-  <mvc:annotation-driven />
-  
-	<bean id="domainObjectFactory" class="mindbadger.footballresultsanalyser.domain.DomainObjectFactoryImpl">
-	</bean>
-
-    <bean id="dao" class="mindbadger.footballresultsanalyser.dao.FootballResultsAnalyserCouchbaseDAO">
-      <property name="bucketName" value="football"/>
-      <property name="domainObjectFactory" ref="domainObjectFactory"/>
-    </bean>
-  
-	<bean id="analyserCache" class="mindbadger.football.season.AnalyserCache">
-	</bean>
-
 	<!-- RAW CALCULATIONS -->
 	<bean id="gamesWonAtHomeVsAboveDefinition" class="mindbadger.football.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="gamesWonAtHomeVsAbove" />
@@ -659,8 +644,6 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="sequence" value="20" />
 	</bean>
 
-
-
 	<bean id="goalsConcededInWinsAtHomeDefinition" class="mindbadger.football.table.calculation.AttributeDefinition">
 		<property name="attributeId" value="goalsConcededInWinsAtHome" />
 		<property name="description" value="Goals Conceded in Wins At Home" />
@@ -830,7 +813,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="sequence" value="1000" />
 	</bean>
 
-
+	<!-- Calculation Maps -->
 	<bean id="calculationMapFactory" class="mindbadger.football.table.calculation.CalculationMapFactory">
 		<property name="rawAttributes">
 			<list>
@@ -935,9 +918,31 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		</property>
 	</bean>
 
-	<bean id="teamFixtureContextFactory" class="mindbadger.football.season.TeamFixtureContextFactory">
+	<!-- Caches & Cache Loaders -->
+	<bean id="analyserCache" class="mindbadger.football.caches.AnalyserCache">
+	</bean>
+
+	<bean id="seasonCacheFixtureAndTableLoader" class="mindbadger.football.cache.loaders.SeasonCacheFixtureAndTableLoader">
+		<property name="tableFactory" ref="tableFactory"/>
+		<property name="tableRowFactory" ref="tableRowFactory"/>
+		<property name="teamFixtureContextFactory" ref="teamFixtureContextFactory"/>
 	</bean>
 	
+	<bean id="seasonCacheDivisionLoader" class="mindbadger.football.cache.loaders.SeasonCacheDivisionLoader">
+		<property name="tableFactory" ref="tableFactory"/>
+		<property name="seasonCacheFixtureAndTableLoader" ref="seasonCacheFixtureAndTableLoader"/>
+	</bean>
+	
+	<bean id="seasonCacheLoader" class="mindbadger.football.cache.loaders.SeasonCacheLoader">
+		<property name="analyserCache" ref="analyserCache"/>
+		<property name="seasonCacheDivisionLoader" ref="seasonCacheDivisionLoader"/>
+	</bean>
+
+	<!-- Team Fixture Context Beans -->
+	<bean id="teamFixtureContextFactory" class="mindbadger.football.table.TeamFixtureContextFactory">
+	</bean>
+
+	<!-- Table Beans -->	
 	<bean id="tableFactory" class="mindbadger.football.table.TableFactory">
 	</bean>
 
@@ -945,24 +950,6 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<constructor-arg ref="calculationMapFactory"/>
 	</bean>
 	
-	<bean id="seasonCacheFixtureAndTableLoader" class="mindbadger.football.season.SeasonCacheFixtureAndTableLoader">
-		<property name="tableFactory" ref="tableFactory"/>
-		<property name="tableRowFactory" ref="tableRowFactory"/>
-		<property name="teamFixtureContextFactory" ref="teamFixtureContextFactory"/>
-	</bean>
-	
-	<bean id="seasonCacheDivisionLoader" class="mindbadger.football.season.SeasonCacheDivisionLoader">
-		<property name="tableFactory" ref="tableFactory"/>
-		<property name="dao" ref="dao"/>
-		<property name="seasonCacheFixtureAndTableLoader" ref="seasonCacheFixtureAndTableLoader"/>
-	</bean>
-	
-	<bean id="seasonCacheLoader" class="mindbadger.football.season.SeasonCacheLoader">
-		<property name="dao" ref="dao"/>
-		<property name="analyserCache" ref="analyserCache"/>
-		<property name="seasonCacheDivisionLoader" ref="seasonCacheDivisionLoader"/>
-	</bean>
-
 	<bean id="tableShapes" class="mindbadger.football.table.TableShapes">
 		<property name="shortTable">
 			<list>

@@ -4,8 +4,8 @@ import static mindbadger.football.table.AttributeIds.*;
 
 import mindbadger.football.table.TableRow;
 import mindbadger.football.table.TeamFixtureContext;
-import mindbadger.footballresultsanalyser.domain.Fixture;
-import mindbadger.footballresultsanalyser.domain.Team;
+import mindbadger.football.domain.Fixture;
+import mindbadger.football.domain.Team;
 
 public class GoalsScoredInDefeatsAtHomeVsTeamsAboveCalculation extends CalculationForFixture<String, String, String> {
 	public GoalsScoredInDefeatsAtHomeVsTeamsAboveCalculation(Team team, Fixture fixture, TeamFixtureContext fixtureTeamContext, TeamFixtureContext oppositionTeamContext, TableRow previousTableRow) {
